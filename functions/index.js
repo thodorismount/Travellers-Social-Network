@@ -1,9 +1,10 @@
 const functions = require('firebase-functions');
+const express = require('express');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const app = express();
+
+// initializing the root end point of point
+
+app.use('/users', require('./routes/api/users'));
+
+exports.api = functions.https.onRequest(app);
