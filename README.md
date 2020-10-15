@@ -1,2 +1,0 @@
-# skgCodeC
-SkgCode Team C
