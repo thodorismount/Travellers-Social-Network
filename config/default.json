@@ -1,0 +1,3 @@
+{
+    "mongoURI" : "mongodb+srv://skgcodedev:skgcodedev@skgcode.llmup.mongodb.net/SkgCode?retryWrites=true&w=majority"    
+}
