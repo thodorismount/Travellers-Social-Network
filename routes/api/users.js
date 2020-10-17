@@ -22,8 +22,18 @@ router.post(
   '/signup',
   // check if all fields are filled properly
   [
-    check('name', 'Name is required').trim().not().isEmpty(),
-    check('surname', 'Surname is required').trim().not().isEmpty(),
+    check('firstName', 'First name is required')
+      .trim()
+      .not()
+      .isEmpty()
+      .matches(/^[A-Za-z\s]+$/)
+      .withMessage('Firt name must be alphabetic.'),
+    check('lastName', 'Last name is required')
+      .trim()
+      .not()
+      .isEmpty()
+      .matches(/^[A-Za-z\s]+$/)
+      .withMessage('Last name must be alphabetic.'),
     check('password', 'Please enter a password with 6 or more characters')
       .isLength({ min: 6 })
       .custom((value, { req }) => {
@@ -34,13 +44,19 @@ router.post(
           return value;
         }
       }),
-    check('email', 'Please enter a valid email address').isEmail(),
+    check('email', 'Please enter a valid email address')
+      .normalizeEmail()
+      .isEmail()
+      .matches(
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+      .withMessage('Email must be in latin'),
     check(
       'confirmPassword',
       'Please enter a password confirmation with 6 or more characters'
     ).isLength({ min: 6 }),
     check('birthDate', 'Please select a birth date').not().isEmpty(),
-    check('gender', 'Please select a gender').not().isEmpty()
+    check('gender', 'Please select your gender').not().isEmpty()
   ],
   async (req, res) => {
     // check if there was an error with the parsed data
@@ -49,7 +65,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     // deconstruct the req.body so that we dont use req.body all the time
-    const { name, surname, email, password, birthDate, gender } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      birthDate,
+      gender
+    } = req.body;
 
     try {
       // check if a user with same email exists
@@ -59,15 +82,17 @@ router.post(
       }
       // create a user instance
       user = new User({
-        name,
-        surname,
+        firstName,
+        lastName,
         email,
         password,
         birthDate,
         gender
       });
       // format the date so it will be compatible with mongoDB
-      user.birthDate = new Date(birthDate);
+      let date = new Date(birthDate);
+      user.birthDate = date.setHours(3);
+      console.log(user.birthDate);
       // create "salt" in order to use it to hash the password
       const salt = await bcrypt.genSalt(10);
       // here we hash the password
