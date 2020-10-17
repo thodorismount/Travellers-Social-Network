@@ -76,9 +76,9 @@ export default class extends Component {
             variant="outlined" 
             fullWidth/>
           
-          <CreateDatePicker/>
+            <CreateDatePicker/>
 
-          <CreateGenderSelector/>
+            <CreateGenderSelector/>
           </form>
         </DialogContent>
         <DialogActions>
