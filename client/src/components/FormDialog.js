@@ -47,6 +47,7 @@ export default class extends Component {
           <form>
           <TextField
             autoFocus
+            name="firstName"
             margin="dense"
             id="firstName"
             label="First name"
@@ -54,6 +55,7 @@ export default class extends Component {
             fullWidth
           />
           <TextField
+            name="lastName"
             margin="dense"
             id="lastName"
             label="Last name"
@@ -61,17 +63,28 @@ export default class extends Component {
             fullWidth
           />
           <TextField
+            name="email"         
             margin="dense"
-            id="name"
-            label="Email Address"
+            id="email"
+            label="Email"
             type="email"
             variant="outlined"
             fullWidth
           />
           <TextField 
+            name="password"
             margin="dense"
             id="password"
             label="Password" 
+            type="password"
+            variant="outlined" 
+            fullWidth/>
+          
+          <TextField 
+            name="confirmPassword"
+            margin="dense"
+            id="confirmPassword"
+            label="Confirm password" 
             type="password"
             variant="outlined" 
             fullWidth/>

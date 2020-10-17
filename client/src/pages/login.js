@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types'; //type-checking variables 
-import Link from 'react-router-dom/Link';
+import Link from 'react-router-dom';
 import axios from 'axios';
 import CreateformDialog from '../components/FormDialog'
 
