@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
 
+app.use(express.json({ extended: false }));
 // call db "connector"
 connectDB();
 
@@ -9,10 +10,10 @@ app.get('/', (req, res) => {
   res.send('Api is Running');
 });
 
-app.use('/api/users', require('./routes/users'));
-app.use('/api/posts', require('./routes/posts'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/profile', require('./routes/profile'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
 
 const PORT = process.env.PORT || 5000;
 
