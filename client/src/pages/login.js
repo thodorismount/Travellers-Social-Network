@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types'; //type-checking variables 
-import Link from 'react-router-dom/Link';
+import Link from 'react-router-dom';
 import axios from 'axios';
+import CreateformDialog from '../components/FormDialog'
 
 //MUI 
 import Grid from '@material-ui/core/Grid';
@@ -118,12 +119,7 @@ const styles = {
                         color="primary" 
                         className={classes.button}>
                             Login </Button>
-                        <Button type="submit" 
-                        variant="contained" 
-                        color="primary" 
-                        className={classes.button} 
-                        component={Link} to="/signup">
-                            Sign Up </Button>
+                        <CreateformDialog/>
                         
                     </form>
                 </Grid> 
