@@ -9,20 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 import Avatar from '@material-ui/core/Avatar';
 import './Navbar.css';
-import { purple } from '@material-ui/core/colors';
-import { yellow } from '@material-ui/core/colors';
-import { createMuiTheme } from '@material-ui/core/styles'
 
-
-
-const theme = createMuiTheme({
-    palette: {
-      primary: {
-          main: yellow[500],
-      }
-      
-    }
-  });
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
