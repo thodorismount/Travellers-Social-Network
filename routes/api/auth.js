@@ -22,8 +22,6 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// TODO: Create Login Route ,
-
 // @ROUTE -- POST api/auth/
 // @DESC  -- Login user and get a token back
 // @ACCESS -- Public
