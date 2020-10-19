@@ -8,8 +8,11 @@ import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    //margin: theme.spacing(1),
     minWidth: 120,
+    marginTop: "9px",
+    marginLeft: "30px"
+
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -36,9 +39,9 @@ export default function SimpleSelect() {
                         onChange={handleChange}
                         label="Gender"
                     >
-                        <MenuItem value={"Male"}>Male</MenuItem>
-                        <MenuItem value={"Female"}>Female</MenuItem>
-                        <MenuItem value={"Other"}>Other</MenuItem>
+                        <MenuItem value={"male"}>Male</MenuItem>
+                        <MenuItem value={"female"}>Female</MenuItem>
+                        <MenuItem value={"other"}>Other</MenuItem>
                     </Select>
             </FormControl>  
 

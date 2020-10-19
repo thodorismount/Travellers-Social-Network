@@ -3,7 +3,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types'; //type-checking variables 
 import Link from 'react-router-dom';
 import axios from 'axios';
-import CreateformDialog from '../components/FormDialog'
+import CreateformDialog from '../components/FormDialog';
+import $ from "jquery";
+import NavBar from "../components/NavBar";
 
 //MUI 
 import Grid from '@material-ui/core/Grid';
@@ -37,19 +39,29 @@ const styles = {
     }
 }
 
+ class login extends Component {
+     constructor(){
+         super();
+         this.state = {
+             email: '',
+             password: '',
+             loading: false,
+             error: {}
+         }
+     }
+     
+     componentDidMount(){
+        var contents = $('#navigationbar')[0];
+        contents.style.display="none";
+     }
+  
+     componentWillUnmount(){
+        var contents = $('#navigationbar')[0];
+        contents.style.display="flex";
+     }
+     
+     handleSubmit =(event) => {
 
-class login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            email: '',
-            password: '',
-            loading: false,
-            error: {}
-        }
-    }
-
-    handleSubmit = (event) => {
         event.preventDefault();
         this.setState({
             loading: true
