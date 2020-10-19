@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'react-router-dom/Link';
+import {Link} from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
@@ -23,7 +23,8 @@ export class NavBar extends Component {
                 </Tooltip>
                <Tooltip className="navbar-logout" title="Logout" placement="top">
                         <IconButton component={Link} to="/login">
-                        <KeyboardReturn color="white" />
+                        <KeyboardReturn color="white" /> 
+                        {/* the above line gives warning "Invalid prop `color` of value `white` " */}
                         </IconButton>
                     </Tooltip>
            </nav>

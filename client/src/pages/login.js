@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types'; //type-checking variables 
-import Link from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import CreateformDialog from '../components/FormDialog';
 import $ from "jquery";
 import NavBar from "../components/NavBar";
+import Divider from '@material-ui/core/Divider';
+
 
 //MUI 
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +24,7 @@ const styles = {
         margin: '20px auto auto auto'
     },
     textField: {
-        margin: '10px auto auto auto'
+        margin: '15px auto auto auto'
     },
     button: {
         margin: '10px 10px'
@@ -36,6 +38,9 @@ const styles = {
     pageName: {
         margin: '180px auto auto auto',
         color: "blue"
+    },
+    divider: {
+        //height: '100px'
     }
 }
 
@@ -112,6 +117,7 @@ const styles = {
                                    name="email"
                                    type="email"
                                    label="Email"
+                                   variant="outlined"
                                    className={classes.textField}
                             // helperText={errors.email}
                             // error={errors.email ? true: false}
@@ -122,6 +128,7 @@ const styles = {
                                    name="password"
                                    type="password"
                                    label="Password"
+                                   variant="outlined"
                                    className={classes.textField}
                             // helperText={errors.password}
                             // error={errors.password ? true: false}
@@ -129,11 +136,13 @@ const styles = {
                                    onChange={this.handleChange}
                                    fullWidth/>
                         <Button type="submit"
+                                size="large"
                                 variant="contained"
                                 color="primary"
                                 className={classes.button}>
                             Login
                         </Button>
+                        <Divider variant="middle" className={classes.divider} />
                         <CreateformDialog/>
 
                     </form>

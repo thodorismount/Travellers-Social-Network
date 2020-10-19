@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Create from '@material-ui/icons/Create';
+import CreatePostDialog from '../components/CreatePostDialog';
+
 
 export class home extends Component {
     render() {
@@ -11,9 +13,7 @@ export class home extends Component {
                 <p>Posts...</p>
             </Grid>
              <Grid item sm={4} xs={12}>
-                 <Button color='inherit' variant="outlined" >
-                 <Create /> &nbsp; Create Post
-                 </Button>
+                <CreatePostDialog/>
              </Grid>
             </Grid>
         )
