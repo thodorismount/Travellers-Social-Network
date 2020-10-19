@@ -52,12 +52,12 @@ const styles = {
      }
      
      componentDidMount(){
-        var contents = $('#navigationbar')[0];
+        var contents = $('#appbar')[0];
         contents.style.display="none";
      }
   
      componentWillUnmount(){
-        var contents = $('#navigationbar')[0];
+        var contents = $('#appbar')[0];
         contents.style.display="flex";
      }
      
