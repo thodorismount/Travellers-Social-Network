@@ -35,6 +35,7 @@ function KeyboardDatePickerExample(props) {
           inputVariant="outlined"
           maxDateMessage="Do you come from the future?"
           variant="inline"
+          margin="normal"
         />
       </MuiPickersUtilsProvider>
     </Fragment>

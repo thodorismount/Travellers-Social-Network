@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 //MUI 
 import Button from '@material-ui/core/Button';
@@ -11,9 +12,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CreateDatePicker from '../components/DatePicker';
 import Grid from '@material-ui/core/Grid';
 import CreateGenderSelector from '../components/GenderSelector';
+import withStyles from '@material-ui/core/styles/withStyles';
 
+const styles = {
+  form: {
+    //padding: '30px',
+  }
+  
+};
 
-export default class extends Component {
+class FormDialog extends Component {
   state = {
     open: false
   }
@@ -26,7 +34,7 @@ export default class extends Component {
     
   render(){
     const { open } = this.state
-
+    const{classes} = this.props;
     return <Fragment>
     <Button variant="contained" color="primary" onClick={this.handleToggle}>
       Sign Up
@@ -42,56 +50,66 @@ export default class extends Component {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-          It’s quick and easy.
+            It’s quick and easy.
           </DialogContentText>
-          <form>
-          <TextField
-            autoFocus
-            name="firstName"
-            margin="dense"
-            id="firstName"
-            label="First name"
-            variant="outlined"
-            fullWidth
-          />
-          <TextField
-            name="lastName"
-            margin="dense"
-            id="lastName"
-            label="Last name"
-            variant="outlined"
-            fullWidth
-          />
-          <TextField
-            name="email"         
-            margin="dense"
-            id="email"
-            label="Email"
-            type="email"
-            variant="outlined"
-            fullWidth
-          />
-          <TextField 
-            name="password"
-            margin="dense"
-            id="password"
-            label="Password" 
-            type="password"
-            variant="outlined" 
-            fullWidth/>
-          
-          <TextField 
-            name="confirmPassword"
-            margin="dense"
-            id="confirmPassword"
-            label="Confirm password" 
-            type="password"
-            variant="outlined" 
-            fullWidth/>
-          
-            <CreateDatePicker/>
+          <form className={classes.form}>
+            <TextField
+              autoFocus
+              name="firstName"
+              margin="normal"
+              id="firstName"
+              label="First name"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              name="lastName"
+              margin="normal"
+              id="lastName"
+              label="Last name"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              name="email"         
+              margin="normal"
+              id="email"
+              label="Email"
+              type="email"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField 
+              name="password"
+              margin="normal"
+              id="password"
+              label="Password" 
+              type="password"
+              variant="outlined" 
+              fullWidth/>
+            
+            <TextField 
+              name="confirmPassword"
+              margin="normal"
+              id="confirmPassword"
+              label="Confirm password" 
+              type="password"
+              variant="outlined" 
+              fullWidth/>
 
-            <CreateGenderSelector/>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                  <CreateDatePicker/>
+                  </td>
+                  <td>
+                  <CreateGenderSelector/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
           </form>
         </DialogContent>
         <DialogActions>
@@ -107,6 +125,6 @@ export default class extends Component {
     
   }
 }
-
+export default withStyles(styles)(FormDialog);
 
   
