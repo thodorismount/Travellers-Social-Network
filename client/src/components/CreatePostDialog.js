@@ -11,8 +11,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import CreateSelectCountry from '../components/selectCountry';
+import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 
 class CreatePostDialog extends Component {
     state = {
@@ -38,12 +40,12 @@ class CreatePostDialog extends Component {
         aria-labelledby="form-dialog-title"
         >
             <DialogTitle id="form-dialog-title">
-            Join Travellers community
+            Create your travel post
             </DialogTitle>
             <DialogContent>
-            <DialogContentText>
+            {/* <DialogContentText>
                 It’s quick and easy.
-            </DialogContentText>
+            </DialogContentText> */}
             <form>
                 
                <TextField
@@ -52,20 +54,24 @@ class CreatePostDialog extends Component {
                     autoFocus
                     name="postTextField"
                     multiline
+                    style={{width: 500}}
                     rows={5}
-                    defaultValue="Hey traveller! Write your story"
+                    margin="normal"
+                    // defaultValue="Hey traveller! Write your story"
                     variant="outlined"
+                    placeholder="Hey traveller! Write your story"
                 />
-                <CreateSelectCountry />
+                <MapsSelector />
+                
                 <CreateUploadImage/>
             </form>
             </DialogContent>
             <DialogActions>
-            <Button color="primary" onClick={this.handleToggle}>
+            <Button color="primary" variant='outlined' onClick={this.handleToggle}>
                 Cancel
             </Button>
-            <Button color="primary">
-                Sign Up
+            <Button color="primary" variant='contained' type="submit">
+                Post
             </Button>
             </DialogActions>
         </Dialog>
