@@ -17,7 +17,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = {
   form: {
     //padding: '30px',
-  }
+  },
+  button: {
+    margin: '10px 10px'
+}
   
 };
 
@@ -36,7 +39,7 @@ class FormDialog extends Component {
     const { open } = this.state
     const{classes} = this.props;
     return <Fragment>
-    <Button variant="contained" color="primary" onClick={this.handleToggle}>
+    <Button variant="contained" size="large" color="primary" onClick={this.handleToggle} className={classes.button}>
       Sign Up
     </Button>
     

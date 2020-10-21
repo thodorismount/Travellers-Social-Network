@@ -30,7 +30,7 @@ function KeyboardDatePickerExample(props) {
           inputValue={inputValue}
           onChange={onDateChange}
           rifmFormatter={dateFormatter}
-          //maxDate={moment()}
+          maxDate={moment()}
           disableFuture={true}
           inputVariant="outlined"
           maxDateMessage="Do you come from the future?"
