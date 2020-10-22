@@ -14,6 +14,8 @@ import CreateDatePicker from '../components/DatePicker';
 import Grid from '@material-ui/core/Grid';
 import CreateGenderSelector from '../components/GenderSelector';
 import withStyles from '@material-ui/core/styles/withStyles';
+// custom  Components
+import Alert from './Alert';
 
 const styles = {
   form: {
@@ -52,10 +54,9 @@ const FormDialog = props => {
     setOpen(!open);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (password !== confirmPassword) {
-      props.setAlert('Passwords do not match', 'danger');
+      props.setAlert('Passwords do not match', 'dark');
     }
   };
 
@@ -84,6 +85,7 @@ const FormDialog = props => {
         <DialogTitle id='form-dialog-title'>
           Join Travellers community
         </DialogTitle>
+        <Alert />
         <DialogContent>
           <DialogContentText>It’s quick and easy.</DialogContentText>
           <form className={classes.form} onSubmit={e => handleSubmit(e)}>
@@ -143,12 +145,16 @@ const FormDialog = props => {
                 <tr>
                   <td>
                     <CreateDatePicker
-                      onChange={value => setFormData({ birthDate: value })}
+                      onChange={value =>
+                        setFormData({ ...formData, birthDate: value })
+                      }
                     />
                   </td>
                   <td>
                     <CreateGenderSelector
-                      onChange={value => setFormData({ gender: value })}
+                      onChange={value =>
+                        setFormData({ ...formData, gender: value })
+                      }
                     />
                   </td>
                 </tr>
@@ -160,7 +166,7 @@ const FormDialog = props => {
           <Button color='primary' onClick={handleToggle}>
             Cancel
           </Button>
-          <Button color='primary' type='submit' onClick={e => handleSubmit(e)}>
+          <Button color='primary' type='submit' onClick={handleSubmit}>
             Sign Up
           </Button>
         </DialogActions>
@@ -168,4 +174,9 @@ const FormDialog = props => {
     </Fragment>
   );
 };
+
+FormDialog.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
 export default withStyles(styles)(connect(null, { setAlert })(FormDialog));
