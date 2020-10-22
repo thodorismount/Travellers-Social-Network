@@ -13,9 +13,7 @@ export class home extends Component {
                 <p>Posts...</p>
             </Grid>
              <Grid item sm={4} xs={12}>
-                 <Button color='inherit' variant="outlined" >
-                 <Create /> &nbsp; Create Post
-                 </Button>
+             <CreatePostDialog/>
              </Grid>
             </Grid>
         )
