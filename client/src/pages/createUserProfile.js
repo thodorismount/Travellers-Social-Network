@@ -5,7 +5,7 @@ import axios from 'axios';
 import CreateSelectTravelExperience from '../components/SelectTravelExperience';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
-
+import CreateProfileForm from '../components/createProfile';
 
 
 //MUI 
