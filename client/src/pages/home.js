@@ -3,19 +3,25 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Create from '@material-ui/icons/Create';
 import CreatePostDialog from '../components/CreatePostDialog';
+import PostCard from '../components/PostCard';
 
 
 export class home extends Component {
     render() {
         return (
-            <Grid container spacing={16}>
-             <Grid item sm={8} xs={12}>
-                <p>Posts...</p>
+            <Grid container >
+             <Grid item sm={6} xs={6}>
+                <PostCard />
+                <PostCard />
+                <PostCard />
             </Grid>
-             <Grid item sm={4} xs={12}>
+             <Grid item sm={6} xs={6}>
              <CreatePostDialog/>
              </Grid>
             </Grid>
+            
+
+
         )
     }
 }
