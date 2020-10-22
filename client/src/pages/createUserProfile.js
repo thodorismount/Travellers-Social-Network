@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import $ from "jquery";
+import NavBar from "../components/NavBar";
 
 const styles = {
     form: {
@@ -38,6 +40,16 @@ const styles = {
             error: {}
         }
     }
+    componentDidMount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="none";
+     }
+  
+     componentWillUnmount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="flex";
+     }
+     
     handleSubmit =(event) => {
        event.preventDefault();
        this.setState({
