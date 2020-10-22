@@ -13,7 +13,7 @@ export class home extends Component {
                 <p>Posts...</p>
             </Grid>
              <Grid item sm={4} xs={12}>
-                <CreatePostDialog/>
+             <CreatePostDialog/>
              </Grid>
             </Grid>
         )

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'; //type-checking variables
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import CreateformDialog from '../components/FormDialog';
-import $ from 'jquery';
-import NavBar from '../components/NavBar';
+import $ from "jquery";
+import NavBar from "../components/NavBar";
+
 
 //MUI
 import Grid from '@material-ui/core/Grid';
@@ -51,17 +52,16 @@ class login extends Component {
       error: {}
     };
   }
-
-  componentDidMount() {
-    var contents = $('#navigationbar')[0];
-    contents.style.display = 'none';
-  }
-
-  componentWillUnmount() {
-    var contents = $('#navigationbar')[0];
-    contents.style.display = 'flex';
-  }
-
+     componentDidMount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="none";
+     }
+  
+     componentWillUnmount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="flex";
+     }
+     
   handleSubmit = event => {
     event.preventDefault();
     this.setState({
