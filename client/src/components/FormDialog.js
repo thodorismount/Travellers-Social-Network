@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-
-//MUI 
+import { connect } from 'react-redux';
+import { setAlert } from '../actions/alert';
+//MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,114 +18,154 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = {
   form: {
     //padding: '30px',
+  },
+  button: {
+    margin: '10px 10px'
   }
-  
 };
 
-class FormDialog extends Component {
-  state = {
-    open: false
-  }
+const FormDialog = props => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    birthDate: '',
+    gender: ''
+  });
 
-  handleToggle = () =>{
-    this.setState({
-      open: !this.state.open
-    })
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    birthDate,
+    gender
+  } = formData;
+
+  let testOpen;
+  const [open, setOpen] = useState({ testOpen });
+
+  const handleToggle = () => {
+    setOpen(!open);
   };
-    
-  render(){
-    const { open } = this.state
-    const{classes} = this.props;
-    return <Fragment>
-    <Button variant="contained" color="primary" onClick={this.handleToggle}>
-      Sign Up
-    </Button>
-    
-    <Dialog 
-      open={open} 
-      onClose={this.handleToggle} 
-      aria-labelledby="form-dialog-title"
-    >
-        <DialogTitle id="form-dialog-title">
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      props.setAlert('Passwords do not match', 'danger');
+    }
+  };
+
+  const handleTextFieldChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const { classes } = props;
+  return (
+    <Fragment>
+      <Button
+        variant='contained'
+        size='large'
+        color='primary'
+        onClick={handleToggle}
+        className={classes.button}
+      >
+        Sign Up
+      </Button>
+
+      <Dialog
+        open={!open}
+        onClose={handleToggle}
+        aria-labelledby='form-dialog-title'
+      >
+        <DialogTitle id='form-dialog-title'>
           Join Travellers community
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            It’s quick and easy.
-          </DialogContentText>
-          <form className={classes.form}>
+          <DialogContentText>It’s quick and easy.</DialogContentText>
+          <form className={classes.form} onSubmit={e => handleSubmit(e)}>
             <TextField
               autoFocus
-              name="firstName"
-              margin="normal"
-              id="firstName"
-              label="First name"
-              variant="outlined"
+              name='firstName'
+              margin='normal'
+              id='firstName'
+              label='First name'
+              variant='outlined'
               fullWidth
+              onChange={e => handleTextFieldChange(e)}
             />
             <TextField
-              name="lastName"
-              margin="normal"
-              id="lastName"
-              label="Last name"
-              variant="outlined"
+              name='lastName'
+              margin='normal'
+              id='lastName'
+              label='Last name'
+              variant='outlined'
               fullWidth
+              onChange={e => handleTextFieldChange(e)}
             />
             <TextField
-              name="email"         
-              margin="normal"
-              id="email"
-              label="Email"
-              type="email"
-              variant="outlined"
+              name='email'
+              margin='normal'
+              id='email'
+              label='Email'
+              type='email'
+              variant='outlined'
               fullWidth
+              onChange={e => handleTextFieldChange(e)}
             />
-            <TextField 
-              name="password"
-              margin="normal"
-              id="password"
-              label="Password" 
-              type="password"
-              variant="outlined" 
-              fullWidth/>
-            
-            <TextField 
-              name="confirmPassword"
-              margin="normal"
-              id="confirmPassword"
-              label="Confirm password" 
-              type="password"
-              variant="outlined" 
-              fullWidth/>
+            <TextField
+              name='password'
+              margin='normal'
+              id='password'
+              label='Password'
+              type='password'
+              variant='outlined'
+              fullWidth
+              onChange={e => handleTextFieldChange(e)}
+            />
+
+            <TextField
+              name='confirmPassword'
+              margin='normal'
+              id='confirmPassword'
+              label='Confirm password'
+              type='password'
+              variant='outlined'
+              fullWidth
+              onChange={e => handleTextFieldChange(e)}
+            />
 
             <table>
               <tbody>
                 <tr>
                   <td>
-                  <CreateDatePicker/>
+                    <CreateDatePicker
+                      onChange={value => setFormData({ birthDate: value })}
+                    />
                   </td>
                   <td>
-                  <CreateGenderSelector/>
+                    <CreateGenderSelector
+                      onChange={value => setFormData({ gender: value })}
+                    />
                   </td>
                 </tr>
               </tbody>
             </table>
-            
           </form>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={this.handleToggle}>
+          <Button color='primary' onClick={handleToggle}>
             Cancel
           </Button>
-          <Button color="primary">
+          <Button color='primary' type='submit' onClick={e => handleSubmit(e)}>
             Sign Up
           </Button>
         </DialogActions>
       </Dialog>
     </Fragment>
-    
-  }
-}
-export default withStyles(styles)(FormDialog);
-
-  
+  );
+};
+export default withStyles(styles)(connect(null, { setAlert })(FormDialog));

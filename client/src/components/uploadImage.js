@@ -5,7 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = {
     button: {
-        margin: '10px 10px'
+        margin: '10px 0px'
     }
 }
 
@@ -23,7 +23,7 @@ class uploadImage extends Component {
               //onChange={this.handleImageChange}
               hidden="hidden"
               />
-            <Button onClick={this.handleEditPicture} className={classes.button}>
+            <Button onClick={this.handleEditPicture} className={classes.button} variant="outlined">
                  Choose File </Button>
           </div>
         )
