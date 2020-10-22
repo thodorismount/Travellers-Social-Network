@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Create from '@material-ui/icons/Create';
+import CreatePostDialog from '../components/CreatePostDialog';
+
 
 export class home extends Component {
     render() {
