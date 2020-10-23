@@ -40,7 +40,7 @@ export default function MapsSelector() {
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyB_-HWrPCw51TgM_WsAITBMTxYojTLjyJk&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?key=skgAIzaSyB_-HWrPCw51TgM_WsAITBMTxYojTLjyJkcode&libraries=places',
         document.querySelector('head'),
         'google-maps',
       );
