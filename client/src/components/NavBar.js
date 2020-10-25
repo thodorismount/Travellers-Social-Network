@@ -9,6 +9,7 @@ import Link from 'react-router-dom/Link';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Avatar from '@material-ui/core/Avatar';
 import './Navbar.css';
 
@@ -46,7 +47,7 @@ export default function ButtonAppBar() {
                      </Tooltip>
                     <Tooltip className="navbar-logout" title="Logout" placement="top">
                         <IconButton component={Link} to="/login">
-                        <KeyboardReturn color="white" />
+                        <ExitToAppIcon fontSize='large' />
                         </IconButton>
                     </Tooltip>
         </Toolbar>

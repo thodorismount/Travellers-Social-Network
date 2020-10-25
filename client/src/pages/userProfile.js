@@ -5,8 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import Image from 'material-ui-image'
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +35,7 @@ const useStylesImg = makeStyles({
         maxWidth: '100%',
         maxHeight: '100%',
         margin: 'auto',
+        borderRadius: '50%',
       }
 })
 
@@ -44,10 +48,15 @@ export default function UserProfile() {
       <Grid justify={'center'}  container spacing={3}>
         <Grid item xs={4}>
                 <Card className={classes.card} width="auto">
+                  <CardContent>    
                     <img className={classesImg.image} src="static/images/obama.png" />
                     <Typography variant="h4" gutterBottom>
                         Barack Obama
                     </Typography>
+                    <Button variant="contained" size='small' color="primary" startIcon={<AccountCircleIcon/> }>
+                      Edit profile
+                    </Button>
+                  </CardContent>
                 </Card>
         </Grid>
     </Grid>
