@@ -14,24 +14,23 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-
 const styles = {
-    button: {
-      margin: '10px 10px'
-    },
-    pageTitle: {
-        margin: '10px'
-    }
-  };
+  button: {
+    margin: '10px 10px'
+  },
+  pageTitle: {
+    margin: '10px'
+  }
+};
 
 const EditProfileModal = props => {
-    const [formData, setFormData] = useState({
-      countries: '',
-      interests: '',
-      location: ''
-    });
+  const [formData, setFormData] = useState({
+    countries: '',
+    interests: '',
+    location: ''
+  });
 
-let testOpen;
+  let testOpen;
   const [open, setOpen] = useState({ testOpen });
 
   const handleToggle = () => {
@@ -47,7 +46,7 @@ let testOpen;
         color='primary'
         onClick={handleToggle}
         className={classes.button}
-        startIcon={<AccountCircleIcon/>}
+        startIcon={<AccountCircleIcon />}
       >
         Edit profile
       </Button>
@@ -56,45 +55,48 @@ let testOpen;
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'>
-          Edit Your Profile
-        </DialogTitle>
+        <DialogTitle id='form-dialog-title'>Edit Your Profile</DialogTitle>
         <DialogContent>
-        <form className={classes.form}>
-        <TextField 
-        id="interests" 
-        name="interests" 
-        type="interests" 
-        label="Interests e.g. travelling, hikinkg, .." 
-        className={classes.textField} 
-        // helperText={errors.interests}
-        // error={errors.interests ? true: false}  
-        //onChange={this.handleChange} 
-        fullWidth/>
-        <Typography varient="h1" className={classes.pageTitle}>
-                Select Countries you've visited
-                </Typography>
-       <CreateSelectCountries/>
-        <Typography varient="h1" className={classes.pageTitle}>
-                Select your location
-                </Typography>
-        <MapsSelector/>
-        <Typography varient="h1" className={classes.pageTitle}>
-             Upload Profile Picture
+          <form className={classes.form}>
+            <TextField
+              id='interests'
+              name='interests'
+              type='interests'
+              label='Interests e.g. travelling, hikinkg, ..'
+              className={classes.textField}
+              // helperText={errors.interests}
+              // error={errors.interests ? true: false}
+              //onChange={this.handleChange}
+              fullWidth
+            />
+            <Typography varient='h1' className={classes.pageTitle}>
+              Select Countries you've visited
             </Typography>
-        <CreateUploadImage/>
-        <Button type="submit" 
-                variant="contained" 
-                color="primary" 
-                className={classes.button}>
-                Submit </Button>
-        </form>
-            </DialogContent>
-        </Dialog>
-      </Fragment>
+            <CreateSelectCountries />
+            <Typography varient='h1' className={classes.pageTitle}>
+              Select your location
+            </Typography>
+            <MapsSelector />
+            <Typography varient='h1' className={classes.pageTitle}>
+              Upload Profile Picture
+            </Typography>
+            <CreateUploadImage />
+            <Button
+              type='submit'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+            >
+              Submit{' '}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </Fragment>
   );
 };
+
 EditProfileModal.propTypes = {
-    classes: PropTypes.object.isRequired
-}
+  classes: PropTypes.object.isRequired
+};
 export default withStyles(styles)(EditProfileModal);
