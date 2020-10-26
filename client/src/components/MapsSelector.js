@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
 
-
 function loadScript(src, position, id) {
   if (!position) {
     return;
@@ -23,11 +22,11 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   icon: {
     color: theme.palette.text.secondary,
-    marginRight: theme.spacing(2),
-  },
+    marginRight: theme.spacing(2)
+  }
 }));
 
 export default function MapsSelector() {
@@ -40,9 +39,10 @@ export default function MapsSelector() {
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
+        // in order for the api to work he need to delete SKG from the link bellow  at key= ->(!! SKG !!!)<- AIzaSyD...
         'https://maps.googleapis.com/maps/api/js?key=SKGAIzaSyD_n1iuFbpTNBpKIE3aXHR45y8gF6ybI6A&libraries=places',
         document.querySelector('head'),
-        'google-maps',
+        'google-maps'
       );
     }
 
@@ -54,7 +54,7 @@ export default function MapsSelector() {
       throttle((request, callback) => {
         autocompleteService.current.getPlacePredictions(request, callback);
       }, 200),
-    [],
+    []
   );
 
   React.useEffect(() => {
@@ -72,7 +72,7 @@ export default function MapsSelector() {
       return undefined;
     }
 
-    fetch({ input: inputValue }, (results) => {
+    fetch({ input: inputValue }, results => {
       if (active) {
         let newOptions = [];
 
@@ -95,10 +95,12 @@ export default function MapsSelector() {
 
   return (
     <Autocomplete
-      id="google-map-demo"
+      id='google-map-demo'
       style={{ width: 300 }}
-      getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
-      filterOptions={(x) => x}
+      getOptionLabel={option =>
+        typeof option === 'string' ? option : option.description
+      }
+      filterOptions={x => x}
       options={options}
       autoComplete
       includeInputInList
@@ -111,29 +113,38 @@ export default function MapsSelector() {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      renderInput={(params) => (
-        <TextField {...params} label="Add a location" variant="outlined" fullWidth />
+      renderInput={params => (
+        <TextField
+          {...params}
+          label='Add a location'
+          variant='outlined'
+          fullWidth
+        />
       )}
-      renderOption={(option) => {
-        const matches = option.structured_formatting.main_text_matched_substrings;
+      renderOption={option => {
+        const matches =
+          option.structured_formatting.main_text_matched_substrings;
         const parts = parse(
           option.structured_formatting.main_text,
-          matches.map((match) => [match.offset, match.offset + match.length]),
+          matches.map(match => [match.offset, match.offset + match.length])
         );
 
         return (
-          <Grid container alignItems="center">
+          <Grid container alignItems='center'>
             <Grid item>
               <LocationOnIcon className={classes.icon} />
             </Grid>
             <Grid item xs>
               {parts.map((part, index) => (
-                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                <span
+                  key={index}
+                  style={{ fontWeight: part.highlight ? 700 : 400 }}
+                >
                   {part.text}
                 </span>
               ))}
 
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant='body2' color='textSecondary'>
                 {option.structured_formatting.secondary_text}
               </Typography>
             </Grid>

@@ -52,7 +52,7 @@ const Login = props => {
   });
 
   useEffect(() => {
-    var contents = $('#navigationbar')[0];
+    var contents = $('#appbar')[0];
     contents.style.display = 'none';
   }, []);
 
@@ -83,7 +83,7 @@ const Login = props => {
           <Typography varient='h1' className={classes.pageTitle}>
             Please Login or Sign up
           </Typography>
-          <Alert />
+
           <form noValidate onSubmit={handleSubmit}>
             <TextField
               id='email'
@@ -124,7 +124,9 @@ const Login = props => {
             <CreateformDialog />
           </form>
         </Card>
+        <Alert />
       </Grid>
+
       <Grid item sm />
     </Grid>
   );

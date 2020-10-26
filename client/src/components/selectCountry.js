@@ -10,7 +10,9 @@ function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== 'undefined'
     ? isoCode
         .toUpperCase()
-        .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+        .replace(/./g, char =>
+          String.fromCodePoint(char.charCodeAt(0) + 127397)
+        )
     : isoCode;
 }
 
@@ -18,9 +20,9 @@ const useStyles = makeStyles({
   option: {
     fontSize: 15,
     '& > span': {
-     marginRight: 10,
-      fontSize: 18,
-    },
+      marginRight: 10,
+      fontSize: 18
+    }
   }
 });
 
@@ -29,30 +31,30 @@ export default function CountrySelect() {
 
   return (
     <Autocomplete
-    multiple
-      id="country-select-demo"
+      multiple
+      id='country-select-demo'
       style={{ width: 300 }}
       options={countries}
       classes={{
-        option: classes.option,
+        option: classes.option
       }}
       autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(option) => (
+      getOptionLabel={option => option.label}
+      renderOption={option => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
-          {option.label} 
+          {option.label}
         </React.Fragment>
       )}
-      renderInput={(params) => (
+      renderInput={params => (
         <TextField
           {...params}
-          label="I have visited.."
-          margin="dense"
-          variant="outlined"
+          label='I have visited..'
+          margin='dense'
+          variant='outlined'
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: 'new-password' // disable autocomplete and autofill
           }}
           fullWidth
         />
@@ -151,7 +153,11 @@ const countries = [
   { code: 'GP', label: 'Guadeloupe', phone: '590' },
   { code: 'GQ', label: 'Equatorial Guinea', phone: '240' },
   { code: 'GR', label: 'Greece', phone: '30' },
-  { code: 'GS', label: 'South Georgia and the South Sandwich Islands', phone: '500' },
+  {
+    code: 'GS',
+    label: 'South Georgia and the South Sandwich Islands',
+    phone: '500'
+  },
   { code: 'GT', label: 'Guatemala', phone: '502' },
   { code: 'GU', label: 'Guam', phone: '1-671' },
   { code: 'GW', label: 'Guinea-Bissau', phone: '245' },
@@ -205,7 +211,11 @@ const countries = [
   { code: 'MF', label: 'Saint Martin (French part)', phone: '590' },
   { code: 'MG', label: 'Madagascar', phone: '261' },
   { code: 'MH', label: 'Marshall Islands', phone: '692' },
-  { code: 'MK', label: 'Macedonia, the Former Yugoslav Republic of', phone: '389' },
+  {
+    code: 'MK',
+    label: 'Macedonia, the Former Yugoslav Republic of',
+    phone: '389'
+  },
   { code: 'ML', label: 'Mali', phone: '223' },
   { code: 'MM', label: 'Myanmar', phone: '95' },
   { code: 'MN', label: 'Mongolia', phone: '976' },
@@ -310,5 +320,5 @@ const countries = [
   { code: 'YT', label: 'Mayotte', phone: '262' },
   { code: 'ZA', label: 'South Africa', phone: '27' },
   { code: 'ZM', label: 'Zambia', phone: '260' },
-  { code: 'ZW', label: 'Zimbabwe', phone: '263' },
+  { code: 'ZW', label: 'Zimbabwe', phone: '263' }
 ];
