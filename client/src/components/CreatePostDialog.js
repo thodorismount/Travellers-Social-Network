@@ -30,9 +30,10 @@ class CreatePostDialog extends Component {
     return (
       <Fragment>
         <IconButton
-          variant='contained'
+          variant='outlined'
           color='primary'
           onClick={this.handleToggle}
+          title="Create post"
         >
           <CreateRoundedIcon />
         </IconButton>

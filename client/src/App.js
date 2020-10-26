@@ -9,6 +9,8 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import createUserProfile from './pages/createUserProfile';
+import userProfile from './pages/userProfile';
+
 
 // Redux
 import { Provider } from 'react-redux';
@@ -30,6 +32,11 @@ class App extends Component {
                   exact
                   path='/createuserprofile'
                   component={createUserProfile}
+                />
+                <Route
+                  exact
+                  path='/userprofile'
+                  component={userProfile}
                 />
               </Switch>
             </div>
