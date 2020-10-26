@@ -31,7 +31,7 @@ export default function ButtonAppBar() {
       <AppBar position="static" id="appbar" style={{ background: '#60a8b1' }}>
         <Toolbar id="toolbar">
         <Tooltip  title="Go to feed page" >
-                 <IconButton id="navbar-logo" >    
+                 <IconButton id="navbar-logo" component={Link} to="/home" >    
                     <img src="earth2.png" alt="Avatar" className="navbar-logo"></img>
                  </IconButton>
                 </Tooltip>
@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
           </Typography>
           <Avatar className="navbar-user" src="girl_female_woman_avatar-512.png"></Avatar>
                     <Tooltip  title="View profile" id="profile-button">
-                        <IconButton >Name</IconButton>
+                        <IconButton component={Link} to="/userProfile" >Name</IconButton>
                      </Tooltip>
                     <Tooltip className="navbar-logout" title="Logout" placement="top">
                         <IconButton component={Link} to="/login">
