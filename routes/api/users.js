@@ -15,18 +15,9 @@ router.post(
   '/signup',
   // check if all fields are filled properly
   [
-    check('firstName', 'First name is required')
-      .trim()
-      .not()
-      .isEmpty()
-      .matches(/^[A-Za-z\s]+$/)
-      .withMessage('Firt name must be alphabetic.'),
-    check('lastName', 'Last name is required')
-      .trim()
-      .not()
-      .isEmpty()
-      .matches(/^[A-Za-z\s]+$/)
-      .withMessage('Last name must be alphabetic.'),
+    check('firstName', 'First name is required').trim().not().isEmpty(),
+
+    check('lastName', 'Last name is required').trim().not().isEmpty(),
     check('password', 'Please enter a password with 6 or more characters')
       .isLength({ min: 6 })
       .custom((value, { req }) => {
@@ -39,11 +30,7 @@ router.post(
       }),
     check('email', 'Please enter a valid email address')
       .normalizeEmail()
-      .isEmail()
-      .matches(
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-      .withMessage('Email must be in latin'),
+      .isEmail(),
     check(
       'confirmPassword',
       'Please enter a password confirmation with 6 or more characters'
@@ -96,7 +83,6 @@ router.post(
       // format the date so it will be compatible with mongoDB
       user.birthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
 
-      console.log(user.birthDate);
       // create "salt" in order to use it to hash the password
       const salt = await bcrypt.genSalt(10);
       // here we hash the password
