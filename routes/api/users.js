@@ -5,14 +5,7 @@ const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-
-// @ROUTE -- GET api/users
-// @DESC  -- Test route
-// @ACCESS -- Public
-
-router.get('/', (req, res) => {
-  res.send('User route');
-});
+const moment = require('moment');
 
 // @ROUTE -- GET api/users/signup
 // @DESC  -- Sign up a user and get back his token
@@ -89,9 +82,20 @@ router.post(
         birthDate,
         gender
       });
+
+      // let date = birthDate.split('');
+      // let dummy = [date[0], date[1], date[3], date[4]];
+      // date[0] = dummy[2];
+      // date[1] = dummy[3];
+      // date[3] = dummy[0];
+      // date[4] = dummy[1];
+      // date = date.join('');
+      // let date1 = new Date(date);
+      //user.birthDate = date1.setHours(3);
+
       // format the date so it will be compatible with mongoDB
-      let date = new Date(birthDate);
-      user.birthDate = date.setHours(3);
+      user.birthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
+
       console.log(user.birthDate);
       // create "salt" in order to use it to hash the password
       const salt = await bcrypt.genSalt(10);
