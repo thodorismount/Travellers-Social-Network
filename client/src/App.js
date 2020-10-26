@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 //Components
@@ -13,38 +13,47 @@ import userProfile from './pages/userProfile';
 
 
 // Redux
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './store';
+import {loadUser} from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <div className='App'>
-          <Router>
-            <NavBar />
-            <div className='container'>
-              <Switch>
-                <Route exact path='/home' component={home} />
-                <Route exact path='/' component={login} />
-                <Route exact path='/signup' component={signup} />
-                <Route
-                  exact
-                  path='/createuserprofile'
-                  component={createUserProfile}
-                />
-                <Route
-                  exact
-                  path='/userprofile'
-                  component={userProfile}
-                />
-              </Switch>
-            </div>
-          </Router>
-        </div>
-      </Provider>
-    );
-  }
+if (localStorage.token) {
+    setAuthToken(localStorage.token);
 }
+
+const App = () => {
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, []);
+
+    return (
+        <Provider store={store}>
+            <div className='App'>
+                <Router>
+                    <NavBar/>
+                    <div className='container'>
+                        <Switch>
+                            <Route exact path='/' component={login}/>
+                            <Route exact path='/home' component={home}/>
+                            <Route exact path='/login' component={login}/>
+                            <Route exact path='/signup' component={signup}/>
+                            <Route
+                                exact
+                                path='/createuserprofile'
+                                component={createUserProfile}
+                            />
+                            <Route
+                                exact
+                                path='/userprofile'
+                                component={userProfile}
+                            />
+                        </Switch>
+                    </div>
+                </Router>
+            </div>
+        </Provider>
+    );
+};
 
 export default App;

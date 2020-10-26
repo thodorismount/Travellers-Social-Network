@@ -1,0 +1,24 @@
+.alert {
+  padding: 0.8rem;
+  margin: 0.3rem 0;
+  opacity: 0.9;
+  background: #f4f4f4;
+  color: #333;
+  border-radius: 0.4rem;
+}
+.alert.alert-primary {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.alert.alert-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+.alert.alert-success {
+  background-color: #28a745;
+  color: #fff;
+}
+.alert.alert-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
