@@ -1,7 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../actions/alert';
+import { register } from '../actions/auth';
+
 //MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +13,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CreateDatePicker from '../components/DatePicker';
-import Grid from '@material-ui/core/Grid';
 import CreateGenderSelector from '../components/GenderSelector';
 import withStyles from '@material-ui/core/styles/withStyles';
 // custom  Components
@@ -27,6 +28,8 @@ const styles = {
 };
 
 const FormDialog = props => {
+  let testOpen;
+  const [open, setOpen] = useState({ testOpen });
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -47,17 +50,23 @@ const FormDialog = props => {
     gender
   } = formData;
 
-  let testOpen;
-  const [open, setOpen] = useState({ testOpen });
-
-  const handleToggle = () => {
+  useEffect(() => {});
+  const handleToggle = e => {
     setOpen(!open);
   };
 
-  const handleSubmit = () => {
-    if (password !== confirmPassword) {
-      props.setAlert('Passwords do not match', 'dark');
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.register({
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      birthDate,
+      gender
+    });
+    setFormData({});
   };
 
   const handleTextFieldChange = e => {
@@ -85,10 +94,11 @@ const FormDialog = props => {
         <DialogTitle id='form-dialog-title'>
           Join Travellers community
         </DialogTitle>
-        <Alert />
-        <DialogContent>
-          <DialogContentText>It’s quick and easy.</DialogContentText>
-          <form className={classes.form} onSubmit={e => handleSubmit(e)}>
+        <form className={classes.form} onSubmit={e => handleSubmit(e)}>
+          <DialogContent>
+            <DialogContentText>It’s quick and easy.</DialogContentText>
+            <Alert />
+
             <TextField
               autoFocus
               name='firstName'
@@ -96,6 +106,7 @@ const FormDialog = props => {
               id='firstName'
               label='First name'
               variant='outlined'
+              value={formData.firstName || ''}
               fullWidth
               onChange={e => handleTextFieldChange(e)}
             />
@@ -105,6 +116,7 @@ const FormDialog = props => {
               id='lastName'
               label='Last name'
               variant='outlined'
+              value={formData.lastName || ''}
               fullWidth
               onChange={e => handleTextFieldChange(e)}
             />
@@ -115,18 +127,20 @@ const FormDialog = props => {
               label='Email'
               type='email'
               variant='outlined'
+              value={formData.email || ''}
               fullWidth
               onChange={e => handleTextFieldChange(e)}
             />
             <TextField
-              name='password'
-              margin='normal'
               id='password'
-              label='Password'
+              name='password'
               type='password'
+              label='Password'
               variant='outlined'
-              fullWidth
+              className={classes.textField}
+              value={formData.password || ''}
               onChange={e => handleTextFieldChange(e)}
+              fullWidth
             />
 
             <TextField
@@ -134,6 +148,7 @@ const FormDialog = props => {
               margin='normal'
               id='confirmPassword'
               label='Confirm password'
+              value={formData.confirmPassword || ''}
               type='password'
               variant='outlined'
               fullWidth
@@ -160,23 +175,38 @@ const FormDialog = props => {
                 </tr>
               </tbody>
             </table>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button color='primary' onClick={handleToggle}>
-            Cancel
-          </Button>
-          <Button color='primary' type='submit' onClick={handleSubmit}>
-            Sign Up
-          </Button>
-        </DialogActions>
+          </DialogContent>
+
+          <DialogActions>
+            <Button color='primary' onClick={e => handleToggle(e)}>
+              Cancel
+            </Button>
+            <Button
+              type='submit'
+              size='large'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+            >
+              Sign Up
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </Fragment>
   );
 };
 
 FormDialog.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-export default withStyles(styles)(connect(null, { setAlert })(FormDialog));
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default withStyles(styles)(
+  connect(mapStateToProps, { setAlert, register })(FormDialog)
+);

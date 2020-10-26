@@ -2,12 +2,12 @@ const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
 
-app.use(express.json({extended: false}));
+app.use(express.json({ extended: false }));
 // call db "connector"
 connectDB();
 
 app.get('/', (req, res) => {
-    res.send('Api is Running');
+  res.send('Api is Running');
 });
 
 app.use('/api/users', require('./routes/api/users'));
@@ -18,5 +18,5 @@ app.use('/api/profile', require('./routes/api/profile'));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server listening on post  ${PORT}`);
+  console.log(`Server listening on port  ${PORT}`);
 });
