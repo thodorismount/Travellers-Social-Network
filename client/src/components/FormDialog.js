@@ -57,6 +57,7 @@ const FormDialog = props => {
     if (password !== confirmPassword) {
       props.setAlert('Passwords do not match', 'danger');
     }
+    console.log(formData);
   };
 
   const handleTextFieldChange = e => {
@@ -143,12 +144,12 @@ const FormDialog = props => {
                 <tr>
                   <td>
                     <CreateDatePicker
-                      onChange={value => setFormData({ birthDate: value })}
+                      onChange={value => setFormData({...formData, birthDate: value })}
                     />
                   </td>
                   <td>
                     <CreateGenderSelector
-                      onChange={value => setFormData({ gender: value })}
+                      onChange={value => setFormData({...formData, gender: value })}
                     />
                   </td>
                 </tr>

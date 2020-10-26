@@ -16,6 +16,7 @@
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
     "jquery": "^3.5.1",
+    "material-ui-image": "^3.3.0",
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
