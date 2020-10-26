@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -38,9 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function PostCard() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -72,8 +75,8 @@ export default function PostCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add to favorites" onClick={ FavoriteIcon.style={fill: 'red'}}>
+          <FavoriteIcon id="fav" />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -88,7 +91,6 @@ export default function PostCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
           <Typography paragraph>
             Post details
           </Typography>
