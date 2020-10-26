@@ -11,6 +11,7 @@ import signup from './pages/signup';
 import createUserProfile from './pages/createUserProfile';
 import userProfile from './pages/userProfile';
 
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -24,7 +25,7 @@ class App extends Component {
             <NavBar />
             <div className='container'>
               <Switch>
-                <Route exact path='/' component={home} />
+                <Route exact path='/' component={login} />
                 <Route exact path='/home' component={home} />
                 <Route exact path='/login' component={login} />
                 <Route exact path='/signup' component={signup} />
