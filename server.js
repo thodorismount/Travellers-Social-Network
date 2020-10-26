@@ -7,7 +7,7 @@ app.use(express.json({ extended: false }));
 connectDB();
 
 app.get('/', (req, res) => {
-  res.send('Api is Running');
+    res.send('Api is Running');
 });
 
 app.use('/api/users', require('./routes/api/users'));
@@ -18,5 +18,5 @@ app.use('/api/profiles', require('./routes/api/profile'));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on post  ${PORT}`);
+    console.log(`Server listening on post  ${PORT}`);
 });
