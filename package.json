@@ -17,7 +17,7 @@
     "url": "https://github.com/thodorismount/skgCodeC/issues"
   },
   "homepage": "https://github.com/thodorismount/skgCodeC#readme",
-  "dependencies": 
+  "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.2",
     "express": "^4.17.1",
