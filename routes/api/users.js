@@ -7,14 +7,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const moment = require('moment');
 
-// @ROUTE -- GET api/users
-// @DESC  -- Test route
-// @ACCESS -- Public
-
-router.get('/', (req, res) => {
-  res.send('User route');
-});
-
 // @ROUTE -- GET api/users/signup
 // @DESC  -- Sign up a user and get back his token
 // @ACCESS -- Public
@@ -77,6 +69,17 @@ router.post(
         birthDate,
         gender
       });
+
+      // let date = birthDate.split('');
+      // let dummy = [date[0], date[1], date[3], date[4]];
+      // date[0] = dummy[2];
+      // date[1] = dummy[3];
+      // date[3] = dummy[0];
+      // date[4] = dummy[1];
+      // date = date.join('');
+      // let date1 = new Date(date);
+      //user.birthDate = date1.setHours(3);
+
       // format the date so it will be compatible with mongoDB
       user.birthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
 

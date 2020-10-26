@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53dafc12-5d21-4673-8a83-8431f1e09c00" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/public/static/images/obama.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/PostCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/createProfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/userProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
@@ -22,7 +19,9 @@
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/actions/alert.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/alert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/actions/auth.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Alert.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/CreatePostDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CreatePostDialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/DatePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DatePicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/FormDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/FormDialog.js" afterDir="false" />
@@ -42,11 +41,14 @@
       <change beforePath="$PROJECT_DIR$/client/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/createUserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/createUserProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/re.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/reducers/alert.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducers/alert.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/reducers/auth.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/serviceWorker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/setupTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/setAuthToken.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/auth.js" afterDir="false" />
@@ -12161,7 +12163,6 @@
       <change beforePath="$PROJECT_DIR$/node_modules/type-is/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/type-is/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/type-is/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/type-is/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/type-is/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/type-is/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/.airtap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/.airtap.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/.travis.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/typedarray-to-buffer/README.md" afterDir="false" />
@@ -12618,48 +12619,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1jPlphTiYNfrb3CN05ojTThHfJl" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="53dafc12-5d21-4673-8a83-8431f1e09c00" name="Default Changelist" comment="" />
-      <created>1603713794408</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1603713794408</updated>
-      <workItem from="1603713796825" duration="299000" />
-      <workItem from="1603714108940" duration="2362000" />
-    </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="0" y="79" width="1920" height="889" key="MergeDialog" timestamp="1603716395464">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="0" y="79" width="1920" height="889" key="MergeDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603716395464" />
-    <state x="781" y="267" key="MultipleFileMergeDialog" timestamp="1603716472515">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="781" y="267" key="MultipleFileMergeDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603716472515" />
-    <state x="745" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1603713982346">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="745" y="233" key="git4idea.branch.GitSmartOperationDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603713982346" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

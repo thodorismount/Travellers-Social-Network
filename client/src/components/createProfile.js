@@ -12,6 +12,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
 const styles = {
@@ -42,12 +43,13 @@ let testOpen;
     <Fragment>
       <Button
         variant='contained'
-        size='large'
+        size='medium'
         color='primary'
         onClick={handleToggle}
         className={classes.button}
+        startIcon={<AccountCircleIcon/>}
       >
-        Edit User Profile
+        Edit profile
       </Button>
       <Dialog
         open={!open}
