@@ -5,12 +5,12 @@ import NavBar from '../components/NavBar'
 
 export class signup extends Component {
     componentDidMount(){
-        var contents = $('#navigationbar')[0];
+        var contents = $('#appbar')[0];
         contents.style.display="none";
      }
   
      componentWillUnmount(){
-        var contents = $('#navigationbar')[0];
+        var contents = $('#appbar')[0];
         contents.style.display="flex";
      }
     render() {

@@ -133,8 +133,9 @@ const FormDialog = props => {
             <TextField
               id='password'
               name='password'
-              type='password'
+              margin='normal'
               label='Password'
+              type='password'
               variant='outlined'
               className={classes.textField}
               value={formData.password || ''}

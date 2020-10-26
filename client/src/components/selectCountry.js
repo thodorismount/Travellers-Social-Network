@@ -29,6 +29,7 @@ export default function CountrySelect() {
 
   return (
     <Autocomplete
+    multiple
       id="country-select-demo"
       style={{ width: 300 }}
       options={countries}
@@ -40,13 +41,13 @@ export default function CountrySelect() {
       renderOption={(option) => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
-          {option.label} ({option.code}) +{option.phone}
+          {option.label} 
         </React.Fragment>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="I live in.."
+          label="I have visited.."
           margin="dense"
           variant="outlined"
           inputProps={{

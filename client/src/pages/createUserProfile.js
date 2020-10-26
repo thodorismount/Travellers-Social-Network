@@ -3,14 +3,19 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types'; //type-checking variables 
 import axios from 'axios';
 import CreateSelectTravelExperience from '../components/SelectTravelExperience';
-import CreateSelectCountry from '../components/selectCountry';
+import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
+import CreateProfileForm from '../components/createProfile';
+
 
 //MUI 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import $ from "jquery";
+import NavBar from "../components/NavBar";
 
 const styles = {
     form: {
@@ -24,7 +29,12 @@ const styles = {
     },
     button: {
         margin: '10px 10px'
-    }
+    },
+    card: {
+        padding: '10px',
+        marginTop: '5px',
+        backgroundColor: '#F0F2F5'
+      }
 }
 
 
@@ -38,6 +48,16 @@ const styles = {
             error: {}
         }
     }
+    componentDidMount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="none";
+     }
+  
+     componentWillUnmount(){
+        var contents = $('#appbar')[0];
+        contents.style.display="flex";
+     }
+     
     handleSubmit =(event) => {
        event.preventDefault();
        this.setState({
@@ -74,6 +94,7 @@ const styles = {
             <Grid container className = {classes.form}>
                 <Grid item sm/>
                 <Grid item sm>
+                    <Card className={classes.card}>
                     <Typography varient="h1" className={classes.pageTitle}>
                         Please Customize Your User Profile
                     </Typography>
@@ -81,31 +102,25 @@ const styles = {
                         <TextField id="interests" 
                         name="interests" 
                         type="interests" 
-                        label="Interests" 
+                        label="Interests e.g. travelling, hikinkg, .." 
                         className={classes.textField} 
                         // helperText={errors.interests}
                         // error={errors.interests ? true: false} 
                         value={this.state.interests} 
                         //onChange={this.handleChange} 
                         fullWidth/>
-                        <TextField id="countries" 
-                        name="countries" 
-                        type="countries" 
-                        label="Countries Visited" 
-                        className={classes.textField} 
-                        // helperText={errors.countries}
-                        // error={errors.countries ? true: false}
-                        value={this.state.countries} 
-                        //onChange={this.handleChange} 
-                        fullWidth/>
+                        <Typography varient="h1" className={classes.pageTitle}>
+                        Select places you've visited
+                        </Typography>
+                        <MapsSelector/>
                         <Typography varient="h1" className={classes.pageTitle}>
                         Select your Travel Experience
                         </Typography>
                         <CreateSelectTravelExperience/>
                         <Typography varient="h1" className={classes.pageTitle}>
-                        Select your country
+                        Select your location
                         </Typography>
-                        <CreateSelectCountry/>
+                        <MapsSelector/>
                         <Typography varient="h1" className={classes.pageTitle}>
                         Upload Profile Picture
                         </Typography>
@@ -116,6 +131,7 @@ const styles = {
                         className={classes.button}>
                             Submit </Button>
                     </form>
+                    </Card>
                 </Grid> 
                 <Grid item sm/>
             </Grid>
