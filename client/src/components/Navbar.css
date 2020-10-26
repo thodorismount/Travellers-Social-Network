@@ -1,0 +1,15 @@
+
+.appbar{
+    background: rgb(96, 167, 177);
+}
+.toolbar{
+    background: rgb(96, 167, 177);
+}
+
+.navbar-logo{
+    justify-self: start;
+    margin-left: 0.5rem;
+    width: 50px;
+    height: inherit;
+}
+
