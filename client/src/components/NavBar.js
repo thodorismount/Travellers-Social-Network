@@ -10,13 +10,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/auth';
 
-const NavBar = ({
-  auth: { isAuthenticated, loading, user },
-  logout,
-  props
-}) => {
+const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
   let isClicked = false;
-  console.log(user);
   const [clicked, setClicked] = useState(isClicked);
 
   return (
@@ -32,7 +27,7 @@ const NavBar = ({
           src='girl_female_woman_avatar-512.png'
         ></Avatar>
         <Tooltip title='View profile'>
-          <IconButton>${user}</IconButton>
+          <IconButton>Name</IconButton>
         </Tooltip>
         <Tooltip className='navbar-logout' title='Logout' placement='top'>
           <IconButton component={Link} to='/login' onClick={logout}>

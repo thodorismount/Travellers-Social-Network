@@ -66,7 +66,6 @@ const FormDialog = props => {
       birthDate,
       gender
     });
-    setFormData({});
   };
 
   const handleTextFieldChange = e => {

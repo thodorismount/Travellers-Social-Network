@@ -79,7 +79,7 @@ router.post(
       });
       // format the date so it will be compatible with mongoDB
       user.birthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
-      console.log(user.birthDate);
+
       // create "salt" in order to use it to hash the password
       const salt = await bcrypt.genSalt(10);
       // here we hash the password
