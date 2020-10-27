@@ -8,13 +8,40 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Avatar from '@material-ui/core/Avatar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+
 import './Navbar.css';
+
 
 //redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/auth';
 
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -24,12 +51,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
   const classes = useStyles();
+  
 
   return (
-    <div className={classes.root}>
-      <AppBar position='static' id='appbar' style={{ background: '#60a8b1' }}>
+    <React.Fragment>
+    <CssBaseline />
+    <ElevationScroll {...props}>
+      <AppBar  id='appbar' style={{ background: '#60a8b1' }}>
         <Toolbar id='toolbar'>
           <Tooltip title='Go to feed page'>
             <IconButton id='navbar-logo' component={Link} to='/home'>
@@ -53,7 +84,8 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
           </Tooltip>
         </Toolbar>
       </AppBar>
-    </div>
+      </ElevationScroll>
+    </React.Fragment>
   );
 };
 
