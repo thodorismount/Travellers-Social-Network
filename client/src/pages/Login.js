@@ -124,8 +124,8 @@ const Login = props => {
               Login
             </Button>
             <Divider variant='middle' className={classes.divider} />
-            <CreateformDialog />
           </form>
+          <CreateformDialog />
         </Card>
       </Grid>
 

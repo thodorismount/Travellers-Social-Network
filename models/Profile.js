@@ -18,7 +18,8 @@ const ProfileSchema = new mongoose.Schema({
     required: true
   },
   visitedCountries: {
-    type: [String]
+    type: [String],
+    default: 1
   },
   travelExperience: {
     type: Number
