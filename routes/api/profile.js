@@ -5,7 +5,7 @@ const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-//const Post = require('../../models/Post');
+const Post = require('../../models/Post');
 
 // @ROUTE -- GET api/profiles/me
 // @DESC  -- Gets the user's profile
@@ -50,24 +50,23 @@ router.post(
       res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      location,
-      bio,
-      interests,
-      visitedCountries,
-      travelExperience
-    } = req.body;
+    const { location, bio, interests, visitedCountries } = req.body;
 
     const profileFields = {};
     profileFields.user = req.user.id;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
     if (interests) profileFields.interests = interests.split(',');
-    if (visitedCountries)
+    if (visitedCountries) {
       profileFields.visitedCountries = visitedCountries
         .split(',')
         .map(country => country.trim());
-    if (travelExperience) profileFields.travelExperience = travelExperience;
+    }
+    if (profileFields.visitedCountries.length > 5)
+      profileFields.travelExperience = 3;
+    else if (profileFields.visitedCountries.length >= 3)
+      profileFields.travelExperience = 2;
+    else profileFields.travelExperience = 1;
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -139,14 +138,17 @@ router.get('/user/:user_id', async (req, res) => {
 
 router.delete('/', auth, async (req, res) => {
   try {
-    //await Post.deleteMany({ user: req.user.id });
+    await Post.deleteMany({ user: req.user.id });
     // delete user's profile
-    await Profile.findByIdAndRemove({ user: req.user.id });
-    // delete User
-    await User.findByIdAndRemove({ _id: req.user.id });
+    await Profile.findOneAndRemove({ user: req.user.id });
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
 
     res.json({ msg: 'Account deleted.' });
-  } catch (error) {}
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;
