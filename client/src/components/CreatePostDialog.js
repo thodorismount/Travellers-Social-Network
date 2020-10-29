@@ -13,6 +13,7 @@ import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import '../components/Navbar.css';
 
 class CreatePostDialog extends Component {
   state = {

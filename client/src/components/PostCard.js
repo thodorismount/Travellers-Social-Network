@@ -75,6 +75,7 @@ export default function PostCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+        
         <IconButton aria-label="add to favorites" onClick={ FavoriteIcon.style={fill: 'red'}}>
           <FavoriteIcon id="fav" />
         </IconButton>
