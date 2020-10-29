@@ -13,6 +13,8 @@ import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import EditIcon from '@material-ui/icons/Edit';
+import Fab from '@material-ui/core/Fab';
 
 class CreatePostDialog extends Component {
   state = {
@@ -29,14 +31,18 @@ class CreatePostDialog extends Component {
     const { open } = this.state;
     return (
       <Fragment>
-        <IconButton
-          variant='outlined'
+        <Fab
           color='primary'
           onClick={this.handleToggle}
-          title="Create post"
+          title='Create post'
+          style={{
+            position: 'fixed',
+            bottom: '7%',
+            right: '7%'
+          }}
         >
-          <CreateRoundedIcon />
-        </IconButton>
+          <EditIcon />
+        </Fab>
 
         <Dialog
           open={open}
@@ -64,7 +70,7 @@ class CreatePostDialog extends Component {
                 variant='outlined'
                 placeholder='Hey traveller! Write your story'
               />
-              <MapsSelector />
+              <MapsSelector label='Select location' />
 
               <CreateUploadImage />
             </form>
