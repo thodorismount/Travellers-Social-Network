@@ -14,6 +14,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MyMenu from './MyMenu';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,9 +58,7 @@ export default function PostCard() {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <MyMenu />
         }
         title="Location"
         subheader="September 14, 2016"

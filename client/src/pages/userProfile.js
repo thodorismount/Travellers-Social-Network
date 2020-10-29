@@ -10,7 +10,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
 import Button from '@material-ui/core/Button';
 import EditProfileModal from '../components/createProfile'
-
+import PostCard from '../components/PostCard';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 6,
@@ -72,8 +72,12 @@ export default function UserProfile() {
                 </Typography>
             </Paper>
         </Grid>
-        <Grid item xs={8} sm={8}>
-          <Paper className={classes.paper}>posts</Paper>
+        <Grid item xs={8} sm={8} spacing={3} >
+          <Paper className={classes.paper}>
+            <PostCard />
+            <PostCard />
+            <PostCard />
+          </Paper>
         </Grid>
       </Grid>
     </div>
