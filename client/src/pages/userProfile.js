@@ -13,8 +13,8 @@ import EditProfileModal from '../components/createProfile';
 
 // Redux
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../actions/profile';
 import PropTypes from 'prop-types';
+import { getCurrentProfile } from '../actions/profile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,7 +73,7 @@ const UserProfile = ({ getCurrentProfile, auth, profile }) => {
               <br />
               <CakeIcon /> 04/06/1961
               <br />
-              travel experience
+              travel experiences
               <br />
               places visited
             </Typography>
