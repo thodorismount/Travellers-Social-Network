@@ -87,7 +87,7 @@ const EditProfileModal = props => {
               color='primary'
               className={classes.button}
             >
-              Submit{' '}
+              Submit
             </Button>
           </form>
         </DialogContent>

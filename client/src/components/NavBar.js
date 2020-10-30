@@ -51,7 +51,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
+const NavBar = ({
+  auth: { isAuthenticated, loading, user },
+  logout,
+  props
+}) => {
   const classes = useStyles();
 
   return (
@@ -70,13 +74,14 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
               </IconButton>
             </Tooltip>
             <Typography variant='h6' className={classes.title}></Typography>
-            <Avatar
-              className='navbar-user'
-              src='girl_female_woman_avatar-512.png'
-            ></Avatar>
+
             <Tooltip title='View profile' id='profile-button'>
               <IconButton component={Link} to='/userProfile'>
-                Name
+                <Avatar
+                  className='navbar-user'
+                  src='girl_female_woman_avatar-512.png'
+                />
+                {user && user.firstName} {user && user.lastName}
               </IconButton>
             </Tooltip>
             <Tooltip className='navbar-logout' title='Logout' placement='top'>

@@ -61,15 +61,18 @@ const UserProfile = ({ getCurrentProfile, auth, profile }) => {
                     className={classesImg.image}
                     src='static/images/obama.png'
                   />
-                  <Typography variant='h4' gutterBottom>
-                    Barack Obama
-                  </Typography>
+                  <h2>
+                    {auth.user && auth.user.firstName}
+                    <br />
+                    {auth.user && auth.user.lastName}
+                  </h2>
                   <EditProfileModal />
                 </CardContent>
               </Card>
             </Grid>
             <Typography variant='h6' gutterBottom>
-              <RoomIcon /> Washington, USA
+              <RoomIcon />
+              {profile && profile.profile && profile.profile.location}
               <br />
               <CakeIcon /> 04/06/1961
               <br />
