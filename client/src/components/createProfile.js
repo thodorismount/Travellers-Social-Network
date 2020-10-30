@@ -44,7 +44,7 @@ const EditProfileModal = props => {
         variant='contained'
         size='medium'
         color='primary'
-        onClick={handleToggle}
+        onClick={() => handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
       >
@@ -99,4 +99,5 @@ const EditProfileModal = props => {
 EditProfileModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
 export default withStyles(styles)(EditProfileModal);
