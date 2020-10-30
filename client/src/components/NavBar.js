@@ -13,7 +13,6 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 import './Navbar.css';
 
-
 //redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -27,10 +26,10 @@ function ElevationScroll(props) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
+    target: window ? window() : undefined
   });
   return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
+    elevation: trigger ? 4 : 0
   });
 }
 
@@ -40,8 +39,9 @@ ElevationScroll.propTypes = {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  window: PropTypes.func,
+  window: PropTypes.func
 };
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -51,39 +51,41 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
 const NavBar = ({ auth: { isAuthenticated, loading }, logout, props }) => {
   const classes = useStyles();
-  
 
   return (
     <React.Fragment>
-    <CssBaseline />
-    <ElevationScroll {...props}>
-      <AppBar  id='appbar' style={{ background: '#60a8b1' }}>
-        <Toolbar id='toolbar'>
-          <Tooltip title='Go to feed page'>
-            <IconButton id='navbar-logo' component={Link} to='/home'>
-              <img src='earth2.png' alt='Avatar' className='navbar-logo'></img>
-            </IconButton>
-          </Tooltip>
-          <Typography variant='h6' className={classes.title}></Typography>
-          <Avatar
-            className='navbar-user'
-            src='girl_female_woman_avatar-512.png'
-          ></Avatar>
-          <Tooltip title='View profile' id='profile-button'>
-            <IconButton component={Link} to='/userProfile'>
-              Name
-            </IconButton>
-          </Tooltip>
-          <Tooltip className='navbar-logout' title='Logout' placement='top'>
-            <IconButton component={Link} to='/login' onClick={logout}>
-              <ExitToAppIcon fontSize='large' />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar id='appbar' style={{ background: '#60a8b1' }}>
+          <Toolbar id='toolbar'>
+            <Tooltip title='Go to feed page'>
+              <IconButton id='navbar-logo' component={Link} to='/home'>
+                <img
+                  src='earth2.png'
+                  alt='Avatar'
+                  className='navbar-logo'
+                ></img>
+              </IconButton>
+            </Tooltip>
+            <Typography variant='h6' className={classes.title}></Typography>
+            <Avatar
+              className='navbar-user'
+              src='girl_female_woman_avatar-512.png'
+            ></Avatar>
+            <Tooltip title='View profile' id='profile-button'>
+              <IconButton component={Link} to='/userProfile'>
+                Name
+              </IconButton>
+            </Tooltip>
+            <Tooltip className='navbar-logout' title='Logout' placement='top'>
+              <IconButton component={Link} to='/login' onClick={logout}>
+                <ExitToAppIcon fontSize='large' />
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
+        </AppBar>
       </ElevationScroll>
     </React.Fragment>
   );

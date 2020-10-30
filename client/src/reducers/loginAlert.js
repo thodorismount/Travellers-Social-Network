@@ -1,5 +1,3 @@
-import { initial } from 'lodash';
-
 import { SET_LOGIN_ALERT, REMOVE_LOGIN_ALERT } from '../actions/types';
 
 const initialState = [];
