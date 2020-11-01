@@ -10,6 +10,8 @@ import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
 import Button from '@material-ui/core/Button';
 import EditProfileModal from '../components/createProfile';
+import PostCard from '../components/PostCard';
+import Divider from '@material-ui/core/Divider';
 import Spinner from '../components/Profile/Spinner';
 import moment from 'moment';
 
@@ -24,8 +26,8 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    // textAlign: 'center',
-    // justifyContent: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
     height: 'auto'
   },
   card: {

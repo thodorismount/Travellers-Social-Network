@@ -17,6 +17,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    minWidth: '60%',
+    marginBottom: '2rem'
     maxWidth: 345
   },
   media: {
@@ -71,7 +73,7 @@ export default function PostCard() {
       />
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
-          Post caption
+          Post caption...
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

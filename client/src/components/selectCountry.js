@@ -49,8 +49,8 @@ export default function CountrySelect() {
       renderInput={params => (
         <TextField
           {...params}
-          label='I have visited..'
-          margin='dense'
+          label="Select countries you've visited"
+          margin='normal'
           variant='outlined'
           inputProps={{
             ...params.inputProps,
