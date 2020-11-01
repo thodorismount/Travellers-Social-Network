@@ -75,10 +75,15 @@ const Login = props => {
 
   return (
     <Grid container className={classes.form}>
-      <Grid item sm>
-        <h1 className={classes.logo}>Logo</h1>
+      <Grid item xs={6}>
+        <img
+          src='static/images/logo.png'
+          width='180'
+          height='180'
+          style={{ marginTop: '180px' }}
+        />
       </Grid>
-      <Grid item sm>
+      <Grid item xs={3}>
         <Card className={classes.card}>
           <Typography varient='h1' className={classes.pageTitle}>
             Please Login or Sign up
