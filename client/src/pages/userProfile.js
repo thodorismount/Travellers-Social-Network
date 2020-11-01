@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,8 @@ import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
 import Button from '@material-ui/core/Button';
 import EditProfileModal from '../components/createProfile';
+import Spinner from '../components/Profile/Spinner';
+import moment from 'moment';
 
 // Redux
 import { connect } from 'react-redux';
@@ -42,52 +44,69 @@ const useStylesImg = makeStyles({
   }
 });
 
-const UserProfile = ({ getCurrentProfile, auth, profile }) => {
+const UserProfile = ({
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile, loading }
+}) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
   const classes = useStyles();
   const classesImg = useStylesImg();
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={7} sm={4}>
-          <Paper className={classes.paper}>
-            <Grid item container xs={7}>
-              <Card className={classes.card} width='auto'>
-                <CardContent>
-                  <img
-                    className={classesImg.image}
-                    src='static/images/obama.png'
-                  />
-                  <h2>
-                    {auth.user && auth.user.firstName}
-                    <br />
-                    {auth.user && auth.user.lastName}
-                  </h2>
-                  <EditProfileModal />
-                </CardContent>
-              </Card>
-            </Grid>
-            <Typography variant='h6' gutterBottom>
-              <RoomIcon />
-              {profile && profile.profile && profile.profile.location}
-              <br />
-              <CakeIcon /> 04/06/1961
-              <br />
-              travel experiences
-              <br />
-              places visited
-            </Typography>
-          </Paper>
+  if (loading && profile === null) {
+    return <Spinner />;
+  } else if (profile === null) {
+    return (
+      <div>
+        <h1>Profile</h1>
+        <p>
+          Welcome {user && user.firstName} {user && user.lastName}
+        </p>
+      </div>
+    );
+  } else {
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={7} sm={4}>
+            <Paper className={classes.paper}>
+              <Grid item container xs={7}>
+                <Card className={classes.card} width='auto'>
+                  <CardContent>
+                    <img
+                      className={classesImg.image}
+                      src='static/images/obama.png'
+                    />
+                    <h2>
+                      {user && user.firstName}
+                      <br />
+                      {user && user.lastName}
+                    </h2>
+                    <EditProfileModal />
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Typography variant='h6' gutterBottom>
+                <RoomIcon />
+                {profile && profile.location}
+                <br />
+                <CakeIcon />
+                {moment(user && user.birthDate).format('DD-MM-YYYY')}
+                <br />
+                Travel Experience : {profile && profile.travelExperience}/5
+                <br />
+                places visited
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={8} sm={8}>
+            <Paper className={classes.paper}>posts</Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={8} sm={8}>
-          <Paper className={classes.paper}>posts</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
 UserProfile.propTypes = {
@@ -98,7 +117,7 @@ UserProfile.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.auth
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { getCurrentProfile })(UserProfile);

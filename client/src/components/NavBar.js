@@ -62,7 +62,7 @@ const NavBar = ({
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar id='appbar' style={{ background: '#60a8b1' }}>
+        <AppBar id='appbar' className='appbar'>
           <Toolbar id='toolbar'>
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
@@ -81,7 +81,7 @@ const NavBar = ({
                   className='navbar-user'
                   src='girl_female_woman_avatar-512.png'
                 />
-                {user && user.firstName} {user && user.lastName}
+                {`${user && user.firstName} ${user && user.lastName}`}
               </IconButton>
             </Tooltip>
             <Tooltip className='navbar-logout' title='Logout' placement='top'>

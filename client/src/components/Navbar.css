@@ -1,10 +1,11 @@
 .appbar {
-  background: rgb(96, 167, 177);
+  background: linear-gradient(
+    24deg,
+    rgba(7, 58, 129, 1) 5%,
+    rgba(0, 172, 179, 1) 55%,
+    rgba(0, 255, 184, 1) 89%
+  );
 }
-.toolbar {
-  background: rgb(96, 167, 177);
-}
-
 .navbar-logo {
   justify-self: start;
   margin-left: 0.5rem;
