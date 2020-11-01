@@ -15,6 +15,8 @@ import CreateUploadImage from '../components/uploadImage';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
+import '../components/Navbar.css';
+
 
 class CreatePostDialog extends Component {
   state = {

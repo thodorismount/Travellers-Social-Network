@@ -16,7 +16,7 @@ import CreateDatePicker from '../components/DatePicker';
 import CreateGenderSelector from '../components/GenderSelector';
 import withStyles from '@material-ui/core/styles/withStyles';
 // custom  Components
-import Alert from './Alert';
+import Alert from './Alerts/Alert';
 
 const styles = {
   form: {

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CreateformDialog from '../components/FormDialog';
 import $ from 'jquery';
-
+import '../re.css';
 //MUI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -13,11 +13,13 @@ import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 
 // R.E. Components
-import Alert from '../components/Alert';
+import LoginAlert from '../components/Alerts/LoginAlert';
+
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'; //type-checking variables
 import { login } from '../actions/auth';
+import { loginAlert } from '../actions/loginAlert';
 
 // initialize MUI styles
 const styles = {
@@ -85,6 +87,7 @@ const Login = props => {
       </Grid>
       <Grid item xs={3}>
         <Card className={classes.card}>
+          <LoginAlert />
           <Typography varient='h1' className={classes.pageTitle}>
             Please Login or Sign up
           </Typography>
@@ -126,10 +129,9 @@ const Login = props => {
               Login
             </Button>
             <Divider variant='middle' className={classes.divider} />
-            <CreateformDialog />
           </form>
+          <CreateformDialog />
         </Card>
-        <Alert />
       </Grid>
 
       <Grid item sm />
@@ -139,6 +141,7 @@ const Login = props => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
+  loginAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
@@ -146,4 +149,6 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default withStyles(styles)(connect(mapStateToProps, { login })(Login));
+export default withStyles(styles)(
+  connect(mapStateToProps, { login, loginAlert })(Login)
+);

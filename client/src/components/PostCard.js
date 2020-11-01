@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
     marginBottom: '2rem'
+    maxWidth: 345
   },
   media: {
     height: 0,
@@ -78,7 +79,9 @@ export default function PostCard() {
       <CardActions disableSpacing>
         <IconButton
           aria-label='add to favorites'
-          onClick={(FavoriteIcon.style = { fill: 'red' })}
+          onClick={() => {
+            FavoriteIcon.style = { fill: 'red' };
+          }}
         >
           <FavoriteIcon id='fav' />
         </IconButton>
