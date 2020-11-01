@@ -1,23 +1,23 @@
-
-.appbar{
-    background: rgb(96, 167, 177);
-
+.appbar {
+  background: linear-gradient(
+    24deg,
+    rgba(7, 58, 129, 1) 5%,
+    rgba(0, 172, 179, 1) 55%,
+    rgba(0, 255, 184, 1) 89%
+  );
 }
-.toolbar{
-    background: rgb(96, 167, 177);
+.navbar-logo {
+  justify-self: start;
+  margin-left: 0.5rem;
+  width: 50px;
+  height: inherit;
 }
-
-.navbar-logo{
-    justify-self: start;
-    margin-left: 0.5rem;
-    width: 50px;
-    height: inherit;
+.button {
+  position: fixed;
+  bottom: -4px;
+  right: -4px;
+  margin-left: 1350px;
 }
-.button{
-    position: fixed;
-    bottom: -4px;
-    right: -4px;
-    margin-left: 1350px;
+.navbar-user {
+  margin-right: 0.5rem;
 }
-
-
