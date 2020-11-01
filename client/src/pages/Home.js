@@ -7,6 +7,7 @@ import PostCard from '../components/PostCard';
 import '../components/Navbar.css';
 import $ from 'jquery';
 import '../re.css';
+import Paper from '@material-ui/core/Paper';
 
 // var style = document.createElement('style');
 // style.innerHTML = `
@@ -37,11 +38,19 @@ const Home = () => {
           xs={10}
           justify={'center'}
           container
-          className={'postContainer'}
+          // className={'postContainer'}
         >
-          <PostCard />
-          <PostCard />
-          <PostCard />
+          <Paper
+            justify='center'
+            style={{
+              width: '75%',
+              backgroundColor: '#F0F2F5'
+            }}
+          >
+            <PostCard />
+            <PostCard />
+            <PostCard />
+          </Paper>
         </Grid>
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
           <CreatePostDialog />

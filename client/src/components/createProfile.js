@@ -13,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import DialogActions from '@material-ui/core/DialogActions';
 
 const styles = {
   button: {
@@ -47,7 +48,7 @@ const EditProfileModal = props => {
         variant='contained'
         size='medium'
         color='primary'
-        onClick={() => handleToggle}
+        onClick={handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
       >
@@ -101,17 +102,27 @@ const EditProfileModal = props => {
               Upload Profile Picture
             </Typography> */}
             <CreateUploadImage />
-            <Button
-              type='submit'
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              size='large'
-            >
-              Submit
-            </Button>
           </form>
         </DialogContent>
+        <DialogActions>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            size='medium'
+          >
+            Submit
+          </Button>
+          <Button
+            color='primary'
+            variant='outlined'
+            size='medium'
+            onClick={handleToggle}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
     </Fragment>
   );

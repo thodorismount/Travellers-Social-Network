@@ -82,7 +82,7 @@ const Login = props => {
           src='static/images/logo.png'
           width='180'
           height='180'
-          style={{ marginTop: '180px' }}
+          style={{ marginTop: '250px' }}
         />
       </Grid>
       <Grid item xs={3}>

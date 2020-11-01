@@ -10,6 +10,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Button from '@material-ui/core/Button';
 
 import './Navbar.css';
 
@@ -67,7 +68,7 @@ const NavBar = ({
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
                 <img
-                  src='earth2.png'
+                  src='static/images/logo.png'
                   alt='Avatar'
                   className='navbar-logo'
                 ></img>
@@ -76,13 +77,18 @@ const NavBar = ({
             <Typography variant='h6' className={classes.title}></Typography>
 
             <Tooltip title='View profile' id='profile-button'>
-              <IconButton component={Link} to='/userProfile'>
+              <Button component={Link} to='/userProfile'>
                 <Avatar
                   className='navbar-user'
                   src='girl_female_woman_avatar-512.png'
                 />
-                {`${user && user.firstName} ${user && user.lastName}`}
-              </IconButton>
+                <Typography
+                  variant='h5'
+                  style={{ textTransform: 'capitalize' }}
+                >
+                  {`${user && user.firstName} ${user && user.lastName}`}
+                </Typography>
+              </Button>
             </Tooltip>
             <Tooltip className='navbar-logout' title='Logout' placement='top'>
               <IconButton component={Link} to='/login' onClick={logout}>

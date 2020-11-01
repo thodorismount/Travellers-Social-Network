@@ -17,7 +17,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
 
-
 class CreatePostDialog extends Component {
   state = {
     open: false
@@ -39,8 +38,8 @@ class CreatePostDialog extends Component {
           title='Create post'
           style={{
             position: 'fixed',
-            bottom: '7%',
-            right: '7%'
+            top: '10%',
+            right: '13%'
           }}
         >
           <EditIcon />

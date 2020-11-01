@@ -14,6 +14,12 @@ import PostCard from '../components/PostCard';
 import Divider from '@material-ui/core/Divider';
 import Spinner from '../components/Profile/Spinner';
 import moment from 'moment';
+import CreatePostDialog from '../components/CreatePostDialog';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 
 // Redux
 import { connect } from 'react-redux';
@@ -22,18 +28,25 @@ import { getCurrentProfile } from '../actions/profile';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 6
+    flexGrow: 6,
+    paddingTop: '10px'
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     justifyContent: 'center',
-    height: 'auto'
+    height: 'auto',
+    paddingTop: '10px'
   },
   card: {
     textAlign: 'center',
     justifyContent: 'center',
     height: 'auto'
+  },
+  ListItemText: {
+    fontSize: '1.1rem', //font size of rest profile info is 1.25 rem
+    lineHeight: '0.7',
+    marginLeft: '-2rem'
   }
 }));
 
@@ -54,6 +67,7 @@ const UserProfile = ({
   useEffect(() => {
     getCurrentProfile();
   }, []);
+
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
@@ -71,39 +85,106 @@ const UserProfile = ({
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={7} sm={4}>
-            <Paper className={classes.paper}>
-              <Grid item container xs={7}>
-                <Card className={classes.card} width='auto'>
-                  <CardContent>
-                    <img
-                      className={classesImg.image}
-                      src='static/images/obama.png'
-                    />
-                    <h2>
-                      {user && user.firstName}
-                      <br />
-                      {user && user.lastName}
-                    </h2>
-                    <EditProfileModal />
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Typography variant='h6' gutterBottom>
+          <Grid item xs={4} sm={4}>
+            <Paper className={classes.paper} variant='elevation'>
+              <div
+                style={{
+                  backgroundColor: '#F0F2F5',
+                  borderRadius: '2%',
+                  paddingTop: '5px'
+                }}
+              >
+                <img
+                  className={classesImg.image}
+                  src='static/images/obama.png'
+                />
+                <Typography
+                  variant='h4'
+                  style={{ textTransform: 'uppercase', width: '95%' }}
+                >
+                  {`${user && user.firstName} ${user && user.lastName}`}
+                </Typography>
+                <EditProfileModal />
+              </div>
+              <Typography
+                variant='h6'
+                gutterBottom
+                align='left'
+                style={{ textAlign: 'left' }}
+              >
+                {profile && profile.bio}
+                <br />
                 <RoomIcon />
                 {profile && profile.location}
                 <br />
                 <CakeIcon />
                 {moment(user && user.birthDate).format('DD-MM-YYYY')}
                 <br />
-                Travel Experience : {profile && profile.travelExperience}/5
+                Travel Experience: {profile && profile.travelExperience}/5
                 <br />
-                places visited
+                <List dense='true' subheader='Countries visited:'>
+                  {profile &&
+                    profile.visitedCountries.map(countries => (
+                      <ListItem>
+                        <ListItemIcon>
+                          <PanoramaFishEyeRoundedIcon
+                            style={{ fontSize: '0.8rem' }}
+                            color='primary'
+                          />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={countries}
+                          classes={{ primary: classes.ListItemText }}
+                        >
+                          {/* <Typography variant='h6'>{inte}</Typography> */}
+                        </ListItemText>
+                      </ListItem>
+                    ))}
+                </List>
+                <List dense='true' subheader='Interests:'>
+                  {profile &&
+                    profile.interests.map(interests => (
+                      <ListItem>
+                        <ListItemIcon>
+                          <PanoramaFishEyeRoundedIcon
+                            style={{ fontSize: '0.8rem' }}
+                            color='primary'
+                          />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={interests}
+                          classes={{ primary: classes.ListItemText }}
+                        >
+                          {/* <Typography variant='h6'>{inte}</Typography> */}
+                        </ListItemText>
+                      </ListItem>
+                    ))}
+                </List>
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={8} sm={8}>
-            <Paper className={classes.paper}>posts</Paper>
+          <Grid
+            item
+            xs={8}
+            md={8}
+            justify='center'
+            container
+            //className={'postContainer'}
+          >
+            <Paper
+              justify='center'
+              style={{
+                width: '80%',
+                backgroundColor: '#F0F2F5'
+              }}
+            >
+              <PostCard />
+              <PostCard />
+              <PostCard />
+            </Paper>
+          </Grid>
+          <Grid item xs={1} sm={1}>
+            <CreatePostDialog />
           </Grid>
         </Grid>
       </div>
