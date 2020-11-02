@@ -80,10 +80,11 @@ const Login = props => {
       <Grid item xs={6}>
         <img
           src='static/images/logo.png'
-          width='180'
-          height='180'
+          width='230'
+          height='230'
           style={{ marginTop: '250px' }}
         />
+        <br />
       </Grid>
       <Grid item xs={3}>
         <Card className={classes.card}>
