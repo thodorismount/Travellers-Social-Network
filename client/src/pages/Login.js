@@ -79,11 +79,12 @@ const Login = props => {
     <Grid container className={classes.form}>
       <Grid item xs={6}>
         <img
-          src='static/images/logo.png'
-          width='180'
-          height='180'
-          style={{ marginTop: '250px' }}
+          src='static/images/logo_final.png'
+          width='350'
+          height='375'
+          style={{ marginTop: '180px' }}
         />
+        <br />
       </Grid>
       <Grid item xs={3}>
         <Card className={classes.card}>
@@ -149,6 +150,6 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default withStyles(styles)(
-  connect(mapStateToProps, { login, loginAlert })(Login)
+export default connect(mapStateToProps, { login, loginAlert })(
+  withStyles(styles)(Login)
 );

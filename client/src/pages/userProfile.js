@@ -127,10 +127,10 @@ const UserProfile = ({
                 <br />
                 Travel Experience: {profile && profile.travelExperience}/5
                 <br />
-                <List dense='true' subheader='Countries visited:'>
+                <List dense={true} subheader='Countries visited:'>
                   {profile &&
                     profile.visitedCountries.map(countries => (
-                      <ListItem>
+                      <ListItem key={countries}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -146,10 +146,10 @@ const UserProfile = ({
                       </ListItem>
                     ))}
                 </List>
-                <List dense='true' subheader='Interests:'>
+                <List dense={true} subheader='Interests:'>
                   {profile &&
-                    profile.interests.map(interests => (
-                      <ListItem>
+                    profile.interests.map(interest => (
+                      <ListItem key={interest}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -157,7 +157,7 @@ const UserProfile = ({
                           />
                         </ListItemIcon>
                         <ListItemText
-                          primary={interests}
+                          primary={interest}
                           classes={{ primary: classes.ListItemText }}
                         >
                           {/* <Typography variant='h6'>{inte}</Typography> */}
