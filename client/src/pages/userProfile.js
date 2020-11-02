@@ -105,32 +105,46 @@ const UserProfile = ({
                 />
                 <Typography
                   variant='h4'
-                  style={{ textTransform: 'capitalize', width: '95%' }}
+                  style={{
+                    textTransform: 'capitalize',
+                    width: '95%',
+                    marginBottom: '1rem'
+                  }}
                 >
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
-                <EditProfileModal />
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <EditProfileModal />
+                </div>
               </div>
               <Typography
                 variant='h6'
                 gutterBottom
                 align='left'
-                style={{ textAlign: 'left' }}
+                style={{ textAlign: 'left', marginBottom: '0.5rem' }}
               >
-                {profile && profile.bio}
-                <br />
-                <RoomIcon />
-                {profile && profile.location}
-                <br />
-                <CakeIcon />
-                {moment(user && user.birthDate).format('DD-MM-YYYY')}
-                <br />
-                Travel Experience: {profile && profile.travelExperience}/5
-                <br />
-                <List dense='true' subheader='Countries visited:'>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  {profile && profile.bio}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <RoomIcon style={{ marginRight: '1rem' }} />
+                  {profile && profile.location}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <CakeIcon style={{ marginRight: '1rem' }} />
+                  {moment(user && user.birthDate).format('DD-MM-YYYY')}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  Travel Experience: {profile && profile.travelExperience}/5
+                </div>
+                <List
+                  dense={true}
+                  subheader='Countries visited:'
+                  style={{ marginBottom: '0.4rem' }}
+                >
                   {profile &&
                     profile.visitedCountries.map(countries => (
-                      <ListItem>
+                      <ListItem key={countries}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -146,10 +160,14 @@ const UserProfile = ({
                       </ListItem>
                     ))}
                 </List>
-                <List dense='true' subheader='Interests:'>
+                <List
+                  dense={true}
+                  subheader='Interests:'
+                  style={{ marginBottom: '0.4rem' }}
+                >
                   {profile &&
-                    profile.interests.map(interests => (
-                      <ListItem>
+                    profile.interests.map(interest => (
+                      <ListItem key={interest}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -157,7 +175,7 @@ const UserProfile = ({
                           />
                         </ListItemIcon>
                         <ListItemText
-                          primary={interests}
+                          primary={interest}
                           classes={{ primary: classes.ListItemText }}
                         >
                           {/* <Typography variant='h6'>{inte}</Typography> */}

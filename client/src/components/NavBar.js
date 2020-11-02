@@ -68,7 +68,7 @@ const NavBar = ({
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
                 <img
-                  src='static/images/logo.png'
+                  src='static/images/logo_white_lines.png'
                   alt='Avatar'
                   className='navbar-logo'
                 ></img>
