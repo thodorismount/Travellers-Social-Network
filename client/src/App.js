@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import { post } from 'jquery';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -38,6 +39,8 @@ const App = () => {
               <Route exact path='/Login' component={Login} />
               <Route exact path='/signup' component={signup} />
               <Route exact path='/userprofile' component={userProfile} />
+              <Route exact path='/posts' component={post} />
+
             </Switch>
           </div>
         </Router>
