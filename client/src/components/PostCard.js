@@ -16,35 +16,35 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MyMenu from './MyMenu';
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    minWidth: '60%',
+    marginBottom: '1.5rem',
+    margin: '1rem'
+    // marginLeft: '10%'
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(180deg)'
   },
   avatar: {
-    backgroundColor: red[500],
-  },
+    backgroundColor: red[500]
+  }
 }));
-
 
 export default function PostCard() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -54,14 +54,17 @@ export default function PostCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" src="girl_female_woman_avatar-512.png" className={classes.avatar}>
-          </Avatar>
+          <Avatar
+            aria-label='recipe'
+            src='girl_female_woman_avatar-512.png'
+            className={classes.avatar}
+          ></Avatar>
         }
         action={
           <MyMenu />
         }
-        title="Location"
-        subheader="September 14, 2016"
+        title='Location'
+        subheader='September 14, 2016'
       />
       <CardMedia
         className={classes.media}
@@ -69,31 +72,33 @@ export default function PostCard() {
         title=""
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Post caption
+        <Typography variant='body2' color='textSecondary' component='p'>
+          Post caption...
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        
-        <IconButton aria-label="add to favorites" onClick={ FavoriteIcon.style={fill: 'red'}}>
-          <FavoriteIcon id="fav" />
+        <IconButton
+          aria-label='add to favorites'
+          onClick={() => {
+            FavoriteIcon.style = { fill: 'red' };
+          }}
+        >
+          <FavoriteIcon id='fav' />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: expanded
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
+          aria-label='show more'
         >
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-            Post details
-          </Typography>
+          <Typography paragraph>Post details</Typography>
         </CardContent>
       </Collapse>
     </Card>

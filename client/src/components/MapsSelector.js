@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MapsSelector() {
+export default function MapsSelector(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
@@ -40,7 +40,7 @@ export default function MapsSelector() {
     if (!document.querySelector('#google-maps')) {
       loadScript(
         // in order for the api to work he need to delete SKG from the link bellow  at key= ->(!! SKG !!!)<- AIzaSyD...
-        'https://maps.googleapis.com/maps/api/js?key=SKGAIzaSyD_n1iuFbpTNBpKIE3aXHR45y8gF6ybI6A&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD_n1iuFbpTNBpKIE3aXHR45y8gF6ybI6A&libraries=places',
         document.querySelector('head'),
         'google-maps'
       );
@@ -116,9 +116,10 @@ export default function MapsSelector() {
       renderInput={params => (
         <TextField
           {...params}
-          label='Add a location'
+          label={props.label}
           variant='outlined'
           fullWidth
+          margin='normal'
         />
       )}
       renderOption={option => {
