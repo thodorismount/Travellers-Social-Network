@@ -9,6 +9,7 @@ import $ from 'jquery';
 import '../re.css';
 import Paper from '@material-ui/core/Paper';
 
+
 // var style = document.createElement('style');
 // style.innerHTML = `
 //   #target {
@@ -51,6 +52,9 @@ const Home = () => {
             <PostCard />
             <PostCard />
           </Paper>
+        </Grid>
+        <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
+          <CreatePostDialog />
         </Grid>
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
           <CreatePostDialog />
