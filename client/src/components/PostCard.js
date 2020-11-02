@@ -66,7 +66,7 @@ export default function PostCard() {
       <CardMedia
         className={classes.media}
         image="earth2.png"
-        title="Paella dish"
+        title=""
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
