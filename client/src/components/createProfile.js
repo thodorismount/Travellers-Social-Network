@@ -34,7 +34,7 @@ const EditProfileModal = props => {
     location: ''
   });
 
-  let testOpen;
+  let testOpen = props.open;
   const [open, setOpen] = useState({ testOpen });
 
   const handleToggle = () => {

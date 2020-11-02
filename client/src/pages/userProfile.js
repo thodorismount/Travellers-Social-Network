@@ -75,9 +75,14 @@ const UserProfile = ({
   } else if (profile === null) {
     return (
       <div>
-        <h1>Profile</h1>
+        <Typography
+          variant='h6'
+          align='left'
+          style={{ textAlign: 'left' }}
+        ></Typography>
         <p>
           Welcome {user && user.firstName} {user && user.lastName}
+          <EditProfileModal />
         </p>
       </div>
     );
