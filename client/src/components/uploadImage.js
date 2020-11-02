@@ -30,8 +30,9 @@ class uploadImage extends Component {
           className={classes.button}
           variant='contained'
           startIcon={<PhotoCameraIcon />}
+          size='medium'
         >
-          Upload image{' '}
+          Upload image
         </Button>
       </div>
     );

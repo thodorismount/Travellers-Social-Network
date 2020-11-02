@@ -39,8 +39,8 @@ class CreatePostDialog extends Component {
           title='Create post'
           style={{
             position: 'fixed',
-            bottom: '7%',
-            right: '7%'
+            top: '10%',
+            right: '13%'
           }}
         >
           <EditIcon />
