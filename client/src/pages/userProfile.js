@@ -52,8 +52,8 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesImg = makeStyles({
   image: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '80%',
+    maxHeight: '80%',
     margin: 'auto',
     borderRadius: '50%'
   }
@@ -89,7 +89,7 @@ const UserProfile = ({
   } else {
     return (
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={4} sm={4}>
             <Paper className={classes.paper} variant='elevation'>
               <div
@@ -101,11 +101,11 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='static/images/obama.png'
+                  src='girl_female_woman_avatar-512.png'
                 />
                 <Typography
                   variant='h4'
-                  style={{ textTransform: 'uppercase', width: '95%' }}
+                  style={{ textTransform: 'capitalize', width: '95%' }}
                 >
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
@@ -172,20 +172,38 @@ const UserProfile = ({
             item
             xs={8}
             md={8}
-            justify='center'
+            justify='start'
             container
             //className={'postContainer'}
           >
             <Paper
               justify='center'
               style={{
-                width: '80%',
+                width: '100%',
                 backgroundColor: '#F0F2F5'
               }}
             >
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              <PostCard
+                caption='Throwback to my trip in Morocco'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/morocco.jpg'
+                location='Morocco'
+                date='October 14, 2020'
+              />
+              <PostCard
+                caption='Looking forward for my next flight to Paris'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/paris.jpg'
+                location='Paris'
+                date='September 9, 2020'
+              />
+              <PostCard
+                caption='Any good restaurants in NY?'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/newYork.jpg'
+                location='New York'
+                date='May 19, 2020'
+              />
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>

@@ -81,7 +81,7 @@ const EditProfileModal = props => {
               id='interests'
               name='interests'
               type='interests'
-              label='Interests e.g. travelling, hikinkg, ...'
+              label='Interests e.g. travelling, hiking, ...'
               margin='normal'
               variant='outlined'
               className={classes.textField}
