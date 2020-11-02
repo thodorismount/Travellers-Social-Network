@@ -20,6 +20,9 @@ const styles = {
   },
   pageTitle: {
     margin: '10px'
+  },
+  form: {
+    alignItems: 'center'
   }
 };
 
@@ -44,7 +47,7 @@ const EditProfileModal = props => {
         variant='contained'
         size='medium'
         color='primary'
-        onClick={handleToggle}
+        onClick={() => handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
       >
@@ -59,35 +62,53 @@ const EditProfileModal = props => {
         <DialogContent>
           <form className={classes.form}>
             <TextField
+              fullWidth
+              id='postTextField'
+              autoFocus
+              name='postTextField'
+              multiline
+              rows={3}
+              margin='normal'
+              // defaultValue="Hey traveller! Write your story"
+              variant='outlined'
+              placeholder='Hey traveller! Write your bio'
+              label='Bio'
+              fullWidth
+            />
+
+            <TextField
               id='interests'
               name='interests'
               type='interests'
-              label='Interests e.g. travelling, hikinkg, ..'
+              label='Interests e.g. travelling, hikinkg, ...'
+              margin='normal'
+              variant='outlined'
               className={classes.textField}
               // helperText={errors.interests}
               // error={errors.interests ? true: false}
               //onChange={this.handleChange}
               fullWidth
             />
-            <Typography varient='h1' className={classes.pageTitle}>
+            {/* <Typography varient='h1' className={classes.pageTitle}>
               Select Countries you've visited
-            </Typography>
+            </Typography> */}
             <CreateSelectCountries />
-            <Typography varient='h1' className={classes.pageTitle}>
+            {/* <Typography varient='h1' className={classes.pageTitle}>
               Select your location
-            </Typography>
-            <MapsSelector />
-            <Typography varient='h1' className={classes.pageTitle}>
+            </Typography> */}
+            <MapsSelector label='Select your location' />
+            {/* <Typography varient='h1' className={classes.pageTitle}>
               Upload Profile Picture
-            </Typography>
+            </Typography> */}
             <CreateUploadImage />
             <Button
               type='submit'
               variant='contained'
               color='primary'
               className={classes.button}
+              size='large'
             >
-              Submit{' '}
+              Submit
             </Button>
           </form>
         </DialogContent>
@@ -99,4 +120,5 @@ const EditProfileModal = props => {
 EditProfileModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
 export default withStyles(styles)(EditProfileModal);

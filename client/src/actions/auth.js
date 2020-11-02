@@ -1,6 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
+import { loginAlert } from './loginAlert';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -8,7 +9,8 @@ import {
   AUTH_ERROR,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PROFILE
 } from './types';
 
 // Load User
@@ -88,7 +90,7 @@ export const login = (email, password) => async dispatch => {
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error => dispatch(loginAlert(error.msg, 'danger')));
     }
     dispatch({
       type: LOGIN_FAIL
@@ -97,5 +99,6 @@ export const login = (email, password) => async dispatch => {
 };
 // Logout / clear Profile
 export const logout = () => dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
