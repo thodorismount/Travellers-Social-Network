@@ -79,10 +79,10 @@ const Login = props => {
     <Grid container className={classes.form}>
       <Grid item xs={6}>
         <img
-          src='static/images/logo.png'
-          width='230'
-          height='230'
-          style={{ marginTop: '250px' }}
+          src='static/images/logo_final.png'
+          width='350'
+          height='375'
+          style={{ marginTop: '180px' }}
         />
         <br />
       </Grid>
