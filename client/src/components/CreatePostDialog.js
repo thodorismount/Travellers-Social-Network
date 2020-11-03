@@ -38,7 +38,7 @@ class CreatePostDialog extends Component {
           title='Create post'
           style={{
             position: 'fixed',
-            top: '10%',
+            top: '7rem',
             right: '15%'
           }}
         >

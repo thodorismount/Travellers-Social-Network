@@ -14,7 +14,8 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import Divider from '@material-ui/core/Divider';
+import ManagePost from '../components/ManagePost';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -67,7 +68,7 @@ export default function PostCard(props) {
         }
         action={
           <IconButton aria-label='settings'>
-            <MoreVertIcon />
+            <ManagePost />
           </IconButton>
         }
         title={props.username}
@@ -75,16 +76,13 @@ export default function PostCard(props) {
         classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
         style={{ textTransform: 'capitalize' }}
       />
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title='Paella dish'
-      />
+      <CardMedia className={classes.media} image={props.image} />
       <CardContent>
         <Typography variant='h6' component='p'>
           {props.caption}
         </Typography>
       </CardContent>
+      <Divider variant='middle' />
       <CardActions disableSpacing>
         <IconButton
           aria-label='add to favorites'

@@ -52,8 +52,8 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesImg = makeStyles({
   image: {
-    maxWidth: '80%',
-    maxHeight: '80%',
+    maxWidth: '60%',
+    maxHeight: '60%',
     margin: 'auto',
     borderRadius: '50%'
   }
@@ -127,11 +127,11 @@ const UserProfile = ({
                   {profile && profile.bio}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <RoomIcon style={{ marginRight: '1rem' }} />
+                  <RoomIcon color='primary' style={{ marginRight: '1rem' }} />
                   {profile && profile.location}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <CakeIcon style={{ marginRight: '1rem' }} />
+                  <CakeIcon color='primary' style={{ marginRight: '1rem' }} />
                   {moment(user && user.birthDate).format('DD-MM-YYYY')}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
@@ -188,9 +188,9 @@ const UserProfile = ({
           </Grid>
           <Grid
             item
-            xs={8}
-            md={8}
-            justify='start'
+            xs={7}
+            md={7}
+            justify='flex-start'
             container
             //className={'postContainer'}
           >

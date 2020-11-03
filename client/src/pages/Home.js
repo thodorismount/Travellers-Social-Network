@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Create from '@material-ui/icons/Create';
@@ -17,14 +18,22 @@ import Paper from '@material-ui/core/Paper';
 //   `;
 // document.head.appendChild(style);
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    //margin of whole feed view from navbar
+    flexGrow: 6,
+    paddingTop: '10px'
+  }
+}));
+
 const Home = () => {
   useEffect(() => {
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
   }, []);
-
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       {/* <Grid id='target' container spacing={3}>
         <Grid item xs={1}>
           
