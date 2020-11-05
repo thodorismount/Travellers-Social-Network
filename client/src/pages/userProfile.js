@@ -76,14 +76,19 @@ const UserProfile = ({
     return (
       <div>
         <Typography
-          variant='h6'
+          variant='h3'
           align='left'
-          style={{ textAlign: 'left' }}
-        ></Typography>
-        <p>
+          style={{ textAlign: 'left', textTransform: 'capitalize' }}
+        >
+          {' '}
           Welcome {user && user.firstName} {user && user.lastName}
-          <EditProfileModal />
-        </p>
+        </Typography>
+        <br />
+        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
+          Please fill in your profile
+        </Typography>
+
+        <EditProfileModal />
       </div>
     );
   } else {

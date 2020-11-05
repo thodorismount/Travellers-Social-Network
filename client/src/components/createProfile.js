@@ -106,6 +106,14 @@ const EditProfileModal = props => {
         </DialogContent>
         <DialogActions>
           <Button
+            color='primary'
+            variant='outlined'
+            size='medium'
+            onClick={handleToggle}
+          >
+            Cancel
+          </Button>
+          <Button
             type='submit'
             variant='contained'
             color='primary'
@@ -113,14 +121,6 @@ const EditProfileModal = props => {
             size='medium'
           >
             Submit
-          </Button>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
           </Button>
         </DialogActions>
       </Dialog>

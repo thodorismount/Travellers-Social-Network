@@ -90,7 +90,7 @@ export default function PostCard(props) {
             FavoriteIcon.style = { fill: 'red' };
           }}
         >
-          <FavoriteIcon id='fav' />
+          <FavoriteIcon id='fav' style={{ fill: 'red' }} />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
