@@ -14,6 +14,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MyMenu from './MyMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,9 +67,7 @@ export default function PostCard(props) {
           ></Avatar>
         }
         action={
-          <IconButton aria-label='settings'>
-            <MoreVertIcon />
-          </IconButton>
+          <MyMenu />
         }
         title={props.username}
         subheader={`${props.location}, ${props.date}`}
@@ -78,7 +77,7 @@ export default function PostCard(props) {
       <CardMedia
         className={classes.media}
         image={props.image}
-        title='Paella dish'
+        title=""
       />
       <CardContent>
         <Typography variant='h6' component='p'>
