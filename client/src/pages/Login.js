@@ -52,7 +52,10 @@ const Login = props => {
   useEffect(() => {
     var contents = $('#appbar')[0];
     contents.style.display = 'none';
-  }, []);
+    if (props.isAuthenticated) {
+      props.history.push('/home');
+    }
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -66,9 +69,6 @@ const Login = props => {
 
   const { classes } = props;
 
-  if (props.isAuthenticated) {
-    props.history.push('/home');
-  }
   // Redirect if successfully logged in
 
   return (

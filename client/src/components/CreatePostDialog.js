@@ -13,10 +13,9 @@ import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
-
 
 class CreatePostDialog extends Component {
   state = {
@@ -39,11 +38,11 @@ class CreatePostDialog extends Component {
           title='Create post'
           style={{
             position: 'fixed',
-            top: '10%',
-            right: '13%'
+            top: '7rem',
+            right: '15%'
           }}
         >
-          <EditIcon />
+          <AddIcon />
         </Fab>
 
         <Dialog

@@ -14,8 +14,8 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MyMenu from './MyMenu';
-
+import Divider from '@material-ui/core/Divider';
+import ManagePost from '../components/ManagePost';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -39,13 +39,19 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  titleFont: {
+    fontSize: '1.25rem'
+  },
+  subheaderFont: {
+    fontSize: '1rem',
+    color: '#191919'
   }
 }));
 
-export default function PostCard() {
+export default function PostCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -61,21 +67,22 @@ export default function PostCard() {
           ></Avatar>
         }
         action={
-          <MyMenu />
+          <IconButton aria-label='settings'>
+            <ManagePost />
+          </IconButton>
         }
-        title='Location'
-        subheader='September 14, 2016'
+        title={props.username}
+        subheader={`${props.location}, ${props.date}`}
+        classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
+        style={{ textTransform: 'capitalize' }}
       />
-      <CardMedia
-        className={classes.media}
-        image="earth2.png"
-        title=""
-      />
+      <CardMedia className={classes.media} image={props.image} />
       <CardContent>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          Post caption...
+        <Typography variant='h6' component='p'>
+          {props.caption}
         </Typography>
       </CardContent>
+      <Divider variant='middle' />
       <CardActions disableSpacing>
         <IconButton
           aria-label='add to favorites'
@@ -83,7 +90,7 @@ export default function PostCard() {
             FavoriteIcon.style = { fill: 'red' };
           }}
         >
-          <FavoriteIcon id='fav' />
+          <FavoriteIcon id='fav' style={{ fill: 'red' }} />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -98,7 +105,7 @@ export default function PostCard() {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>Post details</Typography>
+          <Typography paragraph>Comments...</Typography>
         </CardContent>
       </Collapse>
     </Card>

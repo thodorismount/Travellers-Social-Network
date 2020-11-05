@@ -30,7 +30,7 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-// @ROUTE -- POST api/profiles/createProfile
+// @ROUTE -- POST api/profiles/
 // @DESC  -- Creates or update a profile
 // @ACCESS -- Private
 //  location bio interests visitedCountries travelExperience
@@ -62,9 +62,13 @@ router.post(
         .split(',')
         .map(country => country.trim());
     }
-    if (profileFields.visitedCountries.length > 5)
+    if (profileFields.visitedCountries.length >= 10)
+      profileFields.travelExperience = 5;
+    else if (profileFields.visitedCountries.length >= 7)
+      profileFields.travelExperience = 4;
+    else if (profileFields.visitedCountries.length >= 4)
       profileFields.travelExperience = 3;
-    else if (profileFields.visitedCountries.length >= 3)
+    else if (profileFields.visitedCountries.length >= 2)
       profileFields.travelExperience = 2;
     else profileFields.travelExperience = 1;
 
