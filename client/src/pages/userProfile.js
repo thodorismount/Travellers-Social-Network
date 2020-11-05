@@ -26,6 +26,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
 
+import '../re.css';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -52,8 +54,8 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesImg = makeStyles({
   image: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '80%',
+    maxHeight: '80%',
     margin: 'auto',
     borderRadius: '50%'
   }
@@ -74,22 +76,21 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return (
-      <div>
-        <Typography
-          variant='h6'
-          align='left'
-          style={{ textAlign: 'left' }}
-        ></Typography>
-        <p>
+      <div className='no-profile-template'>
+        <Typography variant='h3'>Profile</Typography>
+        <h2>
           Welcome {user && user.firstName} {user && user.lastName}
-          <EditProfileModal />
-        </p>
+        </h2>
+
+        <h4>It seems like you haven't created yout profile yet</h4>
+
+        <EditProfileModal buttonType='Create Profile' />
       </div>
     );
   } else {
     return (
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={4} sm={4}>
             <Paper className={classes.paper} variant='elevation'>
               <div
@@ -101,36 +102,52 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='static/images/obama.png'
+                  src='girl_female_woman_avatar-512.png'
                 />
                 <Typography
                   variant='h4'
-                  style={{ textTransform: 'uppercase', width: '95%' }}
+                  style={{
+                    textTransform: 'capitalize',
+                    width: '95%',
+                    marginBottom: '1rem'
+                  }}
                 >
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
-                <EditProfileModal />
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <EditProfileModal buttonType='Edit Profile' />
+                </div>
               </div>
               <Typography
                 variant='h6'
                 gutterBottom
                 align='left'
-                style={{ textAlign: 'left' }}
+                style={{ textAlign: 'left', marginBottom: '0.5rem' }}
               >
-                {profile && profile.bio}
-                <br />
-                <RoomIcon />
-                {profile && profile.location}
-                <br />
-                <CakeIcon />
-                {moment(user && user.birthDate).format('DD-MM-YYYY')}
-                <br />
-                Travel Experience: {profile && profile.travelExperience}/5
-                <br />
-                <List dense={true} subheader='Countries visited:'>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  {profile && profile.bio}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <RoomIcon style={{ marginRight: '1rem' }} />
+                  {profile && profile.location}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  <CakeIcon style={{ marginRight: '1rem' }} />
+                  {moment(user && user.birthDate).format('DD-MM-YYYY')}
+                </div>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  Travel Experience: {profile && profile.travelExperience}/5
+                </div>
+                <List
+                  dense={true}
+                  subheader='Countries visited:'
+                  style={{ marginBottom: '0.4rem' }}
+                >
+                  {console.log(profile && profile.visitedCountries)}
                   {profile &&
-                    profile.visitedCountries.map(countries => (
-                      <ListItem key={countries}>
+                    profile.visitedCountries &&
+                    profile.visitedCountries.map(country => (
+                      <ListItem key={country}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -138,16 +155,19 @@ const UserProfile = ({
                           />
                         </ListItemIcon>
                         <ListItemText
-                          primary={countries}
+                          primary={country}
                           classes={{ primary: classes.ListItemText }}
-                        >
-                          {/* <Typography variant='h6'>{inte}</Typography> */}
-                        </ListItemText>
+                        ></ListItemText>
                       </ListItem>
                     ))}
                 </List>
-                <List dense={true} subheader='Interests:'>
+                <List
+                  dense={true}
+                  subheader='Interests:'
+                  style={{ marginBottom: '0.4rem' }}
+                >
                   {profile &&
+                    profile.interests &&
                     profile.interests.map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
@@ -172,20 +192,38 @@ const UserProfile = ({
             item
             xs={8}
             md={8}
-            justify='center'
+            justify='flex-start'
             container
             //className={'postContainer'}
           >
             <Paper
               justify='center'
               style={{
-                width: '80%',
+                width: '100%',
                 backgroundColor: '#F0F2F5'
               }}
             >
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              <PostCard
+                caption='Throwback to my trip in Morocco'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/morocco.jpg'
+                location='Morocco'
+                date='October 14, 2020'
+              />
+              <PostCard
+                caption='Looking forward for my next flight to Paris'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/paris.jpg'
+                location='Paris'
+                date='September 9, 2020'
+              />
+              <PostCard
+                caption='Any good restaurants in NY?'
+                username={`${user && user.firstName}  ${user && user.lastName}`}
+                image='static/images/newYork.jpg'
+                location='New York'
+                date='May 19, 2020'
+              />
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>

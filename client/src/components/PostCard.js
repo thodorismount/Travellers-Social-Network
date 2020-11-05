@@ -39,13 +39,19 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  titleFont: {
+    fontSize: '1.25rem'
+  },
+  subheaderFont: {
+    fontSize: '1rem',
+    color: '#191919'
   }
 }));
 
-export default function PostCard() {
+export default function PostCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -63,17 +69,19 @@ export default function PostCard() {
         action={
           <MyMenu />
         }
-        title='Location'
-        subheader='September 14, 2016'
+        title={props.username}
+        subheader={`${props.location}, ${props.date}`}
+        classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
+        style={{ textTransform: 'capitalize' }}
       />
       <CardMedia
         className={classes.media}
-        image="earth2.png"
+        image={props.image}
         title=""
       />
       <CardContent>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          Post caption...
+        <Typography variant='h6' component='p'>
+          {props.caption}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -98,7 +106,7 @@ export default function PostCard() {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>Post details</Typography>
+          <Typography paragraph>Comments...</Typography>
         </CardContent>
       </Collapse>
     </Card>
