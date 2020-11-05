@@ -14,11 +14,12 @@ code {
 .footer{
   margin-top: 0.25rem;
   padding: 0.25rem;
-  background-color: rgb(235, 195, 64);
+  background-color: rgb(248, 177, 46);
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: fit-content;
 }
 .footer-copyright{
   margin-right: 0.5rem;
