@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 
 import './Navbar.css';
 
+
 //redux imports
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -58,6 +59,7 @@ const NavBar = ({
   props
 }) => {
   const classes = useStyles();
+  
 
   return (
     <React.Fragment>

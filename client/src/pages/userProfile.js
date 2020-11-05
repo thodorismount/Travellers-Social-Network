@@ -26,6 +26,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
 
+import '../re.css';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -119,7 +121,7 @@ const UserProfile = ({
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal />
+                  <EditProfileModal buttonType='Edit Profile' />
                 </div>
               </div>
               <Typography
@@ -148,8 +150,9 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
-                    profile.visitedCountries.map(countries => (
-                      <ListItem key={countries}>
+                    profile.visitedCountries &&
+                    profile.visitedCountries.map(country => (
+                      <ListItem key={country}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -157,11 +160,9 @@ const UserProfile = ({
                           />
                         </ListItemIcon>
                         <ListItemText
-                          primary={countries}
+                          primary={country}
                           classes={{ primary: classes.ListItemText }}
-                        >
-                          {/* <Typography variant='h6'>{inte}</Typography> */}
-                        </ListItemText>
+                        ></ListItemText>
                       </ListItem>
                     ))}
                 </List>
@@ -171,6 +172,7 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
+                    profile.interests &&
                     profile.interests.map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
