@@ -144,6 +144,25 @@ const EditProfileModal = props => {
             </DialogActions>
           </form>
         </DialogContent>
+        <DialogActions>
+          <Button
+            color='primary'
+            variant='outlined'
+            size='medium'
+            onClick={handleToggle}
+          >
+            Cancel
+          </Button>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            size='medium'
+          >
+            Submit
+          </Button>
+        </DialogActions>
       </Dialog>
     </Fragment>
   );

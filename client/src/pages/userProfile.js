@@ -54,8 +54,8 @@ const useStyles = makeStyles(theme => ({
 
 const useStylesImg = makeStyles({
   image: {
-    maxWidth: '80%',
-    maxHeight: '80%',
+    maxWidth: '60%',
+    maxHeight: '60%',
     margin: 'auto',
     borderRadius: '50%'
   }
@@ -76,15 +76,21 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return (
-      <div className='no-profile-template'>
-        <Typography variant='h3'>Profile</Typography>
-        <h2>
+      <div>
+        <Typography
+          variant='h3'
+          align='left'
+          style={{ textAlign: 'left', textTransform: 'capitalize' }}
+        >
+          {' '}
           Welcome {user && user.firstName} {user && user.lastName}
-        </h2>
+        </Typography>
+        <br />
+        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
+          Please fill in your profile
+        </Typography>
 
-        <h4>It seems like you haven't created yout profile yet</h4>
-
-        <EditProfileModal buttonType='Create Profile' />
+        <EditProfileModal />
       </div>
     );
   } else {
@@ -128,11 +134,11 @@ const UserProfile = ({
                   {profile && profile.bio}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <RoomIcon style={{ marginRight: '1rem' }} />
+                  <RoomIcon color='primary' style={{ marginRight: '1rem' }} />
                   {profile && profile.location}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <CakeIcon style={{ marginRight: '1rem' }} />
+                  <CakeIcon color='primary' style={{ marginRight: '1rem' }} />
                   {moment(user && user.birthDate).format('DD-MM-YYYY')}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
@@ -143,7 +149,6 @@ const UserProfile = ({
                   subheader='Countries visited:'
                   style={{ marginBottom: '0.4rem' }}
                 >
-                  {console.log(profile && profile.visitedCountries)}
                   {profile &&
                     profile.visitedCountries &&
                     profile.visitedCountries.map(country => (
@@ -190,8 +195,8 @@ const UserProfile = ({
           </Grid>
           <Grid
             item
-            xs={8}
-            md={8}
+            xs={7}
+            md={7}
             justify='flex-start'
             container
             //className={'postContainer'}

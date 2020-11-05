@@ -14,8 +14,8 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import MyMenu from './MyMenu';
-
+import Divider from '@material-ui/core/Divider';
+import ManagePost from '../components/ManagePost';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -67,23 +67,22 @@ export default function PostCard(props) {
           ></Avatar>
         }
         action={
-          <MyMenu />
+          <IconButton aria-label='settings'>
+            <ManagePost />
+          </IconButton>
         }
         title={props.username}
         subheader={`${props.location}, ${props.date}`}
         classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
         style={{ textTransform: 'capitalize' }}
       />
-      <CardMedia
-        className={classes.media}
-        image={props.image}
-        title=""
-      />
+      <CardMedia className={classes.media} image={props.image} />
       <CardContent>
         <Typography variant='h6' component='p'>
           {props.caption}
         </Typography>
       </CardContent>
+      <Divider variant='middle' />
       <CardActions disableSpacing>
         <IconButton
           aria-label='add to favorites'
@@ -91,7 +90,7 @@ export default function PostCard(props) {
             FavoriteIcon.style = { fill: 'red' };
           }}
         >
-          <FavoriteIcon id='fav' />
+          <FavoriteIcon id='fav' style={{ fill: 'red' }} />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
