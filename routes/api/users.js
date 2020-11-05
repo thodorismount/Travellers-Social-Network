@@ -58,7 +58,9 @@ router.post(
       // check if a user with same email exists
       let user = await User.findOne({ email });
       if (user) {
-        res.status(400).json({ errors: [{ message: 'User already exists' }] });
+        res.status(400).json({
+          errors: [{ msg: 'Email is already used, try using another email.' }]
+        });
       }
       // create a user instance
       user = new User({

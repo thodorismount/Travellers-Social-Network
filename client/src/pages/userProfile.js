@@ -26,6 +26,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
 
+import '../re.css';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -74,16 +76,15 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return (
-      <div>
-        <Typography
-          variant='h6'
-          align='left'
-          style={{ textAlign: 'left' }}
-        ></Typography>
-        <p>
+      <div className='no-profile-template'>
+        <Typography variant='h3'>Profile</Typography>
+        <h2>
           Welcome {user && user.firstName} {user && user.lastName}
-          <EditProfileModal />
-        </p>
+        </h2>
+
+        <h4>It seems like you haven't created yout profile yet</h4>
+
+        <EditProfileModal buttonType='Create Profile' />
       </div>
     );
   } else {
@@ -114,7 +115,7 @@ const UserProfile = ({
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal />
+                  <EditProfileModal buttonType='Edit Profile' />
                 </div>
               </div>
               <Typography
@@ -142,9 +143,11 @@ const UserProfile = ({
                   subheader='Countries visited:'
                   style={{ marginBottom: '0.4rem' }}
                 >
+                  {console.log(profile && profile.visitedCountries)}
                   {profile &&
-                    profile.visitedCountries.map(countries => (
-                      <ListItem key={countries}>
+                    profile.visitedCountries &&
+                    profile.visitedCountries.map(country => (
+                      <ListItem key={country}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}
@@ -152,11 +155,9 @@ const UserProfile = ({
                           />
                         </ListItemIcon>
                         <ListItemText
-                          primary={countries}
+                          primary={country}
                           classes={{ primary: classes.ListItemText }}
-                        >
-                          {/* <Typography variant='h6'>{inte}</Typography> */}
-                        </ListItemText>
+                        ></ListItemText>
                       </ListItem>
                     ))}
                 </List>
@@ -166,6 +167,7 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
+                    profile.interests &&
                     profile.interests.map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
@@ -190,7 +192,7 @@ const UserProfile = ({
             item
             xs={8}
             md={8}
-            justify='start'
+            justify='flex-start'
             container
             //className={'postContainer'}
           >
