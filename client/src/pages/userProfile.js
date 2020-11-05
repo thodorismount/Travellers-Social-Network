@@ -90,7 +90,7 @@ const UserProfile = ({
           Please fill in your profile
         </Typography>
 
-        <EditProfileModal />
+        <EditProfileModal buttonType={'Create Profile'} />
       </div>
     );
   } else {
@@ -121,7 +121,15 @@ const UserProfile = ({
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal buttonType='Edit Profile' />
+                  <EditProfileModal
+                    buttonType='Edit Profile'
+                    bio={profile ? profile && profile.bio : ''}
+                    interests={profile ? profile && profile.interests : ''}
+                    location={profile ? profile && profile.location : ''}
+                    visitedCountries={
+                      profile ? profile && profile.visitedCountries : ''
+                    }
+                  />
                 </div>
               </div>
               <Typography

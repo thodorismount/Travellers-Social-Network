@@ -19,6 +19,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
 import { create } from 'lodash';
 import { connect } from 'react-redux';
+import { formatMs } from '@material-ui/core';
 
 const styles = {
   button: {
@@ -32,17 +33,27 @@ const styles = {
   }
 };
 
+// TODO: Configure visitedCountries and location state managment -_-
+
 const EditProfileModal = props => {
   const [formData, setFormData] = useState({
+    bio: props.bio,
     visitedCountries: '',
-    interests: '',
+    interests: props.interests,
     location: ''
   });
 
   const onSubmit = e => {
     e.preventDefault();
     props.createProfile(formData, props.history);
-    window.location.reload(false);
+    if (
+      formData.interests !== '' &&
+      formData.location !== '' &&
+      formData.visitedCountries !== ''
+    ) {
+      props.createProfile(formData, props.history);
+      window.location.reload(false);
+    } else console.log('this is just a test');
   };
 
   let testOpen = props.open;
@@ -53,8 +64,10 @@ const EditProfileModal = props => {
   };
 
   const handleAutocomplete = v => {
+    console.log(v);
     let t = v.map(val => val.label);
     setFormData({ ...formData, visitedCountries: t.join(',') });
+    console.log(formData.visitedCountries);
   };
 
   const handleLocationChange = v => {
@@ -115,7 +128,10 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <CreateSelectCountries onChange={handleAutocomplete} />
+            <CreateSelectCountries
+              onChange={handleAutocomplete}
+              visitedCount={formData.visitedCountries}
+            />
             <MapsSelector
               label='Select your location'
               onChange={handleLocationChange}
@@ -125,6 +141,14 @@ const EditProfileModal = props => {
 
             <DialogActions>
               <Button
+                color='primary'
+                variant='outlined'
+                size='medium'
+                onClick={handleToggle}
+              >
+                Cancel
+              </Button>
+              <Button
                 type='submit'
                 variant='contained'
                 color='primary'
@@ -133,36 +157,9 @@ const EditProfileModal = props => {
               >
                 Submit
               </Button>
-              <Button
-                color='primary'
-                variant='outlined'
-                size='medium'
-                onClick={handleToggle}
-              >
-                Cancel
-              </Button>
             </DialogActions>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
-          </Button>
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            className={classes.button}
-            size='medium'
-          >
-            Submit
-          </Button>
-        </DialogActions>
       </Dialog>
     </Fragment>
   );

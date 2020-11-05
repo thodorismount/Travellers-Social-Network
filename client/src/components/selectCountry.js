@@ -36,6 +36,7 @@ export default function CountrySelect(props) {
       id='country-select-demo'
       style={{ width: 300 }}
       options={countries}
+      //defaultValue={{ code: 'AD' }}
       classes={{
         option: classes.option
       }}
