@@ -15,11 +15,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
-import { create } from 'lodash';
+
 import { connect } from 'react-redux';
-import { formatMs } from '@material-ui/core';
 
 const styles = {
   button: {
@@ -37,23 +36,15 @@ const styles = {
 
 const EditProfileModal = props => {
   const [formData, setFormData] = useState({
-    bio: props.bio,
+    bio: props.profile ? props.profile.bio : '',
     visitedCountries: '',
-    interests: props.interests,
-    location: ''
+    interests: props.profile ? props.profile.interests : '',
+    location: props.profile ? props.profile.location : ''
   });
 
   const onSubmit = e => {
     e.preventDefault();
-    props.createProfile(formData, props.history);
-    if (
-      formData.interests !== '' &&
-      formData.location !== '' &&
-      formData.visitedCountries !== ''
-    ) {
-      props.createProfile(formData, props.history);
-      window.location.reload(false);
-    } else console.log('this is just a test');
+    props.createProfile(formData);
   };
 
   let testOpen = props.open;
@@ -71,7 +62,7 @@ const EditProfileModal = props => {
   };
 
   const handleLocationChange = v => {
-    setFormData({ ...formData, location: v.terms[0].value });
+    setFormData({ ...formData, location: v ? v.terms[0].value : '' });
   };
 
   const handleTextField = e => {
@@ -112,7 +103,6 @@ const EditProfileModal = props => {
               variant='outlined'
               placeholder='Hey traveller! Write your bio'
               label='Bio'
-              fullWidth
               onChange={handleTextField}
             />
 
@@ -135,6 +125,7 @@ const EditProfileModal = props => {
             <MapsSelector
               label='Select your location'
               onChange={handleLocationChange}
+              prevLoc={formData.location}
             />
 
             <CreateUploadImage />
@@ -169,7 +160,8 @@ EditProfileModal.propTypes = {
   classes: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired
 };
+const mapStateToProps = state => ({ profile: state.profile.profile });
 
-export default connect(null, { createProfile })(
+export default connect(mapStateToProps, { createProfile })(
   withStyles(styles)(withRouter(EditProfileModal))
 );

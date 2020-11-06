@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { connect } from 'react-redux';
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
 function countryToFlag(isoCode) {
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CountrySelect(props) {
+function CountrySelect(props) {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,6 @@ export default function CountrySelect(props) {
       id='country-select-demo'
       style={{ width: 300 }}
       options={countries}
-      //defaultValue={{ code: 'AD' }}
       classes={{
         option: classes.option
       }}
@@ -324,3 +323,9 @@ const countries = [
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' }
 ];
+
+const mapStateToProps = state => ({
+  profile: state.profile.profile
+});
+
+export default connect(mapStateToProps)(CountrySelect);

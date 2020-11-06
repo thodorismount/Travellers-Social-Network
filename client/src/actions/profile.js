@@ -41,9 +41,9 @@ export const createProfile = (
       payload: res.data
     });
 
-    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created'));
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created'), 'success');
 
-    history.push(0);
+    window.location.reload();
   } catch (err) {
     let errors;
     if (err.response && err.response.data && err.response.data.errors)

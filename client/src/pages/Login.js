@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 import CreateformDialog from '../components/FormDialog';
 import $ from 'jquery';
@@ -82,6 +82,7 @@ const Login = props => {
           src='static/images/logo_final.png'
           width='350'
           height='375'
+          alt='page-logo'
           style={{ marginTop: '180px' }}
         />
         <br />
