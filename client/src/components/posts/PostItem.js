@@ -34,7 +34,7 @@ const PostItem = ({
         moment(date).fromNow().includes('day') ||
         moment(date).fromNow().includes('month') ||
         moment(date).fromNow().includes('year')
-          ? moment(date).format('MMMM DD   YYYY')
+          ? moment(date).format('DD MMMM YYYY')
           : moment(date).fromNow()
       }`}
     />
