@@ -1,9 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Create from '@material-ui/icons/Create';
 import CreatePostDialog from '../components/CreatePostDialog';
-import PostCard from '../components/PostCard';
 import '../components/Navbar.css';
 import $ from 'jquery';
 import '../re.css';
