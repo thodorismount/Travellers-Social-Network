@@ -8,7 +8,15 @@ import '../components/Navbar.css';
 import $ from 'jquery';
 import '../re.css';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPosts } from '../actions/post';
+import PostItem from '../components/posts/PostItem';
+import Posts from '../components/posts/Posts';
+import Spinner from '../components/Profile/Spinner';
 
 // var style = document.createElement('style');
 // style.innerHTML = `
@@ -18,14 +26,23 @@ import Paper from '@material-ui/core/Paper';
 //   `;
 // document.head.appendChild(style);
 
-const Home = () => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    //margin of whole feed view from navbar
+    flexGrow: 6,
+    paddingTop: '10px'
+  }
+}));
+
+const Home = (props) => {
   useEffect(() => {
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
-  }, []);
-
+    props.getPosts();
+  }, [getPosts]);
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       {/* <Grid id='target' container spacing={3}>
         <Grid item xs={1}>
           
@@ -48,10 +65,14 @@ const Home = () => {
               backgroundColor: '#F0F2F5'
             }}
           >
-            <PostCard />
-            <PostCard />
-            <PostCard />
-          </Paper>
+            {props.loading ? <Spinner /> :
+      <div className='posts'>
+        {props.posts&& props.posts.map(post => (
+          <PostItem key={post._id} post={post} />
+        ))}
+      </div>
+    }      
+    </Paper>
         </Grid>
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
           <CreatePostDialog />
@@ -64,4 +85,14 @@ const Home = () => {
   );
 };
 
-export default Home;
+Posts.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  loading: state.post.loading,
+  posts: state.post.posts
+});
+
+export default connect(mapStateToProps, { getPosts })(Home);

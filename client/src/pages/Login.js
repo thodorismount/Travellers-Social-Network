@@ -149,6 +149,6 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default withStyles(styles)(
-  connect(mapStateToProps, { login, loginAlert })(Login)
+export default connect(mapStateToProps, { login, loginAlert })(
+  withStyles(styles)(Login)
 );

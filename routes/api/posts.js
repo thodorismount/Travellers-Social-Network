@@ -56,6 +56,12 @@ async (req, res) => {
   
 });
 
+// TODO: Create a route that get all user's posts 
+// @ROUTE -- UPDATE api/posts/user/
+// @DESC  -- Get current user's posts
+// @ACCESS -- private
+
+
 // @ROUTE -- UPDATE api/posts/:id
 // @DESC  -- Update Post
 // @ACCESS -- private

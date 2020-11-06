@@ -182,11 +182,7 @@ const UserProfile = ({
                 width: '80%',
                 backgroundColor: '#F0F2F5'
               }}
-            >
-              <PostCard />
-              <PostCard />
-              <PostCard />
-            </Paper>
+            ></Paper>
           </Grid>
           <Grid item xs={1} sm={1}>
             <CreatePostDialog />
