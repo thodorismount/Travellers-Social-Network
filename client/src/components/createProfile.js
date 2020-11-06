@@ -19,6 +19,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
 import { create } from 'lodash';
 import { connect } from 'react-redux';
+import ModalMessage from './ModalMessage';
 
 const styles = {
   button: {
@@ -83,7 +84,7 @@ const EditProfileModal = props => {
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'>Edit Your Profile</DialogTitle>
+        <DialogTitle id='form-dialog-title'><ModalMessage /></DialogTitle>
         <DialogContent>
           <Alert />
           <form className={classes.form} onSubmit={e => onSubmit(e)}>
