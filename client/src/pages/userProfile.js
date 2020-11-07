@@ -1,17 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Image from 'material-ui-image';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
-import Button from '@material-ui/core/Button';
 import EditProfileModal from '../components/createProfile';
 import PostCard from '../components/PostCard';
-import Divider from '@material-ui/core/Divider';
 import Spinner from '../components/Profile/Spinner';
 import moment from 'moment';
 import CreatePostDialog from '../components/CreatePostDialog';
@@ -68,7 +63,7 @@ const UserProfile = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   const classes = useStyles();
   const classesImg = useStylesImg();
@@ -82,7 +77,6 @@ const UserProfile = ({
           align='left'
           style={{ textAlign: 'left', textTransform: 'capitalize' }}
         >
-          {' '}
           Welcome {user && user.firstName} {user && user.lastName}
         </Typography>
         <br />
@@ -90,7 +84,7 @@ const UserProfile = ({
           Please fill in your profile
         </Typography>
 
-        <EditProfileModal />
+        <EditProfileModal buttonType={'Create Profile'} />
       </div>
     );
   } else {
@@ -109,6 +103,7 @@ const UserProfile = ({
                 <img
                   className={classesImg.image}
                   src='girl_female_woman_avatar-512.png'
+                  alt='girl-logo'
                 />
                 <Typography
                   variant='h4'
@@ -121,7 +116,15 @@ const UserProfile = ({
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal buttonType='Edit Profile' />
+                  <EditProfileModal
+                    buttonType='Edit Profile'
+                    bio={profile ? profile && profile.bio : ''}
+                    interests={profile ? profile && profile.interests : ''}
+                    location={profile ? profile && profile.location : ''}
+                    visitedCountries={
+                      profile ? profile && profile.visitedCountries : ''
+                    }
+                  />
                 </div>
               </div>
               <Typography

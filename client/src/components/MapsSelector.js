@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function MapsSelector(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState(props.prevLoc);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
