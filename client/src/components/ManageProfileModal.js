@@ -78,6 +78,7 @@ const ManageProfileModal = props => {
         title='Manage account'
         component='span'
         onClick={handleToggle}
+        style={{ marginRight: '-20%', marginTop: '-110%' }}
       >
         <SettingsIcon fontSize='large' />
       </IconButton>
@@ -100,7 +101,7 @@ const ManageProfileModal = props => {
               autoFocus
               name='firstName'
               className={classes.textField}
-              style={{ width: '80%' }}
+              fullWidth
             />
             <TextField
               id='lastName'
@@ -109,20 +110,19 @@ const ManageProfileModal = props => {
               onChange={handleTextField}
               value={formData.firstName}
               margin='normal'
-              autoFocus
               name='firstName'
               className={classes.textField}
               fullWidth
             />
             <TextField
-              id='firstName'
-              label='First name'
+              id='newPassword'
+              label='New Password'
               variant='outlined'
+              type='password'
               onChange={handleTextField}
               value={formData.firstName}
               margin='normal'
-              autoFocus
-              name='firstName'
+              name='newPassword'
               className={classes.textField}
               fullWidth
             />
@@ -150,6 +150,14 @@ const ManageProfileModal = props => {
         </DialogContent>
         <DialogActions>
           <Button
+            color='primary'
+            variant='outlined'
+            size='medium'
+            onClick={handleToggle}
+          >
+            Cancel
+          </Button>
+          <Button
             type='submit'
             variant='contained'
             color='primary'
@@ -157,14 +165,6 @@ const ManageProfileModal = props => {
             size='medium'
           >
             Submit
-          </Button>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
           </Button>
         </DialogActions>
       </Dialog>

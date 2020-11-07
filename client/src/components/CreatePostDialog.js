@@ -12,7 +12,7 @@ import CreateUploadImage from '../components/uploadImage';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
-
+import EmojiPicker from '../components/EmojiPicker';
 class CreatePostDialog extends Component {
   state = {
     open: false
@@ -67,6 +67,7 @@ class CreatePostDialog extends Component {
                 variant='outlined'
                 placeholder='Hey traveller! Write your story'
               />
+              <EmojiPicker />
               <MapsSelector label='Select location' />
 
               <CreateUploadImage />

@@ -52,7 +52,7 @@ const useStylesImg = makeStyles({
   image: {
     maxWidth: '60%',
     maxHeight: '60%',
-    margin: 'auto',
+    marginRight: '4%',
     borderRadius: '50%'
   }
 });
@@ -105,6 +105,7 @@ const UserProfile = ({
                   src='girl_female_woman_avatar-512.png'
                   alt='girl-logo'
                 />
+                <ManageProfileModal />
                 <Typography
                   variant='h4'
                   style={{
@@ -115,18 +116,6 @@ const UserProfile = ({
                 >
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
-                <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal
-                    buttonType='Edit Profile'
-                    bio={profile ? profile && profile.bio : ''}
-                    interests={profile ? profile && profile.interests : ''}
-                    location={profile ? profile && profile.location : ''}
-                    visitedCountries={
-                      profile ? profile && profile.visitedCountries : ''
-                    }
-                  />
-                </div>
-                <ManageProfileModal />
               </div>
               <Typography
                 variant='h6'
@@ -195,6 +184,17 @@ const UserProfile = ({
                     ))}
                 </List>
               </Typography>
+              <div style={{ marginBottom: '0.4rem' }}>
+                <EditProfileModal
+                  buttonType='Edit Profile'
+                  bio={profile ? profile && profile.bio : ''}
+                  interests={profile ? profile && profile.interests : ''}
+                  location={profile ? profile && profile.location : ''}
+                  visitedCountries={
+                    profile ? profile && profile.visitedCountries : ''
+                  }
+                />
+              </div>
             </Paper>
           </Grid>
           <Grid
