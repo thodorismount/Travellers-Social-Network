@@ -2,12 +2,20 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+
 import CreatePostDialog from '../components/CreatePostDialog';
-import PostCard from '../components/PostCard';
 import '../components/Navbar.css';
 import $ from 'jquery';
 import '../re.css';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPosts } from '../actions/post';
+import PostItem from '../components/posts/PostItem';
+import Posts from '../components/posts/Posts';
+import Spinner from '../components/Profile/Spinner';
 
 // var style = document.createElement('style');
 // style.innerHTML = `
@@ -25,11 +33,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Home = () => {
+const Home = props => {
   useEffect(() => {
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
-  }, []);
+    props.getPosts();
+  }, [getPosts]);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -55,27 +64,16 @@ const Home = () => {
               backgroundColor: '#F0F2F5'
             }}
           >
-            <PostCard
-              caption='Throwback to my trip in Morocco'
-              username='Maria Iwannou'
-              image='static/images/morocco.jpg'
-              location='Morocco'
-              date='October 14, 2020'
-            />
-            <PostCard
-              caption='Looking forward for my next flight to Paris'
-              username='Giwrgos Petrou'
-              image='static/images/paris.jpg'
-              location='Paris'
-              date='September 9, 2020'
-            />
-            <PostCard
-              caption='Any good restaurants in NY?'
-              username='Bill Kotas'
-              image='static/images/newYork.jpg'
-              location='New York'
-              date='May 19, 2020'
-            />
+            {props.loading ? (
+              <Spinner />
+            ) : (
+              <div className='posts'>
+                {props.posts &&
+                  props.posts.map(post => (
+                    <PostItem key={post._id} post={post} />
+                  ))}
+              </div>
+            )}
           </Paper>
         </Grid>
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
@@ -89,4 +87,14 @@ const Home = () => {
   );
 };
 
-export default Home;
+Posts.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  loading: state.post.loading,
+  posts: state.post.posts
+});
+
+export default connect(mapStateToProps, { getPosts })(Home);

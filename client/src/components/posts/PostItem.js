@@ -1,53 +1,58 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {addLike, removeLike} from '../../actions/post';
+import { addLike, removeLike, deletePost } from '../../actions/post';
+import PostCard from '../PostCard';
+import moment from 'moment';
+import '../Navbar.css';
+import '../../re.css';
 
+const PostItem = ({
+  addLike,
+  removeLike,
+  deletePost,
+  auth,
+  post: {
+    _id,
+    text,
+    firstName,
+    lastName,
+    location,
+    user,
+    likes,
+    comments,
+    date,
+    updatedAt
+  }
+}) => {
+  return (
+    <PostCard
+      caption={text}
+      username={`${firstName}  ${lastName}`}
+      location={`${location}`}
+      date={`${
+        moment(date).fromNow().includes('day') ||
+        moment(date).fromNow().includes('month') ||
+        moment(date).fromNow().includes('year')
+          ? moment(date).format('DD MMMM YYYY')
+          : moment(date).fromNow()
+      }`}
+    />
+  );
+};
 
-const PostItem = ({addLike, removeLike, auth, post: {_id, text, firstName, lastName, user, likes, comments, date, updatedAt}}) => {
-   
-    
-    return (
-    <div class='post-bg-white p1 my-1'>
-        <div>
-            <a href='profilehtml'>
-                <h4>Test</h4>
-            </a>
-        </div>
-        <div>
-            <p class='my-1'>
-                {text}
-            </p>
-            <p class='post-date'>Posted on 29/10/2020</p>
-            <button onClick={e => addLike(_id)} type='button' class='btn btn-light'>
-                <i class='fas fa-thumbs-up'/>
-                <span>4</span>
-            </button>
-            <button onClick={e => removeLike(_id)} type='button' class='btn btn-light'>
-                <i class='fas fa-thumbs-down'/>
-            </button>
-            <a href='post.html' class='btn btn-primary'>
-                Discussion <span class='comment-count'>2</span>
-            </a>
-            <button type='button' class = 'btn btn-danger'>
-                <i class='fas fa-times'></i>
-            </button>
-        </div>
-    </div>
-    )
-}
-
-  
-   
-
-   
 PostItem.propTypes = {
-    post: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
-}
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
-    auth: state.auth
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, {addLike, removeLike}) (PostItem)
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+  PostItem
+);
