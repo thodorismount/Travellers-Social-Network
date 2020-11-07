@@ -10,6 +10,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
 import Button from '@material-ui/core/Button';
 import EditProfileModal from '../components/createProfile';
+import ManageProfileModal from '../components/ManageProfileModal';
 import PostCard from '../components/PostCard';
 import Divider from '@material-ui/core/Divider';
 import Spinner from '../components/Profile/Spinner';
@@ -89,7 +90,6 @@ const UserProfile = ({
         <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
           Please fill in your profile
         </Typography>
-
         <EditProfileModal />
       </div>
     );
@@ -123,6 +123,7 @@ const UserProfile = ({
                 <div style={{ marginBottom: '0.4rem' }}>
                   <EditProfileModal buttonType='Edit Profile' />
                 </div>
+                <ManageProfileModal />
               </div>
               <Typography
                 variant='h6'
