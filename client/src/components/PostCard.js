@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
 const useStyles = makeStyles(theme => ({
@@ -67,9 +66,7 @@ export default function PostCard(props) {
           ></Avatar>
         }
         action={
-          <IconButton aria-label='settings'>
-            <ManagePost />
-          </IconButton>
+          <IconButton aria-label='settings'>{/* <ManagePost /> */}</IconButton>
         }
         title={props.username}
         subheader={`${props.location}, ${props.date}`}
