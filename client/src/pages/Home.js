@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
 
 import CreatePostDialog from '../components/CreatePostDialog';
 import '../components/Navbar.css';
 import $ from 'jquery';
 import '../re.css';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -15,6 +14,7 @@ import { getPosts } from '../actions/post';
 import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
+
 
 // var style = document.createElement('style');
 // style.innerHTML = `
