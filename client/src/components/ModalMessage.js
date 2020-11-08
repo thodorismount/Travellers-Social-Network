@@ -31,17 +31,16 @@ import '../re.css';
 const ModalMessage = ({
     getCurrentProfile,
     auth: { user },
-    profile: { profile, loading }
+    profile: { profile}
   }) => {
     useEffect(() => {
       getCurrentProfile();
     }, []);
     if(profile==null){
         return (
-<Typography style={{textTransform: 'capitalize'}} >
-    {' '}
-    Welcome {user && user.firstName} {user && user.lastName}! Please fill in your profile
-        </Typography>
+          <Typography style={{textTransform: 'capitalize'}} > {' '}
+             Welcome {user && user.firstName} {user && user.lastName}! Please fill in your profile
+          </Typography>
         );
     }
     else{

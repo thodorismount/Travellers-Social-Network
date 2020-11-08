@@ -20,14 +20,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
-
+import $ from 'jquery';
+import '../components/createProfile';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
 
 import '../re.css';
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -76,22 +76,8 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return (
-      <div>
-        <Typography
-          variant='h3'
-          align='left'
-          style={{ textAlign: 'left', textTransform: 'capitalize' }}
-        >
-          {' '}
-          Welcome {user && user.firstName} {user && user.lastName}
-        </Typography>
-        <br />
-        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
-          Please fill in your profile
-        </Typography>
-
-        <EditProfileModal />
-      </div>
+      
+        <EditProfileModal hasProfile={false}/>
     );
   } else {
     return (
@@ -121,7 +107,7 @@ const UserProfile = ({
                   {`${user && user.firstName} ${user && user.lastName}`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal buttonType='Edit Profile' />
+                  <EditProfileModal buttonType='Edit Profile' hasProfile={true}/>
                 </div>
               </div>
               <Typography

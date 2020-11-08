@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CreateSelectCountries from '../components/selectCountry';
 import MapsSelector from '../components/MapsSelector';
@@ -20,6 +20,7 @@ import { createProfile } from '../actions/profile';
 import { create } from 'lodash';
 import { connect } from 'react-redux';
 import ModalMessage from './ModalMessage';
+import { getCurrentProfile } from '../actions/profile';
 
 const styles = {
   button: {
@@ -38,21 +39,18 @@ const EditProfileModal = props => {
     visitedCountries: '',
     interests: '',
     location: ''
-  });
-
+  }); 
+ let testopen=props.open;
+  const [open, setOpen] = useState({ testopen });
   const onSubmit = e => {
     e.preventDefault();
     props.createProfile(formData, props.history);
     window.location.reload(false);
   };
-
-  let testOpen = props.open;
-  const [open, setOpen] = useState({ testOpen });
-
+  var testProfile=props.hasProfile;
   const handleToggle = () => {
     setOpen(!open);
   };
-
   const handleAutocomplete = v => {
     let t = v.map(val => val.label);
     setFormData({ ...formData, visitedCountries: t.join(',') });
@@ -65,7 +63,7 @@ const EditProfileModal = props => {
   const handleTextField = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const { classes } = props;
   return (
     <Fragment>
@@ -79,12 +77,14 @@ const EditProfileModal = props => {
       >
         {props.buttonType}
       </Button>
-      <Dialog
-        open={!open}
+      <Dialog 
+        open={props.hasProfile? !open : open}
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'><ModalMessage /></DialogTitle>
+        <DialogTitle id='form-dialog-title'>
+          <ModalMessage />
+          </DialogTitle>
         <DialogContent>
           <Alert />
           <form className={classes.form} onSubmit={e => onSubmit(e)}>
@@ -145,25 +145,7 @@ const EditProfileModal = props => {
             </DialogActions>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
-          </Button>
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            className={classes.button}
-            size='medium'
-          >
-            Submit
-          </Button>
-        </DialogActions>
+
       </Dialog>
     </Fragment>
   );
