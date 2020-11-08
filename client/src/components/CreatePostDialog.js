@@ -67,7 +67,7 @@ class CreatePostDialog extends Component {
                 variant='outlined'
                 placeholder='Hey traveller! Write your story'
               />
-              <EmojiPicker />
+              {/* <EmojiPicker /> */}
               <MapsSelector label='Select location' />
 
               <CreateUploadImage />

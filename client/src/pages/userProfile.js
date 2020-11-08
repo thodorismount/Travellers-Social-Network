@@ -34,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     justifyContent: 'center',
     height: 'auto',
-    paddingTop: '10px'
+    paddingTop: '10px',
+    position: 'relative'
   },
   card: {
     textAlign: 'center',
@@ -52,7 +53,6 @@ const useStylesImg = makeStyles({
   image: {
     maxWidth: '60%',
     maxHeight: '60%',
-    marginRight: '4%',
     borderRadius: '50%'
   }
 });
@@ -91,7 +91,7 @@ const UserProfile = ({
     return (
       <div className={classes.root}>
         <Grid container spacing={1}>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={12} sm={12} md={4}>
             <Paper className={classes.paper} variant='elevation'>
               <div
                 style={{
@@ -102,7 +102,7 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='girl_female_woman_avatar-512.png'
+                  src='static/images/obama.png'
                   alt='girl-logo'
                 />
                 <ManageProfileModal />
@@ -199,7 +199,8 @@ const UserProfile = ({
           </Grid>
           <Grid
             item
-            xs={7}
+            xs={12}
+            sm={12}
             md={7}
             justify='flex-start'
             container

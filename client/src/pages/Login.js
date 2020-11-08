@@ -76,8 +76,8 @@ const Login = props => {
   // Redirect if successfully logged in
 
   return (
-    <Grid container className={classes.form}>
-      <Grid item xs={6}>
+    <Grid container spacing={1} className={classes.form}>
+      <Grid item xs={12} sm={12} md={6}>
         <img
           src='static/images/logo_final.png'
           width='350'
@@ -87,8 +87,8 @@ const Login = props => {
         />
         <br />
       </Grid>
-      <Grid item xs={3}>
-        <Card className={classes.card}>
+      <Grid item xs={12} sm={12} md={4} justify='center'>
+        <Card className={classes.card} justify='center'>
           <LoginAlert />
           <Typography varient='h1' className={classes.pageTitle}>
             Please Login or Sign up
@@ -135,8 +135,6 @@ const Login = props => {
           <CreateformDialog />
         </Card>
       </Grid>
-
-      <Grid item sm />
     </Grid>
   );
 };
