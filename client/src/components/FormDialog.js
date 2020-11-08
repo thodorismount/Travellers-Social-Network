@@ -50,7 +50,6 @@ const FormDialog = props => {
     gender
   } = formData;
 
-  useEffect(() => {});
   const handleToggle = e => {
     setOpen(!open);
   };

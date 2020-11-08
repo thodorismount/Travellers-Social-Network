@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 
 //MUI
 import Button from '@material-ui/core/Button';
@@ -13,81 +13,100 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
 
-class CreatePostDialog extends Component {
-  state = {
-    open: false
+// redux
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { addPost } from '../actions/post';
+
+const CreatePostDialog = ({ addPost }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
   };
 
-  handleToggle = () => {
-    this.setState({
-      open: !this.state.open
-    });
+  const handleLocationChange = v => {
+    setFormData({ ...formData, location: v ? v.terms[0].value : '' });
   };
 
-  render() {
-    const { open } = this.state;
-    return (
-      <Fragment>
-        <Fab
-          color='primary'
-          onClick={this.handleToggle}
-          title='Create post'
-          style={{
-            position: 'fixed',
-            top: '7rem',
-            right: '15%'
-          }}
-        >
-          <AddIcon />
-        </Fab>
+  const [formData, setFormData] = useState({
+    text: '',
+    location: ''
+  });
 
-        <Dialog
-          open={open}
-          onClose={this.handleToggle}
-          aria-labelledby='form-dialog-title'
-        >
-          <DialogTitle id='form-dialog-title'>
-            Create your travel post
-          </DialogTitle>
-          <DialogContent>
-            {/* <DialogContentText>
-                It’s quick and easy.
-            </DialogContentText> */}
-            <form>
-              <TextField
-                fullWidth
-                id='postTextField'
-                autoFocus
-                name='postTextField'
-                multiline
-                style={{ width: 500 }}
-                rows={5}
-                margin='normal'
-                // defaultValue="Hey traveller! Write your story"
-                variant='outlined'
-                placeholder='Hey traveller! Write your story'
-              />
-              <MapsSelector label='Select location' />
+  const handleTextField = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-              <CreateUploadImage />
+  const handleSubmit = e => {
+    e.preventDefault();
+    addPost(formData);
+  };
 
-              <DialogActions>
-                <Button
-                  color='primary'
-                  variant='outlined'
-                  onClick={this.handleToggle}
-                >
-                  Cancel
-                </Button>
-                <Button color='primary' variant='contained' type='submit'>
-                  Post
-                </Button>
-              </DialogActions>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </Fragment>
-    );
-  }
-}
-export default CreatePostDialog;
+  return (
+    <Fragment>
+      <Fab
+        color='primary'
+        onClick={handleToggle}
+        title='Create post'
+        style={{
+          position: 'fixed',
+          top: '7rem',
+          right: '15%'
+        }}
+      >
+        <AddIcon />
+      </Fab>
+
+      <Dialog
+        open={open}
+        onClose={handleToggle}
+        aria-labelledby='form-dialog-title'
+      >
+        <DialogTitle id='form-dialog-title'>
+          Create your travel post
+        </DialogTitle>
+        <DialogContent>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              value={formData.text}
+              id='postTextField'
+              autoFocus
+              name='text'
+              onChange={handleTextField}
+              multiline
+              style={{ width: 500 }}
+              rows={5}
+              margin='normal'
+              variant='outlined'
+              placeholder='Hey traveller! Write your story'
+            />
+            <MapsSelector
+              label='Select location'
+              onChange={handleLocationChange}
+              prevLoc={formData.location}
+            />
+
+            <CreateUploadImage />
+
+            <DialogActions>
+              <Button color='primary' variant='outlined' onClick={handleToggle}>
+                Cancel
+              </Button>
+              <Button color='primary' variant='contained' type='submit'>
+                Post
+              </Button>
+            </DialogActions>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </Fragment>
+  );
+};
+
+CreatePostDialog.propTypes = {
+  addPost: PropTypes.func.isRequired
+};
+
+export default connect(null, { addPost })(CreatePostDialog);

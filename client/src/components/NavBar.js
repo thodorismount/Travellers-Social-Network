@@ -77,7 +77,7 @@ const NavBar = ({
             <Typography variant='h6' className={classes.title}></Typography>
 
             <Tooltip title='View profile' id='profile-button'>
-              <Button component={Link} to='/userProfile'>
+              <Button component={Link} to={`/userProfile/${user && user._id}`}>
                 <Avatar
                   className='navbar-user'
                   src='girl_female_woman_avatar-512.png'

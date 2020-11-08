@@ -16,13 +16,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
-
+import PostItem from '../components/posts/PostItem';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
+import { getProfilePosts } from '../actions/post';
 
 import '../re.css';
+import { post } from 'jquery';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,12 +61,17 @@ const useStylesImg = makeStyles({
 
 const UserProfile = ({
   getCurrentProfile,
-  auth: { user },
-  profile: { profile, loading }
+  getProfilePosts,
+  match,
+  user,
+  profile: { profile, loading },
+  posts
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
+    console.log(match.params.id);
+    getCurrentProfile(match.params.id);
+    getProfilePosts(match.params.id);
+  }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
   const classes = useStyles();
   const classesImg = useStylesImg();
@@ -102,7 +109,7 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='girl_female_woman_avatar-512.png'
+                  src='../girl_female_woman_avatar-512.png'
                   alt='girl-logo'
                 />
                 <Typography
@@ -113,8 +120,11 @@ const UserProfile = ({
                     marginBottom: '1rem'
                   }}
                 >
-                  {`${user && user.firstName} ${user && user.lastName}`}
+                  {`${profile.user && profile.user.firstName} ${
+                    profile.user && profile.user.lastName
+                  }`}
                 </Typography>
+                {}
                 <div style={{ marginBottom: '0.4rem' }}>
                   <EditProfileModal
                     buttonType='Edit Profile'
@@ -176,7 +186,7 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
-                    profile.interests &&
+                    profile.interests.length > 0 &&
                     profile.interests.map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
@@ -212,27 +222,15 @@ const UserProfile = ({
                 backgroundColor: '#F0F2F5'
               }}
             >
-              <PostCard
-                caption='Throwback to my trip in Morocco'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/morocco.jpg'
-                location='Morocco'
-                date='October 14, 2020'
-              />
-              <PostCard
-                caption='Looking forward for my next flight to Paris'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/paris.jpg'
-                location='Paris'
-                date='September 9, 2020'
-              />
-              <PostCard
-                caption='Any good restaurants in NY?'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/newYork.jpg'
-                location='New York'
-                date='May 19, 2020'
-              />
+              {/* this is where the post are being rendered */}
+              {post.loading ? (
+                <Spinner />
+              ) : (
+                <div className='posts'>
+                  {posts.length > 0 &&
+                    posts.map(post => <PostItem key={post._id} post={post} />)}
+                </div>
+              )}
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>
@@ -246,13 +244,17 @@ const UserProfile = ({
 
 UserProfile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getProfilePosts: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  user: state.auth.user,
+  profile: state.profile,
+  posts: state.post.posts
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(UserProfile);
+export default connect(mapStateToProps, { getCurrentProfile, getProfilePosts })(
+  UserProfile
+);
