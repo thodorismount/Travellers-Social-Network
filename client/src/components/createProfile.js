@@ -40,18 +40,18 @@ const styles = {
 const EditProfileModal = props => {
   const [formData, setFormData] = useState({
     bio: props.profile ? props.profile.bio : '',
-    visitedCountries: '',
-    interests:  props.profile ? props.profile.interests : '',
+    visitedCountries: props.profile ? props.profile.visitedCountries : '',
+    interests: props.profile ? props.profile.interests : '',
     location: props.profile ? props.profile.location : ''
-  }); 
- let testopen=props.open;
+  });
+  let testopen = props.open;
   const [open, setOpen] = useState({ testopen });
 
   const onSubmit = e => {
     e.preventDefault();
     props.createProfile(formData);
   };
-  var testProfile=props.hasProfile;
+  var testProfile = props.hasProfile;
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -69,7 +69,7 @@ const EditProfileModal = props => {
   const handleTextField = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   const { classes } = props;
   return (
     <Fragment>
@@ -83,14 +83,14 @@ const EditProfileModal = props => {
       >
         {props.buttonType}
       </Button>
-      <Dialog 
-        open={props.hasProfile? !open : open}
+      <Dialog
+        open={props.hasProfile ? !open : open}
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
         <DialogTitle id='form-dialog-title'>
           <ModalMessage />
-          </DialogTitle>
+        </DialogTitle>
         <DialogContent>
           <Alert />
           <form className={classes.form} onSubmit={e => onSubmit(e)}>

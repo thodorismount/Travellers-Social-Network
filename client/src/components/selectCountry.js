@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,22 +25,33 @@ const useStyles = makeStyles({
     }
   }
 });
-
+let flag = true;
 function CountrySelect(props) {
   const classes = useStyles();
+  const [val, setVal] = useState([]);
 
+  if (flag) {
+    // props.visitedCount.forEach(function (x) {
+    //   setVal({ label: x });
+    // });
+    setVal({ label: props.visitedCount });
+  }
+  flag = false;
+  console.log(val);
   return (
     <Autocomplete
       multiple
-      onChange={(e, v) => props.onChange(v)}
+      onChange={(e, val) => props.onChange(val)}
       id='country-select-demo'
       style={{ width: 300 }}
       options={countries}
       classes={{
         option: classes.option
       }}
+      defaultValue={[val]}
+      autoSelect={true}
       autoHighlight
-      getOptionLabel={option => option.label}
+      getOptionLabel={option => option.label || ''}
       renderOption={option => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
@@ -53,6 +64,7 @@ function CountrySelect(props) {
           label="Select countries you've visited"
           margin='normal'
           variant='outlined'
+          // defaultValue={[val]}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password' // disable autocomplete and autofill
