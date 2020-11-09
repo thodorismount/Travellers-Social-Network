@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,13 +7,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { deleteProfile } from '../actions/profile';
+// redux
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-export default function DeleteAccountModal() {
-  const [open, setOpen] = React.useState(false);
+function DeleteAccountModal(props) {
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,7 +63,7 @@ export default function DeleteAccountModal() {
             Cancel
           </Button>
           <Button
-            onClick={handleClose}
+            onClick={() => props.deleteProfile()}
             color='primary'
             variant='contained'
             color='secondary'
@@ -72,3 +76,13 @@ export default function DeleteAccountModal() {
     </div>
   );
 }
+
+DeleteAccountModal.propTypes = {
+  deleteProfile: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile.profile
+});
+
+export default connect(mapStateToProps, { deleteProfile })(DeleteAccountModal);
