@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -12,6 +12,14 @@ import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Divider from '@material-ui/core/Divider';
 
+
+
+// redux
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deletePost } from '../actions/post';
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex'
@@ -21,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ManagePost() {
+function ManagePost(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -94,8 +102,9 @@ export default function ManagePost() {
                       Edit Post
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={() => props.deletePost(props.id)}>
                       <DeleteForeverRoundedIcon color='error' />
+                      
                       Delete Post
                     </MenuItem>
                   </MenuList>
@@ -107,4 +116,18 @@ export default function ManagePost() {
       </div>
     </div>
   );
+
+  
 }
+
+ManagePost.propTypes = {
+  deletePost: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  post: state.post.post
+});
+
+
+export default connect(mapStateToProps, { deletePost })(ManagePost);
+
