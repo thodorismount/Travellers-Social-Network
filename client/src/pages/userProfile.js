@@ -76,7 +76,7 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return (
-      
+        
         <EditProfileModal hasProfile={false}/>
     );
   } else {
