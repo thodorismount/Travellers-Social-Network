@@ -17,6 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
+import Like from '../components/LikeButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -98,13 +99,9 @@ function PostCard(props) {
       </CardContent>
       <Divider variant='middle' />
       <CardActions disableSpacing>
-        <IconButton
-          aria-label='add to favorites'
-          onClick={() => {
-            FavoriteIcon.style = { fill: 'red' };
-          }}
-        >
-          <FavoriteIcon id='fav' style={{ fill: 'red' }} />
+        <IconButton>
+          <Like /> 
+          {/* <Like like={false} */}
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
