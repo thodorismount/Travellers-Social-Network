@@ -31,10 +31,12 @@ function CountrySelect(props) {
   const [val, setVal] = useState([]);
 
   if (flag) {
-    // props.visitedCount.forEach(function (x) {
-    //   setVal({ label: x });
+    props.visitedCount.forEach(function (x, index) {
+      val[index] = { label: x };
+    });
+    // setVal({
+
     // });
-    setVal({ label: props.visitedCount });
   }
   flag = false;
   console.log(val);
@@ -48,7 +50,7 @@ function CountrySelect(props) {
       classes={{
         option: classes.option
       }}
-      defaultValue={[val]}
+      defaultValue={val.map(i => i)}
       autoSelect={true}
       autoHighlight
       getOptionLabel={option => option.label || ''}
