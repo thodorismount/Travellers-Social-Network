@@ -73,7 +73,7 @@ const UserProfile = ({
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
-  console.log(user && user._id);
+  console.log();
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
@@ -129,21 +129,6 @@ const UserProfile = ({
                     profile.user && profile.user.lastName
                   }`}
                 </Typography>
-                <div style={{ marginBottom: '0.4rem' }}>
-                  {user && user._id === match.params.id ? (
-                    <EditProfileModal
-                      buttonType='Edit Profile'
-                      hasProfile={true}
-                      bio={profile ? profile && profile.bio : ''}
-                      interests={profile ? profile && profile.interests : ''}
-                      location={profile ? profile && profile.location : ''}
-                      visitedCountries={
-                        profile ? profile && profile.visitedCountries : ''
-                      }
-                    />
-                  ) : null}
-                </div>
-                <ManageProfileModal />
               </div>
               <Typography
                 variant='h6'
@@ -193,8 +178,9 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
+                    profile.interests &&
                     profile.interests.length > 0 &&
-                    profile.interests.map(interest => (
+                    profile.interests[0].split(',').map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
@@ -256,7 +242,11 @@ const UserProfile = ({
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>
-            <CreatePostDialog />
+            <div style={{ marginBottom: '0.4rem' }}>
+              {user && user._id === match.params.id ? (
+                <CreatePostDialog />
+              ) : null}
+            </div>
           </Grid>
         </Grid>
       </div>

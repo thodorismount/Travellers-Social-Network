@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,6 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
+import Like from '../components/LikeButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,20 +63,30 @@ function PostCard(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar
-            aria-label='recipe'
-            src='girl_female_woman_avatar-512.png'
-            className={classes.avatar}
-          ></Avatar>
+          <Link
+            to={`/userProfile/${props.user && props.user}`}
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            <Avatar
+              aria-label='recipe'
+              src='/static/images/girl_female_woman_avatar-512.png'
+              className={classes.avatar}
+            ></Avatar>
+          </Link>
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-
             <ManagePost />
-
           ) : null
         }
-        title={props.username}
+        title={
+          <Link
+            to={`/userProfile/${props.user && props.user}`}
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            {props.username}
+          </Link>
+        }
         subheader={`${props.location}, ${props.date}`}
         classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
         style={{ textTransform: 'capitalize' }}
@@ -87,13 +99,9 @@ function PostCard(props) {
       </CardContent>
       <Divider variant='middle' />
       <CardActions disableSpacing>
-        <IconButton
-          aria-label='add to favorites'
-          onClick={() => {
-            FavoriteIcon.style = { fill: 'red' };
-          }}
-        >
-          <FavoriteIcon id='fav' style={{ fill: 'red' }} />
+        <IconButton>
+          <Like /> 
+          {/* <Like like={false} */}
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
