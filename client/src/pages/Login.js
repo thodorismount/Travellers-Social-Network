@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import CreateformDialog from '../components/FormDialog';
@@ -72,11 +72,11 @@ const Login = props => {
   // Redirect if successfully logged in
 
   return (
-    <React.Fragment>
-    <Footer />
-    <Grid container className={classes.form}>
-      <Grid item xs={6}>
-        <img 
+    <Fragment>
+      <Footer />
+    <Grid container spacing={1} className={classes.form}>
+      <Grid item xs={12} sm={12} md={6}>
+        <img
           src='static/images/logo_final.png'
           width='350'
           height='375'
@@ -84,8 +84,8 @@ const Login = props => {
         />
         <br />
       </Grid>
-      <Grid item xs={3}>
-        <Card className={classes.card}>
+      <Grid item xs={12} sm={12} md={4} justify='center'>
+        <Card className={classes.card} justify='center'>
           <LoginAlert />
           <Typography varient='h1' className={classes.pageTitle}>
             Please Login or Sign up
@@ -132,10 +132,8 @@ const Login = props => {
           <CreateformDialog />
         </Card>
       </Grid>
-
-      <Grid item sm />
     </Grid>
-    </React.Fragment>
+    </Fragment>
     
   );
 };

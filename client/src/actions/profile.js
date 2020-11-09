@@ -5,9 +5,9 @@ import { GET_PROFILE, PROFILE_ERROR } from './types';
 
 // get current users profile
 
-export const getCurrentProfile = () => async dispatch => {
+export const getCurrentProfile = id => async dispatch => {
   try {
-    const res = await axios.get('/api/profiles/me');
+    const res = await axios.get(`/api/profiles/${id}`);
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -22,11 +22,7 @@ export const getCurrentProfile = () => async dispatch => {
 
 // Create or update a profile
 
-export const createProfile = (
-  formData,
-  history,
-  edit = false
-) => async dispatch => {
+export const createProfile = (formData, edit = false) => async dispatch => {
   try {
     const config = {
       headers: {

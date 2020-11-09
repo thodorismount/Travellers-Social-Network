@@ -1,8 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import CreateSelectCountries from './selectCountry';
-import MapsSelector from './MapsSelector';
-import CreateUploadImage from './uploadImage';
 import Alert from './Alerts/Alert';
 
 //MUI
@@ -14,15 +11,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Fab from '@material-ui/core/Fab';
 import CreateDatePicker from '../components/DatePicker';
 import CreateGenderSelector from '../components/GenderSelector';
+import DeleteAccountModal from '../components/DeleteAccountModal';
 // import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Link, withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
-import { create } from 'lodash';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -78,6 +74,9 @@ const ManageProfileModal = props => {
         title='Manage account'
         component='span'
         onClick={handleToggle}
+        style={{
+          position: 'absolute'
+        }}
       >
         <SettingsIcon fontSize='large' />
       </IconButton>
@@ -95,34 +94,50 @@ const ManageProfileModal = props => {
               label='First name'
               variant='outlined'
               onChange={handleTextField}
-              value={formData.firstName}
+              // value={formData.firstName}
               margin='normal'
               autoFocus
               name='firstName'
               className={classes.textField}
-              style={{ width: '80%' }}
+              fullWidth
+              type='text'
             />
             <TextField
               id='lastName'
               label='Last name'
               variant='outlined'
               onChange={handleTextField}
-              value={formData.firstName}
+              // value={formData.firstName}
               margin='normal'
-              autoFocus
-              name='firstName'
+              name='lastName'
+              className={classes.textField}
+              fullWidth
+              type='text'
+            />
+            <TextField
+              id='newPassword'
+              label='New password'
+              variant='outlined'
+              type='password'
+              autoComplete='new-password' //to disable autocomplete
+              onChange={handleTextField}
+              // value={formData.firstName}
+              margin='normal'
+              name='password'
               className={classes.textField}
               fullWidth
             />
+
             <TextField
-              id='firstName'
-              label='First name'
+              id='confirmNewPassword'
+              label='Confirm new password'
               variant='outlined'
+              type='password'
+              autoComplete='new-password' //to disable autocomplete
               onChange={handleTextField}
-              value={formData.firstName}
+              // value={formData.firstName}
               margin='normal'
-              autoFocus
-              name='firstName'
+              name='password'
               className={classes.textField}
               fullWidth
             />
@@ -147,8 +162,17 @@ const ManageProfileModal = props => {
               </tbody>
             </table>
           </form>
+          <DeleteAccountModal />
         </DialogContent>
         <DialogActions>
+          <Button
+            color='primary'
+            variant='outlined'
+            size='medium'
+            onClick={handleToggle}
+          >
+            Cancel
+          </Button>
           <Button
             type='submit'
             variant='contained'
@@ -157,14 +181,6 @@ const ManageProfileModal = props => {
             size='medium'
           >
             Submit
-          </Button>
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
           </Button>
         </DialogActions>
       </Dialog>

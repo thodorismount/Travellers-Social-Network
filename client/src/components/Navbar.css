@@ -1,10 +1,11 @@
 .appbar {
-  background: linear-gradient(
+  /* background: linear-gradient(
     24deg,
     rgba(7, 58, 129, 1) 5%,
     rgba(0, 172, 179, 1) 55%,
     rgba(0, 255, 184, 1) 89%
-  );
+  ); */
+  background: linear-gradient(to right, #1fa2ff, #12d8fa, rgb(0, 225, 255) 89%);
 }
 .navbar-logo {
   justify-self: start;

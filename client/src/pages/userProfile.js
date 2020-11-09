@@ -16,14 +16,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
-import $ from 'jquery';
-import '../components/createProfile';
+import PostItem from '../components/posts/PostItem';
+import createProfile from '../components/createProfile';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
+import { getProfilePosts } from '../actions/post';
 
 import '../re.css';
+import { post } from 'jquery';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -34,7 +37,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     justifyContent: 'center',
     height: 'auto',
-    paddingTop: '10px'
+    paddingTop: '10px',
+    position: 'relative'
   },
   card: {
     textAlign: 'center',
@@ -52,34 +56,51 @@ const useStylesImg = makeStyles({
   image: {
     maxWidth: '60%',
     maxHeight: '60%',
-    margin: 'auto',
     borderRadius: '50%'
   }
 });
 
 const UserProfile = ({
   getCurrentProfile,
-  auth: { user },
-  profile: { profile, loading }
+  getProfilePosts,
+  match,
+  user,
+  profile: { profile, loading },
+  posts
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
+    getCurrentProfile(match.params.id);
+    getProfilePosts(match.params.id);
+  }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
+  console.log(user && user._id);
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
-    return (
-        
-        <EditProfileModal hasProfile={false}/>
+    return user && user._id === match.params.id ? (
+      <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
+    ) : (
+      <div>
+        <Typography
+          variant='h3'
+          align='left'
+          style={{ textAlign: 'left', textTransform: 'capitalize' }}
+        >
+          Error 404 !!
+        </Typography>
+        <br />
+        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
+          Profile does not exist!
+        </Typography>
+      </div>
     );
   } else {
     return (
       <div className={classes.root}>
         <Grid container spacing={1}>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={12} sm={12} md={4}>
             <Paper className={classes.paper} variant='elevation'>
               <div
                 style={{
@@ -90,9 +111,10 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='girl_female_woman_avatar-512.png'
+                  src='static/images/obama.png'
                   alt='girl-logo'
                 />
+                <ManageProfileModal />
                 <Typography
                   variant='h4'
                   style={{
@@ -101,19 +123,23 @@ const UserProfile = ({
                     marginBottom: '1rem'
                   }}
                 >
-                  {`${user && user.firstName} ${user && user.lastName}`}
+                  {`${profile.user && profile.user.firstName} ${
+                    profile.user && profile.user.lastName
+                  }`}
                 </Typography>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal
-                    buttonType='Edit Profile'
-                    hasProfile= {true}
-                    bio={profile ? profile && profile.bio : ''}
-                    interests={profile ? profile && profile.interests : ''}
-                    location={profile ? profile && profile.location : ''}
-                    visitedCountries={
-                      profile ? profile && profile.visitedCountries : ''
-                    }
-                  />
+                  {user && user._id === match.params.id ? (
+                    <EditProfileModal
+                      buttonType='Edit Profile'
+                      hasProfile={true}
+                      bio={profile ? profile && profile.bio : ''}
+                      interests={profile ? profile && profile.interests : ''}
+                      location={profile ? profile && profile.location : ''}
+                      visitedCountries={
+                        profile ? profile && profile.visitedCountries : ''
+                      }
+                    />
+                  ) : null}
                 </div>
                 <ManageProfileModal />
               </div>
@@ -165,7 +191,7 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
-                    profile.interests &&
+                    profile.interests.length > 0 &&
                     profile.interests.map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
@@ -184,11 +210,24 @@ const UserProfile = ({
                     ))}
                 </List>
               </Typography>
+              <div style={{ marginBottom: '0.4rem' }}>
+                <EditProfileModal
+                  buttonType='Edit Profile'
+                  hasProfile={true}
+                  bio={profile ? profile && profile.bio : ''}
+                  interests={profile ? profile && profile.interests : ''}
+                  location={profile ? profile && profile.location : ''}
+                  visitedCountries={
+                    profile ? profile && profile.visitedCountries : ''
+                  }
+                />
+              </div>
             </Paper>
           </Grid>
           <Grid
             item
-            xs={7}
+            xs={12}
+            sm={12}
             md={7}
             justify='flex-start'
             container
@@ -201,27 +240,15 @@ const UserProfile = ({
                 backgroundColor: '#F0F2F5'
               }}
             >
-              <PostCard
-                caption='Throwback to my trip in Morocco'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/morocco.jpg'
-                location='Morocco'
-                date='October 14, 2020'
-              />
-              <PostCard
-                caption='Looking forward for my next flight to Paris'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/paris.jpg'
-                location='Paris'
-                date='September 9, 2020'
-              />
-              <PostCard
-                caption='Any good restaurants in NY?'
-                username={`${user && user.firstName}  ${user && user.lastName}`}
-                image='static/images/newYork.jpg'
-                location='New York'
-                date='May 19, 2020'
-              />
+              {/* this is where the post are being rendered */}
+              {post.loading ? (
+                <Spinner />
+              ) : (
+                <div className='posts'>
+                  {posts.length > 0 &&
+                    posts.map(post => <PostItem key={post._id} post={post} />)}
+                </div>
+              )}
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>
@@ -235,13 +262,17 @@ const UserProfile = ({
 
 UserProfile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getProfilePosts: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  user: state.auth.user,
+  profile: state.profile,
+  posts: state.post.posts
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(UserProfile);
+export default connect(mapStateToProps, { getCurrentProfile, getProfilePosts })(
+  UserProfile
+);

@@ -21,6 +21,7 @@ import { createProfile } from '../actions/profile';
 import { connect } from 'react-redux';
 import ModalMessage from './ModalMessage';
 import { getCurrentProfile } from '../actions/profile';
+import userProfile from '../pages/userProfile';
 
 const styles = {
   button: {
