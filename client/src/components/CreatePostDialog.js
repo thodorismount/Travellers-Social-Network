@@ -1,4 +1,3 @@
-  
 import React, { useState, Fragment } from 'react';
 
 //MUI
@@ -82,11 +81,13 @@ const CreatePostDialog = ({ addPost }) => {
               margin='normal'
               variant='outlined'
               placeholder='Hey traveller! Write your story'
+              required
             />
             <MapsSelector
               label='Select location'
               onChange={handleLocationChange}
               prevLoc={formData.location}
+              required
             />
 
             <CreateUploadImage />
@@ -95,7 +96,12 @@ const CreatePostDialog = ({ addPost }) => {
               <Button color='primary' variant='outlined' onClick={handleToggle}>
                 Cancel
               </Button>
-              <Button color='primary' variant='contained' type='submit'>
+              <Button
+                color='primary'
+                disabled={formData.location === '' || formData.text === ''}
+                variant='contained'
+                type='submit'
+              >
                 Post
               </Button>
             </DialogActions>
