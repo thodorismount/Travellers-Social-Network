@@ -72,6 +72,7 @@ const UserProfile = ({
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
+  console.log(user && user._id);
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
