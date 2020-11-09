@@ -123,10 +123,12 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='static/images/obama.png'
+                  src='../static/images/obama.png'
                   alt='girl-logo'
                 />
-                <ManageProfileModal />
+                {user && user._id === match.params.id ? (
+                  <ManageProfileModal />
+                ) : null}
                 <Typography
                   variant='h4'
                   style={{
@@ -139,20 +141,6 @@ const UserProfile = ({
                     profile.user && profile.user.lastName
                   }`}
                 </Typography>
-                <div style={{ marginBottom: '0.4rem' }}>
-                  {user && user._id === match.params.id ? (
-                    <EditProfileModal
-                      buttonType='Edit Profile'
-                      bio={profile ? profile && profile.bio : ''}
-                      interests={profile ? profile && profile.interests : ''}
-                      location={profile ? profile && profile.location : ''}
-                      visitedCountries={
-                        profile ? profile && profile.visitedCountries : ''
-                      }
-                    />
-                  ) : null}
-                </div>
-                <ManageProfileModal />
               </div>
               <Typography
                 variant='h6'
@@ -222,15 +210,17 @@ const UserProfile = ({
                 </List>
               </Typography>
               <div style={{ marginBottom: '0.4rem' }}>
-                <EditProfileModal
-                  buttonType='Edit Profile'
-                  bio={profile ? profile && profile.bio : ''}
-                  interests={profile ? profile && profile.interests : ''}
-                  location={profile ? profile && profile.location : ''}
-                  visitedCountries={
-                    profile ? profile && profile.visitedCountries : ''
-                  }
-                />
+                {user && user._id === match.params.id ? (
+                  <EditProfileModal
+                    buttonType='Edit Profile'
+                    bio={profile ? profile && profile.bio : ''}
+                    interests={profile ? profile && profile.interests : ''}
+                    location={profile ? profile && profile.location : ''}
+                    visitedCountries={
+                      profile ? profile && profile.visitedCountries : ''
+                    }
+                  />
+                ) : null}
               </div>
             </Paper>
           </Grid>
