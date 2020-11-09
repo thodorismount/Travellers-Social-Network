@@ -125,16 +125,16 @@ router.get('/profile/:id', async (req, res) => {
     if (err.kind === 'ObjectId')
       res
         .status(404)
-        .json({ msg: 'User profile does nor exist,can not get posts.' });
+        .json({ msg: 'User profile does not exist,can not get posts.' });
     res.status(500).send('Server Error');
   }
 });
 
 // @ROUTE -- GET api/posts
 // @DESC  -- Get all post
-// @ACCESS -- private
+// @ACCESS -- Public
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const post = await Post.find().sort({ date: -1 });
 
