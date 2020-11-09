@@ -68,7 +68,6 @@ const UserProfile = ({
   posts
 }) => {
   useEffect(() => {
-    console.log(match.params.id);
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
