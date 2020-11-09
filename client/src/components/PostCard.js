@@ -15,7 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
-import MyMenu from '../components/MyMenu';
+
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
@@ -70,7 +70,7 @@ function PostCard(props) {
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-            <MyMenu />
+            <ManagePost />
           ) : null
         }
         title={props.username}
