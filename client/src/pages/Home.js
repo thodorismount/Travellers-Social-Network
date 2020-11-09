@@ -15,7 +15,6 @@ import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
 
-
 // var style = document.createElement('style');
 // style.innerHTML = `
 //   #target {
@@ -26,7 +25,6 @@ import Spinner from '../components/Profile/Spinner';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    //margin of whole feed view from navbar
     flexGrow: 6,
     paddingTop: '10px'
   }
@@ -37,25 +35,15 @@ const Home = props => {
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
     props.getPosts();
-  }, [getPosts]);
+  }, []);
   const classes = useStyles();
-  return (
+  return props.loading ? (
+    <Spinner />
+  ) : (
     <div className={classes.root}>
-      {/* <Grid id='target' container spacing={3}>
-        <Grid item xs={1}>
-          
-        </Grid>
-      </Grid> */}
-
       <Grid justify={'center'} container spacing={3}>
         <Grid item xs={1}></Grid>
-        <Grid
-          item
-          xs={10}
-          justify={'center'}
-          container
-          // className={'postContainer'}
-        >
+        <Grid item xs={10} justify={'center'} container>
           <Paper
             justify='center'
             style={{
@@ -67,7 +55,7 @@ const Home = props => {
               <Spinner />
             ) : (
               <div className='posts'>
-                {props.posts &&
+                {props.posts.length > 0 &&
                   props.posts.map(post => (
                     <PostItem key={post._id} post={post} />
                   ))}
