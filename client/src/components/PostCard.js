@@ -62,18 +62,30 @@ function PostCard(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar
-            aria-label='recipe'
-            src='girl_female_woman_avatar-512.png'
-            className={classes.avatar}
-          ></Avatar>
+          <Link
+            to={`/userProfile/${props.user && props.user}`}
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            <Avatar
+              aria-label='recipe'
+              src='/static/images/girl_female_woman_avatar-512.png'
+              className={classes.avatar}
+            ></Avatar>
+          </Link>
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
             <ManagePost />
           ) : null
         }
-        title={props.username}
+        title={
+          <Link
+            to={`/userProfile/${props.user && props.user}`}
+            style={{ textDecoration: 'none', color: '#000' }}
+          >
+            {props.username}
+          </Link>
+        }
         subheader={`${props.location}, ${props.date}`}
         classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
         style={{ textTransform: 'capitalize' }}
