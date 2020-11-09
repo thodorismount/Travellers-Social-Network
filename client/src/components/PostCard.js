@@ -76,7 +76,7 @@ function PostCard(props) {
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-            <ManagePost />
+            <ManagePost id = {props.id} />
           ) : null
         }
         title={
@@ -99,7 +99,8 @@ function PostCard(props) {
       </CardContent>
       <Divider variant='middle' />
       <CardActions disableSpacing>
-        <IconButton>
+        <IconButton onClick={() => props.like}
+>
           <Like /> 
           {/* <Like like={false} */}
         </IconButton>
