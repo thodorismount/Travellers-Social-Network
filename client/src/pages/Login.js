@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import CreateformDialog from '../components/FormDialog';
@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
+import Footer from '../components/Footer';
 
 // R.E. Components
 import LoginAlert from '../components/Alerts/LoginAlert';
@@ -35,14 +36,9 @@ const styles = {
   button: {
     margin: '10px 10px'
   },
-  logo: {
-    margin: '300px',
-    height: 'auto',
-    width: 'auto'
-  },
   card: {
     padding: '10px',
-    marginTop: '180px',
+    marginTop: '100px',
     backgroundColor: '#F0F2F5'
   }
 };
@@ -76,14 +72,15 @@ const Login = props => {
   // Redirect if successfully logged in
 
   return (
+    <Fragment>
+      <Footer />
     <Grid container spacing={1} className={classes.form}>
       <Grid item xs={12} sm={12} md={6}>
         <img
           src='static/images/logo_final.png'
           width='350'
           height='375'
-          alt='page-logo'
-          style={{ marginTop: '180px' }}
+          style={{ marginTop: '100px' }}
         />
         <br />
       </Grid>
@@ -136,6 +133,8 @@ const Login = props => {
         </Card>
       </Grid>
     </Grid>
+    </Fragment>
+    
   );
 };
 

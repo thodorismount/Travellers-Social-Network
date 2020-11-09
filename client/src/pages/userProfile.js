@@ -17,6 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
+import createProfile from '../components/createProfile';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -79,20 +80,7 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div>
-        <Typography
-          variant='h3'
-          align='left'
-          style={{ textAlign: 'left', textTransform: 'capitalize' }}
-        >
-          Welcome {user && user.firstName} {user && user.lastName}
-        </Typography>
-        <br />
-        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
-          Please fill in your profile
-        </Typography>
-        <EditProfileModal buttonType={'Create Profile'} />
-      </div>
+      <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
     ) : (
       <div>
         <Typography
@@ -141,6 +129,21 @@ const UserProfile = ({
                     profile.user && profile.user.lastName
                   }`}
                 </Typography>
+                <div style={{ marginBottom: '0.4rem' }}>
+                  {user && user._id === match.params.id ? (
+                    <EditProfileModal
+                      buttonType='Edit Profile'
+                      hasProfile={true}
+                      bio={profile ? profile && profile.bio : ''}
+                      interests={profile ? profile && profile.interests : ''}
+                      location={profile ? profile && profile.location : ''}
+                      visitedCountries={
+                        profile ? profile && profile.visitedCountries : ''
+                      }
+                    />
+                  ) : null}
+                </div>
+                <ManageProfileModal />
               </div>
               <Typography
                 variant='h6'
@@ -213,6 +216,7 @@ const UserProfile = ({
                 {user && user._id === match.params.id ? (
                   <EditProfileModal
                     buttonType='Edit Profile'
+                    hasProfile={true}
                     bio={profile ? profile && profile.bio : ''}
                     interests={profile ? profile && profile.interests : ''}
                     location={profile ? profile && profile.location : ''}
