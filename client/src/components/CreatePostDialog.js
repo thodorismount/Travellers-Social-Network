@@ -13,6 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
 
+
 // redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -89,7 +90,7 @@ const CreatePostDialog = ({ addPost }) => {
             />
 
             <CreateUploadImage />
-
+    </DialogContent>
             <DialogActions>
               <Button color='primary' variant='outlined' onClick={handleToggle}>
                 Cancel
@@ -99,11 +100,12 @@ const CreatePostDialog = ({ addPost }) => {
               </Button>
             </DialogActions>
           </form>
-        </DialogContent>
+        
       </Dialog>
     </Fragment>
   );
 };
+
 
 CreatePostDialog.propTypes = {
   addPost: PropTypes.func.isRequired
