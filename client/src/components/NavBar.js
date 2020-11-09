@@ -68,7 +68,7 @@ const NavBar = ({
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
                 <img
-                  src='static/images/logo_white_lines.png'
+                  src='../static/images/logo_white_lines.png'
                   alt='Avatar'
                   className='navbar-logo'
                 ></img>
@@ -80,7 +80,7 @@ const NavBar = ({
               <Button component={Link} to={`/userProfile/${user && user._id}`}>
                 <Avatar
                   className='navbar-user'
-                  src='girl_female_woman_avatar-512.png'
+                  src='../static/images/girl_female_woman_avatar-512.png'
                 />
                 <Typography
                   variant='h5'

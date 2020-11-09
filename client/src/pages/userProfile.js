@@ -73,7 +73,7 @@ const UserProfile = ({
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
-  console.log(user && user._id);
+  console.log();
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
@@ -193,8 +193,9 @@ const UserProfile = ({
                   style={{ marginBottom: '0.4rem' }}
                 >
                   {profile &&
+                    profile.interests &&
                     profile.interests.length > 0 &&
-                    profile.interests.map(interest => (
+                    profile.interests[0].split(',').map(interest => (
                       <ListItem key={interest}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
