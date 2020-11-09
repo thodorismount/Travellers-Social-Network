@@ -1,8 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import CreateSelectCountries from './selectCountry';
-import MapsSelector from './MapsSelector';
-import CreateUploadImage from './uploadImage';
 import Alert from './Alerts/Alert';
 
 //MUI
@@ -14,7 +11,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Fab from '@material-ui/core/Fab';
 import CreateDatePicker from '../components/DatePicker';
 import CreateGenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
@@ -23,7 +19,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Link, withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
-import { create } from 'lodash';
 import { connect } from 'react-redux';
 
 const styles = {
