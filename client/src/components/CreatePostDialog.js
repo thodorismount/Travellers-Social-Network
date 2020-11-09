@@ -6,13 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
@@ -74,20 +70,21 @@ class CreatePostDialog extends Component {
               <MapsSelector label='Select location' />
 
               <CreateUploadImage />
+
+              <DialogActions>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={this.handleToggle}
+                >
+                  Cancel
+                </Button>
+                <Button color='primary' variant='contained' type='submit'>
+                  Post
+                </Button>
+              </DialogActions>
             </form>
           </DialogContent>
-          <DialogActions>
-            <Button
-              color='primary'
-              variant='outlined'
-              onClick={this.handleToggle}
-            >
-              Cancel
-            </Button>
-            <Button color='primary' variant='contained' type='submit'>
-              Post
-            </Button>
-          </DialogActions>
         </Dialog>
       </Fragment>
     );

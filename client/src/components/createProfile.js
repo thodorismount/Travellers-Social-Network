@@ -15,9 +15,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
-import { create } from 'lodash';
+
 import { connect } from 'react-redux';
 import ModalMessage from './ModalMessage';
 import { getCurrentProfile } from '../actions/profile';
@@ -34,30 +34,35 @@ const styles = {
   }
 };
 
+// TODO: Configure visitedCountries and location state managment -_-
+
 const EditProfileModal = props => {
   const [formData, setFormData] = useState({
+    bio: props.profile ? props.profile.bio : '',
     visitedCountries: '',
-    interests: '',
-    location: ''
+    interests:  props.profile ? props.profile.interests : '',
+    location: props.profile ? props.profile.location : ''
   }); 
  let testopen=props.open;
   const [open, setOpen] = useState({ testopen });
+
   const onSubmit = e => {
     e.preventDefault();
-    props.createProfile(formData, props.history);
-    window.location.reload(false);
+    props.createProfile(formData);
   };
   var testProfile=props.hasProfile;
   const handleToggle = () => {
     setOpen(!open);
   };
   const handleAutocomplete = v => {
+    console.log(v);
     let t = v.map(val => val.label);
     setFormData({ ...formData, visitedCountries: t.join(',') });
+    console.log(formData.visitedCountries);
   };
 
   const handleLocationChange = v => {
-    setFormData({ ...formData, location: v.terms[0].value });
+    setFormData({ ...formData, location: v ? v.terms[0].value : '' });
   };
 
   const handleTextField = e => {
@@ -100,7 +105,6 @@ const EditProfileModal = props => {
               variant='outlined'
               placeholder='Hey traveller! Write your bio'
               label='Bio'
-              fullWidth
               onChange={handleTextField}
             />
 
@@ -116,15 +120,27 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <CreateSelectCountries onChange={handleAutocomplete} />
+            <CreateSelectCountries
+              onChange={handleAutocomplete}
+              visitedCount={formData.visitedCountries}
+            />
             <MapsSelector
               label='Select your location'
               onChange={handleLocationChange}
+              prevLoc={formData.location}
             />
 
             <CreateUploadImage />
 
             <DialogActions>
+              <Button
+                color='primary'
+                variant='outlined'
+                size='medium'
+                onClick={handleToggle}
+              >
+                Cancel
+              </Button>
               <Button
                 type='submit'
                 variant='contained'
@@ -134,18 +150,9 @@ const EditProfileModal = props => {
               >
                 Submit
               </Button>
-              <Button
-                color='primary'
-                variant='outlined'
-                size='medium'
-                onClick={handleToggle}
-              >
-                Cancel
-              </Button>
             </DialogActions>
           </form>
         </DialogContent>
-
       </Dialog>
     </Fragment>
   );
@@ -155,7 +162,8 @@ EditProfileModal.propTypes = {
   classes: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired
 };
+const mapStateToProps = state => ({ profile: state.profile.profile });
 
-export default connect(null, { createProfile })(
+export default connect(mapStateToProps, { createProfile })(
   withStyles(styles)(withRouter(EditProfileModal))
 );

@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+
 import CreatePostDialog from '../components/CreatePostDialog';
 import '../components/Navbar.css';
 import $ from 'jquery';
@@ -13,6 +14,7 @@ import { getPosts } from '../actions/post';
 import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
+
 
 // var style = document.createElement('style');
 // style.innerHTML = `

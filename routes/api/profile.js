@@ -56,21 +56,23 @@ router.post(
     profileFields.user = req.user.id;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
-    if (interests) profileFields.interests = interests.split(',');
+    if (interests) profileFields.interests = interests;
     if (visitedCountries) {
       profileFields.visitedCountries = visitedCountries
         .split(',')
         .map(country => country.trim());
     }
-    if (profileFields.visitedCountries.length >= 10)
-      profileFields.travelExperience = 5;
-    else if (profileFields.visitedCountries.length >= 7)
-      profileFields.travelExperience = 4;
-    else if (profileFields.visitedCountries.length >= 4)
-      profileFields.travelExperience = 3;
-    else if (profileFields.visitedCountries.length >= 2)
-      profileFields.travelExperience = 2;
-    else profileFields.travelExperience = 1;
+    if (profileFields.visitedCountries) {
+      if (profileFields.visitedCountries.length >= 10)
+        profileFields.travelExperience = 5;
+      else if (profileFields.visitedCountries.length >= 7)
+        profileFields.travelExperience = 4;
+      else if (profileFields.visitedCountries.length >= 4)
+        profileFields.travelExperience = 3;
+      else if (profileFields.visitedCountries.length >= 2)
+        profileFields.travelExperience = 2;
+      else profileFields.travelExperience = 1;
+    }
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
