@@ -73,12 +73,13 @@ const UserProfile = ({
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
+  console.log(user && user._id);
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
-    return (
+    return user && user._id === match.params.id ? (
       <div>
         <Typography
           variant='h3'
@@ -92,6 +93,20 @@ const UserProfile = ({
           Please fill in your profile
         </Typography>
         <EditProfileModal buttonType={'Create Profile'} />
+      </div>
+    ) : (
+      <div>
+        <Typography
+          variant='h3'
+          align='left'
+          style={{ textAlign: 'left', textTransform: 'capitalize' }}
+        >
+          Error 404 !!
+        </Typography>
+        <br />
+        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
+          Profile does not exist!
+        </Typography>
       </div>
     );
   } else {
@@ -126,15 +141,17 @@ const UserProfile = ({
                 </Typography>
                 {}
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <EditProfileModal
-                    buttonType='Edit Profile'
-                    bio={profile ? profile && profile.bio : ''}
-                    interests={profile ? profile && profile.interests : ''}
-                    location={profile ? profile && profile.location : ''}
-                    visitedCountries={
-                      profile ? profile && profile.visitedCountries : ''
-                    }
-                  />
+                  {user && user._id === match.params.id ? (
+                    <EditProfileModal
+                      buttonType='Edit Profile'
+                      bio={profile ? profile && profile.bio : ''}
+                      interests={profile ? profile && profile.interests : ''}
+                      location={profile ? profile && profile.location : ''}
+                      visitedCountries={
+                        profile ? profile && profile.visitedCountries : ''
+                      }
+                    />
+                  ) : null}
                 </div>
                 <ManageProfileModal />
               </div>

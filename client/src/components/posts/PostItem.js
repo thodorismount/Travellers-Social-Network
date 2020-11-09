@@ -27,6 +27,7 @@ const PostItem = ({
 }) => {
   return (
     <PostCard
+      user={user}
       caption={text}
       username={`${firstName}  ${lastName}`}
       location={`${location}`}
