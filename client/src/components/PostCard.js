@@ -15,6 +15,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
+import MyMenu from '../components/MyMenu';
+import { connect } from 'react-redux';
+
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -48,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PostCard(props) {
+function PostCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -66,7 +69,9 @@ export default function PostCard(props) {
           ></Avatar>
         }
         action={
-          <IconButton aria-label='settings'>{/* <ManagePost /> */}</IconButton>
+          props.user === (props.authUser && props.authUser._id) ? (
+            <MyMenu />
+          ) : null
         }
         title={props.username}
         subheader={`${props.location}, ${props.date}`}
@@ -108,3 +113,9 @@ export default function PostCard(props) {
     </Card>
   );
 }
+
+const mapStateToProps = state => ({
+  authUser: state.auth.user
+});
+
+export default connect(mapStateToProps)(PostCard);
