@@ -23,12 +23,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = props => {
-  const [skip, setSkip] = useState(4);
+  const [skip, setSkip] = useState(2);
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop === scrollHeight) {
+    if (offsetHeight + scrollTop + 100 >= scrollHeight) {
       setSkip(skip + 2);
       props.fetchMore(skip);
     }

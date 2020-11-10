@@ -113,6 +113,7 @@ export const deletePost = id => async dispatch => {
       type: DELETE_POST,
       payload: id
     });
+    window.location.reload();
 
     dispatch(setAlert('Post was deleted', 'success'));
   } catch (err) {
