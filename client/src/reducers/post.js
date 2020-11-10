@@ -4,7 +4,9 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_PROFILE_POSTS
+  GET_PROFILE_POSTS,
+  FETCH_MORE,
+  FETCH_MORE_PROFILE
 } from '../actions/types';
 
 const initialState = {
@@ -24,10 +26,22 @@ export default function (state = initialState, action) {
         posts: payload,
         loading: false
       };
+    case FETCH_MORE:
+      return {
+        ...state,
+        posts: [...state.posts, payload].flat(),
+        loading: false
+      };
     case GET_PROFILE_POSTS:
       return {
         ...state,
         posts: payload,
+        loading: false
+      };
+    case FETCH_MORE_PROFILE:
+      return {
+        ...state,
+        posts: [...state.posts, payload].flat(),
         loading: false
       };
 

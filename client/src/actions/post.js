@@ -6,17 +6,34 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_PROFILE_POSTS
+  GET_PROFILE_POSTS,
+  FETCH_MORE,
+  FETCH_MORE_PROFILE
 } from './types';
 
 //GET POSTS
 
 export const getPosts = () => async dispatch => {
   try {
-    const res = await axios.get('/api/posts');
+    const res = await axios.get(`/api/posts`);
 
     dispatch({
       type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const fetchMore = skip => async dispatch => {
+  try {
+    const res = await axios.get(`/api/posts/fetchMore?skip=${skip}`);
+    dispatch({
+      type: FETCH_MORE,
       payload: res.data
     });
   } catch (err) {
@@ -33,6 +50,24 @@ export const getProfilePosts = id => async dispatch => {
 
     dispatch({
       type: GET_PROFILE_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const fetchMoreProfile = (id, skip) => async dispatch => {
+  try {
+    const res = await axios.get(
+      `/api/posts/profile/fetchMoreProfile/${id}?skip=${skip}`
+    );
+
+    dispatch({
+      type: FETCH_MORE_PROFILE,
       payload: res.data
     });
   } catch (err) {

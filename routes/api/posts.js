@@ -113,11 +113,40 @@ router.post(
 );
 
 // @ROUTE -- GET api/posts/pofile/:id
-// @DESC  -- Get all post for a user's id
+// @DESC  -- Get 2 first post for a user's id
 // @ACCESS -- public
+
 router.get('/profile/:id', async (req, res) => {
   try {
-    const post = await Post.find({ user: req.params.id }).sort({ date: -1 });
+    const skip = 0;
+    const post = await Post.find({ user: req.params.id }, undefined, {
+      skip,
+      limit: 2
+    }).sort({ date: -1 });
+
+    return res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId')
+      res
+        .status(404)
+        .json({ msg: 'User profile does not exist,can not get posts.' });
+    res.status(500).send('Server Error');
+  }
+});
+
+// Infinite scroll fetching 2 posts each time
+router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
+  try {
+    const skip =
+      req.query.skip && /^\d+$/.test(req.query.skip)
+        ? Number(req.query.skip)
+        : 2;
+
+    const post = await Post.find({ user: req.params.id }, undefined, {
+      skip,
+      limit: 2
+    }).sort({ date: -1 });
 
     return res.json(post);
   } catch (err) {
@@ -131,12 +160,32 @@ router.get('/profile/:id', async (req, res) => {
 });
 
 // @ROUTE -- GET api/posts
-// @DESC  -- Get all post
+// @DESC  -- Get 2 firts post
 // @ACCESS -- Public
 
 router.get('/', async (req, res) => {
   try {
-    const post = await Post.find().sort({ date: -1 });
+    const skip = 0;
+    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
+      date: -1
+    });
+
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.get('/fetchMore', async (req, res) => {
+  try {
+    const skip =
+      req.query.skip && /^\d+$/.test(req.query.skip)
+        ? Number(req.query.skip)
+        : 2;
+    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
+      date: -1
+    });
 
     res.json(post);
   } catch (err) {
