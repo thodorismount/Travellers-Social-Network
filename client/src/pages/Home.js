@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 
 import CreatePostDialog from '../components/CreatePostDialog';
@@ -10,18 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPosts } from '../actions/post';
+import { getPosts, fetchMore } from '../actions/post';
 import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
-
-// var style = document.createElement('style');
-// style.innerHTML = `
-//   #target {
-//     display: flex;
-//   }
-//   `;
-// document.head.appendChild(style);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,11 +23,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = props => {
+  const [skip, setSkip] = useState(4);
+
+  const handleScroll = e => {
+    const { offsetHeight, scrollTop, scrollHeight } = e.target;
+
+    if (offsetHeight + scrollTop === scrollHeight) {
+      setSkip(skip + 2);
+      props.fetchMore(skip);
+    }
+  };
+
   useEffect(() => {
+    props.getPosts();
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
-    props.getPosts();
   }, []);
+
   const classes = useStyles();
   return props.loading ? (
     <Spinner />
@@ -45,10 +49,15 @@ const Home = props => {
         <Grid item xs={1}></Grid>
         <Grid item xs={10} justify={'center'} container>
           <Paper
+            onScroll={handleScroll}
             justify='center'
             style={{
-              width: '75%',
-              backgroundColor: '#F0F2F5'
+              width: '80%',
+              backgroundColor: '#F0F2F5',
+              height: '85vh',
+              padding: '2rem',
+              overflowY: 'scroll',
+              scrollbarWidth: '0'
             }}
           >
             {props.loading ? (
@@ -76,7 +85,8 @@ const Home = props => {
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  fetchMore: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -84,4 +94,4 @@ const mapStateToProps = state => ({
   posts: state.post.posts
 });
 
-export default connect(mapStateToProps, { getPosts })(Home);
+export default connect(mapStateToProps, { getPosts, fetchMore })(Home);
