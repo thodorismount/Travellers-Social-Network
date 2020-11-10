@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,6 @@ import RoomIcon from '@material-ui/icons/Room';
 import CakeIcon from '@material-ui/icons/Cake';
 import EditProfileModal from '../components/createProfile';
 import ManageProfileModal from '../components/ManageProfileModal';
-import PostCard from '../components/PostCard';
 import Spinner from '../components/Profile/Spinner';
 import moment from 'moment';
 import CreatePostDialog from '../components/CreatePostDialog';
@@ -17,12 +16,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
-import createProfile from '../components/createProfile';
+
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentProfile } from '../actions/profile';
 import { getProfilePosts } from '../actions/post';
+import { fetchMoreProfile } from '../actions/post';
 
 import '../re.css';
 import { post } from 'jquery';
@@ -63,19 +63,30 @@ const useStylesImg = makeStyles({
 const UserProfile = ({
   getCurrentProfile,
   getProfilePosts,
+  fetchMoreProfile,
   match,
   user,
   profile: { profile, loading },
   posts
 }) => {
+  const [skip, setSkip] = useState(2);
+
+  const handleScroll = e => {
+    const { offsetHeight, scrollTop, scrollHeight } = e.target;
+
+    if (offsetHeight + scrollTop === scrollHeight) {
+      setSkip(skip + 2);
+      fetchMoreProfile(match.params.id, skip);
+    }
+  };
   useEffect(() => {
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
-  console.log();
   const classes = useStyles();
   const classesImg = useStylesImg();
+
   if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
@@ -225,9 +236,14 @@ const UserProfile = ({
           >
             <Paper
               justify='center'
+              onScroll={handleScroll}
               style={{
                 width: '100%',
-                backgroundColor: '#F0F2F5'
+                backgroundColor: '#F0F2F5',
+                backgroundColor: '#F0F2F5',
+                height: '85vh',
+                padding: '2rem',
+                overflowY: 'scroll'
               }}
             >
               {/* this is where the post are being rendered */}
@@ -257,6 +273,7 @@ const UserProfile = ({
 UserProfile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getProfilePosts: PropTypes.func.isRequired,
+  fetchMoreProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -267,6 +284,8 @@ const mapStateToProps = state => ({
   posts: state.post.posts
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getProfilePosts })(
-  UserProfile
-);
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  getProfilePosts,
+  fetchMoreProfile
+})(UserProfile);

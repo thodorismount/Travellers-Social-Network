@@ -9,27 +9,26 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
+const CheckboxLabels = props => {
+  const [state, setState] = React.useState({});
+  const handleChange = event => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
-  const CheckboxLabels = props => {
-    
-    const [state, setState] = React.useState({});
-    const handleChange = (event) => {
-      setState({ ...state, [event.target.name]: event.target.checked });
-
-    };
-    console.log(state)
-  return(
+  return (
     <FormControlLabel
-    //checked = 'true'   if the "checked" variable is true the component appears checked
-    control={<Checkbox checked = {props.like} 
-    name="checked" 
-    icon={<FavoriteBorder />} 
-    checkedIcon={<Favorite /> } 
-     />}
-    label="Like this post"
-    onChange = {handleChange}
-   
-  />
+      //checked = 'true'   if the "checked" variable is true the component appears checked
+      control={
+        <Checkbox
+          checked={props.like}
+          name='checked'
+          icon={<FavoriteBorder />}
+          checkedIcon={<Favorite />}
+        />
+      }
+      label='Like this post'
+      onChange={handleChange}
+    />
   );
-}
+};
 export default CheckboxLabels;
