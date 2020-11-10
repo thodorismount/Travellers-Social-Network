@@ -35,8 +35,6 @@ const styles = {
   }
 };
 
-// TODO: Configure visitedCountries and location state managment -_-
-
 const EditProfileModal = props => {
   const [formData, setFormData] = useState({
     bio: props.profile ? props.profile.bio : '',

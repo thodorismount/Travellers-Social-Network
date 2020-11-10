@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,13 +31,15 @@ function CountrySelect(props) {
   const [val, setVal] = useState([]);
 
   if (flag) {
-    props.visitedCount.forEach(function (x, index) {
-      val[index] = { label: x };
-    });
+    props.visitedCount &&
+      props.visitedCount.forEach(function (x, index) {
+        val[index] = { label: x };
+      });
     // setVal({
 
     // });
   }
+
   flag = false;
   console.log(val);
   return (
