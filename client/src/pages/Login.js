@@ -73,7 +73,6 @@ const Login = props => {
 
   return (
     <Fragment>
-      <Footer />
     <Grid container spacing={1} className={classes.form}>
       <Grid item xs={12} sm={12} md={6}>
         <img
@@ -133,6 +132,7 @@ const Login = props => {
         </Card>
       </Grid>
     </Grid>
+    <Footer />
     </Fragment>
     
   );

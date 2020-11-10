@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -80,7 +80,10 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
+      <div style={{color: 'rgb(117, 116, 133)'}}>
       <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
+      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to show yet!</Typography>
+      </div>
     ) : (
       <div>
         <Typography
