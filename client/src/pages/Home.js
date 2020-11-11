@@ -75,9 +75,6 @@ const Home = props => {
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
           <CreatePostDialog />
         </Grid>
-        <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
-          <CreatePostDialog />
-        </Grid>
       </Grid>
     </div>
   );
