@@ -4,6 +4,8 @@ import CreateSelectCountries from '../components/selectCountry';
 import MapsSelector from '../components/MapsSelector';
 import CreateUploadImage from '../components/uploadImage';
 import Alert from './Alerts/Alert';
+import $ from 'jquery';
+
 
 //MUI
 import Button from '@material-ui/core/Button';

@@ -16,7 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
-
+import $ from 'jquery';
+import Footer from '../components/Footer';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -59,7 +60,6 @@ const useStylesImg = makeStyles({
     borderRadius: '50%'
   }
 });
-
 const UserProfile = ({
   getCurrentProfile,
   getProfilePosts,
@@ -70,7 +70,6 @@ const UserProfile = ({
   posts
 }) => {
   const [skip, setSkip] = useState(2);
-
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
@@ -82,18 +81,22 @@ const UserProfile = ({
   useEffect(() => {
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
+    var foot = $('#footer')[0];
+    foot.style.display = 'none';
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
   const classes = useStyles();
   const classesImg = useStylesImg();
-
   if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
+      <div style={{color: 'rgb(117, 116, 133)'}}>
       <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
+      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to see yet!</Typography>
+      </div>
     ) : (
-      <div>
+      <div >
         <Typography
           variant='h3'
           align='left'

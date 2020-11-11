@@ -38,6 +38,8 @@ const Home = props => {
     props.getPosts();
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
+    var foot = $('#footer')[0];
+    foot.style.display = 'none';
   }, []);
 
   const classes = useStyles();

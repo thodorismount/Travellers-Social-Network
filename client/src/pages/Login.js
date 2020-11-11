@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Footer from '../components/Footer';
+import '../index.css';
 
 // R.E. Components
 import LoginAlert from '../components/Alerts/LoginAlert';
@@ -25,7 +26,8 @@ import { loginAlert } from '../actions/loginAlert';
 // initialize MUI styles
 const styles = {
   form: {
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: '98px'
   },
   pageTitle: {
     margin: '10px auto auto auto'
@@ -52,6 +54,8 @@ const Login = props => {
   useEffect(() => {
     var contents = $('#appbar')[0];
     contents.style.display = 'none';
+    var foot = $('#footer')[0];
+    foot.style.display='block';
     if (props.isAuthenticated) {
       props.history.push('/home');
     }
@@ -132,7 +136,6 @@ const Login = props => {
           </Card>
         </Grid>
       </Grid>
-      <Footer />
     </Fragment>
   );
 };
