@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/routing/PrivateRoute';
 import './App.css';
+import Footer from './components/Footer';
 
 //Components
 import NavBar from './components/NavBar';
@@ -44,6 +45,7 @@ const App = () => {
               />
             </Switch>
           </div>
+          <Footer />
         </Router>
       </div>
     </Provider>

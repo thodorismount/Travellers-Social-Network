@@ -23,12 +23,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = props => {
-  const [skip, setSkip] = useState(4);
+  const [skip, setSkip] = useState(2);
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop === scrollHeight) {
+    if (offsetHeight + scrollTop >= scrollHeight) {
       setSkip(skip + 2);
       props.fetchMore(skip);
     }
@@ -38,6 +38,8 @@ const Home = props => {
     props.getPosts();
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
+    var foot = $('#footer')[0];
+    foot.style.display = 'none';
   }, []);
 
   const classes = useStyles();
