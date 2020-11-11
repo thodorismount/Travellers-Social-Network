@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,22 +25,37 @@ const useStyles = makeStyles({
     }
   }
 });
-
+let flag = true;
 function CountrySelect(props) {
   const classes = useStyles();
+  const [val, setVal] = useState([]);
 
+  if (flag) {
+    props.visitedCount &&
+      props.visitedCount.forEach(function (x, index) {
+        val[index] = { label: x };
+      });
+    // setVal({
+
+    // });
+  }
+
+  flag = false;
+  console.log(val);
   return (
     <Autocomplete
       multiple
-      onChange={(e, v) => props.onChange(v)}
+      onChange={(e, val) => props.onChange(val)}
       id='country-select-demo'
       style={{ width: 300 }}
       options={countries}
       classes={{
         option: classes.option
       }}
+      defaultValue={val.map(i => i)}
+      autoSelect={true}
       autoHighlight
-      getOptionLabel={option => option.label}
+      getOptionLabel={option => option.label || ''}
       renderOption={option => (
         <React.Fragment>
           <span>{countryToFlag(option.code)}</span>
@@ -53,6 +68,7 @@ function CountrySelect(props) {
           label="Select countries you've visited"
           margin='normal'
           variant='outlined'
+          // defaultValue={[val]}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password' // disable autocomplete and autofill
@@ -104,9 +120,9 @@ const countries = [
   { code: 'BZ', label: 'Belize', phone: '501' },
   { code: 'CA', label: 'Canada', phone: '1', suggested: true },
   { code: 'CC', label: 'Cocos (Keeling) Islands', phone: '61' },
-  { code: 'CD', label: 'Congo, Democratic Republic of the', phone: '243' },
+  { code: 'CD', label: 'Congo Democratic Republic of the', phone: '243' },
   { code: 'CF', label: 'Central African Republic', phone: '236' },
-  { code: 'CG', label: 'Congo, Republic of the', phone: '242' },
+  { code: 'CG', label: 'Congo Republic of the', phone: '242' },
   { code: 'CH', label: 'Switzerland', phone: '41' },
   { code: 'CI', label: "Cote d'Ivoire", phone: '225' },
   { code: 'CK', label: 'Cook Islands', phone: '682' },
@@ -137,7 +153,7 @@ const countries = [
   { code: 'FI', label: 'Finland', phone: '358' },
   { code: 'FJ', label: 'Fiji', phone: '679' },
   { code: 'FK', label: 'Falkland Islands (Malvinas)', phone: '500' },
-  { code: 'FM', label: 'Micronesia, Federated States of', phone: '691' },
+  { code: 'FM', label: 'Micronesia Federated States of', phone: '691' },
   { code: 'FO', label: 'Faroe Islands', phone: '298' },
   { code: 'FR', label: 'France', phone: '33', suggested: true },
   { code: 'GA', label: 'Gabon', phone: '241' },
@@ -176,7 +192,7 @@ const countries = [
   { code: 'IN', label: 'India', phone: '91' },
   { code: 'IO', label: 'British Indian Ocean Territory', phone: '246' },
   { code: 'IQ', label: 'Iraq', phone: '964' },
-  { code: 'IR', label: 'Iran, Islamic Republic of', phone: '98' },
+  { code: 'IR', label: 'Iran Islamic Republic of', phone: '98' },
   { code: 'IS', label: 'Iceland', phone: '354' },
   { code: 'IT', label: 'Italy', phone: '39' },
   { code: 'JE', label: 'Jersey', phone: '44' },
@@ -189,8 +205,8 @@ const countries = [
   { code: 'KI', label: 'Kiribati', phone: '686' },
   { code: 'KM', label: 'Comoros', phone: '269' },
   { code: 'KN', label: 'Saint Kitts and Nevis', phone: '1-869' },
-  { code: 'KP', label: "Korea, Democratic People's Republic of", phone: '850' },
-  { code: 'KR', label: 'Korea, Republic of', phone: '82' },
+  { code: 'KP', label: "Korea Democratic People's Republic of", phone: '850' },
+  { code: 'KR', label: 'Korea Republic of', phone: '82' },
   { code: 'KW', label: 'Kuwait', phone: '965' },
   { code: 'KY', label: 'Cayman Islands', phone: '1-345' },
   { code: 'KZ', label: 'Kazakhstan', phone: '7' },
@@ -207,14 +223,14 @@ const countries = [
   { code: 'LY', label: 'Libya', phone: '218' },
   { code: 'MA', label: 'Morocco', phone: '212' },
   { code: 'MC', label: 'Monaco', phone: '377' },
-  { code: 'MD', label: 'Moldova, Republic of', phone: '373' },
+  { code: 'MD', label: 'Moldova Republic of', phone: '373' },
   { code: 'ME', label: 'Montenegro', phone: '382' },
   { code: 'MF', label: 'Saint Martin (French part)', phone: '590' },
   { code: 'MG', label: 'Madagascar', phone: '261' },
   { code: 'MH', label: 'Marshall Islands', phone: '692' },
   {
     code: 'MK',
-    label: 'Macedonia, the Former Yugoslav Republic of',
+    label: 'Macedonia the Former Yugoslav Republic of',
     phone: '389'
   },
   { code: 'ML', label: 'Mali', phone: '223' },
@@ -255,7 +271,7 @@ const countries = [
   { code: 'PM', label: 'Saint Pierre and Miquelon', phone: '508' },
   { code: 'PN', label: 'Pitcairn', phone: '870' },
   { code: 'PR', label: 'Puerto Rico', phone: '1' },
-  { code: 'PS', label: 'Palestine, State of', phone: '970' },
+  { code: 'PS', label: 'Palestine State of', phone: '970' },
   { code: 'PT', label: 'Portugal', phone: '351' },
   { code: 'PW', label: 'Palau', phone: '680' },
   { code: 'PY', label: 'Paraguay', phone: '595' },
@@ -300,7 +316,7 @@ const countries = [
   { code: 'TR', label: 'Turkey', phone: '90' },
   { code: 'TT', label: 'Trinidad and Tobago', phone: '1-868' },
   { code: 'TV', label: 'Tuvalu', phone: '688' },
-  { code: 'TW', label: 'Taiwan, Province of China', phone: '886' },
+  { code: 'TW', label: 'Taiwan Province of China', phone: '886' },
   { code: 'TZ', label: 'United Republic of Tanzania', phone: '255' },
   { code: 'UA', label: 'Ukraine', phone: '380' },
   { code: 'UG', label: 'Uganda', phone: '256' },

@@ -34,6 +34,7 @@ function DeleteAccountModal(props) {
         color='secondary'
         startIcon={<DeleteIcon />}
         onClick={handleClickOpen}
+        style={{ marginLeft: '10px' }}
       >
         Delete account
       </Button>

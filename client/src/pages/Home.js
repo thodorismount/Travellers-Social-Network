@@ -28,7 +28,7 @@ const Home = props => {
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop >= scrollHeight) {
+    if (offsetHeight + scrollTop + 100 >= scrollHeight) {
       setSkip(skip + 2);
       props.fetchMore(skip);
     }
@@ -73,9 +73,6 @@ const Home = props => {
               </div>
             )}
           </Paper>
-        </Grid>
-        <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
-          <CreatePostDialog />
         </Grid>
         <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
           <CreatePostDialog />

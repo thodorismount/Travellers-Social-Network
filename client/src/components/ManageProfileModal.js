@@ -162,9 +162,10 @@ const ManageProfileModal = props => {
               </tbody>
             </table>
           </form>
-          <DeleteAccountModal />
         </DialogContent>
         <DialogActions>
+          <DeleteAccountModal />
+          <div style={{ flex: '1 0 0' }} />
           <Button
             color='primary'
             variant='outlined'

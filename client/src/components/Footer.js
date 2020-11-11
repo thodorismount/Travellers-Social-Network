@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Explore from '@material-ui/icons/Explore';
 import LocationOn from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
 const Footer = () => (

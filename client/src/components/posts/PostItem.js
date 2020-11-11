@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addLike, removeLike} from '../../actions/post';
+import { addLike, removeLike } from '../../actions/post';
 import PostCard from '../PostCard';
 import moment from 'moment';
 import '../Navbar.css';
@@ -24,12 +24,11 @@ const PostItem = ({
     date,
     updatedAt
   }
-  
 }) => {
-
   return (
     <PostCard
       id={_id}
+      likes={likes}
       user={user}
       caption={text}
       username={`${firstName}  ${lastName}`}
@@ -41,7 +40,6 @@ const PostItem = ({
           ? moment(date).format('DD MMMM YYYY')
           : moment(date).fromNow()
       }`}
-      
     />
   );
 };
@@ -50,13 +48,11 @@ PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { addLike, removeLike })(
-  PostItem
-);
+export default connect(mapStateToProps, { addLike, removeLike })(PostItem);
