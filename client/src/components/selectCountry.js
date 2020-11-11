@@ -70,8 +70,7 @@ function CountrySelect(props) {
           variant='outlined'
           // defaultValue={[val]}
           inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password' // disable autocomplete and autofill
+            ...params.inputProps
           }}
           fullWidth
         />

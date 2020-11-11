@@ -63,13 +63,23 @@ router.post(
         .map(country => country.trim());
     }
     if (profileFields.visitedCountries) {
-      if (profileFields.visitedCountries.length >= 10)
+      if (profileFields.visitedCountries.length >= 30)
+        profileFields.travelExperience = 10;
+      else if (profileFields.visitedCountries.length >= 25)
+        profileFields.travelExperience = 9;
+      else if (profileFields.visitedCountries.length >= 20)
+        profileFields.travelExperience = 8;
+      else if (profileFields.visitedCountries.length >= 17)
+        profileFields.travelExperience = 7;
+      else if (profileFields.visitedCountries.length >= 15)
+        profileFields.travelExperience = 6;
+      else if (profileFields.visitedCountries.length >= 12)
         profileFields.travelExperience = 5;
-      else if (profileFields.visitedCountries.length >= 7)
+      else if (profileFields.visitedCountries.length >= 9)
         profileFields.travelExperience = 4;
-      else if (profileFields.visitedCountries.length >= 4)
+      else if (profileFields.visitedCountries.length >= 6)
         profileFields.travelExperience = 3;
-      else if (profileFields.visitedCountries.length >= 2)
+      else if (profileFields.visitedCountries.length >= 3)
         profileFields.travelExperience = 2;
       else profileFields.travelExperience = 1;
     }
@@ -123,7 +133,7 @@ router.get('/:user_id', async (req, res) => {
   try {
     const profile = await await Profile.findOne({
       user: req.params.user_id
-    }).populate('user', ['firstName', 'lastName']);
+    }).populate('user', ['firstName', 'lastName', 'birthDate']);
 
     if (!profile) {
       res.status(400).json({ msg: 'Profile does not exist !' });
