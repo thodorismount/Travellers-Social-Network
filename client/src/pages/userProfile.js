@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +17,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
 import $ from 'jquery';
+import spinningEarth from '../components/Profile/spinningEarth.gif';
+import '../App.css';
 import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressBar';
 // Redux
 import { connect } from 'react-redux';
@@ -91,14 +93,12 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div style={{ color: 'rgb(117, 116, 133)' }}>
-        <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
-        <Typography
-          variant='h6'
-          style={({ justifyContent: 'center' }, { textAlign: 'center' })}
-        >
-          Nothing to see yet!
-        </Typography>
+      <div style={{color: "#9BA5A3"}} justify={'center'}>
+      <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
+      <div style={{fontSize: 'large'}}>
+      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to see yet!</Typography>
+      </div>
+      <img src={spinningEarth} style={{ width: '400px', margin: 'auto', display: 'block' }} />
       </div>
     ) : (
       <div>
