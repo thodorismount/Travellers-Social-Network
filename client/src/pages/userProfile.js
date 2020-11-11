@@ -17,7 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
 import $ from 'jquery';
-import Footer from '../components/Footer';
+import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressBar';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -91,12 +91,17 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div style={{color: 'rgb(117, 116, 133)'}}>
-      <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
-      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to see yet!</Typography>
+      <div style={{ color: 'rgb(117, 116, 133)' }}>
+        <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
+        <Typography
+          variant='h6'
+          style={({ justifyContent: 'center' }, { textAlign: 'center' })}
+        >
+          Nothing to see yet!
+        </Typography>
       </div>
     ) : (
-      <div >
+      <div>
         <Typography
           variant='h3'
           align='left'
@@ -159,11 +164,18 @@ const UserProfile = ({
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
                   <CakeIcon color='primary' style={{ marginRight: '1rem' }} />
-                  {moment(user && user.birthDate).format('DD-MM-YYYY')}
+                  {moment(
+                    profile && profile.user && profile.user.birthDate
+                  ).format('DD-MM-YYYY')}
                 </div>
-                <div style={{ marginBottom: '0.4rem' }}>
-                  Travel Experience: {profile && profile.travelExperience}/5
-                </div>
+                <div style={{ marginBottom: '0.4rem' }}>Travel Experience:</div>
+                <CountriesVisitedProgressBar
+                  travelExperience={
+                    profile && profile.travelExperience
+                      ? profile.travelExperience
+                      : 0
+                  }
+                />
                 <List
                   dense={true}
                   subheader='Countries visited:'

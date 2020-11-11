@@ -55,7 +55,7 @@ const Login = props => {
     var contents = $('#appbar')[0];
     contents.style.display = 'none';
     var foot = $('#footer')[0];
-    foot.style.display='block';
+    foot.style.display = 'block';
     if (props.isAuthenticated) {
       props.history.push('/home');
     }
