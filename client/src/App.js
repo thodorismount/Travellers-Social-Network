@@ -11,7 +11,6 @@ import Login from './pages/Login';
 
 import userProfile from './pages/userProfile';
 
-
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
