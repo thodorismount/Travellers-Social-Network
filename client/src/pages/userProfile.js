@@ -93,7 +93,7 @@ const UserProfile = ({
     return user && user._id === match.params.id ? (
       <div style={{color: 'rgb(117, 116, 133)'}}>
       <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
-      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to show yet!</Typography>
+      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to see yet!</Typography>
       </div>
     ) : (
       <div >
