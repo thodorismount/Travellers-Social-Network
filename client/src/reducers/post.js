@@ -6,7 +6,8 @@ import {
   ADD_POST,
   GET_PROFILE_POSTS,
   FETCH_MORE,
-  FETCH_MORE_PROFILE
+  FETCH_MORE_PROFILE,
+  LOGOUT
 } from '../actions/types';
 
 const initialState = {
@@ -42,6 +43,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: [...state.posts, payload].flat(),
+
         loading: false
       };
 
@@ -66,9 +68,16 @@ export default function (state = initialState, action) {
     case UPDATE_LIKES:
       return {
         ...state,
-        posts: state.post.map(post =>
+        posts: state.posts.map(post =>
           post._id === payload.id ? { ...post, likes: payload.likes } : post
         ),
+        loading: false
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        posts: [],
+        post: null,
         loading: false
       };
     default:

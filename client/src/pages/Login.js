@@ -73,68 +73,67 @@ const Login = props => {
 
   return (
     <Fragment>
-      <Footer />
-    <Grid container spacing={1} className={classes.form}>
-      <Grid item xs={12} sm={12} md={6}>
-        <img
-          src='static/images/logo_final.png'
-          width='350'
-          height='375'
-          style={{ marginTop: '100px' }}
-        />
-        <br />
-      </Grid>
-      <Grid item xs={12} sm={12} md={4} justify='center'>
-        <Card className={classes.card} justify='center'>
-          <LoginAlert />
-          <Typography varient='h1' className={classes.pageTitle}>
-            Please Login or Sign up
-          </Typography>
+      <Grid container spacing={1} className={classes.form}>
+        <Grid item xs={12} sm={12} md={6}>
+          <img
+            src='static/images/logo_final.png'
+            width='350'
+            height='375'
+            style={{ marginTop: '100px' }}
+          />
+          <br />
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} justify='center'>
+          <Card className={classes.card} justify='center'>
+            <LoginAlert />
+            <Typography varient='h1' className={classes.pageTitle}>
+              Please Login or Sign up
+            </Typography>
 
-          <form noValidate onSubmit={handleSubmit}>
-            <TextField
-              id='email'
-              name='email'
-              type='email'
-              label='Email'
-              variant='outlined'
-              className={classes.textField}
-              // helperText={errors.email}
-              // error={errors.email ? true: false}
-              value={loginData.email || ''}
-              onChange={e => handleChange(e)}
-              fullWidth
-            />
-            <TextField
-              id='password'
-              name='password'
-              type='password'
-              label='Password'
-              variant='outlined'
-              className={classes.textField}
-              // helperText={errors.password}
-              // error={errors.password ? true: false}
-              value={loginData.password || ''}
-              onChange={e => handleChange(e)}
-              fullWidth
-            />
-            <Button
-              type='submit'
-              size='large'
-              variant='contained'
-              color='primary'
-              className={classes.button}
-            >
-              Login
-            </Button>
-            <Divider variant='middle' className={classes.divider} />
-          </form>
-          <CreateformDialog />
-        </Card>
+            <form noValidate onSubmit={handleSubmit}>
+              <TextField
+                id='email'
+                name='email'
+                type='email'
+                label='Email'
+                variant='outlined'
+                className={classes.textField}
+                // helperText={errors.email}
+                // error={errors.email ? true: false}
+                value={loginData.email || ''}
+                onChange={e => handleChange(e)}
+                fullWidth
+              />
+              <TextField
+                id='password'
+                name='password'
+                type='password'
+                label='Password'
+                variant='outlined'
+                className={classes.textField}
+                // helperText={errors.password}
+                // error={errors.password ? true: false}
+                value={loginData.password || ''}
+                onChange={e => handleChange(e)}
+                fullWidth
+              />
+              <Button
+                type='submit'
+                size='large'
+                variant='contained'
+                color='primary'
+                className={classes.button}
+              >
+                Login
+              </Button>
+              <Divider variant='middle' className={classes.divider} />
+            </form>
+            <CreateformDialog />
+          </Card>
+        </Grid>
       </Grid>
-    </Grid>
+      <Footer />
     </Fragment>
-    
   );
 };
 

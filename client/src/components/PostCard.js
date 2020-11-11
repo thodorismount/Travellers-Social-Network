@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
@@ -12,12 +12,13 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
-import Like from '../components/LikeButton';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { addLike, removeLike } from '../actions/post';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,7 +55,40 @@ const useStyles = makeStyles(theme => ({
 
 function PostCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [state, setState] = useState({});
+
+  const checkLiked = () => {
+    if (props.likes && props.likes.length > 0) {
+      for (let i = 0; i < props.likes.length; i++) {
+        console.log(
+          props.likes[i].user === (props.authUser && props.authUser._id)
+        );
+        if (props.likes[i].user === (props.authUser && props.authUser._id)) {
+          setState({ liked: true });
+          break;
+        } else {
+          setState({ liked: false });
+        }
+      }
+    } else {
+      setState({ liked: false });
+    }
+  };
+
+  useEffect(() => {
+    checkLiked();
+  }, []);
+
+  const handleLike = () => {
+    props.addLike(props.id);
+    setState({ liked: true });
+  };
+
+  const handleUnlike = () => {
+    props.removeLike(props.id);
+    setState({ liked: false });
+  };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -76,7 +110,7 @@ function PostCard(props) {
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-            <ManagePost id = {props.id} />
+            <ManagePost id={props.id} />
           ) : null
         }
         title={
@@ -99,11 +133,19 @@ function PostCard(props) {
       </CardContent>
       <Divider variant='middle' />
       <CardActions disableSpacing>
-        <IconButton onClick={() => props.like}
->
-          <Like /> 
-          {/* <Like like={false} */}
-        </IconButton>
+        {/* like buttons  */}
+        {!state.liked ? (
+          <IconButton onClick={handleLike}>
+            <FavoriteBorder style={{ color: '#000' }} />
+          </IconButton>
+        ) : (
+          <IconButton onClick={handleUnlike}>
+            <Favorite style={{ color: 'rgba(238,1,1,1)' }} />
+          </IconButton>
+        )}
+
+        {props.likes && props.likes.length}
+
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -128,4 +170,4 @@ const mapStateToProps = state => ({
   authUser: state.auth.user
 });
 
-export default connect(mapStateToProps)(PostCard);
+export default connect(mapStateToProps, { addLike, removeLike })(PostCard);
