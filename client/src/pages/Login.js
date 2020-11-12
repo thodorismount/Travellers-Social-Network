@@ -27,7 +27,6 @@ import { loginAlert } from '../actions/loginAlert';
 const styles = {
   form: {
     textAlign: 'center',
-    paddingBottom: '92px'
   },
   pageTitle: {
     margin: '10px auto auto auto'

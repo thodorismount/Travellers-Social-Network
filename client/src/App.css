@@ -6,13 +6,10 @@ html body {
 .container {
   margin: 80px auto 0 auto;
   max-width: 1200px;
-  padding-bottom: 20vh;
+  padding-bottom: 30vh;
 }
 
 .nav-container {
   margin: auto 0 auto auto;
 }
-.footer-copyright {
-  padding-bottom: 0px;
-  bottom: 0;
-}
+

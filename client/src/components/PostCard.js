@@ -19,6 +19,8 @@ import { connect } from 'react-redux';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { addLike, removeLike } from '../actions/post';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -92,7 +94,7 @@ function PostCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  // handleTextfield
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -160,6 +162,29 @@ function PostCard(props) {
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
           <Typography paragraph>Comments...</Typography>
+          <TextField
+            fullWidth
+              id='comments'
+              autoFocus
+              name='comments'
+              multiline
+              rows={1}
+              margin='normal'
+              variant='outlined'
+              placeholder='Add a comment'
+              label='Comments'
+            />
+            <Button
+                type='submit'
+                justify='right'
+                variant='contained'
+                color='primary'
+                className={classes.button}
+                size='medium'
+              >
+                Submit
+              </Button>
+
         </CardContent>
       </Collapse>
     </Card>
