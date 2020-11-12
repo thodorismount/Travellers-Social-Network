@@ -93,12 +93,25 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div style={{color: "#9BA5A3"}} justify={'center'}>
-      <EditProfileModal buttonType={'Create Profile'} hasProfile={false} />
-      <div style={{fontSize: 'large'}}>
-      <Typography variant='h6' style={{justifyContent: 'center' },{textAlign: 'center'}}>Nothing to see yet!</Typography>
-      </div>
-      <img src={spinningEarth} style={{ width: '400px', margin: 'auto', display: 'block' }} />
+      <div style={{ color: '#9BA5A3' }} justify={'center'}>
+        <EditProfileModal
+          buttonType={'Create Profile'}
+          hasProfile={false}
+          disableOutsideClick={true}
+          disableCancelButton={true}
+        />
+        <div style={{ fontSize: 'large' }}>
+          <Typography
+            variant='h6'
+            style={({ justifyContent: 'center' }, { textAlign: 'center' })}
+          >
+            Nothing to see yet!
+          </Typography>
+        </div>
+        <img
+          src={spinningEarth}
+          style={{ width: '400px', margin: 'auto', display: 'block' }}
+        />
       </div>
     ) : (
       <div>
@@ -229,6 +242,8 @@ const UserProfile = ({
                   <EditProfileModal
                     buttonType='Edit Profile'
                     hasProfile={true}
+                    disableOutsideClick={false}
+                    disableCancelButton={false}
                     bio={profile ? profile && profile.bio : ''}
                     interests={profile ? profile && profile.interests : ''}
                     location={profile ? profile && profile.location : ''}
