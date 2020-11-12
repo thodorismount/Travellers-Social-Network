@@ -112,7 +112,7 @@ function PostCard(props) {
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-            <ManagePost id={props.id} />
+            <ManagePost id={props.id}  text = {props.caption} location = {props.location}/>
           ) : null
         }
         title={
