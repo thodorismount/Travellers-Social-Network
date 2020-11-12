@@ -53,6 +53,9 @@ const EditProfileModal = props => {
   var testProfile = props.hasProfile;
   const handleToggle = () => {
     setOpen(!open);
+    if (!open) {
+      window.location.reload();
+    }
   };
   const handleAutocomplete = v => {
     console.log(v);
@@ -124,6 +127,7 @@ const EditProfileModal = props => {
             <CreateSelectCountries
               onChange={handleAutocomplete}
               visitedCount={formData.visitedCountries}
+              renderCountries={!open}
             />
             <MapsSelector
               label='Select your location'

@@ -35,9 +35,6 @@ function CountrySelect(props) {
       props.visitedCount.forEach(function (x, index) {
         val[index] = { label: x };
       });
-    // setVal({
-
-    // });
   }
 
   flag = false;
