@@ -4,6 +4,7 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
+  UPDATE_POST,
   GET_PROFILE_POSTS,
   FETCH_MORE,
   FETCH_MORE_PROFILE,
@@ -39,6 +40,13 @@ export default function (state = initialState, action) {
         posts: payload,
         loading: false
       };
+    case UPDATE_POST:
+      return {
+        ...state,
+        posts: [...state.posts],
+        loading: false
+      };
+
     case FETCH_MORE_PROFILE:
       return {
         ...state,
