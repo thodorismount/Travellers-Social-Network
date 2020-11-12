@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Divider from '@material-ui/core/Divider';
+import EditPost from './EditPostDialog';
 
 
 
@@ -42,10 +43,10 @@ function ManagePost(props) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
+ 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -62,8 +63,9 @@ function ManagePost(props) {
 
     prevOpen.current = open;
   }, [open]);
-
+  
   return (
+    
     <div className={classes.root}>
       <div>
         <IconButton
@@ -95,11 +97,8 @@ function ManagePost(props) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>
-                      <EditRoundedIcon
-                        style={{ color: 'rgba(232, 126, 4, 1)' }}
-                      />
-                      Edit Post
+                    <MenuItem>
+                      <EditPost id = {props.id} text = {props.text} location = {props.location}/>
                     </MenuItem>
                     <Divider />
                     <MenuItem onClick={() => props.deletePost(props.id)}>
