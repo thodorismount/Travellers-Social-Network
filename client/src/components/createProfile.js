@@ -126,7 +126,7 @@ const EditProfileModal = props => {
             />
             <CreateSelectCountries
               onChange={handleAutocomplete}
-              visitedCount={formData.visitedCountries}
+              visitedCount={props.profile ? props.profile.visitedCountries : ''}
               renderCountries={!open}
             />
             <MapsSelector

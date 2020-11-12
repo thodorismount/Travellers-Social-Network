@@ -41,7 +41,10 @@ router.post(
     [
       check('location', 'Location is Required').not().isEmpty(),
       check('bio', 'Bio is required').not().isEmpty(),
-      check('interests', 'Interests is required').not().isEmpty()
+      check('interests', 'Interests is required').not().isEmpty(),
+      check('visitedCountries', 'Please select one country you have visited ')
+        .not()
+        .isEmpty()
     ]
   ],
   async (req, res) => {
@@ -58,9 +61,19 @@ router.post(
     if (bio) profileFields.bio = bio;
     if (interests) profileFields.interests = interests;
     if (visitedCountries) {
-      profileFields.visitedCountries = visitedCountries
-        .split(',')
-        .map(country => country.trim());
+      console.log(visitedCountries);
+
+      if (Array.isArray(visitedCountries)) {
+        profileFields.visitedCountries = visitedCountries.map(country =>
+          country.trim()
+        );
+      } else {
+        profileFields.visitedCountries = visitedCountries
+          .split(',')
+          .map(country => country.trim());
+      }
+
+      console.log(profileFields.visitedCountries);
     }
     if (profileFields.visitedCountries) {
       if (profileFields.visitedCountries.length >= 30)
