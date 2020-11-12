@@ -3,9 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import LocationOn from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
 const Footer = () => (
-  <Grid container>
-    <Grid item xs={12} sm={12} md={12} lg={12}>
-      <div className='footer' id='footer'>
+      <footer id="footer" style={{position: 'relative',bottom: '0px',left: '0px',right: '0px',backgroundColor: 'rgb(248, 177, 46)',width: '100%', paddingBottom: '0px',height: '20vh'}}>
         <br></br>
         <Typography variant='h5'>Hello Traveller! </Typography>
         Share your travel experience and connect with others
@@ -23,9 +21,7 @@ const Footer = () => (
           </a>{' '}
           | © 2020 Copyright: Team Flash @ skgcode
         </div>
-      </div>
-    </Grid>
-  </Grid>
+      </footer>
 );
 
 export default Footer;
