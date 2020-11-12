@@ -6,7 +6,6 @@ import CreateUploadImage from '../components/uploadImage';
 import Alert from './Alerts/Alert';
 import $ from 'jquery';
 
-
 //MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -87,6 +86,7 @@ const EditProfileModal = props => {
         open={props.hasProfile ? !open : open}
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
+        disableBackdropClick={props.disableOutsideClick}
       >
         <DialogTitle id='form-dialog-title'>
           <ModalMessage />
@@ -139,6 +139,7 @@ const EditProfileModal = props => {
                 variant='outlined'
                 size='medium'
                 onClick={handleToggle}
+                disabled={props.disableCancelButton}
               >
                 Cancel
               </Button>
