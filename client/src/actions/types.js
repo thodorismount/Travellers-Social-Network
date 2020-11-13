@@ -14,6 +14,7 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 export const GET_PROFILE = 'GET_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
@@ -21,4 +22,3 @@ export const GET_PROFILE_POSTS = 'GET_PROFILE_POSTS';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const FETCH_MORE = 'FETCH_MORE';
 export const FETCH_MORE_PROFILE = 'FETCH_MORE_PROFILE';
-

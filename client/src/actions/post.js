@@ -5,6 +5,7 @@ import {
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
+  UPDATE_POST,
   ADD_POST,
   GET_PROFILE_POSTS,
   FETCH_MORE,
@@ -150,6 +151,29 @@ export const removeLike = id => async dispatch => {
       payload: { id, likes: res.data }
     });
   } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Edit post
+export const editPost = (id, formData) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  try {
+    const res = await axios.post(`/api/posts/${id}`, formData, config);
+    dispatch({
+      type: UPDATE_POST,
+      payload: res.data
+    });
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
