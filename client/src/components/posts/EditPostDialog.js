@@ -12,6 +12,7 @@ import CreateUploadImage from '../uploadImage';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import '../Navbar.css';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // redux
 import { editPost } from '../../actions/post';
@@ -27,6 +28,11 @@ const EditPostDialog = props => {
     location: props.location ? props.location : ''
   });
 
+  const stopPropagationForTab = event => {
+    if (event.key === 'd' || event.key === 'Tab') {
+      event.stopPropagation();
+    }
+  };
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -47,21 +53,12 @@ const EditPostDialog = props => {
   console.log(props.id);
   return (
     <Fragment>
-      <Button
-        color='default'
-        variant='text'
-        size='medium'
-        startIcon={
-          <EditRoundedIcon style={{ color: 'rgba(232, 126, 4, 1)' }} />
-        }
-        onClick={handleToggle}
-      >
-        <Typography style={{ textTransform: 'capitalize' }}>
-          Edit Post
-        </Typography>
-      </Button>
-
+      <MenuItem onClick={handleToggle}>
+        <EditRoundedIcon style={{ color: 'rgba(232, 126, 4, 1)' }} />
+        Edit Post
+      </MenuItem>
       <Dialog
+        onKeyDown={stopPropagationForTab}
         open={open}
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
@@ -71,10 +68,10 @@ const EditPostDialog = props => {
           <form onSubmit={handleSubmit}>
             <TextField
               fullWidth
+              value={formData.text}
               id='postTextField'
               autoFocus
               name='text'
-              value={formData.text}
               onChange={handleTextField}
               multiline
               style={{ width: 500 }}
