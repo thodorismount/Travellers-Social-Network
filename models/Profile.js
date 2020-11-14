@@ -21,6 +21,9 @@ const ProfileSchema = new mongoose.Schema({
     type: [String],
     default: 1
   },
+  avatar: {
+    type: String,
+  },
   travelExperience: {
     type: Number
   },

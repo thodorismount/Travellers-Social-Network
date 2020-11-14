@@ -11,15 +11,11 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import Divider from '@material-ui/core/Divider';
-import EditPost from './EditPostDialog';
-
-
-
+import EditPost from './posts/EditPostDialog';
 // redux
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deletePost } from '../actions/post';
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,6 +31,11 @@ function ManagePost(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
+  function handleListClosing() {
+    setOpen(false);
+  }
+
+  console.log(props.closeList);
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
@@ -46,7 +47,6 @@ function ManagePost(props) {
     setOpen(false);
   };
 
- 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -63,9 +63,8 @@ function ManagePost(props) {
 
     prevOpen.current = open;
   }, [open]);
-  
+
   return (
-    
     <div className={classes.root}>
       <div>
         <IconButton
@@ -97,13 +96,17 @@ function ManagePost(props) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem>
-                      <EditPost id = {props.id} text = {props.text} location = {props.location}/>
-                    </MenuItem>
+
+                    <EditPost
+                      id={props.id}
+                      image={props.image}
+                      text={props.text}
+                      location={props.location}
+                    />
+
                     <Divider />
                     <MenuItem onClick={() => props.deletePost(props.id)}>
                       <DeleteForeverRoundedIcon color='error' />
-                      
                       Delete Post
                     </MenuItem>
                   </MenuList>
@@ -115,8 +118,6 @@ function ManagePost(props) {
       </div>
     </div>
   );
-
-  
 }
 
 ManagePost.propTypes = {
@@ -127,6 +128,4 @@ const mapStateToProps = state => ({
   post: state.post.post
 });
 
-
 export default connect(mapStateToProps, { deletePost })(ManagePost);
-

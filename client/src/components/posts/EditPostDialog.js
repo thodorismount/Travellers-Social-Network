@@ -7,26 +7,34 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import MapsSelector from './MapsSelector';
-import CreateUploadImage from './uploadImage';
+import MapsSelector from '../MapsSelector';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
-import '../components/Navbar.css';
+import '../Navbar.css';
 import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
 
+// images
+import FileBase from 'react-file-base64';
 // redux
+import { editPost } from '../../actions/post';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 //import {editPost} from '../actions/post.js'
 
-
-
 const EditPostDialog = props => {
   const [open, setOpen] = useState(false);
-  
+
   const [formData, setFormData] = useState({
-    text: props.text? props.text : '',
-    location: props.location ? props.location : ''
+    text: props.text ? props.text : '',
+    location: props.location ? props.location : '',
+    image: props.image ? props.image : ''
   });
+
+  const stopPropagationForTab = event => {
+    if (event.key === 'd' || event.key === 'Tab' || event.key === 'D') {
+      event.stopPropagation();
+    }
+  };
   const handleToggle = () => {
     setOpen(!open);
   };
@@ -35,47 +43,36 @@ const EditPostDialog = props => {
     setFormData({ ...formData, location: v ? v.terms[0].value : '' });
   };
 
-
   const handleTextField = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    //editPost(props.id, formdata.text, formdata.location);
-   
+    props.editPost(props.id, formData);
   };
-  console.log(props.id + " id");
-  console.log(props.text + " text");
-  console.log(props.location + " location");
+
   return (
     <Fragment>
-      <Button
-        color='default'
-        variant = 'text'
-        size= 'medium'
-        startIcon = {<EditRoundedIcon style={{ color: 'rgba(232, 126, 4, 1)' }}/>}
-        onClick={handleToggle}
-      >
-        <Typography>Edit Post</Typography>
-      </Button>
-
+      <MenuItem onClick={handleToggle}>
+        <EditRoundedIcon style={{ color: 'rgba(232, 126, 4, 1)' }} />
+        Edit Post
+      </MenuItem>
       <Dialog
+        onKeyDown={stopPropagationForTab}
         open={open}
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'>
-          Edit your travel post
-        </DialogTitle>
+        <DialogTitle id='form-dialog-title'>Edit your travel post</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
               fullWidth
+              value={formData.text}
               id='postTextField'
               autoFocus
               name='text'
-              value={formData.text}
               onChange={handleTextField}
               multiline
               style={{ width: 500 }}
@@ -91,8 +88,13 @@ const EditPostDialog = props => {
               prevLoc={props.location}
               required
             />
-
-            <CreateUploadImage />
+            <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setFormData({ ...formData, image: base64 })
+              }
+            />
 
             <DialogActions>
               <Button color='primary' variant='outlined' onClick={handleToggle}>
@@ -100,9 +102,13 @@ const EditPostDialog = props => {
               </Button>
               <Button
                 color='primary'
-                disabled={formData.location === '' || formData.text === ''}
                 variant='contained'
                 type='submit'
+                disabled={
+                  formData.location === '' ||
+                  formData.text === '' ||
+                  formData.image === ''
+                }
               >
                 Post
               </Button>
@@ -115,9 +121,9 @@ const EditPostDialog = props => {
 };
 
 EditPostDialog.propTypes = {
- //editPost: PropTypes.func.isRequired
+  editPost: PropTypes.func.isRequired
 };
 
-export default (EditPostDialog);
+export default connect(null, { editPost })(EditPostDialog);
 
 //export defualt connect (null, editPost)(EditPostDialog);

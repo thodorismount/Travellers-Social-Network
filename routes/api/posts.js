@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
 const Post = require('../../models/Post');
+const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 // @ROUTE -- POST api/posts
@@ -18,7 +19,8 @@ router.post(
       check('text', 'Text is required').trim().not().isEmpty(),
       check('location', 'A location is required to create a new post')
         .not()
-        .isEmpty()
+        .isEmpty(),
+      check('image', 'Please select an image ').not().isEmpty()
     ]
   ],
   async (req, res) => {
@@ -39,7 +41,7 @@ router.post(
         location: req.body.location,
         firstName: user.firstName,
         lastName: user.lastName,
-        //useravatar to be added
+        image: req.body.image,
         user: req.user.id
       });
 
@@ -58,16 +60,14 @@ router.post(
 // @ROUTE -- UPDATE api/posts/:id
 // @DESC  -- Update Post
 // @ACCESS -- private
-
 router.post(
   '/:id',
   [
     auth,
     [
       check('text', 'Text is required').trim().not().isEmpty(),
-      check('location', 'A location is required to create a new post')
-        .not()
-        .isEmpty()
+      check('location', 'A location is required').not().isEmpty(),
+      check('image', 'Please select an image').not().isEmpty()
     ]
   ],
   async (req, res) => {
@@ -77,41 +77,30 @@ router.post(
     }
     try {
       let post = await Post.findById(req.params.id);
-
-      //Check if post exists
-
       if (!post) {
         return res.status(404).json({ msg: 'Post not found' });
       }
 
-      // Check user
-      if (post.user.toString() !== req.user.id) {
-        return res.status(401).json({ msg: 'User not authorized' });
-      }
-      const user = await User.findById(req.user.id).select('-password');
-
-      const postFields = {};
-      postFields.user = req.user.id;
-      postFields.text = req.body.text;
-      postFields.location = req.body.location;
-      postFields.updatedAt = Date.now();
+      const postFields = {
+        user: req.user.id,
+        text: req.body.text,
+        location: req.body.location,
+        image: req.body.image,
+        updatedAt: Date.now()
+      };
 
       if (post) {
         // UPDATE POST
-        post = await Post.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: postFields },
-          { new: true }
-        );
+        let post = await Post.findByIdAndUpdate(req.params.id, postFields);
         return res.json(post);
       }
+      return res.json(post);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
   }
 );
-
 // @ROUTE -- GET api/posts/pofile/:id
 // @DESC  -- Get 2 first post for a user's id
 // @ACCESS -- public
@@ -121,7 +110,7 @@ router.get('/profile/:id', async (req, res) => {
     const skip = 0;
     const post = await Post.find({ user: req.params.id }, undefined, {
       skip,
-      limit: 2
+      limit: 5
     }).sort({ date: -1 });
 
     return res.json(post);
@@ -141,7 +130,7 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
     const skip =
       req.query.skip && /^\d+$/.test(req.query.skip)
         ? Number(req.query.skip)
-        : 2;
+        : 5;
 
     const post = await Post.find({ user: req.params.id }, undefined, {
       skip,
@@ -166,7 +155,7 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const skip = 0;
-    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
+    const post = await Post.find({}, undefined, { skip, limit: 5 }).sort({
       date: -1
     });
 
@@ -182,8 +171,8 @@ router.get('/fetchMore', async (req, res) => {
     const skip =
       req.query.skip && /^\d+$/.test(req.query.skip)
         ? Number(req.query.skip)
-        : 2;
-    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
+        : 5;
+    const post = await Post.find({}, undefined, { skip, limit: 5 }).sort({
       date: -1
     });
 

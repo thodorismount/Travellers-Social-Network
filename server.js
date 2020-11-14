@@ -1,8 +1,11 @@
 const express = require('express');
 const connectDB = require('./config/db');
+const bodyParser = require('body-parser');
 const app = express();
-
-app.use(express.json({ extended: false }));
+const cors = require('cors');
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(cors());
 // call db "connector"
 connectDB();
 

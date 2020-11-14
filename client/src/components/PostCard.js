@@ -63,9 +63,6 @@ function PostCard(props) {
   const checkLiked = () => {
     if (props.likes && props.likes.length > 0) {
       for (let i = 0; i < props.likes.length; i++) {
-        console.log(
-          props.likes[i].user === (props.authUser && props.authUser._id)
-        );
         if (props.likes[i].user === (props.authUser && props.authUser._id)) {
           setState({ liked: true });
           break;
@@ -112,7 +109,12 @@ function PostCard(props) {
         }
         action={
           props.user === (props.authUser && props.authUser._id) ? (
-            <ManagePost id={props.id}  text = {props.caption} location = {props.location}/>
+            <ManagePost
+              id={props.id}
+              image={props.image}
+              text={props.caption}
+              location={props.location}
+            />
           ) : null
         }
         title={
