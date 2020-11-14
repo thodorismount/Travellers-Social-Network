@@ -87,12 +87,9 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-
   const [skip, setSkip] = useState(5);
-
-  const [expanded, setExpanded] = useState(false);
-  const [expandedInt, setExpandedInt] = useState(false);
-
+  const [expanded, setExpanded] = useState(false); //for visited countries
+  const [expandedInt, setExpandedInt] = useState(false); //for interests
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
@@ -293,7 +290,7 @@ const UserProfile = ({
                       .split(',')
                       .slice(0, 3)
                       .map(interest => (
-                        <ListItem key={interest}>
+                        <ListItem key={Math.random() * 100}>
                           <ListItemIcon>
                             <PanoramaFishEyeRoundedIcon
                               style={{ fontSize: '0.8rem' }}
@@ -315,7 +312,7 @@ const UserProfile = ({
                         .split(',')
                         .slice(3, profile.interests[0].length)
                         .map(country => (
-                          <ListItem key={country}>
+                          <ListItem key={Math.random() * 100}>
                             <ListItemIcon>
                               <PanoramaFishEyeRoundedIcon
                                 style={{ fontSize: '0.8rem' }}
