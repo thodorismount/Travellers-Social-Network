@@ -87,7 +87,7 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-  const [skip, setSkip] = useState(2);
+  const [skip, setSkip] = useState(5);
   const [expanded, setExpanded] = useState(false); //for visited countries
   const [expandedInt, setExpandedInt] = useState(false); //for interests
 
@@ -95,7 +95,7 @@ const UserProfile = ({
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
     if (offsetHeight + scrollTop === scrollHeight) {
-      setSkip(skip + 2);
+      setSkip(skip + 5);
       fetchMoreProfile(match.params.id, skip);
     }
   };
@@ -168,7 +168,11 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='../static/images/obama.png'
+                  src={`${
+                    profile.avatar
+                      ? profile.avatar
+                      : '../static/images/empty_avatar.png'
+                  }`}
                   alt='girl-logo'
                 />
                 {user && user._id === match.params.id ? (
@@ -281,6 +285,7 @@ const UserProfile = ({
                   {profile &&
                     profile.interests &&
                     profile.interests.length > 0 &&
+
                     profile.interests[0]
                       .split(',')
                       .slice(0, 3)
@@ -337,6 +342,7 @@ const UserProfile = ({
                   ) : (
                     <div></div>
                   )}
+
                 </List>
               </Typography>
               <div style={{ marginBottom: '0.4rem' }}>

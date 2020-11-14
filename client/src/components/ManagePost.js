@@ -96,8 +96,10 @@ function ManagePost(props) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
+
                     <EditPost
                       id={props.id}
+                      image={props.image}
                       text={props.text}
                       location={props.location}
                     />

@@ -8,12 +8,9 @@ import '../Navbar.css';
 import '../../re.css';
 
 const PostItem = ({
-  addLike,
-  removeLike,
-  deletePost,
-  auth,
   post: {
     _id,
+    image,
     text,
     firstName,
     lastName,
@@ -29,6 +26,7 @@ const PostItem = ({
     <PostCard
       id={_id}
       likes={likes}
+      image={image}
       user={user}
       caption={text}
       username={`${firstName}  ${lastName}`}
