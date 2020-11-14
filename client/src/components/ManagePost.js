@@ -31,6 +31,11 @@ function ManagePost(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
+  function handleListClosing() {
+    setOpen(false);
+  }
+
+  console.log(props.closeList);
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
@@ -91,14 +96,14 @@ function ManagePost(props) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem>
-                      <EditPost
-                        id={props.id}
-                        image={props.image}
-                        text={props.text}
-                        location={props.location}
-                      />
-                    </MenuItem>
+
+                    <EditPost
+                      id={props.id}
+                      image={props.image}
+                      text={props.text}
+                      location={props.location}
+                    />
+
                     <Divider />
                     <MenuItem onClick={() => props.deletePost(props.id)}>
                       <DeleteForeverRoundedIcon color='error' />
