@@ -35,11 +35,13 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
+      const profile = await Profile.findOne({ user: user.id });
 
       const newPost = new Post({
         text: req.body.text,
         location: req.body.location,
         firstName: user.firstName,
+        avatar: profile.avatar,
         lastName: user.lastName,
         image: req.body.image,
         user: req.user.id

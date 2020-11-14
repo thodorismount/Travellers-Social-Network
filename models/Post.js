@@ -6,7 +6,7 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-
+  avatar: { type: String },
   text: {
     type: String,
     required: true
@@ -24,8 +24,6 @@ const PostSchema = new Schema({
   lastName: {
     type: String
   },
-
-  //user image to be added
 
   likes: [
     {
