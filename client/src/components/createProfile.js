@@ -1,10 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import CreateSelectCountries from '../components/selectCountry';
 import MapsSelector from '../components/MapsSelector';
-import CreateUploadImage from '../components/uploadImage';
 import Alert from './Alerts/Alert';
-import $ from 'jquery';
 
 //MUI
 import Button from '@material-ui/core/Button';
@@ -17,12 +15,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
+// redux imports
 import { createProfile } from '../actions/profile';
-
 import { connect } from 'react-redux';
 import ModalMessage from './ModalMessage';
-import { getCurrentProfile } from '../actions/profile';
-import userProfile from '../pages/userProfile';
+
+// images
+import FileBase from 'react-file-base64';
 
 const styles = {
   button: {
@@ -41,13 +40,15 @@ const EditProfileModal = props => {
     bio: props.profile ? props.profile.bio : '',
     visitedCountries: props.profile ? props.profile.visitedCountries : '',
     interests: props.profile ? props.profile.interests : '',
-    location: props.profile ? props.profile.location : ''
+    location: props.profile ? props.profile.location : '',
+    avatar: props.profile ? props.profile.avatar : ''
   });
   let testopen = props.open;
   const [open, setOpen] = useState({ testopen });
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log(formData);
     props.createProfile(formData);
   };
   var testProfile = props.hasProfile;
@@ -135,7 +136,13 @@ const EditProfileModal = props => {
               prevLoc={formData.location}
             />
 
-            <CreateUploadImage />
+            <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setFormData({ ...formData, avatar: base64 })
+              }
+            />
 
             <DialogActions>
               <Button

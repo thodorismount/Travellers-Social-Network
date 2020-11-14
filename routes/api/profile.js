@@ -53,16 +53,15 @@ router.post(
       res.status(400).json({ errors: errors.array() });
     }
 
-    const { location, bio, interests, visitedCountries } = req.body;
+    const { location, bio, interests, visitedCountries, avatar } = req.body;
 
     const profileFields = {};
     profileFields.user = req.user.id;
+    if (avatar) profileFields.avatar = avatar;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
     if (interests) profileFields.interests = interests;
     if (visitedCountries) {
-      console.log(visitedCountries);
-
       if (Array.isArray(visitedCountries)) {
         profileFields.visitedCountries = visitedCountries.map(country =>
           country.trim()
@@ -72,8 +71,6 @@ router.post(
           .split(',')
           .map(country => country.trim());
       }
-
-      console.log(profileFields.visitedCountries);
     }
     if (profileFields.visitedCountries) {
       if (profileFields.visitedCountries.length >= 30)
