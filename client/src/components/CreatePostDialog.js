@@ -8,11 +8,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MapsSelector from '../components/MapsSelector';
-import CreateUploadImage from '../components/uploadImage';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
-
+// images
+import FileBase from 'react-file-base64';
 // redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -91,7 +91,13 @@ const CreatePostDialog = ({ addPost }) => {
               required
             />
 
-            <CreateUploadImage />
+            <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setFormData({ ...formData, image: base64 })
+              }
+            />
 
             <DialogActions>
               <Button color='primary' variant='outlined' onClick={handleToggle}>
@@ -99,7 +105,11 @@ const CreatePostDialog = ({ addPost }) => {
               </Button>
               <Button
                 color='primary'
-                disabled={formData.location === '' || formData.text === ''}
+                disabled={
+                  formData.location === '' ||
+                  formData.text === '' ||
+                  formData.image === ''
+                }
                 variant='contained'
                 type='submit'
               >

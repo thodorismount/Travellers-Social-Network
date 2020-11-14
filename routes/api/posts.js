@@ -34,6 +34,8 @@ router.post(
     // TODO: add post image when  images get implemented
 
     try {
+      const user = await User.findById(req.user.id).select('-password');
+
       const newPost = new Post({
         text: req.body.text,
         location: req.body.location,

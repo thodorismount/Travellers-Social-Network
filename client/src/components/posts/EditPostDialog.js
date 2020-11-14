@@ -46,7 +46,6 @@ const EditPostDialog = props => {
     props.editPost(props.id, formData);
   };
 
-  console.log(props.id);
   return (
     <Fragment>
       <Button
