@@ -71,12 +71,12 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-  const [skip, setSkip] = useState(2);
+  const [skip, setSkip] = useState(5);
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
     if (offsetHeight + scrollTop === scrollHeight) {
-      setSkip(skip + 2);
+      setSkip(skip + 5);
       fetchMoreProfile(match.params.id, skip);
     }
   };
