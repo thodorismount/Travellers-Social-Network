@@ -25,6 +25,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CardContent from '@material-ui/core/CardContent';
 import clsx from 'clsx';
+import Background from '../components/maxairi.png';
 
 // Redux
 import { connect } from 'react-redux';
@@ -68,6 +69,12 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
+  },
+  profilePic: {
+    backgroundImage:
+      'url(' +
+      'https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' +
+      ')'
   }
 }));
 
@@ -166,7 +173,7 @@ const UserProfile = ({
                   paddingTop: '5px'
                 }}
               >
-                <img
+                {/* <img
                   className={classesImg.image}
                   src={`${
                     profile.avatar
@@ -174,7 +181,22 @@ const UserProfile = ({
                       : '../static/images/empty_avatar.png'
                   }`}
                   alt='girl-logo'
-                />
+                /> */}
+                <div
+                  style={{
+                    backgroundImage: `url(${profile.avatar})`,
+                    width: '250px',
+                    height: '250px',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    borderRadius: '50%',
+                    marginLeft: '15%',
+                    marginRight: '15%',
+                    marginBottom: '0.8rem'
+                  }}
+                ></div>
+                {/* <div className={classes.profilePic} /> */}
                 {user && user._id === match.params.id ? (
                   <ManageProfileModal />
                 ) : null}
@@ -285,7 +307,6 @@ const UserProfile = ({
                   {profile &&
                     profile.interests &&
                     profile.interests.length > 0 &&
-
                     profile.interests[0]
                       .split(',')
                       .slice(0, 3)
@@ -342,7 +363,6 @@ const UserProfile = ({
                   ) : (
                     <div></div>
                   )}
-
                 </List>
               </Typography>
               <div style={{ marginBottom: '0.4rem' }}>

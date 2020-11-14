@@ -10,16 +10,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import MapsSelector from '../MapsSelector';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import '../Navbar.css';
-import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
-
 // images
 import FileBase from 'react-file-base64';
 // redux
 import { editPost } from '../../actions/post';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-//import {editPost} from '../actions/post.js'
 
 const EditPostDialog = props => {
   const [open, setOpen] = useState(false);
@@ -90,6 +87,7 @@ const EditPostDialog = props => {
             />
             <FileBase
               type='file'
+              class={'inputfile'}
               multiple={false}
               onDone={({ base64 }) =>
                 setFormData({ ...formData, image: base64 })

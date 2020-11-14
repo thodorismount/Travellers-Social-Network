@@ -102,7 +102,11 @@ function PostCard(props) {
           >
             <Avatar
               aria-label='recipe'
-              src='/static/images/girl_female_woman_avatar-512.png'
+              src={`${
+                props.avatar
+                  ? props.avatar
+                  : 'public/static/images/empty_avatar.png'
+              }`}
               className={classes.avatar}
             ></Avatar>
           </Link>

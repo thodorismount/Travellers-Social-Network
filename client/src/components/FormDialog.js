@@ -127,6 +127,7 @@ const FormDialog = props => {
               variant='outlined'
               value={formData.email || ''}
               fullWidth
+              autoComplete='new-password'
               onChange={e => handleTextFieldChange(e)}
             />
             <TextField
@@ -136,6 +137,7 @@ const FormDialog = props => {
               label='Password'
               type='password'
               variant='outlined'
+              autoComplete='new-password'
               className={classes.textField}
               value={formData.password || ''}
               onChange={e => handleTextFieldChange(e)}

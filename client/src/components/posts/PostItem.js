@@ -11,6 +11,7 @@ const PostItem = ({
   post: {
     _id,
     image,
+    avatar,
     text,
     firstName,
     lastName,
@@ -26,6 +27,7 @@ const PostItem = ({
     <PostCard
       id={_id}
       likes={likes}
+      avatar={avatar}
       image={image}
       user={user}
       caption={text}
