@@ -75,7 +75,9 @@ const ManageProfileModal = props => {
         component='span'
         onClick={handleToggle}
         style={{
-          position: 'absolute'
+          position: 'absolute',
+          left: '80%',
+          top: '1%'
         }}
       >
         <SettingsIcon fontSize='large' />
