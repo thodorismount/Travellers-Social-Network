@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import '../../re.css';
 
 //MUI
 import Button from '@material-ui/core/Button';
@@ -90,6 +91,7 @@ const EditPostDialog = props => {
             />
             <FileBase
               type='file'
+              class={'inputfile'}
               multiple={false}
               onDone={({ base64 }) =>
                 setFormData({ ...formData, image: base64 })
