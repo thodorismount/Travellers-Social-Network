@@ -109,6 +109,7 @@ function PostCard(props) {
           props.user === (props.authUser && props.authUser._id) ? (
             <ManagePost
               id={props.id}
+              image={props.image}
               text={props.caption}
               location={props.location}
             />

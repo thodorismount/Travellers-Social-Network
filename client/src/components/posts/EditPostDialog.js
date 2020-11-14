@@ -107,7 +107,11 @@ const EditPostDialog = props => {
                 color='primary'
                 variant='contained'
                 type='submit'
-                disabled={formData.location === '' || formData.text === ''}
+                disabled={
+                  formData.location === '' ||
+                  formData.text === '' ||
+                  formData.image === ''
+                }
               >
                 Post
               </Button>

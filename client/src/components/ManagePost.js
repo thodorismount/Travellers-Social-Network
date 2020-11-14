@@ -94,6 +94,7 @@ function ManagePost(props) {
                     <MenuItem>
                       <EditPost
                         id={props.id}
+                        image={props.image}
                         text={props.text}
                         location={props.location}
                       />
