@@ -20,6 +20,12 @@ import $ from 'jquery';
 import spinningEarth from '../components/Profile/spinningEarth.gif';
 import '../App.css';
 import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressBar';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CardContent from '@material-ui/core/CardContent';
+import clsx from 'clsx';
+
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -52,6 +58,16 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.1rem', //font size of rest profile info is 1.25 rem
     lineHeight: '0.7',
     marginLeft: '-2rem'
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    left: '45%',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
   }
 }));
 
@@ -72,6 +88,9 @@ const UserProfile = ({
   posts
 }) => {
   const [skip, setSkip] = useState(2);
+  const [expanded, setExpanded] = useState(false);
+  const [expandedInt, setExpandedInt] = useState(false);
+
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
@@ -87,6 +106,12 @@ const UserProfile = ({
     foot.style.display = 'none';
   }, [getCurrentProfile, getProfilePosts, match.params.id]);
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+  const handleExpandIntClick = () => {
+    setExpandedInt(!expandedInt);
+  };
   const classes = useStyles();
   const classesImg = useStylesImg();
   if (loading && profile === null) {
@@ -196,7 +221,7 @@ const UserProfile = ({
                 >
                   {profile &&
                     profile.visitedCountries &&
-                    profile.visitedCountries.map(country => (
+                    profile.visitedCountries.slice(0, 3).map(country => (
                       <ListItem key={country}>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
@@ -210,7 +235,44 @@ const UserProfile = ({
                         ></ListItemText>
                       </ListItem>
                     ))}
+                  <Collapse in={expanded} timeout='auto' unmountOnExit>
+                    {profile &&
+                      profile.visitedCountries &&
+                      profile.visitedCountries
+                        .slice(3, profile.visitedCountries.length)
+                        .map(country => (
+                          <ListItem key={country}>
+                            <ListItemIcon>
+                              <PanoramaFishEyeRoundedIcon
+                                style={{ fontSize: '0.8rem' }}
+                                color='primary'
+                              />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={country}
+                              classes={{ primary: classes.ListItemText }}
+                            ></ListItemText>
+                          </ListItem>
+                        ))}
+                  </Collapse>
+                  {profile &&
+                  profile.visitedCountries &&
+                  profile.visitedCountries.length > 3 ? (
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expanded
+                      })}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label='show more'
+                    >
+                      <ExpandMoreIcon color='primary' />
+                    </IconButton>
+                  ) : (
+                    <div></div>
+                  )}
                 </List>
+                {/* sadasdasdasdaaaaaaaaaaaaaaaaa */}
                 <List
                   dense={true}
                   subheader='Interests:'
@@ -219,22 +281,62 @@ const UserProfile = ({
                   {profile &&
                     profile.interests &&
                     profile.interests.length > 0 &&
-                    profile.interests[0].split(',').map(interest => (
-                      <ListItem key={interest}>
-                        <ListItemIcon>
-                          <PanoramaFishEyeRoundedIcon
-                            style={{ fontSize: '0.8rem' }}
-                            color='primary'
-                          />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={interest}
-                          classes={{ primary: classes.ListItemText }}
-                        >
-                          {/* <Typography variant='h6'>{inte}</Typography> */}
-                        </ListItemText>
-                      </ListItem>
-                    ))}
+                    profile.interests[0]
+                      .split(',')
+                      .slice(0, 3)
+                      .map(interest => (
+                        <ListItem key={interest}>
+                          <ListItemIcon>
+                            <PanoramaFishEyeRoundedIcon
+                              style={{ fontSize: '0.8rem' }}
+                              color='primary'
+                            />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={interest}
+                            classes={{ primary: classes.ListItemText }}
+                          >
+                            {/* <Typography variant='h6'>{inte}</Typography> */}
+                          </ListItemText>
+                        </ListItem>
+                      ))}
+                  <Collapse in={expandedInt} timeout='auto' unmountOnExit>
+                    {profile &&
+                      profile.interests &&
+                      profile.interests[0]
+                        .split(',')
+                        .slice(3, profile.interests[0].length)
+                        .map(country => (
+                          <ListItem key={country}>
+                            <ListItemIcon>
+                              <PanoramaFishEyeRoundedIcon
+                                style={{ fontSize: '0.8rem' }}
+                                color='primary'
+                              />
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={country}
+                              classes={{ primary: classes.ListItemText }}
+                            ></ListItemText>
+                          </ListItem>
+                        ))}
+                  </Collapse>
+                  {profile &&
+                  profile.interests &&
+                  profile.interests[0].split(',').length > 3 ? (
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedInt
+                      })}
+                      onClick={handleExpandIntClick}
+                      aria-expanded={expandedInt}
+                      aria-label='show more'
+                    >
+                      <ExpandMoreIcon color='primary' />
+                    </IconButton>
+                  ) : (
+                    <div></div>
+                  )}
                 </List>
               </Typography>
               <div style={{ marginBottom: '0.4rem' }}>
