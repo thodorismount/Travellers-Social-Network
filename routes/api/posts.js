@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
 const Post = require('../../models/Post');
+const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 // @ROUTE -- POST api/posts
@@ -18,7 +19,8 @@ router.post(
       check('text', 'Text is required').trim().not().isEmpty(),
       check('location', 'A location is required to create a new post')
         .not()
-        .isEmpty()
+        .isEmpty(),
+      check('image', 'Please select an image ').not().isEmpty()
     ]
   ],
   async (req, res) => {
@@ -32,14 +34,12 @@ router.post(
     // TODO: add post image when  images get implemented
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
-
       const newPost = new Post({
         text: req.body.text,
         location: req.body.location,
         firstName: user.firstName,
         lastName: user.lastName,
-        //useravatar to be added
+        image: req.body.image,
         user: req.user.id
       });
 
@@ -64,7 +64,8 @@ router.post(
     auth,
     [
       check('text', 'Text is required').trim().not().isEmpty(),
-      check('location', 'A location is required').not().isEmpty()
+      check('location', 'A location is required').not().isEmpty(),
+      check('image', 'Please select an image').not().isEmpty()
     ]
   ],
   async (req, res) => {
@@ -82,6 +83,7 @@ router.post(
         user: req.user.id,
         text: req.body.text,
         location: req.body.location,
+        image: req.body.image,
         updatedAt: Date.now()
       };
 

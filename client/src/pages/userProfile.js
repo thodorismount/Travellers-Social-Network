@@ -143,7 +143,11 @@ const UserProfile = ({
               >
                 <img
                   className={classesImg.image}
-                  src='../static/images/obama.png'
+                  src={`${
+                    profile.avatar
+                      ? profile.avatar
+                      : '../static/images/empty_avatar.png'
+                  }`}
                   alt='girl-logo'
                 />
                 {user && user._id === match.params.id ? (
@@ -220,7 +224,7 @@ const UserProfile = ({
                     profile.interests &&
                     profile.interests.length > 0 &&
                     profile.interests[0].split(',').map(interest => (
-                      <ListItem key={interest}>
+                      <ListItem>
                         <ListItemIcon>
                           <PanoramaFishEyeRoundedIcon
                             style={{ fontSize: '0.8rem' }}

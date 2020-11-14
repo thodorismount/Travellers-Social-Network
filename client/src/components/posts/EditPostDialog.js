@@ -8,11 +8,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MapsSelector from '../MapsSelector';
-import CreateUploadImage from '../uploadImage';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import '../Navbar.css';
 import Typography from '@material-ui/core/Typography';
 
+// images
+import FileBase from 'react-file-base64';
 // redux
 import { editPost } from '../../actions/post';
 import { connect } from 'react-redux';
@@ -24,7 +25,8 @@ const EditPostDialog = props => {
 
   const [formData, setFormData] = useState({
     text: props.text ? props.text : '',
-    location: props.location ? props.location : ''
+    location: props.location ? props.location : '',
+    image: props.image ? props.image : ''
   });
 
   const handleToggle = () => {
@@ -90,8 +92,13 @@ const EditPostDialog = props => {
               prevLoc={props.location}
               required
             />
-
-            <CreateUploadImage />
+            <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setFormData({ ...formData, image: base64 })
+              }
+            />
 
             <DialogActions>
               <Button color='primary' variant='outlined' onClick={handleToggle}>

@@ -31,7 +31,8 @@ const CreatePostDialog = ({ addPost }) => {
 
   const [formData, setFormData] = useState({
     text: '',
-    location: ''
+    location: '',
+    image: ''
   });
 
   const handleTextField = e => {
