@@ -22,7 +22,7 @@ const ProfileSchema = new mongoose.Schema({
     default: 1
   },
   avatar: {
-    type: String,
+    type: String
   },
   travelExperience: {
     type: Number
