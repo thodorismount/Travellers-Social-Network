@@ -49,7 +49,7 @@ const EditProfileModal = props => {
   const onSubmit = e => {
     e.preventDefault();
     console.log(formData);
-    props.createProfile(formData);
+    props.createProfile(formData, props.edit);
   };
   var testProfile = props.hasProfile;
   const handleToggle = () => {
