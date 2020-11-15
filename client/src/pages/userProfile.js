@@ -287,7 +287,6 @@ const UserProfile = ({
                     <div></div>
                   )}
                 </List>
-                {/* sadasdasdasdaaaaaaaaaaaaaaaaa */}
                 <List
                   dense={true}
                   subheader='Interests:'
