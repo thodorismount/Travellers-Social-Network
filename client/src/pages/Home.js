@@ -92,7 +92,8 @@ Posts.propTypes = {
 
 const mapStateToProps = state => ({
   loading: state.post.loading,
-  posts: state.post.posts
+  posts: state.post.posts,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, { getPosts, fetchMore })(Home);
