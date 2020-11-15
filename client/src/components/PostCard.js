@@ -18,7 +18,7 @@ import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import { addLike, removeLike } from '../actions/post';
+import { addLike, removeLike, addComment } from '../actions/post';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,6 +89,14 @@ function PostCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const commentSubmit = e => {
+    e.preventDefault();
+    console.log(formData.text);
+    props.addComment(props.id, formData);
+  };
+
+  const [formData, setFormData] = useState({ text: '' });
 
   return (
     <Card className={classes.root}>
@@ -165,7 +173,28 @@ function PostCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>Comments...</Typography>
+          <Typography paragraph>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {/* this is where comments go i guess */}
+            </div>
+            .
+          </Typography>
+          <form onSubmit={commentSubmit} style={{ display: 'flex' }}>
+            <input
+              type='text'
+              name='comment'
+              placeholder='Comment...'
+              style={{ flex: 1 }}
+              onChange={e => setFormData({ text: e.target.value })}
+            />
+            <button
+              type='submit'
+              style={{ flex: 1 }}
+              disabled={formData.text.trim() === ''}
+            >
+              Add a comment
+            </button>
+          </form>
         </CardContent>
       </Collapse>
     </Card>
@@ -176,4 +205,6 @@ const mapStateToProps = state => ({
   authUser: state.auth.user
 });
 
-export default connect(mapStateToProps, { addLike, removeLike })(PostCard);
+export default connect(mapStateToProps, { addLike, removeLike, addComment })(
+  PostCard
+);

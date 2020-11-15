@@ -318,22 +318,22 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
-
+      const profile = await Profile.findOne({ user: req.user.id });
+      console.log(profile);
       const post = await Post.findById(req.params.id);
 
       const newComment = {
         text: req.body.text,
         firstName: user.firstName,
         lastName: user.lastName,
-        //useravatar to be added
+        image: profile.avatar,
         user: req.user.id
       };
 
       post.comments.unshift(newComment);
-
       post.save();
 
-      res.json(post.comments);
+      res.json(post);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');

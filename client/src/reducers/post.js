@@ -8,6 +8,7 @@ import {
   GET_PROFILE_POSTS,
   FETCH_MORE,
   FETCH_MORE_PROFILE,
+  ADD_COMMENT,
   LOGOUT
 } from '../actions/types';
 
@@ -61,6 +62,7 @@ export default function (state = initialState, action) {
         posts: [...state.posts, payload],
         loading: false
       };
+
     case DELETE_POST:
       return {
         ...state,
@@ -78,6 +80,17 @@ export default function (state = initialState, action) {
         ...state,
         posts: state.posts.map(post =>
           post._id === payload.id ? { ...post, likes: payload.likes } : post
+        ),
+        loading: false
+      };
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.id === payload.id
+            ? { ...post, comments: payload.comments }
+            : post
         ),
         loading: false
       };
