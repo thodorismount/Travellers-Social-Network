@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import { Redirect } from 'react-router-dom';
 
 import CreatePostDialog from '../components/CreatePostDialog';
 import '../components/Navbar.css';
@@ -43,10 +44,12 @@ const Home = props => {
     var foot = $('#footer')[0];
     foot.style.display = 'none';
   }, []);
-
   const classes = useStyles();
+
   return props.loading ? (
     <Spinner />
+  ) : !(props.user && props.user.isRegistered) ? (
+    <Redirect to={`/userProfile/${props.user && props.user._id}`} />
   ) : (
     <div className={classes.root}>
       <Grid justify={'center'} container spacing={3}>
