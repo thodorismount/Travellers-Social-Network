@@ -29,17 +29,17 @@ const styles = {
     textAlign: 'center',
   },
   pageTitle: {
-    margin: '10px auto auto auto'
+    margin: '1% auto auto auto'
   },
   textField: {
-    margin: '15px auto auto auto'
+    margin: '3% auto auto auto'
   },
   button: {
-    margin: '10px 10px'
+    margin: '1% 1%'
   },
   card: {
-    padding: '10px',
-    marginTop: '100px',
+    padding: '1%',
+    marginTop: '10%',
     backgroundColor: '#F0F2F5'
   }
 };
@@ -82,7 +82,7 @@ const Login = props => {
             src='static/images/logo_final.png'
             width='350'
             height='375'
-            style={{ marginTop: '100px' }}
+            style={{ marginTop: '3%' }}
           />
           <br />
         </Grid>
