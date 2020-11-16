@@ -6,8 +6,51 @@ html body {
 .container {
   margin: 5% auto 0 auto;
   max-width: 1200px;
-padding-bottom: 30vh;
+}
+@media only screen and (min-height: 550px){
+#footer{
+  position : absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(248, 177, 46);
+  width: 100%;
+  padding-top: 0.5rem;
+}
+@media screen and (max-width: 550px) and (max-height: 840px){
+  #footer{
+    position : relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(248, 177, 46);
+  width: 100%;
+  padding-top: 0.5rem;
+  }
 
+}
+}
+@media only screen and (max-height: 550px) {
+  #footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgb(248, 177, 46);
+    padding-top: 0.5rem;
+  }
+}
+@media only screen and (max-width: 960px){
+  #footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgb(248, 177, 46);
+    padding-top: 0.5rem;
+  }
 }
 
 .nav-container {

@@ -26,7 +26,7 @@ import { loginAlert } from '../actions/loginAlert';
 // initialize MUI styles
 const styles = {
   form: {
-    textAlign: 'center',
+    textAlign: 'center'
   },
   pageTitle: {
     margin: '1% auto auto auto'
