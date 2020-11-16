@@ -5,11 +5,23 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   ACCOUNT_DELETED,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  USER_LOADED,
+  AUTH_ERROR
 } from './types';
 
-// get current users profile
+// load user
+export const loadUser = () => async dispatch => {
+  //if the token exists we get the user from  route api/auth/ and store it in our payload
+  try {
+    const res = await axios.get('/api/auth');
+    dispatch({ type: USER_LOADED, payload: res.data });
+  } catch (err) {
+    dispatch({ type: AUTH_ERROR });
+  }
+};
 
+// get current users profile
 export const getCurrentProfile = id => async dispatch => {
   try {
     const res = await axios.get(`/api/profiles/${id}`);
@@ -27,7 +39,7 @@ export const getCurrentProfile = id => async dispatch => {
 
 // Create or update a profile
 
-export const createProfile = (formData, edit = false) => async dispatch => {
+export const createProfile = (formData, edit) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -37,6 +49,9 @@ export const createProfile = (formData, edit = false) => async dispatch => {
 
     const res = await axios.post('/api/profiles', formData, config);
 
+    if (!edit) {
+      dispatch(loadUser());
+    }
     dispatch({
       type: GET_PROFILE,
       payload: res.data

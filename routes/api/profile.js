@@ -106,8 +106,15 @@ router.post(
         return res.json({ profile });
       }
       // create
+
       profile = new Profile(profileFields);
+
       await profile.save();
+      let idUser = await User.findByIdAndUpdate(req.user.id, {
+        isRegistered: true
+      });
+      console.log(idUser);
+
       res.json({ profile });
     } catch (err) {
       console.log(err.message);

@@ -23,9 +23,7 @@ import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressB
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CardContent from '@material-ui/core/CardContent';
 import clsx from 'clsx';
-import Background from '../components/maxairi.png';
 
 // Redux
 import { connect } from 'react-redux';
@@ -120,7 +118,7 @@ const UserProfile = ({
     setExpandedInt(!expandedInt);
   };
   const classes = useStyles();
-  const classesImg = useStylesImg();
+
   if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
@@ -128,6 +126,7 @@ const UserProfile = ({
       <div style={{ color: '#9BA5A3' }} justify={'center'}>
         <EditProfileModal
           buttonType={'Create Profile'}
+          edit={false}
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
@@ -173,15 +172,6 @@ const UserProfile = ({
                   paddingTop: '5px'
                 }}
               >
-                {/* <img
-                  className={classesImg.image}
-                  src={`${
-                    profile.avatar
-                      ? profile.avatar
-                      : '../static/images/empty_avatar.png'
-                  }`}
-                  alt='girl-logo'
-                /> */}
                 <div
                   style={{
                     backgroundImage: `url(${profile.avatar})`,
@@ -196,7 +186,6 @@ const UserProfile = ({
                     marginBottom: '0.8rem'
                   }}
                 ></div>
-                {/* <div className={classes.profilePic} /> */}
                 {user && user._id === match.params.id ? (
                   <ManageProfileModal />
                 ) : null}
@@ -298,7 +287,6 @@ const UserProfile = ({
                     <div></div>
                   )}
                 </List>
-                {/* sadasdasdasdaaaaaaaaaaaaaaaaa */}
                 <List
                   dense={true}
                   subheader='Interests:'
@@ -370,6 +358,7 @@ const UserProfile = ({
                   <EditProfileModal
                     buttonType='Edit Profile'
                     hasProfile={true}
+                    edit={true}
                     disableOutsideClick={false}
                     disableCancelButton={false}
                     bio={profile ? profile && profile.bio : ''}
