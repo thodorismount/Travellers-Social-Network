@@ -9,11 +9,11 @@ import {
   ADD_POST,
   GET_PROFILE_POSTS,
   FETCH_MORE,
-  FETCH_MORE_PROFILE
+  FETCH_MORE_PROFILE,
+  ADD_COMMENT
 } from './types';
 
 //GET POSTS
-
 export const getPosts = () => async dispatch => {
   try {
     const res = await axios.get(`/api/posts`);
@@ -29,7 +29,7 @@ export const getPosts = () => async dispatch => {
     });
   }
 };
-
+// fetch 5 more posts
 export const fetchMore = skip => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/fetchMore?skip=${skip}`);
@@ -45,6 +45,7 @@ export const fetchMore = skip => async dispatch => {
   }
 };
 
+// get 5 posta of a specific profile
 export const getProfilePosts = id => async dispatch => {
   try {
     const res = await axios.get(`/api/posts/profile/${id}`);
@@ -60,7 +61,7 @@ export const getProfilePosts = id => async dispatch => {
     });
   }
 };
-
+// get 5 next posts of a profile
 export const fetchMoreProfile = (id, skip) => async dispatch => {
   try {
     const res = await axios.get(
@@ -172,6 +173,28 @@ export const editPost = (id, formData) => async dispatch => {
       payload: res.data
     });
     window.location.reload();
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const addComment = (id, text) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const res = await axios.post(`/api/posts/comment/${id}`, text, config);
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
   } catch (err) {
     console.log(err);
     dispatch({

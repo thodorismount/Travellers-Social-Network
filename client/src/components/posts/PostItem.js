@@ -26,6 +26,7 @@ const PostItem = ({
   return (
     <PostCard
       id={_id}
+      comments={comments}
       likes={likes}
       avatar={avatar}
       image={image}
