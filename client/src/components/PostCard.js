@@ -18,9 +18,10 @@ import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import { addLike, removeLike } from '../actions/post';
-import TextField from '@material-ui/core/TextField';
+import { addLike, removeLike, addComment } from '../actions/post';
+import CommentItem from './posts/CommentItem';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,7 +92,16 @@ function PostCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  // handleTextfield
+
+  const commentSubmit = e => {
+    e.preventDefault();
+    console.log(formData.text);
+    props.addComment(props.id, formData);
+    setFormData({ text: '' });
+  };
+
+  const [formData, setFormData] = useState({ text: '' });
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -167,11 +177,24 @@ function PostCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>Comments...</Typography>
-          <TextField
-            fullWidth
+          <Typography paragraph>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {props.comments &&
+                props.comments.map(comment => (
+                  <CommentItem
+                    key={comment._id}
+                    comment={comment}
+                    postId={props.id}
+                  />
+                ))}
+            </div>
+          </Typography>
+          <form onSubmit={commentSubmit} style={{ display: 'flex' }}>
+            <TextField
+              fullWidth
               id='comments'
               autoFocus
+              value={formData.text}
               name='comments'
               multiline
               rows={1}
@@ -179,18 +202,21 @@ function PostCard(props) {
               variant='outlined'
               placeholder='Add a comment'
               label='Comments'
+              onChange={e => setFormData({ text: e.target.value })}
+              required
             />
             <Button
-                type='submit'
-                justify='right'
-                variant='contained'
-                color='primary'
-                className={classes.button}
-                size='medium'
-              >
-                Submit
-              </Button>
-
+              type='submit'
+              justify='right'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+              size='medium'
+              disabled={formData.text.trim() === ''}
+            >
+              Submit
+            </Button>
+          </form>
         </CardContent>
       </Collapse>
     </Card>
@@ -201,4 +227,6 @@ const mapStateToProps = state => ({
   authUser: state.auth.user
 });
 
-export default connect(mapStateToProps, { addLike, removeLike })(PostCard);
+export default connect(mapStateToProps, { addLike, removeLike, addComment })(
+  PostCard
+);
