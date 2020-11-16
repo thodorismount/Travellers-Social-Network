@@ -19,6 +19,9 @@ import { connect } from 'react-redux';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { addLike, removeLike, addComment } from '../actions/post';
+import CommentItem from './posts/CommentItem';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -94,6 +97,7 @@ function PostCard(props) {
     e.preventDefault();
     console.log(formData.text);
     props.addComment(props.id, formData);
+    setFormData({ text: '' });
   };
 
   const [formData, setFormData] = useState({ text: '' });
@@ -175,25 +179,43 @@ function PostCard(props) {
         <CardContent>
           <Typography paragraph>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {/* this is where comments go i guess */}
+              {props.comments &&
+                props.comments.map(comment => (
+                  <CommentItem
+                    key={comment._id}
+                    comment={comment}
+                    postId={props.id}
+                  />
+                ))}
             </div>
-            .
           </Typography>
           <form onSubmit={commentSubmit} style={{ display: 'flex' }}>
-            <input
-              type='text'
-              name='comment'
-              placeholder='Comment...'
-              style={{ flex: 1 }}
+            <TextField
+              fullWidth
+              id='comments'
+              autoFocus
+              value={formData.text}
+              name='comments'
+              multiline
+              rows={1}
+              margin='normal'
+              variant='outlined'
+              placeholder='Add a comment'
+              label='Comments'
               onChange={e => setFormData({ text: e.target.value })}
+              required
             />
-            <button
+            <Button
               type='submit'
-              style={{ flex: 1 }}
+              justify='right'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+              size='medium'
               disabled={formData.text.trim() === ''}
             >
-              Add a comment
-            </button>
+              Submit
+            </Button>
           </form>
         </CardContent>
       </Collapse>
