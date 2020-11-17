@@ -7,11 +7,24 @@ html body {
   margin: 5% auto 0 auto;
   max-width: 1200px;
 }
+::-webkit-scrollbar {
+  width:  0px;
+   overflow: auto;
+ }
+ ::-webkit-scrollbar-track {
+   display: none;
+ }
+
 @media only screen and (min-width: 540px){
 #post-button{
     position: fixed;
     top: 7rem;
     right: 15%;
+}
+#comment-input{
+   display: flex;
+   height: 70px;
+   align-content: center;
 }
 
 }
@@ -21,14 +34,11 @@ html body {
     bottom: 3rem;
     right: 2rem;
   }
+  #comment-input{
+    display: inline;
+     height: 70px;
+  }
 }
-::-webkit-scrollbar {
-  width:  0px;
-   overflow: auto;
- }
- ::-webkit-scrollbar-track {
-   display: none;
- }
 
 @media only screen and (min-height: 550px){
 #footer{
