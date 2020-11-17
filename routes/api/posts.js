@@ -136,7 +136,7 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
 
     const post = await Post.find({ user: req.params.id }, undefined, {
       skip,
-      limit: 2
+      limit: 5
     }).sort({ date: -1 });
 
     return res.json(post);

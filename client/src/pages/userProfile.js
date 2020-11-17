@@ -88,6 +88,7 @@ const UserProfile = ({
   getProfilePosts,
   fetchMoreProfile,
   match,
+  postsLoading,
   user,
   profile: { profile, loading },
   posts
@@ -119,7 +120,7 @@ const UserProfile = ({
   };
   const classes = useStyles();
 
-  if (loading && profile === null) {
+  if (loading || profile === null) {
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
@@ -396,7 +397,7 @@ const UserProfile = ({
               }}
             >
               {/* this is where the post are being rendered */}
-              {post.loading ? (
+              {postsLoading ? (
                 <Spinner />
               ) : (
                 <div className='posts'>
@@ -430,7 +431,8 @@ UserProfile.propTypes = {
 const mapStateToProps = state => ({
   user: state.auth.user,
   profile: state.profile,
-  posts: state.post.posts
+  posts: state.post.posts,
+  postsLoading: state.post.loading
 });
 
 export default connect(mapStateToProps, {
