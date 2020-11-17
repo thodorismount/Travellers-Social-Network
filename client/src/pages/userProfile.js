@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
@@ -35,7 +35,6 @@ import { getProfilePosts } from '../actions/post';
 import { fetchMoreProfile } from '../actions/post';
 
 import '../re.css';
-import { post } from 'jquery';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -78,18 +77,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const useStylesImg = makeStyles({
-  image: {
-    maxWidth: '60%',
-    maxHeight: '60%',
-    borderRadius: '50%'
-  }
-});
 const UserProfile = ({
   getCurrentProfile,
   getProfilePosts,
   fetchMoreProfile,
   match,
+  postsLoading,
   user,
   profile: { profile, loading },
   posts
@@ -121,8 +114,8 @@ const UserProfile = ({
     setExpandedInt(!expandedInt);
   };
   const classes = useStyles();
-
-  if (loading && profile === null) {
+  console.log(profile === null);
+  if (loading) {
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
@@ -397,7 +390,7 @@ const UserProfile = ({
               }}
             >
               {/* this is where the post are being rendered */}
-              {post.loading ? (
+              {postsLoading ? (
                 <Spinner />
               ) : (
                 <div className='posts'>
@@ -431,7 +424,8 @@ UserProfile.propTypes = {
 const mapStateToProps = state => ({
   user: state.auth.user,
   profile: state.profile,
-  posts: state.post.posts
+  posts: state.post.posts,
+  postsLoading: state.post.loading
 });
 
 export default connect(mapStateToProps, {
