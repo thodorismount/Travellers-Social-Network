@@ -7,6 +7,10 @@ html body {
   margin: 5% auto 0 auto;
   max-width: 1200px;
 }
+::-webkit-scrollbar {
+   overflow: auto;
+ }
+
 @media only screen and (min-height: 550px){
 #footer{
   position : absolute;
@@ -56,3 +60,31 @@ html body {
 .nav-container {
   margin: auto 0 auto auto;
 }
+.scrollbar{
+  overflow: scroll;
+}
+/* width */
+.scrollbar ::-webkit-scrollbar {
+  width: 9px;
+  
+}
+
+/* Track */
+.scrollbar ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+.scrollbar ::-webkit-scrollbar-thumb {
+  background: #3f51b5;
+  border-radius: 10px;
+} 
+
+/* Handle on hover */
+.scrollbar ::-webkit-scrollbar-thumb:hover {
+  background:  #21318b;
+  border-radius: 10px;
+} 
+
+

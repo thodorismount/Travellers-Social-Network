@@ -53,6 +53,13 @@ const useStyles = makeStyles(theme => ({
   subheaderFont: {
     fontSize: '1rem',
     color: '#191919'
+  },
+  button: {
+    
+    marginTop: '25px'
+  },
+  textfield: {
+    margin: '20px 15px'
   }
 }));
 
@@ -189,9 +196,11 @@ function PostCard(props) {
                 ))}
             </div>
           </Typography>
-          <form onSubmit={commentSubmit} style={{ display: 'flex' }}>
+          <form onSubmit={commentSubmit} style={{ display: 'flex', height: '70px', alignContent: 'center' }}>
+            
             <TextField
               fullWidth
+              className = {classes.textfield}
               id='comments'
               autoFocus
               value={formData.text}
@@ -205,17 +214,19 @@ function PostCard(props) {
               onChange={e => setFormData({ text: e.target.value })}
               required
             />
+            
             <Button
               type='submit'
               justify='right'
               variant='contained'
               color='primary'
               className={classes.button}
-              size='medium'
+              size='large'
               disabled={formData.text.trim() === ''}
             >
               Submit
             </Button>
+            
           </form>
         </CardContent>
       </Collapse>
