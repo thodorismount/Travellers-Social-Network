@@ -30,22 +30,32 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className='App'>
+      
         <Router>
           <NavBar />
+          
           <div className='container'>
+          
             <Switch>
+            <div className='scrollbar'>
               <Route exact path='/' component={Login} />
+              
               <PrivateRoute exact path='/Home' component={Home} />
+              
               <Route exact path='/Login' component={Login} />
+              
               <PrivateRoute
                 exact
                 path='/userProfile/:id'
                 component={userProfile}
               />
+            </div>
             </Switch>
+            
           </div>
           <Footer />
         </Router>
+        
       </div>
     </Provider>
   );
