@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        loaded: false,
+        loading: false,
         user: payload
       };
     case REGISTER_SUCCESS:
@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false
+        loading: true
       };
     case ACCOUNT_DELETED:
       return {
