@@ -9,12 +9,12 @@ import {
   FETCH_MORE,
   FETCH_MORE_PROFILE,
   ADD_COMMENT,
-  LOGOUT
+  LOGOUT,
+  CLEAR_POSTS
 } from '../actions/types';
 
 const initialState = {
   posts: [],
-  post: null,
   loading: true,
   error: {}
 };
@@ -23,6 +23,13 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case CLEAR_POSTS:
+      return {
+        ...state,
+        posts: [],
+        loading: true
+      };
+
     case GET_POSTS:
       return {
         ...state,
