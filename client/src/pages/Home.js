@@ -23,7 +23,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Home = props => {
+const Home = ({
+  fetchMore,
+  getPosts,
+  postsLoading,
+  authLoading,
+  user,
+  posts
+}) => {
   const [skip, setSkip] = useState(5);
 
   const handleScroll = e => {
@@ -31,23 +38,23 @@ const Home = props => {
 
     if (offsetHeight + scrollTop + 100 >= scrollHeight) {
       setSkip(skip + 5);
-      props.fetchMore(skip);
+      fetchMore(skip);
     }
   };
 
   useEffect(() => {
-    props.getPosts();
+    getPosts();
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
     var foot = $('#footer')[0];
     foot.style.display = 'none';
-  }, []);
+  }, [getPosts]);
   const classes = useStyles();
 
-  return props.authLoading ? (
+  return authLoading ? (
     <Spinner />
-  ) : !(props.user && props.user.isRegistered) ? (
-    <Redirect to={`/userProfile/${props.user && props.user._id}`} />
+  ) : !(user && user.isRegistered) ? (
+    <Redirect to={`/userProfile/${user && user._id}`} />
   ) : (
     <div className={classes.root}>
       <Grid justify={'center'} container spacing={3}>
@@ -65,14 +72,13 @@ const Home = props => {
               scrollbarWidth: '0'
             }}
           >
-            {props.postsLoading ? (
+            {postsLoading ? (
               <Spinner />
             ) : (
               <div className='posts'>
-                {props.posts.length > 0 &&
-                  props.posts.map(post => (
-                    <PostItem key={post._id} post={post} />
-                  ))}
+                {posts &&
+                  posts.length > 0 &&
+                  posts.map(post => <PostItem key={post._id} post={post} />)}
               </div>
             )}
           </Paper>

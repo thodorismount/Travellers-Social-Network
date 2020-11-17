@@ -11,7 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
@@ -43,9 +43,6 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
-  },
-  avatar: {
-    backgroundColor: red[500]
   },
   titleFont: {
     fontSize: '1.25rem'
@@ -199,7 +196,7 @@ function PostCard(props) {
             
             <TextField
               fullWidth
-              className = {classes.textfield}
+              className={classes.textfield}
               id='comments'
               autoFocus
               value={formData.text}
@@ -213,7 +210,7 @@ function PostCard(props) {
               onChange={e => setFormData({ text: e.target.value })}
               required
             />
-            
+
             <Button
               type='submit'
               justify='right'
@@ -225,7 +222,6 @@ function PostCard(props) {
             >
               Submit
             </Button>
-            
           </form>
         </CardContent>
       </Collapse>

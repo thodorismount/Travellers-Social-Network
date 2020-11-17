@@ -48,10 +48,8 @@ const EditProfileModal = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
     props.createProfile(formData, props.edit);
   };
-  var testProfile = props.hasProfile;
   const handleToggle = () => {
     setOpen(!open);
     if (!open) {
@@ -59,10 +57,8 @@ const EditProfileModal = props => {
     }
   };
   const handleAutocomplete = v => {
-    console.log(v);
     let t = v.map(val => val.label);
     setFormData({ ...formData, visitedCountries: t.join(',') });
-    console.log(formData.visitedCountries);
   };
 
   const handleLocationChange = v => {
