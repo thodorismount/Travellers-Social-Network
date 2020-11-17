@@ -10,12 +10,15 @@ import {
   GET_PROFILE_POSTS,
   FETCH_MORE,
   FETCH_MORE_PROFILE,
-  ADD_COMMENT
+  ADD_COMMENT,
+  CLEAR_POSTS
 } from './types';
 
 //GET POSTS
 export const getPosts = () => async dispatch => {
   try {
+    dispatch({ type: CLEAR_POSTS, payload: null });
+
     const res = await axios.get(`/api/posts`);
 
     dispatch({
@@ -48,6 +51,8 @@ export const fetchMore = skip => async dispatch => {
 // get 5 posta of a specific profile
 export const getProfilePosts = id => async dispatch => {
   try {
+    dispatch({ type: CLEAR_POSTS, payload: null });
+
     const res = await axios.get(`/api/posts/profile/${id}`);
 
     dispatch({
