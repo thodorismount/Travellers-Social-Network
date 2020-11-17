@@ -18,7 +18,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
 import $ from 'jquery';
-import jQuery from 'jquery';
 import spinningEarth from '../components/Profile/spinningEarth.gif';
 import '../App.css';
 import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressBar';
@@ -41,7 +40,7 @@ import { post } from 'jquery';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    paddingTop: '10px'
+    paddingTop: '3rem'
   },
   paper: {
     padding: theme.spacing(2),
@@ -173,7 +172,7 @@ const UserProfile = ({
                 style={{
                   backgroundColor: '#F0F2F5',
                   borderRadius: '2%',
-                  paddingTop: '2.5rem'
+                  paddingTop: '5px'
                 }}
               >
                 <div
