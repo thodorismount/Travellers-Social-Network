@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -113,10 +113,7 @@ function PostCard(props) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Link
-            to={`/userProfile/${props.user && props.user}`}
-            style={{ textDecoration: 'none', color: '#000' }}
-          >
+          <Link href={`/userProfile/${props.user && props.user}`}>
             <Avatar
               aria-label='recipe'
               src={`${
@@ -140,8 +137,8 @@ function PostCard(props) {
         }
         title={
           <Link
-            to={`/userProfile/${props.user && props.user}`}
-            style={{ textDecoration: 'none', color: '#000' }}
+            href={`/userProfile/${props.user && props.user}`}
+            color='inherit'
           >
             {props.username}
           </Link>
