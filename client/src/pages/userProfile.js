@@ -120,7 +120,7 @@ const UserProfile = ({
   };
   const classes = useStyles();
 
-  if (loading || profile === null) {
+  if (loading && profile === null) {
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (

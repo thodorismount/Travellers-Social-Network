@@ -46,7 +46,7 @@ const Home = props => {
   }, []);
   const classes = useStyles();
 
-  return props.loading ? (
+  return props.authLoading ? (
     <Spinner />
   ) : !(props.user && props.user.isRegistered) ? (
     <Redirect to={`/userProfile/${props.user && props.user._id}`} />
@@ -67,7 +67,7 @@ const Home = props => {
               scrollbarWidth: '0'
             }}
           >
-            {props.loading ? (
+            {props.postsLoading ? (
               <Spinner />
             ) : (
               <div className='posts'>
@@ -94,9 +94,10 @@ Posts.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  loading: state.post.loading,
+  postsLoading: state.post.loading,
   posts: state.post.posts,
-  user: state.auth.user
+  user: state.auth.user,
+  authLoading: state.auth.loading
 });
 
 export default connect(mapStateToProps, { getPosts, fetchMore })(Home);
