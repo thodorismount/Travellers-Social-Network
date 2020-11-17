@@ -91,6 +91,7 @@ const EditProfileModal = props => {
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
         disableBackdropClick={props.disableOutsideClick}
+        disableEscapeKeyDown={props.disableEscapeKeyDown}
       >
         <DialogTitle id='form-dialog-title'>
           <ModalMessage />

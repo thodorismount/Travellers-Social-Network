@@ -130,6 +130,7 @@ const UserProfile = ({
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
+          disableEscapeKeyDown={false}
         />
         <div style={{ fontSize: 'large' }}>
           <Typography
@@ -361,6 +362,7 @@ const UserProfile = ({
                     edit={true}
                     disableOutsideClick={false}
                     disableCancelButton={false}
+                    disableEscapeKeyDown={false}
                     bio={profile ? profile && profile.bio : ''}
                     interests={profile ? profile && profile.interests : ''}
                     location={profile ? profile && profile.location : ''}
