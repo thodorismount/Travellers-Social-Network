@@ -77,7 +77,7 @@ const ManageProfileModal = props => {
         style={{
           position: 'absolute',
           left: '80%',
-          top: '1%'
+          top: '36%'
         }}
       >
         <SettingsIcon fontSize='large' />
