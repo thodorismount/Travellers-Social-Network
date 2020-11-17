@@ -36,9 +36,7 @@ const Home = props => {
   };
 
   useEffect(() => {
-    setTimeout(function () {
-      props.getPosts();
-    }, 50);
+    props.getPosts();
     var contents = $('#appbar')[0];
     contents.style.display = 'flex';
     var foot = $('#footer')[0];

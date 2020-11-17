@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -33,7 +33,6 @@ import { getProfilePosts } from '../actions/post';
 import { fetchMoreProfile } from '../actions/post';
 
 import '../re.css';
-import { post } from 'jquery';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -76,13 +75,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const useStylesImg = makeStyles({
-  image: {
-    maxWidth: '60%',
-    maxHeight: '60%',
-    borderRadius: '50%'
-  }
-});
 const UserProfile = ({
   getCurrentProfile,
   getProfilePosts,
@@ -105,6 +97,7 @@ const UserProfile = ({
       fetchMoreProfile(match.params.id, skip);
     }
   };
+
   useEffect(() => {
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
@@ -119,8 +112,8 @@ const UserProfile = ({
     setExpandedInt(!expandedInt);
   };
   const classes = useStyles();
-
-  if (loading && profile === null) {
+  console.log(profile === null);
+  if (loading) {
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (

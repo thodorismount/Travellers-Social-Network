@@ -151,7 +151,7 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
 });
 
 // @ROUTE -- GET api/posts
-// @DESC  -- Get 2 firts post
+// @DESC  -- Get 5 firts post
 // @ACCESS -- Public
 
 router.get('/', async (req, res) => {
