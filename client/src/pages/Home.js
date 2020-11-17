@@ -19,7 +19,7 @@ import Spinner from '../components/Profile/Spinner';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    paddingTop: '10px'
+    paddingTop: '2rem'
   }
 }));
 
@@ -54,7 +54,7 @@ const Home = props => {
     <div className={classes.root}>
       <Grid justify={'center'} container spacing={3}>
         <Grid item xs={1}></Grid>
-        <Grid item xs={10} justify={'center'} container>
+        <Grid item xs={12} md={10} justify={'center'} container>
           <Paper
             onScroll={handleScroll}
             justify='center'

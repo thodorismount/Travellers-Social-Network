@@ -13,11 +13,12 @@ html body {
     top: 7rem;
     right: 15%;
 }
+
 }
 @media only screen and (max-width: 540px){
   #post-button{
     position: fixed;
-    bottom: 2rem;
+    bottom: 3rem;
     right: 2rem;
   }
 }
