@@ -11,7 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
-import Footer from '../components/Footer';
 import '../index.css';
 
 // R.E. Components
@@ -24,6 +23,7 @@ import { login } from '../actions/auth';
 import { loginAlert } from '../actions/loginAlert';
 
 // initialize MUI styles
+
 const styles = {
   form: {
     textAlign: 'center'
@@ -35,10 +35,10 @@ const styles = {
     margin: '3% auto auto auto'
   },
   button: {
-    margin: '1% 1%'
+    margin: '3% 1%'
   },
   card: {
-    padding: '1%',
+    padding: '1rem',
     marginTop: '10%',
     backgroundColor: '#F0F2F5'
   }
@@ -80,13 +80,14 @@ const Login = props => {
         <Grid item xs={12} sm={12} md={6}>
           <img
             src='static/images/logo_final.png'
+            alt='Logo'
             width='350'
             height='375'
             style={{ marginTop: '3%' }}
           />
           <br />
         </Grid>
-        <Grid item xs={12} sm={12} md={4} justify='center'>
+        <Grid item xs={12} sm={12} md={4}>
           <Card className={classes.card} justify='center'>
             <LoginAlert />
             <Typography varient='h1' className={classes.pageTitle}>
@@ -114,8 +115,6 @@ const Login = props => {
                 label='Password'
                 variant='outlined'
                 className={classes.textField}
-                // helperText={errors.password}
-                // error={errors.password ? true: false}
                 value={loginData.password || ''}
                 onChange={e => handleChange(e)}
                 fullWidth

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
-import EditRoundedIcon from '@material-ui/icons/EditRounded';
+
 import Divider from '@material-ui/core/Divider';
 import EditPost from './posts/EditPostDialog';
 // redux
@@ -31,11 +31,6 @@ function ManagePost(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  function handleListClosing() {
-    setOpen(false);
-  }
-
-  console.log(props.closeList);
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
@@ -96,7 +91,6 @@ function ManagePost(props) {
                     id='menu-list-grow'
                     onKeyDown={handleListKeyDown}
                   >
-
                     <EditPost
                       id={props.id}
                       image={props.image}

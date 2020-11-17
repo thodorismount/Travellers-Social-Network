@@ -7,7 +7,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Button from '@material-ui/core/Button';
@@ -58,7 +57,7 @@ const NavBar = ({
   props
 }) => {
   const classes = useStyles();
- 
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -77,11 +76,7 @@ const NavBar = ({
             <Typography variant='h6' className={classes.title}></Typography>
 
             <Tooltip title='View profile' id='profile-button'>
-              <Button component={Link} to={`/userProfile/${user && user._id}`} >
-                <Avatar
-                  className='navbar-user'
-                  src='../static/images/girl_female_woman_avatar-512.png'
-                />
+              <Button component={Link} to={`/userProfile/${user && user._id}`}>
                 <Typography
                   variant='h5'
                   style={{ textTransform: 'capitalize' }}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../actions/alert';
@@ -19,9 +19,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Alert from './Alerts/Alert';
 
 const styles = {
-  form: {
-    //padding: '30px',
-  },
   button: {
     margin: '10px 10px'
   }

@@ -15,9 +15,9 @@ import CreateDatePicker from '../components/DatePicker';
 import CreateGenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
 // import Typography from '@material-ui/core/Typography';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 import DialogActions from '@material-ui/core/DialogActions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { createProfile } from '../actions/profile';
 import { connect } from 'react-redux';
 
@@ -51,15 +51,6 @@ const ManageProfileModal = props => {
 
   const handleToggle = () => {
     setOpen(!open);
-  };
-
-  const handleAutocomplete = v => {
-    let t = v.map(val => val.label);
-    setFormData({ ...formData, visitedCountries: t.join(',') });
-  };
-
-  const handleLocationChange = v => {
-    setFormData({ ...formData, location: v.terms[0].value });
   };
 
   const handleTextField = e => {
