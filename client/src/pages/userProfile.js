@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PanoramaFishEyeRoundedIcon from '@material-ui/icons/PanoramaFishEyeRounded';
 import PostItem from '../components/posts/PostItem';
 import $ from 'jquery';
+import jQuery from 'jquery';
 import spinningEarth from '../components/Profile/spinningEarth.gif';
 import '../App.css';
 import CountriesVisitedProgressBar from '../components/CountriesVisitedProgressBar';
@@ -106,6 +107,7 @@ const UserProfile = ({
       fetchMoreProfile(match.params.id, skip);
     }
   };
+
   useEffect(() => {
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
