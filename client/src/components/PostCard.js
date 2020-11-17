@@ -55,11 +55,13 @@ const useStyles = makeStyles(theme => ({
     color: '#191919'
   },
   button: {
-    
-    marginTop: '25px'
+    marginTop: '1rem',
+    paddingLeft: '1rem'
+
   },
   textfield: {
-    margin: '20px 15px'
+    margin: '1rem 1.5rem',
+   marginLeft: '0'
   }
 }));
 
@@ -193,7 +195,7 @@ function PostCard(props) {
                 ))}
             </div>
           </Typography>
-          <form onSubmit={commentSubmit} style={{ display: 'flex', height: '70px', alignContent: 'center' }}>
+          <form id="comment-input" onSubmit={commentSubmit} >
             
             <TextField
               fullWidth
@@ -218,7 +220,7 @@ function PostCard(props) {
               variant='contained'
               color='primary'
               className={classes.button}
-              size='large'
+              size='medium'
               disabled={formData.text.trim() === ''}
             >
               Submit

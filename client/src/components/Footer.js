@@ -12,7 +12,7 @@ const Footer = () => (
           <a
             style={{ color: 'black'}}
             href='https://www.skgcode.gr/'
-            target='_blank'
+            target='_blank' rel="noopener noreferrer"
           >
             Who we are{' '}
           </a>{' '}
