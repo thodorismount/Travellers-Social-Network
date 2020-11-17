@@ -173,7 +173,7 @@ const UserProfile = ({
                 style={{
                   backgroundColor: '#F0F2F5',
                   borderRadius: '2%',
-                  paddingTop: '3rem'
+                  paddingTop: '2.5rem'
                 }}
               >
                 <div
