@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 let flag = true;
 function CountrySelect(props) {
   const classes = useStyles();
-  const [val, setVal] = useState([]);
+  const val = [];
 
   if (flag) {
     props.visitedCount &&

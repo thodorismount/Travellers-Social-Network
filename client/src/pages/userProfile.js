@@ -114,7 +114,6 @@ const UserProfile = ({
     setExpandedInt(!expandedInt);
   };
   const classes = useStyles();
-  console.log(profile === null);
   if (loading) {
     return <Spinner />;
   } else if (profile === null) {
@@ -137,22 +136,40 @@ const UserProfile = ({
         </div>
         <img
           src={spinningEarth}
+          alt='Loading...'
           style={{ width: '400px', margin: 'auto', display: 'block' }}
         />
       </div>
     ) : (
-      <div style={({ justifyContent: 'center',  textAlign: 'center', color: '#9BA5A3' , paddingTop: '1rem'})} justify='center'>
+      <div
+        style={{
+          justifyContent: 'center',
+          textAlign: 'center',
+          color: '#9BA5A3',
+          paddingTop: '1rem'
+        }}
+        justify='center'
+      >
         <Typography
-            variant='h6'
-            style={({ justifyContent: 'center',  textAlign: 'center' })}
-          >
-            Nothing to see here! This profile doesn't exist!
+          variant='h6'
+          style={{ justifyContent: 'center', textAlign: 'center' }}
+        >
+          Nothing to see here! This profile doesn't exist!
         </Typography>
         <img
           src={spinningEarth}
+          alt='Loading...'
           style={{ width: '400px', margin: 'auto', display: 'block' }}
         />
-        <Button color="primary" variant="contained" size="large" component={Link} to='/home'>Back to Home</Button>
+        <Button
+          color='primary'
+          variant='contained'
+          size='large'
+          component={Link}
+          to='/home'
+        >
+          Back to Home
+        </Button>
       </div>
     );
   } else {
@@ -383,7 +400,6 @@ const UserProfile = ({
               style={{
                 width: '100%',
                 backgroundColor: '#F0F2F5',
-                backgroundColor: '#F0F2F5',
                 height: '85vh',
                 padding: '2rem',
                 overflowY: 'scroll'
@@ -417,7 +433,6 @@ UserProfile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getProfilePosts: PropTypes.func.isRequired,
   fetchMoreProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 

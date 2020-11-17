@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 // Redux
@@ -8,18 +8,10 @@ import { getCurrentProfile } from '../actions/profile';
 
 import '../re.css';
 
-const ModalMessage = ({
-  getCurrentProfile,
-  auth: { user },
-  profile: { profile }
-}) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
+const ModalMessage = ({ auth: { user }, profile: { profile } }) => {
   if (profile == null) {
     return (
       <Typography style={{ textTransform: 'capitalize' }}>
-        {' '}
         Welcome {user && user.firstName} {user && user.lastName}! Please fill in
         your profile
       </Typography>
