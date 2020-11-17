@@ -11,6 +11,7 @@ import MapsSelector from '../components/MapsSelector';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import '../components/Navbar.css';
+import '../App.css';
 // images
 import FileBase from 'react-file-base64';
 // redux
@@ -46,15 +47,12 @@ const CreatePostDialog = ({ addPost }) => {
 
   return (
     <Fragment>
-      <Fab
+      <Fab 
+        id="post-button"
         color='primary'
         onClick={handleToggle}
         title='Create post'
-        style={{
-          position: 'fixed',
-          top: '7rem',
-          right: '15%'
-        }}
+      
       >
         <AddIcon />
       </Fab>

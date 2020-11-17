@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -24,6 +25,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
 
 // Redux
 import { connect } from 'react-redux';
@@ -38,7 +40,7 @@ import { post } from 'jquery';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    paddingTop: '10px'
+    paddingTop: '3rem'
   },
   paper: {
     padding: theme.spacing(2),
@@ -104,6 +106,7 @@ const UserProfile = ({
       fetchMoreProfile(match.params.id, skip);
     }
   };
+
   useEffect(() => {
     getCurrentProfile(match.params.id);
     getProfilePosts(match.params.id);
@@ -130,7 +133,6 @@ const UserProfile = ({
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
-          disableEscapeKeyDown={false}
         />
         <div style={{ fontSize: 'large' }}>
           <Typography
@@ -146,18 +148,18 @@ const UserProfile = ({
         />
       </div>
     ) : (
-      <div>
+      <div style={({ justifyContent: 'center',  textAlign: 'center', color: '#9BA5A3' , paddingTop: '1rem'})} justify='center'>
         <Typography
-          variant='h3'
-          align='left'
-          style={{ textAlign: 'left', textTransform: 'capitalize' }}
-        >
-          Error 404 !!
+            variant='h6'
+            style={({ justifyContent: 'center',  textAlign: 'center' })}
+          >
+            Nothing to see here! This profile doesn't exist!
         </Typography>
-        <br />
-        <Typography variant='h6' align='left' style={{ textAlign: 'left' }}>
-          Profile does not exist!
-        </Typography>
+        <img
+          src={spinningEarth}
+          style={{ width: '400px', margin: 'auto', display: 'block' }}
+        />
+        <Button color="primary" variant="contained" size="large" component={Link} to='/home'>Back to Home</Button>
       </div>
     );
   } else {
@@ -362,7 +364,6 @@ const UserProfile = ({
                     edit={true}
                     disableOutsideClick={false}
                     disableCancelButton={false}
-                    disableEscapeKeyDown={false}
                     bio={profile ? profile && profile.bio : ''}
                     interests={profile ? profile && profile.interests : ''}
                     location={profile ? profile && profile.location : ''}
