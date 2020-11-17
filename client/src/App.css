@@ -8,7 +8,11 @@ html body {
   max-width: 1200px;
 }
 ::-webkit-scrollbar {
+  width:  0px;
    overflow: auto;
+ }
+ ::-webkit-scrollbar-track {
+   display: none;
  }
 
 @media only screen and (min-height: 550px){
