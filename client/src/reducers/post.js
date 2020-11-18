@@ -9,6 +9,7 @@ import {
   FETCH_MORE,
   FETCH_MORE_PROFILE,
   ADD_COMMENT,
+  REMOVE_COMMENT,
   LOGOUT,
   CLEAR_POSTS
 } from '../actions/types';
@@ -92,15 +93,23 @@ export default function (state = initialState, action) {
       };
 
     case ADD_COMMENT:
-      return {
-        ...state,
-        posts: state.posts.map(post =>
-          post.id === payload.id
-            ? { ...post, comments: payload.comments }
-            : post
-        ),
-        loading: false
-      };
+        return {
+          ...state,
+          posts: state.posts.map(post =>
+            post._id === payload.id
+              ? { ...post, comments: payload.comments }
+              : post
+          ),
+          loading: false
+        };
+        case REMOVE_COMMENT:
+        return {
+          ...state,
+          posts: state.posts.map(post =>
+            post._id === payload.id ? { ...post, comments: payload.comments} : post
+          ),
+          loading:false    
+        };
     case LOGOUT:
       return {
         ...state,
