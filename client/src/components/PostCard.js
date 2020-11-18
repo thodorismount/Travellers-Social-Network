@@ -203,7 +203,7 @@ function PostCard(props) {
           {props.comments && props.comments.length > 0 ? (
             <List
               dense={true}
-              className='comments'
+              className='raised'
               style={{ backgroundColor: '#F0F2F5', borderRadius: '2%' }}
             >
               {props.comments &&

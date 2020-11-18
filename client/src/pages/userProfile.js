@@ -179,6 +179,7 @@ const UserProfile = ({
           <Grid item xs={12} sm={12} md={4}>
             <Paper className={classes.paper} variant='elevation'>
               <div
+                className='raised'
                 style={{
                   backgroundColor: '#F0F2F5',
                   borderRadius: '2%',
