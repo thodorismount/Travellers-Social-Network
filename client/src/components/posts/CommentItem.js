@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-import DeleteIcon from '@material-ui/icons/Delete';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 const CommentItem = ({
   postId,
@@ -28,7 +28,31 @@ const CommentItem = ({
         {/* //   <DeleteForeverOutlinedIcon fontSize='medium' color='secondary' /> */}
         {/* // </IconButton> */}
         <ListItem>
-          <ListItemText primary={name} secondary={text} />
+          <ListItemText
+            primary={
+              <React.Fragment>
+                <Typography variant='h6' color='textPrimary' component={'span'}>
+                  <Link
+                    href={`/userProfile/${auth.user && auth.user._id}`}
+                    color='textPrimary'
+                  >
+                    {name}
+                  </Link>
+                </Typography>
+              </React.Fragment>
+            }
+            secondary={
+              <React.Fragment>
+                <Typography
+                  variant='subtitle1'
+                  color='textPrimary'
+                  component={'span'}
+                >
+                  {text}
+                </Typography>
+              </React.Fragment>
+            }
+          />
           {user === (auth.user && auth.user._id) && (
             <ListItemSecondaryAction>
               <IconButton
@@ -36,7 +60,7 @@ const CommentItem = ({
                 aria-label='delete'
                 onClick={e => removeComment(postId, _id)}
               >
-                <DeleteIcon />
+                <DeleteForeverOutlinedIcon style={{ color: '#EE0101' }} />
               </IconButton>
             </ListItemSecondaryAction>
           )}

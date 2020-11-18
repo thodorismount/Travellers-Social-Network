@@ -23,6 +23,7 @@ import CommentItem from './posts/CommentItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
+import '../re.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -157,16 +158,18 @@ function PostCard(props) {
         {/* like buttons  */}
         {!state.liked ? (
           <IconButton onClick={handleLike}>
-            <FavoriteBorder style={{ color: '#000' }} />
+            <FavoriteBorder style={{ color: '#000' }} fontSize='large' />
           </IconButton>
         ) : (
           <IconButton onClick={handleUnlike}>
-            <Favorite style={{ color: 'rgba(238,1,1,1)' }} />
+            <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='large' />
           </IconButton>
         )}
 
         {props.likes && props.likes.length > 0 ? (
-          props.likes && props.likes.length
+          <Typography variant='h5' color='textPrimary'>
+            {props.likes && props.likes.length}
+          </Typography>
         ) : (
           <div />
         )}
@@ -197,17 +200,25 @@ function PostCard(props) {
                 ))}
             </div>
           </Typography> */}
-          <List dense={true}>
-            {props.comments &&
-              props.comments.length > 0 &&
-              props.comments.map(comment => (
-                <CommentItem
-                  key={comment._id}
-                  comment={comment}
-                  postId={props.id}
-                />
-              ))}
-          </List>
+          {props.comments && props.comments.length > 0 ? (
+            <List
+              dense={true}
+              className='comments'
+              style={{ backgroundColor: '#F0F2F5', borderRadius: '2%' }}
+            >
+              {props.comments &&
+                props.comments.length > 0 &&
+                props.comments.map(comment => (
+                  <CommentItem
+                    key={comment._id}
+                    comment={comment}
+                    postId={props.id}
+                  />
+                ))}
+            </List>
+          ) : (
+            <div />
+          )}
           <form id='comment-input' onSubmit={commentSubmit}>
             <TextField
               fullWidth
