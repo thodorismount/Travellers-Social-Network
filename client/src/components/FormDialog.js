@@ -168,6 +168,7 @@ const FormDialog = props => {
                       onChange={value =>
                         setFormData({ ...formData, gender: value })
                       }
+                      gender={formData.gender}
                     />
                   </td>
                 </tr>

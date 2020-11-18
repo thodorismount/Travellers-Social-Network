@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Alert from './Alerts/Alert';
+import LoginAlert from './Alerts/LoginAlert';
+import moment from 'moment';
+import { updateAccount } from '../actions/profile';
 
 //MUI
 import Button from '@material-ui/core/Button';
@@ -8,17 +10,18 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CreateDatePicker from '../components/DatePicker';
-import CreateGenderSelector from '../components/GenderSelector';
+import GenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
+import ChangePasswordModal from './ChangePasswordModal';
 // import Typography from '@material-ui/core/Typography';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
-import { createProfile } from '../actions/profile';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -35,15 +38,17 @@ const styles = {
 
 const ManageProfileModal = props => {
   const [formData, setFormData] = useState({
-    visitedCountries: '',
-    interests: '',
-    location: ''
+    password: '',
+    firstName: props.firstName ? props.firstName : '',
+    lastName: props.lastName ? props.lastName : '',
+    birthDate: props.birthDate ? props.birthDate : '',
+    gender: props.gender ? props.gender : ''
   });
 
   const onSubmit = e => {
     e.preventDefault();
-    props.createProfile(formData, props.history);
-    window.location.reload(false);
+    props.updateAccount(formData);
+    // window.location.reload(false);
   };
 
   let testOpen = props.open;
@@ -56,7 +61,7 @@ const ManageProfileModal = props => {
   const handleTextField = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  console.log(formData.birthDate);
   const { classes } = props;
   return (
     <Fragment>
@@ -78,18 +83,34 @@ const ManageProfileModal = props => {
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'>Manage account</DialogTitle>
-        <DialogContent>
-          <Alert />
-          <form className={classes.form} onSubmit={e => onSubmit(e)}>
+        <form className={classes.form} onSubmit={e => onSubmit(e)}>
+          <DialogTitle id='form-dialog-title'>Manage account</DialogTitle>
+          <DialogContent>
+            <LoginAlert />
+            <DialogContentText>
+              Fill in your password to edit your account details
+            </DialogContentText>
+            <TextField
+              id='confirmPassword'
+              label='Enter your password'
+              variant='outlined'
+              type='password'
+              autoComplete='new-password' //to disable autocomplete
+              onChange={handleTextField}
+              value={formData.password}
+              margin='normal'
+              name='password'
+              autoFocus
+              className={classes.textField}
+              fullWidth
+            />
             <TextField
               id='firstName'
               label='First name'
               variant='outlined'
               onChange={handleTextField}
-              // value={formData.firstName}
+              value={formData.firstName}
               margin='normal'
-              autoFocus
               name='firstName'
               className={classes.textField}
               fullWidth
@@ -100,40 +121,14 @@ const ManageProfileModal = props => {
               label='Last name'
               variant='outlined'
               onChange={handleTextField}
-              // value={formData.firstName}
+              value={formData.lastName}
               margin='normal'
               name='lastName'
               className={classes.textField}
               fullWidth
               type='text'
             />
-            <TextField
-              id='newPassword'
-              label='New password'
-              variant='outlined'
-              type='password'
-              autoComplete='new-password' //to disable autocomplete
-              onChange={handleTextField}
-              // value={formData.firstName}
-              margin='normal'
-              name='password'
-              className={classes.textField}
-              fullWidth
-            />
 
-            <TextField
-              id='confirmNewPassword'
-              label='Confirm new password'
-              variant='outlined'
-              type='password'
-              autoComplete='new-password' //to disable autocomplete
-              onChange={handleTextField}
-              // value={formData.firstName}
-              margin='normal'
-              name='password'
-              className={classes.textField}
-              fullWidth
-            />
             <table>
               <tbody>
                 <tr>
@@ -145,38 +140,47 @@ const ManageProfileModal = props => {
                     />
                   </td>
                   <td>
-                    <CreateGenderSelector
+                    <GenderSelector
                       onChange={value =>
                         setFormData({ ...formData, gender: value })
                       }
+                      gender={formData.gender}
                     />
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <ChangePasswordModal />
+                  </td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <DeleteAccountModal />
-          <div style={{ flex: '1 0 0' }} />
-          <Button
-            color='primary'
-            variant='outlined'
-            size='medium'
-            onClick={handleToggle}
-          >
-            Cancel
-          </Button>
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            className={classes.button}
-            size='medium'
-          >
-            Submit
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <DeleteAccountModal />
+            <div style={{ flex: '1 0 0' }} />
+
+            <Button
+              color='primary'
+              variant='outlined'
+              size='medium'
+              onClick={handleToggle}
+            >
+              Cancel
+            </Button>
+
+            <Button
+              type='submit'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+              size='medium'
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </Fragment>
   );
@@ -184,9 +188,9 @@ const ManageProfileModal = props => {
 
 ManageProfileModal.propTypes = {
   classes: PropTypes.object.isRequired,
-  createProfile: PropTypes.func.isRequired
+  updateAccount: PropTypes.func.isRequired
 };
 
-export default connect(null, { createProfile })(
+export default connect(null, { updateAccount })(
   withStyles(styles)(withRouter(ManageProfileModal))
 );

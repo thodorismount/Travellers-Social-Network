@@ -109,28 +109,27 @@ const EditProfileModal = props => {
               label='Bio'
               onChange={handleTextField}
             />
-
-            <TextField
-              id='interests'
-              name='interests'
-              onChange={handleTextField}
-              value={formData.interests}
-              type='interests'
-              label='Interests e.g. travelling, hiking, ...'
-              margin='normal'
-              variant='outlined'
-              className={classes.textField}
-              fullWidth
+            <MapsSelector
+              label='Select your location'
+              onChange={handleLocationChange}
+              prevLoc={formData.location}
             />
             <CreateSelectCountries
               onChange={handleAutocomplete}
               visitedCount={props.profile ? props.profile.visitedCountries : ''}
               renderCountries={!open}
             />
-            <MapsSelector
-              label='Select your location'
-              onChange={handleLocationChange}
-              prevLoc={formData.location}
+            <TextField
+              id='interests'
+              name='interests'
+              onChange={handleTextField}
+              value={formData.interests}
+              type='interests'
+              label='Type your interests seperated by comma e.g. photography, hiking, ...'
+              margin='normal'
+              variant='outlined'
+              className={classes.textField}
+              fullWidth
             />
 
             <FileBase

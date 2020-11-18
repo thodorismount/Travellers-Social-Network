@@ -33,7 +33,7 @@ export default function SimpleSelect(props) {
         <Select
           labelId='demo-simple-select-outlined-label'
           id='demo-simple-select-outlined'
-          value={gender}
+          value={props.gender}
           onChange={handleChange}
           label='Gender'
         >

@@ -200,7 +200,12 @@ const UserProfile = ({
                   }}
                 ></div>
                 {user && user._id === match.params.id ? (
-                  <ManageProfileModal />
+                  <ManageProfileModal
+                    firstName={user && user.firstName}
+                    lastName={user && user.lastName}
+                    birthDate={user && user.birthDate}
+                    gender={user && user.gender}
+                  />
                 ) : null}
                 <Typography
                   variant='h4'

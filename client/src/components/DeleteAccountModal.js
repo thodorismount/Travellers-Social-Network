@@ -55,12 +55,12 @@ function DeleteAccountModal(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary' variant='contained'>
+          <Button onClick={handleClose} color='primary' variant='outlined'>
             Cancel
           </Button>
           <Button
             onClick={() => props.deleteProfile()}
-            color='primary'
+            color='secondary'
             variant='contained'
             startIcon={<DeleteIcon />}
           >
