@@ -24,3 +24,4 @@ export const FETCH_MORE = 'FETCH_MORE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const FETCH_MORE_PROFILE = 'FETCH_MORE_PROFILE';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
+export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';

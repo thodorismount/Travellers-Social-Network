@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { loginAlert } from './loginAlert';
 import { setAlert } from './alert';
-
 import {
   GET_PROFILE,
   PROFILE_ERROR,
   ACCOUNT_DELETED,
   CLEAR_PROFILE,
   USER_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  UPDATE_ACCOUNT
 } from './types';
 
 // load user
@@ -87,6 +88,34 @@ export const deleteProfile = () => async dispatch => {
 
     dispatch(setAlert('Your account has been permanently deleted'));
   } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const updateAccount = formData => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/users/updateAccount', formData, config);
+    dispatch(loginAlert('Account Updated. Redirecting...', 'success'));
+    setInterval(() => {
+      window.location.reload();
+    }, 5000);
+  } catch (err) {
+    console.log(err);
+    let errors;
+    if (err.response && err.response.data && err.response.data.errors)
+      errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(loginAlert(error.msg, 'danger')));
+    }
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
