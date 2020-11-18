@@ -33,7 +33,7 @@ const CommentItem = ({
               <React.Fragment>
                 <Typography variant='h6' color='textPrimary' component={'span'}>
                   <Link
-                    href={`/userProfile/${auth.user && auth.user._id}`}
+                    href={`/userProfile/${user && user}`}
                     color='textPrimary'
                   >
                     {name}
