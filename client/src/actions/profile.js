@@ -8,7 +8,8 @@ import {
   CLEAR_PROFILE,
   USER_LOADED,
   AUTH_ERROR,
-  UPDATE_ACCOUNT
+  CHANGE_PASSWORD,
+  LOGOUT
 } from './types';
 
 // load user

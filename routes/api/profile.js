@@ -103,6 +103,12 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
+
+        await Post.updateMany(
+          { user: req.user.id },
+          { avatar: profileFields.avatar }
+        );
+
         return res.json({ profile });
       }
       // create
@@ -113,6 +119,7 @@ router.post(
       let idUser = await User.findByIdAndUpdate(req.user.id, {
         isRegistered: true
       });
+
       console.log(idUser);
 
       res.json({ profile });
