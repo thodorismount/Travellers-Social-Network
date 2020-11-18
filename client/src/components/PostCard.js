@@ -182,7 +182,7 @@ function PostCard(props) {
         <CardContent>
           <Typography paragraph>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {props.comments &&
+              {props.comments && props.comments.length > 0 &&
                 props.comments.map(comment => (
                   <CommentItem
                     key={comment._id}
