@@ -328,7 +328,7 @@ router.post(
       post.comments.unshift(newComment);
       post.save();
 
-      res.json(post);
+      res.json(post.comments);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
