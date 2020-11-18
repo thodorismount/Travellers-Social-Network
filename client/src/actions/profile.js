@@ -8,8 +8,34 @@ import {
   CLEAR_PROFILE,
   USER_LOADED,
   AUTH_ERROR,
-  UPDATE_ACCOUNT
+  LOGOUT
 } from './types';
+
+export const changePassword = formData => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/users/changePassword', formData, config);
+    dispatch({ type: LOGOUT });
+    dispatch(loginAlert('Password Changed', 'success'));
+  } catch (err) {
+    console.log(err);
+    let errors;
+    if (err.response && err.response.data && err.response.data.errors)
+      errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
 // load user
 export const loadUser = () => async dispatch => {
@@ -58,7 +84,7 @@ export const createProfile = (formData, edit) => async dispatch => {
       payload: res.data
     });
 
-    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created'), 'success');
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
 
     window.location.reload();
   } catch (err) {

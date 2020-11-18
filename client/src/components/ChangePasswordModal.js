@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import LoginAlert from './Alerts/LoginAlert';
+import Alert from './Alerts/Alert';
 
 //MUI
 import Button from '@material-ui/core/Button';
@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
-import { createProfile } from '../actions/profile';
+import { changePassword } from '../actions/profile';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -34,19 +34,17 @@ const useStyles = makeStyles(() => ({
 
 const ChangePasswordModal = props => {
   const [formData, setFormData] = useState({
-    visitedCountries: '',
-    interests: '',
-    location: ''
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
   });
-
-  const onSubmit = e => {
-    e.preventDefault();
-    props.createProfile(formData, props.history);
-    window.location.reload(false);
-  };
 
   let testOpen = props.open;
   const [open, setOpen] = useState({ testOpen });
+
+  const submitForm = e => {
+    props.changePassword(formData);
+  };
 
   const handleToggle = () => {
     setOpen(!open);
@@ -76,8 +74,8 @@ const ChangePasswordModal = props => {
       >
         <DialogTitle id='form-dialog-title'>Change Password</DialogTitle>
         <DialogContent>
-          <LoginAlert />
-          <form className={classes.form} onSubmit={e => onSubmit(e)}>
+          <Alert />
+          <form className={classes.form}>
             <TextField
               id='oldPassword'
               label='Enter your old password'
@@ -85,7 +83,7 @@ const ChangePasswordModal = props => {
               type='password'
               autoComplete='new-password' //to disable autocomplete
               onChange={handleTextField}
-              // value={formData.firstName}
+              value={formData.oldPassword}
               margin='normal'
               name='oldPassword'
               className={classes.textField}
@@ -98,7 +96,7 @@ const ChangePasswordModal = props => {
               type='password'
               autoComplete='new-password' //to disable autocomplete
               onChange={handleTextField}
-              // value={formData.firstName}
+              value={formData.newPassword}
               margin='normal'
               name='newPassword'
               className={classes.textField}
@@ -112,7 +110,7 @@ const ChangePasswordModal = props => {
               type='password'
               autoComplete='new-password' //to disable autocomplete
               onChange={handleTextField}
-              // value={formData.firstName}
+              value={formData.confirmNewPassword}
               margin='normal'
               name='confirmNewPassword'
               className={classes.textField}
@@ -131,11 +129,11 @@ const ChangePasswordModal = props => {
           </Button>
 
           <Button
-            type='submit'
             variant='contained'
             color='primary'
             className={classes.button}
             size='medium'
+            onClick={submitForm}
           >
             Submit
           </Button>
@@ -147,9 +145,9 @@ const ChangePasswordModal = props => {
 
 ChangePasswordModal.propTypes = {
   classes: PropTypes.object.isRequired,
-  createProfile: PropTypes.func.isRequired
+  changePassword: PropTypes.func.isRequired
 };
 
-export default connect(null, { createProfile })(
+export default connect(null, { changePassword })(
   withStyles(styles)(withRouter(ChangePasswordModal))
 );
