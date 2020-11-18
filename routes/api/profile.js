@@ -40,8 +40,8 @@ router.post(
     auth,
     [
       check('location', 'Location is Required').not().isEmpty(),
-      check('bio', 'Bio is required').not().isEmpty(),
-      check('interests', 'Interests is required').not().isEmpty(),
+      check('bio', 'Bio is required').trim().not().isEmpty(),
+      check('interests', 'Interests is required').trim().not().isEmpty(),
       check('visitedCountries', 'Please select one country you have visited ')
         .not()
         .isEmpty()
@@ -103,6 +103,12 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
+
+        await Post.updateMany(
+          { user: req.user.id },
+          { avatar: profileFields.avatar }
+        );
+
         return res.json({ profile });
       }
       // create
@@ -113,6 +119,7 @@ router.post(
       let idUser = await User.findByIdAndUpdate(req.user.id, {
         isRegistered: true
       });
+
       console.log(idUser);
 
       res.json({ profile });

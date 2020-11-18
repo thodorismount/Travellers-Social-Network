@@ -22,6 +22,8 @@ import { addLike, removeLike, addComment } from '../actions/post';
 import CommentItem from './posts/CommentItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
+import '../re.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,11 +56,10 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginTop: '1rem',
     paddingLeft: '1rem'
-
   },
   textfield: {
     margin: '1rem 1.5rem',
-   marginLeft: '0'
+    marginLeft: '0'
   }
 }));
 
@@ -157,15 +158,21 @@ function PostCard(props) {
         {/* like buttons  */}
         {!state.liked ? (
           <IconButton onClick={handleLike}>
-            <FavoriteBorder style={{ color: '#000' }} />
+            <FavoriteBorder style={{ color: '#000' }} fontSize='large' />
           </IconButton>
         ) : (
           <IconButton onClick={handleUnlike}>
-            <Favorite style={{ color: 'rgba(238,1,1,1)' }} />
+            <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='large' />
           </IconButton>
         )}
 
-        {props.likes && props.likes.length}
+        {props.likes && props.likes.length > 0 ? (
+          <Typography variant='h5' color='textPrimary'>
+            {props.likes && props.likes.length}
+          </Typography>
+        ) : (
+          <div />
+        )}
 
         <IconButton
           className={clsx(classes.expand, {
@@ -180,9 +187,10 @@ function PostCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          <Typography paragraph>
+          {/* <Typography paragraph>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {props.comments &&
+                props.comments.length > 0 &&
                 props.comments.map(comment => (
                   <CommentItem
                     key={comment._id}
@@ -191,9 +199,27 @@ function PostCard(props) {
                   />
                 ))}
             </div>
-          </Typography>
-          <form id="comment-input" onSubmit={commentSubmit} >
-            
+          </Typography> */}
+          {props.comments && props.comments.length > 0 ? (
+            <List
+              dense={true}
+              className='raised'
+              style={{ backgroundColor: '#F0F2F5', borderRadius: '2%' }}
+            >
+              {props.comments &&
+                props.comments.length > 0 &&
+                props.comments.map(comment => (
+                  <CommentItem
+                    key={comment._id}
+                    comment={comment}
+                    postId={props.id}
+                  />
+                ))}
+            </List>
+          ) : (
+            <div />
+          )}
+          <form id='comment-input' onSubmit={commentSubmit}>
             <TextField
               fullWidth
               className={classes.textfield}
@@ -206,7 +232,7 @@ function PostCard(props) {
               margin='normal'
               variant='outlined'
               placeholder='Add a comment'
-              label='Comments'
+              label='Comment'
               onChange={e => setFormData({ text: e.target.value })}
               required
             />

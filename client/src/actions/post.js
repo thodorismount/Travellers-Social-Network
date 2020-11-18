@@ -11,6 +11,7 @@ import {
   FETCH_MORE,
   FETCH_MORE_PROFILE,
   ADD_COMMENT,
+  REMOVE_COMMENT,
   CLEAR_POSTS
 } from './types';
 
@@ -187,6 +188,8 @@ export const editPost = (id, formData) => async dispatch => {
   }
 };
 
+//ADD Comment
+
 export const addComment = (id, text) => async dispatch => {
   const config = {
     headers: {
@@ -198,7 +201,7 @@ export const addComment = (id, text) => async dispatch => {
     const res = await axios.post(`/api/posts/comment/${id}`, text, config);
     dispatch({
       type: ADD_COMMENT,
-      payload: res.data
+      payload: {id,comments:res.data}
     });
   } catch (err) {
     console.log(err);
@@ -208,3 +211,28 @@ export const addComment = (id, text) => async dispatch => {
     });
   }
 };
+
+//DELETE Comments 
+export const removeComment = (id, commentId) => async dispatch => {
+  
+  try {
+    const res = await axios.delete(`/api/posts/comment/${id}/${commentId}`);
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: {id,comments:res.data}
+    });
+
+
+
+    dispatch(setAlert('Comment Removed', 'success'));
+  } catch (err) {
+    console.log(err)
+
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+

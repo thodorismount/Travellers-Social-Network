@@ -328,7 +328,7 @@ router.post(
       post.comments.unshift(newComment);
       post.save();
 
-      res.json(post);
+      res.json(post.comments);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -361,18 +361,25 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
     //Get remove index
     const removeIndex = post.comments
-      .map(comment => comment.user.toString())
-      .indexOf(req.user.id);
+      .map(comment => comment.id.toString())
+      .indexOf(req.params.comment_id);
 
     //Remove comment
+    
+    console.log(removeIndex);
 
+    if(removeIndex === -1 ){
+      return res.status(500).json({ msg: "Server error" });
+    } else {
     post.comments.splice(removeIndex, 1);
-
+    
     //Update post comment list
 
     await post.save();
 
     res.json(post.comments);
+    }
+    
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
