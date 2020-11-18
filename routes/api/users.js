@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const moment = require('moment');
+const auth = require('../../middleware/auth');
 
 // @ROUTE -- GET api/users/signup
 // @DESC  -- Sign up a user and get back his token
@@ -101,6 +102,167 @@ router.post(
         }
       );
     } catch (err) {
+      console.log(err);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @ROUTE -- POST api/users/changePassword
+// @DESC  -- Change a users password
+// @ACCESS -- private
+
+router.post(
+  '/changePassword',
+  [
+    auth,
+    [
+      // CHECK IF ALL FIELDS WERE SENT CORRECTLY
+      check(
+        'oldPassword',
+        'Old password must be filled in order to continue'
+      ).isLength({ min: 6 }),
+      check(
+        'newPassword',
+        'Please enter a 6 or more digit new password'
+      ).isLength({ min: 6 }),
+      check(
+        'confirmNewPassword',
+        'Please enter a 6 or more digit confirm password '
+      )
+        .isLength({ min: 6 })
+        .custom((value, { req }) => {
+          if (value !== req.body.newPassword) {
+            throw new Error("Passwords don't match");
+          } else {
+            return value;
+          }
+        })
+    ]
+  ],
+  async (req, res) => {
+    // check if we have any errors from the field validation
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    // we deconstruct the req.body
+    const { oldPassword, newPassword, confirmNewPassword } = req.body;
+    // steps
+    // get user's old password from db
+    // check if old password mathces hashed password
+    // if it matches create hash  and hash the new password
+    // update user's old  password with new hashed password
+    try {
+      // we get the old password from the user
+      let user = await User.findById(req.user.id).select('password');
+      // check if old password mathces hashed password
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        res
+          .status(400)
+          .json({ errors: [{ msg: 'Your request has been declined.' }] });
+      }
+      // if it matches create hash and hash the new password
+      // create salt for new password
+      const salt = await bcrypt.genSalt(10);
+      // hashing the password
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+      // update user's old  password with new hashed password
+      user = await User.findByIdAndUpdate(
+        req.user.id,
+        { password: hashedPassword },
+        { new: true }
+      );
+
+      res.json(user.firstName);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
+// @ROUTE -- POST api/users/updateAccount
+// @DESC  -- Change a users password
+// @ACCESS -- private
+
+router.post(
+  '/updateAccount',
+  [
+    auth,
+    [
+      // CHECK IF ALL FIELDS WERE SENT CORRECTLY
+      check('firstName', 'First name is required').trim().not().isEmpty(),
+      check('lastName', 'Last name is required').trim().not().isEmpty(),
+      check(
+        'password',
+        'Please enter a password with 6 or more characters'
+      ).isLength({ min: 6 }),
+      check('birthDate', 'Please select a birth date').not().isEmpty(),
+      check('gender', 'Please select your gender').not().isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    // check if we have any errors from the field validation
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    // we deconstruct the req.body
+    const { firstName, lastName, password, birthDate, gender } = req.body;
+
+    // steps
+    // check if user exists just for security issues
+    // check if password mathces the db password
+    // modify the date with moment
+    //update account fields
+
+    // TODO: change name from all posts
+
+    try {
+      // check if user exists just for security issues
+      let user = await User.findById(req.user.id);
+      console.log(user);
+      if (!user) {
+        res.status(400).json({
+          errors: [{ msg: 'An error has occured, please try again.' }]
+        });
+      }
+      // check if password mathces the db password
+      const isMatch = await bcrypt.compare(password, user.password);
+      console.log(isMatch);
+      if (!isMatch) {
+        res.status(400).json({
+          errors: [{ msg: 'An error has occured, please try again.' }]
+        });
+      }
+      // modify the date with moment
+      let newBirthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
+      console.log(newBirthDate);
+
+      // create account fields  object,
+      let accountFields = {
+        firstName,
+        lastName,
+        birthDate,
+        gender
+      };
+
+      // update user
+
+      user = await User.findByIdAndUpdate(req.user.id, accountFields, {
+        new: true
+      }).select('-password');
+
+      // update name to all posts
+      let posts = await Post.updateMany(
+        { user: req.user.id },
+        { $set: { firstName: firstName, lastName: lastName } }
+      );
+      console.log(posts);
+      res.json(user);
+    } catch (error) {
       console.log(err);
       res.status(500).send('Server Error');
     }
