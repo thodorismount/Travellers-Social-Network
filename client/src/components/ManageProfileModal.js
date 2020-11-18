@@ -135,8 +135,12 @@ const ManageProfileModal = props => {
                   <td>
                     <CreateDatePicker
                       onChange={value =>
-                        setFormData({ ...formData, birthDate: value })
+                        setFormData({
+                          ...formData,
+                          birthDate: moment(value).format('DD-MM-YYYY')
+                        })
                       }
+                      // inputValue={}
                     />
                   </td>
                   <td>
