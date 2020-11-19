@@ -193,7 +193,7 @@ function PostCard(props) {
         >
           <ModeCommentOutlinedIcon
             fontSize='large'
-            style={{ color: 'black' }}
+            style={{ color: 'black', marginLeft: '0.7rem' }}
           />
         </IconButton>
         {props.comments && props.comments.length > 0 ? (
