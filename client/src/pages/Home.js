@@ -84,10 +84,9 @@ const Home = ({
             )}
           </Paper>
         </Grid>
-        <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
-          <CreatePostDialog />
-        </Grid>
+        <Grid item md={1} justify={'flex-end'} container></Grid>
       </Grid>
+      <CreatePostDialog />
     </div>
   );
 };

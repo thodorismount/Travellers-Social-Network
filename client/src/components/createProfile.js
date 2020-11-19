@@ -11,6 +11,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
+
 // import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -125,13 +127,15 @@ const EditProfileModal = props => {
               onChange={handleTextField}
               value={formData.interests}
               type='interests'
-              label='Type your interests seperated by comma e.g. photography, hiking, ...'
+              label='Add your interests seperated by comma'
               margin='normal'
               variant='outlined'
               className={classes.textField}
               fullWidth
             />
-
+            <Typography style={{ marginTop: '8 px' }}>
+              Add profile picture
+            </Typography>
             <FileBase
               type='file'
               multiple={false}

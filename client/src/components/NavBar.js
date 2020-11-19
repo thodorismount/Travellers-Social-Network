@@ -62,7 +62,11 @@ const NavBar = ({
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
-        <AppBar id='appbar' className='appbar'>
+        <AppBar
+          id='appbar'
+          className='appbar'
+          style={{ background: '#50AEE4' }}
+        >
           <Toolbar id='toolbar'>
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
