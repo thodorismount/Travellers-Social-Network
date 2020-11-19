@@ -58,8 +58,8 @@ const Home = ({
   ) : (
     <div className={classes.root}>
       <Grid justify={'center'} container spacing={3}>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={12} md={10} justify={'center'} container>
+        <Grid item md={1}></Grid>
+        <Grid item xs={12} sm={12} md={10} justify={'center'} container>
           <Paper
             onScroll={handleScroll}
             justify='center'
@@ -83,10 +83,9 @@ const Home = ({
             )}
           </Paper>
         </Grid>
-        <Grid item xs={1} md={1} lg={1} justify={'flex-end'} container>
-          <CreatePostDialog />
-        </Grid>
+        <Grid item md={1} justify={'flex-end'} container></Grid>
       </Grid>
+      <CreatePostDialog />
     </div>
   );
 };
