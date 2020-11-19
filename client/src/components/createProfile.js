@@ -133,7 +133,7 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <Typography style={{ marginTop: '8 px', marginBottom: '8px' }}>
+            <Typography style={{ marginTop: '8 px' }}>
               Add profile picture
             </Typography>
             <FileBase
