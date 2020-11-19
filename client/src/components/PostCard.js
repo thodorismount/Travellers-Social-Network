@@ -67,6 +67,7 @@ function PostCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [state, setState] = useState({});
+  const [disabled, setDisabled] = useState({ disabled: false });
 
   const checkLiked = () => {
     if (props.likes && props.likes.length > 0) {
@@ -88,11 +89,19 @@ function PostCard(props) {
   }, []);
 
   const handleLike = () => {
+    setDisabled({ disabled: true });
+    setInterval(() => {
+      setDisabled({ disabled: false });
+    }, 4000);
     props.addLike(props.id);
     setState({ liked: true });
   };
 
   const handleUnlike = () => {
+    setDisabled({ disabled: true });
+    setInterval(() => {
+      setDisabled({ disabled: false });
+    }, 4000);
     props.removeLike(props.id);
     setState({ liked: false });
   };
@@ -157,11 +166,11 @@ function PostCard(props) {
       <CardActions disableSpacing>
         {/* like buttons  */}
         {!state.liked ? (
-          <IconButton onClick={handleLike}>
+          <IconButton onClick={handleLike} disabled={disabled.disabled}>
             <FavoriteBorder style={{ color: '#000' }} fontSize='large' />
           </IconButton>
         ) : (
-          <IconButton onClick={handleUnlike}>
+          <IconButton onClick={handleUnlike} disabled={disabled.disabled}>
             <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='large' />
           </IconButton>
         )}
