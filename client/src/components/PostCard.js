@@ -11,8 +11,8 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SendIcon from '@material-ui/icons/Send';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import Divider from '@material-ui/core/Divider';
 import ManagePost from '../components/ManagePost';
 import { connect } from 'react-redux';
@@ -38,13 +38,13 @@ const useStyles = makeStyles(theme => ({
   },
   expand: {
     transform: 'rotate(0deg)',
-    marginLeft: 'auto',
+    // marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest
     })
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    backgroundColor: '#F0F2F5'
   },
   titleFont: {
     fontSize: '1.25rem'
@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: '1rem',
-    paddingLeft: '1rem'
+    paddingLeft: '0.5rem'
   },
   textfield: {
     margin: '1rem 1.5rem',
@@ -182,29 +182,29 @@ function PostCard(props) {
           aria-expanded={expanded}
           aria-label='show more'
         >
-          <ExpandMoreIcon />
+          <ModeCommentOutlinedIcon
+            fontSize='large'
+            style={{ color: 'black' }}
+          />
         </IconButton>
+        {props.comments && props.comments.length > 0 ? (
+          <Typography variant='h5' color='textPrimary'>
+            {props.comments && props.comments.length}
+          </Typography>
+        ) : (
+          <div />
+        )}
       </CardActions>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
         <CardContent>
-          {/* <Typography paragraph>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {props.comments &&
-                props.comments.length > 0 &&
-                props.comments.map(comment => (
-                  <CommentItem
-                    key={comment._id}
-                    comment={comment}
-                    postId={props.id}
-                  />
-                ))}
-            </div>
-          </Typography> */}
           {props.comments && props.comments.length > 0 ? (
             <List
               dense={true}
               className='raised'
-              style={{ backgroundColor: '#F0F2F5', borderRadius: '2%' }}
+              style={{
+                backgroundColor: 'rgba(240, 242, 245, 40%)',
+                borderRadius: '2%'
+              }}
             >
               {props.comments &&
                 props.comments.length > 0 &&
@@ -219,7 +219,11 @@ function PostCard(props) {
           ) : (
             <div />
           )}
-          <form id='comment-input' onSubmit={commentSubmit}>
+          <form
+            id='comment-input'
+            onSubmit={commentSubmit}
+            // style={{ paddingBottom: '1rem' }}
+          >
             <TextField
               fullWidth
               className={classes.textfield}
@@ -235,19 +239,21 @@ function PostCard(props) {
               label='Comment'
               onChange={e => setFormData({ text: e.target.value })}
               required
+              rowsMax={5}
+              multiline
+              InputLabelProps={{ required: false }}
             />
 
-            <Button
+            <IconButton
               type='submit'
               justify='right'
               variant='contained'
               color='primary'
-              className={classes.button}
               size='medium'
               disabled={formData.text.trim() === ''}
             >
-              Submit
-            </Button>
+              <SendIcon fontSize='large' />
+            </IconButton>
           </form>
         </CardContent>
       </Collapse>
