@@ -11,6 +11,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import moment from 'moment';
 
 const CommentItem = ({
   postId,
@@ -38,6 +39,14 @@ const CommentItem = ({
                   >
                     {name}
                   </Link>
+                </Typography>
+                <Typography variant='subtitle1' display='inline' color='textSecondary' style={{marginLeft: '0.5rem'}}>
+                {
+        moment(date).fromNow().includes('day') ||
+        moment(date).fromNow().includes('month') ||
+        moment(date).fromNow().includes('year')
+          ? moment(date).format('DD MMMM YYYY')
+          : moment(date).fromNow() }
                 </Typography>
               </React.Fragment>
             }
