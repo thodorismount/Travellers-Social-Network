@@ -39,7 +39,7 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    paddingTop: '3rem'
+    ["@media only screen and (max-width:550px)"]: { paddingTop: '3rem' } 
   },
   paper: {
     padding: theme.spacing(2),
@@ -74,6 +74,14 @@ const useStyles = makeStyles(theme => ({
       'url(' +
       'https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' +
       ')'
+  },
+  postInProfile: {
+    width: '100%',
+    backgroundColor: '#F0F2F5',
+    height: '85vh',
+    ["@media only screen and (min-width:550px)"]: {  padding: '2rem'} ,
+    ["@media only screen and (max-width:550px)"]: {  padding: '0' } ,
+    overflowY: 'scroll'
   }
 }));
 
@@ -400,16 +408,10 @@ const UserProfile = ({
             container
             //className={'postContainer'}
           >
-            <Paper
+            <Paper className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
-              style={{
-                width: '100%',
-                backgroundColor: '#F0F2F5',
-                height: '85vh',
-                padding: '2rem',
-                overflowY: 'scroll'
-              }}
+             
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (

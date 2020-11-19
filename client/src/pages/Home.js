@@ -19,7 +19,16 @@ import Spinner from '../components/Profile/Spinner';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    paddingTop: '2rem'
+    paddingTop: '2rem',
+    ["@media only screen and (max-width:550px)"]: { width: '100%' } 
+  },
+  paper: {
+      backgroundColor: '#F0F2F5',
+      height: '85vh',
+      ["@media only screen and (min-width:550px)"]: { width: '80%', padding: '2rem'} ,
+      ["@media only screen and (max-width:550px)"]: { width: '100%', padding: '0' } ,
+      overflowY: 'scroll',
+      scrollbarWidth: '0'
   }
 }));
 
@@ -58,19 +67,11 @@ const Home = ({
   ) : (
     <div className={classes.root}>
       <Grid justify={'center'} container spacing={3}>
-        <Grid item md={1}></Grid>
-        <Grid item xs={12} sm={12} md={10} justify={'center'} container>
-          <Paper
+        <Grid item xs={1}></Grid>
+        <Grid item xs={12} md={10} justify={'center'} container>
+          <Paper className={classes.paper}
             onScroll={handleScroll}
             justify='center'
-            style={{
-              width: '80%',
-              backgroundColor: '#F0F2F5',
-              height: '85vh',
-              padding: '2rem',
-              overflowY: 'scroll',
-              scrollbarWidth: '0'
-            }}
           >
             {postsLoading ? (
               <Spinner />
