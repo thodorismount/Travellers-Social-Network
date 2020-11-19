@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 
 //MUI
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -47,15 +48,11 @@ const CreatePostDialog = ({ addPost }) => {
 
   return (
     <Fragment>
-      <Fab 
-        id="post-button"
-        color='primary'
-        onClick={handleToggle}
-        title='Create post'
-      
-      >
-        <AddIcon />
-      </Fab>
+      <Tooltip title='Create post'>
+        <Fab id='post-button' color='primary' onClick={handleToggle}>
+          <AddIcon />
+        </Fab>
+      </Tooltip>
 
       <Dialog
         open={open}
