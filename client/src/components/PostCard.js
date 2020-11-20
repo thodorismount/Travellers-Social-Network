@@ -167,11 +167,11 @@ function PostCard(props) {
         {/* like buttons  */}
         {!state.liked ? (
           <IconButton onClick={handleLike} disabled={disabled.disabled}>
-            <FavoriteBorder style={{ color: '#000' }} fontSize='large' />
+            <FavoriteBorder style={{ color: '#000' }} fontSize='medium' />
           </IconButton>
         ) : (
           <IconButton onClick={handleUnlike} disabled={disabled.disabled}>
-            <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='large' />
+            <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='medium' />
           </IconButton>
         )}
 
@@ -182,7 +182,11 @@ function PostCard(props) {
         ) : (
           <div />
         )}
-
+        <Divider
+          orientation='vertical'
+          flexItem
+          style={{ marginLeft: '12px' }}
+        />
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -192,8 +196,8 @@ function PostCard(props) {
           aria-label='show more'
         >
           <ModeCommentOutlinedIcon
-            fontSize='large'
-            style={{ color: 'black', marginLeft: '0.7rem' }}
+            fontSize='medium'
+            style={{ color: 'black' }}
           />
         </IconButton>
         {props.comments && props.comments.length > 0 ? (

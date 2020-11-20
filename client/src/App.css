@@ -20,11 +20,11 @@ html body {
   display: inline-block;
   padding: 6px;
   transition: all 1s ease;
-  color:#ffffff;
+  color: #ffffff;
   text-transform: capitalize;
   font-size: 15px;
-  position: relative; 
-  background-color: #50AEE4;
+  position: relative;
+  background-color: #50aee4;
 }
 
 @media only screen and (min-width: 540px) {
