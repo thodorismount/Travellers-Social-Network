@@ -218,12 +218,10 @@ router.post(
     // modify the date with moment
     //update account fields
 
-    // TODO: change name from all posts
-
     try {
       // check if user exists just for security issues
       let user = await User.findById(req.user.id);
-      console.log(user);
+
       if (!user) {
         res.status(400).json({
           errors: [{ msg: 'An error has occured, please try again.' }]
@@ -231,7 +229,7 @@ router.post(
       }
       // check if password mathces the db password
       const isMatch = await bcrypt.compare(password, user.password);
-      console.log(isMatch);
+
       if (!isMatch) {
         res.status(400).json({
           errors: [{ msg: 'An error has occured, please try again.' }]
@@ -239,7 +237,6 @@ router.post(
       }
       // modify the date with moment
       let newBirthDate = new Date(moment(birthDate, 'DD-MM-YYYY')).setHours(3);
-      console.log(newBirthDate);
 
       // create account fields  object,
       let accountFields = {
@@ -260,7 +257,7 @@ router.post(
         { user: req.user.id },
         { $set: { firstName: firstName, lastName: lastName } }
       );
-      console.log(posts);
+
       res.json(user);
     } catch (error) {
       console.log(err);

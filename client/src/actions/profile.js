@@ -19,7 +19,7 @@ export const changePassword = formData => async dispatch => {
       }
     };
 
-    const res = await axios.post('/api/users/changePassword', formData, config);
+    await axios.post('/api/users/changePassword', formData, config);
     dispatch({ type: LOGOUT });
     dispatch(loginAlert('Password Changed', 'success'));
   } catch (err) {
@@ -131,7 +131,7 @@ export const updateAccount = formData => async dispatch => {
       }
     };
 
-    const res = await axios.post('/api/users/updateAccount', formData, config);
+    await axios.post('/api/users/updateAccount', formData, config);
     dispatch(loginAlert('Account Updated. Redirecting...', 'success'));
     setInterval(() => {
       window.location.reload();
