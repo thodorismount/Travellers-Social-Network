@@ -17,7 +17,7 @@ import EditBirthDate from './EditBirthDate';
 import GenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
 import ChangePasswordModal from './ChangePasswordModal';
-// import Typography from '@material-ui/core/Typography';
+import moment from 'moment';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
