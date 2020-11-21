@@ -23,7 +23,7 @@ import CommentItem from './posts/CommentItem';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import '../re.css';
-
+import defaultAvatar from '../components/empty_avatar.png';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -124,11 +124,7 @@ function PostCard(props) {
           <Link href={`/userProfile/${props.user && props.user}`}>
             <Avatar
               aria-label='recipe'
-              src={`${
-                props.avatar
-                  ? props.avatar
-                  : 'public/static/images/empty_avatar.png'
-              }`}
+              src={`${props.avatar ? props.avatar : defaultAvatar}`}
               className={classes.avatar}
             ></Avatar>
           </Link>

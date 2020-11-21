@@ -65,33 +65,41 @@ const NavBar = ({
         <AppBar
           id='appbar'
           className='appbar'
-          style={{ background: '#50AEE4' }}
+          style={{ background: '#6fc3f2' }}
         >
           <Toolbar id='toolbar'>
             <Tooltip title='Go to feed page'>
               <IconButton id='navbar-logo' component={Link} to='/home'>
                 <img
-                  src='../static/images/logo_white_lines.png'
+                  src='../static/images/shorter_new_logo_earth.png'
                   alt='Avatar'
                   className='navbar-logo'
-                ></img>
+                />
               </IconButton>
             </Tooltip>
             <Typography variant='h6' className={classes.title}></Typography>
 
             <Tooltip title='View profile' id='profile-button'>
-              <Button component={Link} to={`/userProfile/${user && user._id}`}>
+              <Button
+                component={Link}
+                to={`/userProfile/${user && user._id}`}
+                style={{ marginTop: '7px' }}
+              >
                 <Typography
-                  variant='h5'
-                  style={{ textTransform: 'capitalize' }}
+                  variant='h4'
+                  style={{
+                    textTransform: 'capitalize',
+                    fontFamily: 'Bahnschrift Condensed',
+                    color: '#ffffff'
+                  }}
                 >
-                  {`${user && user.firstName} ${user && user.lastName}`}
+                  {`${user && user.firstName}`}
                 </Typography>
               </Button>
             </Tooltip>
             <Tooltip className='navbar-logout' title='Logout' placement='top'>
               <IconButton component={Link} to='/login' onClick={logout}>
-                <ExitToAppIcon fontSize='large' />
+                <ExitToAppIcon fontSize='large' style={{ color: '#ffffff' }} />
               </IconButton>
             </Tooltip>
           </Toolbar>

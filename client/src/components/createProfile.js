@@ -26,9 +26,6 @@ import ModalMessage from './ModalMessage';
 import FileBase from 'react-file-base64';
 
 const styles = {
-  pageTitle: {
-    margin: '10px'
-  },
   form: {
     alignItems: 'center'
   }
@@ -89,15 +86,15 @@ const EditProfileModal = props => {
         disableBackdropClick={props.disableOutsideClick}
         disableEscapeKeyDown={props.disableEscapeKeyDown}
       >
-        <DialogTitle id='form-dialog-title'>
-          <ModalMessage />
-        </DialogTitle>
+        {/* <DialogTitle id='form-dialog-title'> */}
+        <ModalMessage />
+        {/* </DialogTitle> */}
         <DialogContent>
           <Alert />
           <form className={classes.form} onSubmit={e => onSubmit(e)}>
             <TextField
               fullWidth
-              id='postTextField'
+              id='bioTextField'
               autoFocus
               name='bio'
               value={formData.bio}
