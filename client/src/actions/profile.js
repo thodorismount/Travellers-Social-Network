@@ -51,6 +51,8 @@ export const loadUser = () => async dispatch => {
 // get current users profile
 export const getCurrentProfile = id => async dispatch => {
   try {
+    dispatch({ type: CLEAR_PROFILE, payload: null });
+
     const res = await axios.get(`/api/profiles/${id}`);
     dispatch({
       type: GET_PROFILE,
