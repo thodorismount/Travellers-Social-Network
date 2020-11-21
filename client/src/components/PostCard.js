@@ -20,7 +20,6 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { addLike, removeLike, addComment } from '../actions/post';
 import CommentItem from './posts/CommentItem';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import '../re.css';
@@ -250,7 +249,6 @@ function PostCard(props) {
               onChange={e => setFormData({ text: e.target.value })}
               required
               rowsMax={5}
-              multiline
               InputLabelProps={{ required: false }}
             />
 

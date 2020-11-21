@@ -95,16 +95,16 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-  const [skip, setSkip] = useState(5);
+  const [skip, setSkip] = useState({ skip: 2 });
   const [expanded, setExpanded] = useState(false); //for visited countries
   const [expandedInt, setExpandedInt] = useState(false); //for interests
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop === scrollHeight) {
-      setSkip(skip + 5);
-      fetchMoreProfile(match.params.id, skip);
+    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+      setSkip({ skip: skip.skip + 2 });
+      fetchMoreProfile(match.params.id, skip.skip);
     }
   };
 
