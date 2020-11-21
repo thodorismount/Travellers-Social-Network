@@ -334,9 +334,7 @@ const UserProfile = ({
                           <ListItemText
                             primary={interest}
                             classes={{ primary: classes.ListItemText }}
-                          >
-                            {/* <Typography variant='h6'>{inte}</Typography> */}
-                          </ListItemText>
+                          ></ListItemText>
                         </ListItem>
                       ))}
                   <Collapse in={expandedInt} timeout='auto' unmountOnExit>
@@ -398,15 +396,7 @@ const UserProfile = ({
               </div>
             </Paper>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={7}
-            justify='flex-start'
-            container
-            //className={'postContainer'}
-          >
+          <Grid item xs={12} sm={12} md={7} justify='flex-start' container>
             <Paper
               className={classes.postInProfile}
               justify='center'
