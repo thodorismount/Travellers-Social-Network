@@ -16,7 +16,7 @@ html body {
 }
 ::-webkit-file-upload-button {
   cursor: pointer;
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: inline-block;
   padding: 6px;
   transition: all 1s ease;

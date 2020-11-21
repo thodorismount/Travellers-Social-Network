@@ -26,9 +26,6 @@ import ModalMessage from './ModalMessage';
 import FileBase from 'react-file-base64';
 
 const styles = {
-  button: {
-    margin: '10px 10px'
-  },
   pageTitle: {
     margin: '10px'
   },
@@ -81,6 +78,7 @@ const EditProfileModal = props => {
         onClick={handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
+        style={{ display: `${props.hideButton}` }}
       >
         {props.buttonType}
       </Button>
@@ -133,9 +131,7 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <Typography style={{ marginTop: '8 px' }}>
-              Add profile picture
-            </Typography>
+            <Typography>Add profile picture</Typography>
             <FileBase
               type='file'
               multiple={false}
@@ -144,7 +140,7 @@ const EditProfileModal = props => {
               }
             />
 
-            <DialogActions>
+            <DialogActions style={{ marginTop: '20px' }}>
               <Button
                 color='primary'
                 variant='outlined'

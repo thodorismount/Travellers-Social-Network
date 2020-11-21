@@ -26,7 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-
+import defaultAvatar from '../components/empty_avatar.png';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    ["@media only screen and (max-width:550px)"]: { paddingTop: '3rem' } 
+    ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
   },
   paper: {
     padding: theme.spacing(2),
@@ -79,8 +79,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: '#F0F2F5',
     height: '85vh',
-    ["@media only screen and (min-width:550px)"]: {  padding: '2rem'} ,
-    ["@media only screen and (max-width:550px)"]: {  padding: '0' } ,
+    ['@media only screen and (min-width:550px)']: { padding: '2rem' },
+    ['@media only screen and (max-width:550px)']: { padding: '0' },
     overflowY: 'scroll'
   }
 }));
@@ -133,6 +133,7 @@ const UserProfile = ({
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
+          hideButton='none'
         />
         <div style={{ fontSize: 'large' }}>
           <Typography
@@ -142,11 +143,6 @@ const UserProfile = ({
             Nothing to see yet!
           </Typography>
         </div>
-        <img
-          src={spinningEarth}
-          alt='Loading...'
-          style={{ width: '400px', margin: 'auto', display: 'block' }}
-        />
       </div>
     ) : (
       <div
@@ -196,7 +192,9 @@ const UserProfile = ({
               >
                 <div
                   style={{
-                    backgroundImage: `url(${profile.avatar})`,
+                    backgroundImage: `url(${
+                      profile.avatar ? profile.avatar : defaultAvatar
+                    })`,
                     width: '250px',
                     height: '250px',
                     backgroundPosition: 'center',
@@ -386,6 +384,7 @@ const UserProfile = ({
                     buttonType='Edit Profile'
                     hasProfile={true}
                     edit={true}
+                    hideButton=''
                     disableOutsideClick={false}
                     disableCancelButton={false}
                     bio={profile ? profile && profile.bio : ''}
@@ -408,10 +407,10 @@ const UserProfile = ({
             container
             //className={'postContainer'}
           >
-            <Paper className={classes.postInProfile}
+            <Paper
+              className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
-             
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (
