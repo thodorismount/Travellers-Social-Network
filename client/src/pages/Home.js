@@ -20,15 +20,21 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
     paddingTop: '2rem',
-    ["@media only screen and (max-width:550px)"]: { width: '100%' } 
+    ['@media only screen and (max-width:550px)']: { width: '100%' }
   },
   paper: {
-      backgroundColor: '#F0F2F5',
-      height: '85vh',
-      ["@media only screen and (min-width:550px)"]: { width: '80%', padding: '2rem'} ,
-      ["@media only screen and (max-width:550px)"]: { width: '100%', padding: '0' } ,
-      overflowY: 'scroll',
-      scrollbarWidth: '0'
+    backgroundColor: '#F0F2F5',
+    height: '85vh',
+    ['@media only screen and (min-width:550px)']: {
+      width: '80%',
+      padding: '2rem'
+    },
+    ['@media only screen and (max-width:550px)']: {
+      width: '100%',
+      padding: '0'
+    },
+    overflowY: 'scroll',
+    scrollbarWidth: '0'
   }
 }));
 
@@ -40,13 +46,13 @@ const Home = ({
   user,
   posts
 }) => {
-  const [skip, setSkip] = useState(5);
+  const [skip, setSkip] = useState(2);
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop + 100 >= scrollHeight) {
-      setSkip(skip + 5);
+    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+      setSkip(skip + 2);
       fetchMore(skip);
     }
   };
@@ -69,12 +75,15 @@ const Home = ({
       <Grid justify={'center'} container spacing={3}>
         <Grid item xs={1}></Grid>
         <Grid item xs={12} md={10} justify={'center'} container>
-          <Paper className={classes.paper}
+          <Paper
+            className={classes.paper}
             onScroll={handleScroll}
             justify='center'
           >
             {postsLoading ? (
-              <Spinner />
+              <div className='posts'>
+                <Spinner />
+              </div>
             ) : (
               <div className='posts'>
                 {posts &&

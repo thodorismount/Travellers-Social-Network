@@ -39,7 +39,7 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    ["@media only screen and (max-width:550px)"]: { paddingTop: '3rem' } 
+    ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
   },
   paper: {
     padding: theme.spacing(2),
@@ -79,8 +79,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: '#F0F2F5',
     height: '85vh',
-    ["@media only screen and (min-width:550px)"]: {  padding: '2rem'} ,
-    ["@media only screen and (max-width:550px)"]: {  padding: '0' } ,
+    ['@media only screen and (min-width:550px)']: { padding: '2rem' },
+    ['@media only screen and (max-width:550px)']: { padding: '0' },
     overflowY: 'scroll'
   }
 }));
@@ -95,16 +95,16 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-  const [skip, setSkip] = useState(5);
+  const [skip, setSkip] = useState({ skip: 2 });
   const [expanded, setExpanded] = useState(false); //for visited countries
   const [expandedInt, setExpandedInt] = useState(false); //for interests
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop === scrollHeight) {
-      setSkip(skip + 5);
-      fetchMoreProfile(match.params.id, skip);
+    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+      setSkip({ skip: skip.skip + 2 });
+      fetchMoreProfile(match.params.id, skip.skip);
     }
   };
 
@@ -408,10 +408,10 @@ const UserProfile = ({
             container
             //className={'postContainer'}
           >
-            <Paper className={classes.postInProfile}
+            <Paper
+              className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
-             
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (
