@@ -57,7 +57,10 @@ const EditPostDialog = props => {
 
   return (
     <Fragment>
-      <MenuItem onClick={handleToggle}>
+      <MenuItem
+        onClick={handleToggle}
+        style={{ fontFamily: 'Bahnschrift Condensed' }}
+      >
         <EditRoundedIcon style={{ color: 'rgba(232, 126, 4, 1)' }} />
         Edit Post
       </MenuItem>
@@ -67,9 +70,17 @@ const EditPostDialog = props => {
         onClose={handleToggle}
         aria-labelledby='form-dialog-title'
       >
-        <DialogTitle id='form-dialog-title'>Edit your travel post</DialogTitle>
+        <DialogTitle
+          id='form-dialog-title'
+          style={{ fontFamily: 'Bahnschrift Condensed' }}
+        >
+          Edit your travel post
+        </DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            style={{ fontFamily: 'Bahnschrift Condensed' }}
+          >
             <TextField
               fullWidth
               value={formData.text}

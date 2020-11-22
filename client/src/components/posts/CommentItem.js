@@ -25,7 +25,12 @@ const CommentItem = ({
           <ListItemText
             primary={
               <React.Fragment>
-                <Typography variant='h6' color='textPrimary' component={'span'}>
+                <Typography
+                  variant='h6'
+                  color='textPrimary'
+                  component={'span'}
+                  style={{ fontFamily: 'Bahnschrift Condensed' }}
+                >
                   <Link
                     href={`/userProfile/${user && user}`}
                     color='textPrimary'
@@ -37,7 +42,10 @@ const CommentItem = ({
                   variant='subtitle1'
                   display='inline'
                   color='textSecondary'
-                  style={{ marginLeft: '0.5rem' }}
+                  style={{
+                    marginLeft: '0.5rem',
+                    fontFamily: 'Bahnschrift Condensed'
+                  }}
                 >
                   {moment(date).fromNow().includes('day') ||
                   moment(date).fromNow().includes('month') ||
@@ -53,6 +61,7 @@ const CommentItem = ({
                   variant='subtitle1'
                   color='textPrimary'
                   component={'span'}
+                  style={{ fontFamily: 'Bahnschrift Condensed' }}
                 >
                   {text}
                 </Typography>

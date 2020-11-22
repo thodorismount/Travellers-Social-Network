@@ -25,7 +25,7 @@ if (localStorage.token) {
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#50AEE4',
+      main: '#5d9485',
       contrastText: '#ffffff'
     }
   }
