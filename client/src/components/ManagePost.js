@@ -19,10 +19,12 @@ import { deletePost } from '../actions/post';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    fontFamily: 'Bahnschrift Condensed'
   },
   paper: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    fontFamily: 'Bahnschrift Condensed'
   }
 }));
 
@@ -99,7 +101,10 @@ function ManagePost(props) {
                     />
 
                     <Divider />
-                    <MenuItem onClick={() => props.deletePost(props.id)}>
+                    <MenuItem
+                      onClick={() => props.deletePost(props.id)}
+                      style={{ fontFamily: 'Bahnschrift Condensed' }}
+                    >
                       <DeleteForeverRoundedIcon color='error' />
                       Delete Post
                     </MenuItem>

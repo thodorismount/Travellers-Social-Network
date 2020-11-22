@@ -39,6 +39,7 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
+    fontFamily: 'Bahnschrift Condensed',
     ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
   },
   paper: {
@@ -57,7 +58,8 @@ const useStyles = makeStyles(theme => ({
   ListItemText: {
     fontSize: '1.1rem', //font size of rest profile info is 1.25 rem
     lineHeight: '0.7',
-    marginLeft: '-2rem'
+    marginLeft: '-2rem',
+    fontFamily: 'Bahnschrift Condensed'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -126,7 +128,10 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div style={{ color: '#9BA5A3' }} justify={'center'}>
+      <div
+        style={{ color: '#9BA5A3', fontFamily: 'Bahnschrift Condensed' }}
+        justify={'center'}
+      >
         <EditProfileModal
           buttonType={'Create Profile'}
           edit={false}
@@ -150,7 +155,8 @@ const UserProfile = ({
           justifyContent: 'center',
           textAlign: 'center',
           color: '#9BA5A3',
-          paddingTop: '1rem'
+          paddingTop: '1rem',
+          fontFamily: 'Bahnschrift Condensed'
         }}
         justify='center'
       >
@@ -219,7 +225,8 @@ const UserProfile = ({
                   style={{
                     textTransform: 'capitalize',
                     width: '95%',
-                    marginBottom: '1rem'
+                    marginBottom: '1rem',
+                    fontFamily: 'Bahnschrift Condensed'
                   }}
                 >
                   {`${profile.user && profile.user.firstName} ${
@@ -231,7 +238,11 @@ const UserProfile = ({
                 variant='h6'
                 gutterBottom
                 align='left'
-                style={{ textAlign: 'left', marginBottom: '0.5rem' }}
+                style={{
+                  textAlign: 'left',
+                  marginBottom: '0.5rem',
+                  fontFamily: 'Bahnschrift Condensed'
+                }}
               >
                 <div style={{ marginBottom: '0.4rem' }}>
                   {profile && profile.bio}

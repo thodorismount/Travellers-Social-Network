@@ -75,7 +75,10 @@ const EditProfileModal = props => {
         onClick={handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
-        style={{ display: `${props.hideButton}` }}
+        style={{
+          display: `${props.hideButton}`,
+          fontFamily: 'Bahnschrift Condensed'
+        }}
       >
         {props.buttonType}
       </Button>

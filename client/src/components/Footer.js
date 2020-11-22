@@ -4,15 +4,23 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import '../App.css';
 const Footer = () => (
   <footer id='footer'>
-    <Typography variant='h4' align='center'>
+    <Typography
+      variant='h4'
+      align='center'
+      style={{ fontFamily: 'Bahnschrift Condensed' }}
+    >
       Hello Traveller!{' '}
     </Typography>
-    <Typography variant='h5' align='center'>
+    <Typography
+      variant='h5'
+      align='center'
+      style={{ fontFamily: 'Bahnschrift Condensed' }}
+    >
       Share your travel experience and connect with others <LocationOn />{' '}
     </Typography>
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', fontFamily: 'Bahnschrift Condensed' }}>
       <a
-        style={{ color: 'black' }}
+        style={{ color: 'black', fontFamily: 'Bahnschrift Condensed' }}
         href='https://www.skgcode.gr/'
         rel='noopener noreferrer'
         target='_blank'

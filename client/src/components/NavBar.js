@@ -65,7 +65,7 @@ const NavBar = ({
         <AppBar
           id='appbar'
           className='appbar'
-          style={{ background: '#6fc3f2' }}
+          style={{ background: '#5d9485' }}
         >
           <Toolbar id='toolbar'>
             <Tooltip title='Go to feed page'>
@@ -89,7 +89,7 @@ const NavBar = ({
                   variant='h4'
                   style={{
                     textTransform: 'capitalize',
-                    fontFamily: 'Bahnschrift Condensed',
+                    fontFamily: 'Bahnschrift',
                     color: '#ffffff'
                   }}
                 >

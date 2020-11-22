@@ -19,12 +19,14 @@ import Spinner from '../components/Profile/Spinner';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
+    fontFamily: 'Bahnschrift Condensed',
     paddingTop: '2rem',
     ['@media only screen and (max-width:550px)']: { width: '100%' }
   },
   paper: {
     backgroundColor: '#F0F2F5',
     height: '85vh',
+    fontFamily: 'Bahnschrift Condensed',
     ['@media only screen and (min-width:550px)']: {
       width: '80%',
       padding: '2rem'
@@ -51,7 +53,7 @@ const Home = ({
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+    if (offsetHeight + scrollTop >= scrollHeight) {
       setSkip(skip + 2);
       fetchMore(skip);
     }
