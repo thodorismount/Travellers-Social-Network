@@ -23,6 +23,7 @@ import CommentItem from './posts/CommentItem';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import '../re.css';
+
 import defaultAvatar from '../components/empty_avatar.png';
 const useStyles = makeStyles(theme => ({
   root: {

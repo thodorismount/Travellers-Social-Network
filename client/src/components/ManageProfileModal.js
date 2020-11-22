@@ -18,6 +18,7 @@ import GenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
 import ChangePasswordModal from './ChangePasswordModal';
 import moment from 'moment';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
@@ -62,19 +63,22 @@ const ManageProfileModal = props => {
   const { classes } = props;
   return (
     <Fragment>
-      <IconButton
-        color='primary'
-        title='Manage account'
-        component='span'
-        onClick={handleToggle}
-        style={{
-          position: 'absolute',
-          left: '80%',
-          top: '1%'
-        }}
-      >
-        <SettingsIcon fontSize='large' />
-      </IconButton>
+      <Tooltip title='Manage account'>
+        <IconButton
+          color='primary'
+          title='Manage account'
+          component='span'
+          onClick={handleToggle}
+          style={{
+            position: 'absolute',
+            left: '80%',
+            top: '1%'
+          }}
+        >
+          <SettingsIcon fontSize='large' />
+        </IconButton>
+      </Tooltip>
+
       <Dialog
         open={!open}
         onClose={handleToggle}

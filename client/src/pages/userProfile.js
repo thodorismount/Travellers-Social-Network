@@ -27,6 +27,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import defaultAvatar from '../components/empty_avatar.png';
+import Tooltip from '@material-ui/core/Tooltip';
+import ScrollTop from '../components/ScrollTop';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -309,16 +313,18 @@ const UserProfile = ({
                   {profile &&
                   profile.visitedCountries &&
                   profile.visitedCountries.length > 3 ? (
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded
-                      })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon color='primary' />
-                    </IconButton>
+                    <Tooltip title='Show more'>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label='show more'
+                      >
+                        <ExpandMoreIcon color='primary' />
+                      </IconButton>
+                    </Tooltip>
                   ) : (
                     <div></div>
                   )}
@@ -372,16 +378,18 @@ const UserProfile = ({
                   {profile &&
                   profile.interests &&
                   profile.interests[0].split(',').length > 3 ? (
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: expandedInt
-                      })}
-                      onClick={handleExpandIntClick}
-                      aria-expanded={expandedInt}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon color='primary' />
-                    </IconButton>
+                    <Tooltip title='Show more'>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expandedInt
+                        })}
+                        onClick={handleExpandIntClick}
+                        aria-expanded={expandedInt}
+                        aria-label='show more'
+                      >
+                        <ExpandMoreIcon color='primary' />
+                      </IconButton>
+                    </Tooltip>
                   ) : (
                     <div></div>
                   )}
@@ -412,16 +420,28 @@ const UserProfile = ({
               className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
+              id='postsPaper'
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (
                 <Spinner />
               ) : (
                 <div className='posts'>
+                  <div id='back-to-top-anchor'></div>
                   {posts.length > 0 &&
                     posts.map(post => <PostItem key={post._id} post={post} />)}
                 </div>
               )}
+              <ScrollTop>
+                <Fab
+                  color='primary'
+                  size='small'
+                  aria-label='scroll back to top'
+                  style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
+                >
+                  <KeyboardArrowUpIcon />
+                </Fab>
+              </ScrollTop>
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>

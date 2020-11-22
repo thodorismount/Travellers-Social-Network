@@ -15,7 +15,9 @@ import { getPosts, fetchMore } from '../actions/post';
 import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
-
+import ScrollTop from '../components/ScrollTop';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
@@ -81,6 +83,7 @@ const Home = ({
             className={classes.paper}
             onScroll={handleScroll}
             justify='center'
+            id='postsPaper'
           >
             {postsLoading ? (
               <div className='posts'>
@@ -88,11 +91,22 @@ const Home = ({
               </div>
             ) : (
               <div className='posts'>
+                <div id='back-to-top-anchor'></div>
                 {posts &&
                   posts.length > 0 &&
                   posts.map(post => <PostItem key={post._id} post={post} />)}
               </div>
             )}
+            <ScrollTop>
+              <Fab
+                color='primary'
+                size='small'
+                aria-label='scroll back to top'
+                style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
+              >
+                <KeyboardArrowUpIcon />
+              </Fab>
+            </ScrollTop>
           </Paper>
         </Grid>
         <Grid item md={1} justify={'flex-end'} container></Grid>
