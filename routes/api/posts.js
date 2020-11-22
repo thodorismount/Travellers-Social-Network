@@ -31,8 +31,6 @@ router.post(
 
     //Get user's info except password to pass into the post
 
-    // TODO: add post image when  images get implemented
-
     try {
       const user = await User.findById(req.user.id).select('-password');
       const profile = await Profile.findOne({ user: user.id });
@@ -112,7 +110,7 @@ router.get('/profile/:id', async (req, res) => {
     const skip = 0;
     const post = await Post.find({ user: req.params.id }, undefined, {
       skip,
-      limit: 5
+      limit: 2
     }).sort({ date: -1 });
 
     return res.json(post);
@@ -132,11 +130,11 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
     const skip =
       req.query.skip && /^\d+$/.test(req.query.skip)
         ? Number(req.query.skip)
-        : 5;
+        : 2;
 
     const post = await Post.find({ user: req.params.id }, undefined, {
       skip,
-      limit: 5
+      limit: 2
     }).sort({ date: -1 });
 
     return res.json(post);
@@ -151,13 +149,13 @@ router.get('/profile/fetchMoreProfile/:id', async (req, res) => {
 });
 
 // @ROUTE -- GET api/posts
-// @DESC  -- Get 5 firts post
+// @DESC  -- Get 2 firts post
 // @ACCESS -- Public
 
 router.get('/', async (req, res) => {
   try {
     const skip = 0;
-    const post = await Post.find({}, undefined, { skip, limit: 5 }).sort({
+    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
       date: -1
     });
 
@@ -173,8 +171,8 @@ router.get('/fetchMore', async (req, res) => {
     const skip =
       req.query.skip && /^\d+$/.test(req.query.skip)
         ? Number(req.query.skip)
-        : 5;
-    const post = await Post.find({}, undefined, { skip, limit: 5 }).sort({
+        : 2;
+    const post = await Post.find({}, undefined, { skip, limit: 2 }).sort({
       date: -1
     });
 
@@ -205,7 +203,7 @@ router.get('/:id', auth, async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Post not found' });
     }
-    console.error(err.message);
+
     res.status(500).send('Server Error');
   }
 });
@@ -365,21 +363,17 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
       .indexOf(req.params.comment_id);
 
     //Remove comment
-    
-    console.log(removeIndex);
-
-    if(removeIndex === -1 ){
-      return res.status(500).json({ msg: "Server error" });
+    if (removeIndex === -1) {
+      return res.status(500).json({ msg: 'Server error' });
     } else {
-    post.comments.splice(removeIndex, 1);
-    
-    //Update post comment list
+      post.comments.splice(removeIndex, 1);
 
-    await post.save();
+      //Update post comment list
 
-    res.json(post.comments);
+      await post.save();
+
+      res.json(post.comments);
     }
-    
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

@@ -28,7 +28,13 @@ const EditPostDialog = props => {
   });
 
   const stopPropagationForTab = event => {
-    if (event.key === 'd' || event.key === 'Tab' || event.key === 'D') {
+    if (
+      event.key === 'd' ||
+      event.key === 'Tab' ||
+      event.key === 'D' ||
+      event.key === 'e' ||
+      event.key === 'E'
+    ) {
       event.stopPropagation();
     }
   };

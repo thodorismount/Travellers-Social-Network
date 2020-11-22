@@ -20,11 +20,10 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { addLike, removeLike, addComment } from '../actions/post';
 import CommentItem from './posts/CommentItem';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import '../re.css';
-
+import defaultAvatar from '../components/empty_avatar.png';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
@@ -125,11 +124,7 @@ function PostCard(props) {
           <Link href={`/userProfile/${props.user && props.user}`}>
             <Avatar
               aria-label='recipe'
-              src={`${
-                props.avatar
-                  ? props.avatar
-                  : 'public/static/images/empty_avatar.png'
-              }`}
+              src={`${props.avatar ? props.avatar : defaultAvatar}`}
               className={classes.avatar}
             ></Avatar>
           </Link>
@@ -167,11 +162,11 @@ function PostCard(props) {
         {/* like buttons  */}
         {!state.liked ? (
           <IconButton onClick={handleLike} disabled={disabled.disabled}>
-            <FavoriteBorder style={{ color: '#000' }} fontSize='large' />
+            <FavoriteBorder style={{ color: '#000' }} />
           </IconButton>
         ) : (
           <IconButton onClick={handleUnlike} disabled={disabled.disabled}>
-            <Favorite style={{ color: 'rgba(238,1,1,1)' }} fontSize='large' />
+            <Favorite style={{ color: 'rgba(238,1,1,1)' }} />
           </IconButton>
         )}
 
@@ -182,7 +177,11 @@ function PostCard(props) {
         ) : (
           <div />
         )}
-
+        <Divider
+          orientation='vertical'
+          flexItem
+          style={{ marginLeft: '12px' }}
+        />
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -191,10 +190,7 @@ function PostCard(props) {
           aria-expanded={expanded}
           aria-label='show more'
         >
-          <ModeCommentOutlinedIcon
-            fontSize='large'
-            style={{ color: 'black', marginLeft: '0.7rem' }}
-          />
+          <ModeCommentOutlinedIcon style={{ color: 'black' }} />
         </IconButton>
         {props.comments && props.comments.length > 0 ? (
           <Typography variant='h5' color='textPrimary'>
@@ -249,7 +245,6 @@ function PostCard(props) {
               onChange={e => setFormData({ text: e.target.value })}
               required
               rowsMax={5}
-              multiline
               InputLabelProps={{ required: false }}
             />
 

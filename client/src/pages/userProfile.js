@@ -26,7 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-
+import defaultAvatar from '../components/empty_avatar.png';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    ["@media only screen and (max-width:550px)"]: { paddingTop: '3rem' } 
+    ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
   },
   paper: {
     padding: theme.spacing(2),
@@ -79,8 +79,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     backgroundColor: '#F0F2F5',
     height: '85vh',
-    ["@media only screen and (min-width:550px)"]: {  padding: '2rem'} ,
-    ["@media only screen and (max-width:550px)"]: {  padding: '0' } ,
+    ['@media only screen and (min-width:550px)']: { padding: '2rem' },
+    ['@media only screen and (max-width:550px)']: { padding: '0' },
     overflowY: 'scroll'
   }
 }));
@@ -95,16 +95,16 @@ const UserProfile = ({
   profile: { profile, loading },
   posts
 }) => {
-  const [skip, setSkip] = useState(5);
+  const [skip, setSkip] = useState({ skip: 2 });
   const [expanded, setExpanded] = useState(false); //for visited countries
   const [expandedInt, setExpandedInt] = useState(false); //for interests
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop === scrollHeight) {
-      setSkip(skip + 5);
-      fetchMoreProfile(match.params.id, skip);
+    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+      setSkip({ skip: skip.skip + 2 });
+      fetchMoreProfile(match.params.id, skip.skip);
     }
   };
 
@@ -133,6 +133,7 @@ const UserProfile = ({
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
+          hideButton='none'
         />
         <div style={{ fontSize: 'large' }}>
           <Typography
@@ -142,11 +143,6 @@ const UserProfile = ({
             Nothing to see yet!
           </Typography>
         </div>
-        <img
-          src={spinningEarth}
-          alt='Loading...'
-          style={{ width: '400px', margin: 'auto', display: 'block' }}
-        />
       </div>
     ) : (
       <div
@@ -196,7 +192,9 @@ const UserProfile = ({
               >
                 <div
                   style={{
-                    backgroundImage: `url(${profile.avatar})`,
+                    backgroundImage: `url(${
+                      profile.avatar ? profile.avatar : defaultAvatar
+                    })`,
                     width: '250px',
                     height: '250px',
                     backgroundPosition: 'center',
@@ -336,9 +334,7 @@ const UserProfile = ({
                           <ListItemText
                             primary={interest}
                             classes={{ primary: classes.ListItemText }}
-                          >
-                            {/* <Typography variant='h6'>{inte}</Typography> */}
-                          </ListItemText>
+                          ></ListItemText>
                         </ListItem>
                       ))}
                   <Collapse in={expandedInt} timeout='auto' unmountOnExit>
@@ -386,6 +382,7 @@ const UserProfile = ({
                     buttonType='Edit Profile'
                     hasProfile={true}
                     edit={true}
+                    hideButton=''
                     disableOutsideClick={false}
                     disableCancelButton={false}
                     bio={profile ? profile && profile.bio : ''}
@@ -399,19 +396,11 @@ const UserProfile = ({
               </div>
             </Paper>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={7}
-            justify='flex-start'
-            container
-            //className={'postContainer'}
-          >
-            <Paper className={classes.postInProfile}
+          <Grid item xs={12} sm={12} md={7} justify='flex-start' container>
+            <Paper
+              className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
-             
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (

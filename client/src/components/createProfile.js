@@ -26,12 +26,6 @@ import ModalMessage from './ModalMessage';
 import FileBase from 'react-file-base64';
 
 const styles = {
-  button: {
-    margin: '10px 10px'
-  },
-  pageTitle: {
-    margin: '10px'
-  },
   form: {
     alignItems: 'center'
   }
@@ -81,6 +75,7 @@ const EditProfileModal = props => {
         onClick={handleToggle}
         className={classes.button}
         startIcon={<AccountCircleIcon />}
+        style={{ display: `${props.hideButton}` }}
       >
         {props.buttonType}
       </Button>
@@ -91,15 +86,15 @@ const EditProfileModal = props => {
         disableBackdropClick={props.disableOutsideClick}
         disableEscapeKeyDown={props.disableEscapeKeyDown}
       >
-        <DialogTitle id='form-dialog-title'>
-          <ModalMessage />
-        </DialogTitle>
+        {/* <DialogTitle id='form-dialog-title'> */}
+        <ModalMessage />
+        {/* </DialogTitle> */}
         <DialogContent>
           <Alert />
           <form className={classes.form} onSubmit={e => onSubmit(e)}>
             <TextField
               fullWidth
-              id='postTextField'
+              id='bioTextField'
               autoFocus
               name='bio'
               value={formData.bio}
@@ -133,9 +128,7 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <Typography style={{ marginTop: '8 px' }}>
-              Add profile picture
-            </Typography>
+            <Typography>Add profile picture</Typography>
             <FileBase
               type='file'
               multiple={false}
@@ -144,7 +137,7 @@ const EditProfileModal = props => {
               }
             />
 
-            <DialogActions>
+            <DialogActions style={{ marginTop: '20px' }}>
               <Button
                 color='primary'
                 variant='outlined'

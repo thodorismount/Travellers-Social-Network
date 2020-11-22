@@ -1,5 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 // Redux
 import { connect } from 'react-redux';
@@ -11,13 +12,15 @@ import '../re.css';
 const ModalMessage = ({ auth: { user }, profile: { profile } }) => {
   if (profile == null) {
     return (
-      <Typography style={{ textTransform: 'capitalize' }}>
+      <DialogTitle style={{ width: '500px' }}>
         Welcome {user && user.firstName} {user && user.lastName}! Please fill in
         your profile
-      </Typography>
+      </DialogTitle>
     );
   } else {
-    return <Typography>Edit your profile</Typography>;
+    return (
+      <DialogTitle style={{ width: '500px' }}>Edit your profile </DialogTitle>
+    );
   }
 };
 

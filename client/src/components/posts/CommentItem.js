@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
@@ -22,12 +21,6 @@ const CommentItem = ({
   return (
     <div>
       <div style={{ margin: '0.9rem' }}>
-        {/* <h4 style={{ lineHeight: '0.9rem' }}>{name}</h4>
-        <p>{text}</p>
-        {user === (auth.user && auth.user._id) && ( */}
-        {/* // <IconButton onClick={e => removeComment(postId, _id)}> */}
-        {/* //   <DeleteForeverOutlinedIcon fontSize='medium' color='secondary' /> */}
-        {/* // </IconButton> */}
         <ListItem>
           <ListItemText
             primary={
@@ -40,13 +33,17 @@ const CommentItem = ({
                     {name}
                   </Link>
                 </Typography>
-                <Typography variant='subtitle1' display='inline' color='textSecondary' style={{marginLeft: '0.5rem'}}>
-                {
-        moment(date).fromNow().includes('day') ||
-        moment(date).fromNow().includes('month') ||
-        moment(date).fromNow().includes('year')
-          ? moment(date).format('DD MMMM YYYY')
-          : moment(date).fromNow() }
+                <Typography
+                  variant='subtitle1'
+                  display='inline'
+                  color='textSecondary'
+                  style={{ marginLeft: '0.5rem' }}
+                >
+                  {moment(date).fromNow().includes('day') ||
+                  moment(date).fromNow().includes('month') ||
+                  moment(date).fromNow().includes('year')
+                    ? moment(date).format('DD MMMM YYYY')
+                    : moment(date).fromNow()}
                 </Typography>
               </React.Fragment>
             }

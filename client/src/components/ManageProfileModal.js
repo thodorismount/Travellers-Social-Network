@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import LoginAlert from './Alerts/LoginAlert';
-import moment from 'moment';
 import { updateAccount } from '../actions/profile';
 
 //MUI
@@ -14,11 +13,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import withStyles from '@material-ui/core/styles/withStyles';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
-import CreateDatePicker from '../components/DatePicker';
+import EditBirthDate from './EditBirthDate';
 import GenderSelector from '../components/GenderSelector';
 import DeleteAccountModal from '../components/DeleteAccountModal';
 import ChangePasswordModal from './ChangePasswordModal';
-// import Typography from '@material-ui/core/Typography';
+import moment from 'moment';
 
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
@@ -48,7 +47,6 @@ const ManageProfileModal = props => {
   const onSubmit = e => {
     e.preventDefault();
     props.updateAccount(formData);
-    // window.location.reload(false);
   };
 
   let testOpen = props.open;
@@ -61,7 +59,6 @@ const ManageProfileModal = props => {
   const handleTextField = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData.birthDate);
   const { classes } = props;
   return (
     <Fragment>
@@ -133,10 +130,14 @@ const ManageProfileModal = props => {
               <tbody>
                 <tr>
                   <td>
-                    <CreateDatePicker
+                    <EditBirthDate
                       onChange={value =>
-                        setFormData({ ...formData, birthDate: value })
+                        setFormData({
+                          ...formData,
+                          birthDate: moment(value).format('MM-DD-YYYY')
+                        })
                       }
+                      getDate={moment(formData.birthDate).format('DD-MM-YYYY')}
                     />
                   </td>
                   <td>

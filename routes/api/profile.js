@@ -120,8 +120,6 @@ router.post(
         isRegistered: true
       });
 
-      console.log(idUser);
-
       res.json({ profile });
     } catch (err) {
       console.log(err.message);
