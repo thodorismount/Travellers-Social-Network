@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import CreateSelectCountries from '../components/selectCountry';
 import MapsSelector from '../components/MapsSelector';
 import Alert from './Alerts/Alert';
-
 //MUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
-
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
 // import Typography from '@material-ui/core/Typography';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -68,20 +68,23 @@ const EditProfileModal = props => {
   const { classes } = props;
   return (
     <Fragment>
-      <Button
-        variant='contained'
-        size='medium'
-        color='primary'
-        onClick={handleToggle}
-        className={classes.button}
-        startIcon={<AccountCircleIcon />}
-        style={{
-          display: `${props.hideButton}`,
-          fontFamily: 'Bahnschrift Condensed'
-        }}
-      >
-        {props.buttonType}
-      </Button>
+      <Tooltip title='Edit profile'>
+        <IconButton
+          onClick={handleToggle}
+          style={{
+            display: `${props.hideButton}`,
+            position: 'absolute',
+            left: '5%',
+            top: '1%'
+          }}
+          color='primary'
+          title='Edit profile'
+          component='span'
+        >
+          <EditRoundedIcon fontSize='large' />
+        </IconButton>
+      </Tooltip>
+
       <Dialog
         open={props.hasProfile ? !open : open}
         onClose={handleToggle}
