@@ -45,7 +45,7 @@ const Home = ({
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop + 100 >= scrollHeight) {
+    if (offsetHeight + scrollTop  >= scrollHeight) {
       setSkip(skip + 5);
       fetchMore(skip);
     }
