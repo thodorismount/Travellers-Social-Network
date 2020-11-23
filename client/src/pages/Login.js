@@ -56,6 +56,7 @@ const styles = {
     },
     align: 'center'
   }
+
 };
 
 const Login = props => {
@@ -92,8 +93,8 @@ const Login = props => {
     <Fragment>
       <Grid container spacing={1} className={classes.form}>
         <Grid item xs={12} sm={12} md={6}>
-          <img
-            src='static/images/final_logo.png'
+          <img className={classes.image}
+            src='static/images/PNG_new_logo_with_text.png'
             alt='Logo'
             className={classes.image}
           />

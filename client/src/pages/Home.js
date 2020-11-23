@@ -39,6 +39,18 @@ const useStyles = makeStyles(theme => ({
     },
     overflowY: 'scroll',
     scrollbarWidth: '0'
+  },
+  backtotop:{
+    ['@media only screen and (min-width:550px)']:{
+    position: 'fixed',
+    bottom: '3rem',
+    right: '15%' 
+  },
+  ['@media only screen and (max-width:550px)']:{
+    position: 'fixed',
+    bottom: '7rem',
+    right: '2.5rem',
+  }
   }
 }));
 
@@ -99,10 +111,10 @@ const Home = ({
             )}
             <ScrollTop>
               <Fab
+              className={classes.backtotop}
                 color='primary'
                 size='small'
                 aria-label='scroll back to top'
-                style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
               >
                 <KeyboardArrowUpIcon />
               </Fab>
