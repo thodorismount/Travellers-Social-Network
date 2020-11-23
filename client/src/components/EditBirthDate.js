@@ -11,8 +11,6 @@ function EditBirthDate(props) {
   const [inputValue, setInputValue] = useState(props.getDate);
 
   const onDateChange = (date, value) => {
-    console.log(`Date picker date: ${date}`);
-    console.log(`Date picker value: ${value}`);
     setDate(date);
     setInputValue(value);
     props.onChange(date);
@@ -30,6 +28,7 @@ function EditBirthDate(props) {
         showtodaybutton={false}
       >
         <KeyboardDatePicker
+          animateYearScrolling='true'
           autoOk={true}
           value={selectedDate}
           format='DD-MM-YYYY'
