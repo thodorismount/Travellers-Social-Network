@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { removeComment } from '../../actions/post';
 import PropTypes from 'prop-types';
@@ -18,6 +18,14 @@ const CommentItem = ({
   auth,
   removeComment
 }) => {
+  const [disabled, setDisabled] = useState(false);
+  const handleClick = e => {
+    setDisabled(true);
+    setInterval(() => {
+      setDisabled(false);
+    }, 3000);
+    removeComment(postId, _id);
+  };
   return (
     <div>
       <div style={{ margin: '0.9rem' }}>
@@ -72,8 +80,9 @@ const CommentItem = ({
             <ListItemSecondaryAction>
               <IconButton
                 edge='end'
+                disabled={disabled ? disabled : false}
                 aria-label='delete'
-                onClick={e => removeComment(postId, _id)}
+                onClick={handleClick}
               >
                 <DeleteForeverOutlinedIcon style={{ color: '#EE0101' }} />
               </IconButton>
