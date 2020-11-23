@@ -74,7 +74,11 @@ const EditPostDialog = props => {
           id='form-dialog-title'
           style={{ fontFamily: 'Bahnschrift Condensed' }}
         >
-          Edit your travel post
+          <div
+            style={{ fontFamily: 'Bahnschrift Condensed', fontSize: '1.5rem' }}
+          >
+            Edit your travel post
+          </div>
         </DialogTitle>
         <DialogContent>
           <form
@@ -112,10 +116,22 @@ const EditPostDialog = props => {
             />
 
             <DialogActions>
-              <Button color='primary' variant='outlined' onClick={handleToggle}>
+              <Button
+                color='primary'
+                variant='outlined'
+                onClick={handleToggle}
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
+              >
                 Cancel
               </Button>
               <Button
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
                 color='primary'
                 variant='contained'
                 type='submit'

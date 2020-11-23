@@ -145,6 +145,10 @@ const EditProfileModal = props => {
 
             <DialogActions style={{ marginTop: '20px' }}>
               <Button
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
                 color='primary'
                 variant='outlined'
                 size='medium'
@@ -154,6 +158,10 @@ const EditProfileModal = props => {
                 Cancel
               </Button>
               <Button
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
                 type='submit'
                 variant='contained'
                 color='primary'
