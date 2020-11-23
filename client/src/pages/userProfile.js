@@ -44,7 +44,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
     fontFamily: 'Bahnschrift Condensed',
-    ['@media only screen and (max-width:1024px)']: { paddingTop: '3rem' }
+    paddingTop: '1.5rem',
+    ['@media only screen and (max-width: 1550px) and (min-width: 900px)']: {
+      paddingTop: '2.5rem'
+    },
+    ['@media only screen and (max-width:900px)']: { paddingTop: '4.5rem' }
   },
   paper: {
     padding: theme.spacing(2),
@@ -74,12 +78,6 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)'
-  },
-  profilePic: {
-    backgroundImage:
-      'url(' +
-      'https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' +
-      ')'
   },
   postInProfile: {
     width: '100%',
@@ -195,6 +193,7 @@ const UserProfile = ({
             <Paper className={classes.paper} variant='elevation'>
               <div
                 className='raised'
+                align='center'
                 style={{
                   backgroundColor: '#F0F2F5',
                   borderRadius: '2%',
@@ -212,8 +211,6 @@ const UserProfile = ({
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '50%',
-                    marginLeft: '15%',
-                    marginRight: '15%',
                     marginBottom: '0.8rem'
                   }}
                 ></div>

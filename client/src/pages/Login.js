@@ -45,10 +45,16 @@ const styles = {
     backgroundColor: '#F0F2F5'
   },
   image: {
-   marginTop: '-7%',
-   ['@media only screen and (min-width:560px)']: { width: '600px', height: '450px' },
-   ['@media only screen and (max-width:560px)']: { width: '375px', height: '300px' },
-   align: 'center'
+    marginTop: '-7%',
+    ['@media only screen and (min-width:560px)']: {
+      width: '600px',
+      height: '450px'
+    },
+    ['@media only screen and (max-width:560px)']: {
+      width: '375px',
+      height: '300px'
+    },
+    align: 'center'
   }
 
 };
@@ -90,6 +96,7 @@ const Login = props => {
           <img className={classes.image}
             src='static/images/PNG_new_logo_with_text.png'
             alt='Logo'
+            className={classes.image}
           />
           <br />
         </Grid>
