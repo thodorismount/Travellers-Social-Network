@@ -86,6 +86,18 @@ const useStyles = makeStyles(theme => ({
     ['@media only screen and (min-width:550px)']: { padding: '2rem' },
     ['@media only screen and (max-width:550px)']: { padding: '0' },
     overflowY: 'scroll'
+  },
+  backtotop:{
+    ['@media only screen and (min-width:550px)']:{
+    position: 'fixed',
+    bottom: '3rem',
+    right: '15%' 
+  },
+  ['@media only screen and (max-width:550px)']:{
+    position: 'fixed',
+    bottom: '7rem',
+    right: '2.5rem',
+  }
   }
 }));
 
@@ -451,7 +463,7 @@ const UserProfile = ({
                   color='primary'
                   size='small'
                   aria-label='scroll back to top'
-                  style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
+                 className={classes.backtotop}
                 >
                   <KeyboardArrowUpIcon />
                 </Fab>
