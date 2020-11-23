@@ -23,12 +23,14 @@ import CommentItem from './posts/CommentItem';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import '../re.css';
+
 import defaultAvatar from '../components/empty_avatar.png';
 const useStyles = makeStyles(theme => ({
   root: {
     minWidth: '60%',
     marginBottom: '1.5rem',
-    margin: '1rem'
+    margin: '1rem',
+    fontFamily: 'Bahnschrift Condensed'
     // marginLeft: '10%'
   },
   media: {
@@ -46,11 +48,13 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#F0F2F5'
   },
   titleFont: {
-    fontSize: '1.25rem'
+    fontSize: '1.5rem',
+    fontFamily: 'Bahnschrift Condensed'
   },
   subheaderFont: {
     fontSize: '1rem',
-    color: '#191919'
+    color: '#191919',
+    fontFamily: 'Bahnschrift Condensed'
   },
   button: {
     marginTop: '1rem',
@@ -58,7 +62,8 @@ const useStyles = makeStyles(theme => ({
   },
   textfield: {
     margin: '1rem 1.5rem',
-    marginLeft: '0'
+    marginLeft: '0',
+    fontFamily: 'Bahnschrift Condensed'
   }
 }));
 
@@ -143,17 +148,25 @@ function PostCard(props) {
           <Link
             href={`/userProfile/${props.user && props.user}`}
             color='inherit'
+            style={{ fontFamily: 'Bahnschrift Condensed' }}
           >
             {props.username}
           </Link>
         }
         subheader={`${props.location}, ${props.date}`}
         classes={{ title: classes.titleFont, subheader: classes.subheaderFont }}
-        style={{ textTransform: 'capitalize' }}
+        style={{
+          textTransform: 'capitalize',
+          fontFamily: 'Bahnschrift Condensed'
+        }}
       />
       <CardMedia className={classes.media} image={props.image} />
       <CardContent>
-        <Typography variant='h6' component='p'>
+        <Typography
+          variant='h6'
+          component='p'
+          style={{ fontFamily: 'Bahnschrift Condensed' }}
+        >
           {props.caption}
         </Typography>
       </CardContent>
@@ -171,7 +184,11 @@ function PostCard(props) {
         )}
 
         {props.likes && props.likes.length > 0 ? (
-          <Typography variant='h5' color='textPrimary'>
+          <Typography
+            variant='h5'
+            color='textPrimary'
+            style={{ fontFamily: 'Bahnschrift Condensed' }}
+          >
             {props.likes && props.likes.length}
           </Typography>
         ) : (
@@ -193,7 +210,11 @@ function PostCard(props) {
           <ModeCommentOutlinedIcon style={{ color: 'black' }} />
         </IconButton>
         {props.comments && props.comments.length > 0 ? (
-          <Typography variant='h5' color='textPrimary'>
+          <Typography
+            variant='h5'
+            color='textPrimary'
+            style={{ fontFamily: 'Bahnschrift Condensed' }}
+          >
             {props.comments && props.comments.length}
           </Typography>
         ) : (

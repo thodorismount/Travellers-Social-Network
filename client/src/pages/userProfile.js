@@ -27,6 +27,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import defaultAvatar from '../components/empty_avatar.png';
+import Tooltip from '@material-ui/core/Tooltip';
+import ScrollTop from '../components/ScrollTop';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -39,7 +43,8 @@ import '../re.css';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
-    ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
+    fontFamily: 'Bahnschrift Condensed',
+    ['@media only screen and (max-width:1024px)']: { paddingTop: '3rem' }
   },
   paper: {
     padding: theme.spacing(2),
@@ -57,7 +62,8 @@ const useStyles = makeStyles(theme => ({
   ListItemText: {
     fontSize: '1.1rem', //font size of rest profile info is 1.25 rem
     lineHeight: '0.7',
-    marginLeft: '-2rem'
+    marginLeft: '-2rem',
+    fontFamily: 'Bahnschrift Condensed'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -126,7 +132,10 @@ const UserProfile = ({
     return <Spinner />;
   } else if (profile === null) {
     return user && user._id === match.params.id ? (
-      <div style={{ color: '#9BA5A3' }} justify={'center'}>
+      <div
+        style={{ color: '#9BA5A3', fontFamily: 'Bahnschrift Condensed' }}
+        justify={'center'}
+      >
         <EditProfileModal
           buttonType={'Create Profile'}
           edit={false}
@@ -150,7 +159,8 @@ const UserProfile = ({
           justifyContent: 'center',
           textAlign: 'center',
           color: '#9BA5A3',
-          paddingTop: '1rem'
+          paddingTop: '1rem',
+          fontFamily: 'Bahnschrift Condensed'
         }}
         justify='center'
       >
@@ -219,7 +229,8 @@ const UserProfile = ({
                   style={{
                     textTransform: 'capitalize',
                     width: '95%',
-                    marginBottom: '1rem'
+                    marginBottom: '1rem',
+                    fontFamily: 'Bahnschrift Condensed'
                   }}
                 >
                   {`${profile.user && profile.user.firstName} ${
@@ -231,7 +242,11 @@ const UserProfile = ({
                 variant='h6'
                 gutterBottom
                 align='left'
-                style={{ textAlign: 'left', marginBottom: '0.5rem' }}
+                style={{
+                  textAlign: 'left',
+                  marginBottom: '0.5rem',
+                  fontFamily: 'Bahnschrift Condensed'
+                }}
               >
                 <div style={{ marginBottom: '0.4rem' }}>
                   {profile && profile.bio}
@@ -298,16 +313,18 @@ const UserProfile = ({
                   {profile &&
                   profile.visitedCountries &&
                   profile.visitedCountries.length > 3 ? (
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded
-                      })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon color='primary' />
-                    </IconButton>
+                    <Tooltip title='Show more'>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expanded
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label='show more'
+                      >
+                        <ExpandMoreIcon color='primary' />
+                      </IconButton>
+                    </Tooltip>
                   ) : (
                     <div></div>
                   )}
@@ -361,16 +378,18 @@ const UserProfile = ({
                   {profile &&
                   profile.interests &&
                   profile.interests[0].split(',').length > 3 ? (
-                    <IconButton
-                      className={clsx(classes.expand, {
-                        [classes.expandOpen]: expandedInt
-                      })}
-                      onClick={handleExpandIntClick}
-                      aria-expanded={expandedInt}
-                      aria-label='show more'
-                    >
-                      <ExpandMoreIcon color='primary' />
-                    </IconButton>
+                    <Tooltip title='Show more'>
+                      <IconButton
+                        className={clsx(classes.expand, {
+                          [classes.expandOpen]: expandedInt
+                        })}
+                        onClick={handleExpandIntClick}
+                        aria-expanded={expandedInt}
+                        aria-label='show more'
+                      >
+                        <ExpandMoreIcon color='primary' />
+                      </IconButton>
+                    </Tooltip>
                   ) : (
                     <div></div>
                   )}
@@ -401,16 +420,28 @@ const UserProfile = ({
               className={classes.postInProfile}
               justify='center'
               onScroll={handleScroll}
+              id='postsPaper'
             >
               {/* this is where the post are being rendered */}
               {postsLoading ? (
                 <Spinner />
               ) : (
                 <div className='posts'>
+                  <div id='back-to-top-anchor'></div>
                   {posts.length > 0 &&
                     posts.map(post => <PostItem key={post._id} post={post} />)}
                 </div>
               )}
+              <ScrollTop>
+                <Fab
+                  color='primary'
+                  size='small'
+                  aria-label='scroll back to top'
+                  style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
+                >
+                  <KeyboardArrowUpIcon />
+                </Fab>
+              </ScrollTop>
             </Paper>
           </Grid>
           <Grid item xs={1} sm={1}>

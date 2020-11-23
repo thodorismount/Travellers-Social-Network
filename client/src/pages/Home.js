@@ -15,16 +15,20 @@ import { getPosts, fetchMore } from '../actions/post';
 import PostItem from '../components/posts/PostItem';
 import Posts from '../components/posts/Posts';
 import Spinner from '../components/Profile/Spinner';
-
+import ScrollTop from '../components/ScrollTop';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
+    fontFamily: 'Bahnschrift Condensed',
     paddingTop: '2rem',
     ['@media only screen and (max-width:550px)']: { width: '100%' }
   },
   paper: {
     backgroundColor: '#F0F2F5',
     height: '85vh',
+    fontFamily: 'Bahnschrift Condensed',
     ['@media only screen and (min-width:550px)']: {
       width: '80%',
       padding: '2rem'
@@ -51,7 +55,7 @@ const Home = ({
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop + 200 >= scrollHeight) {
+    if (offsetHeight + scrollTop >= scrollHeight) {
       setSkip(skip + 2);
       fetchMore(skip);
     }
@@ -79,6 +83,7 @@ const Home = ({
             className={classes.paper}
             onScroll={handleScroll}
             justify='center'
+            id='postsPaper'
           >
             {postsLoading ? (
               <div className='posts'>
@@ -86,11 +91,22 @@ const Home = ({
               </div>
             ) : (
               <div className='posts'>
+                <div id='back-to-top-anchor'></div>
                 {posts &&
                   posts.length > 0 &&
                   posts.map(post => <PostItem key={post._id} post={post} />)}
               </div>
             )}
+            <ScrollTop>
+              <Fab
+                color='primary'
+                size='small'
+                aria-label='scroll back to top'
+                style={{ position: 'fixed', bottom: '3rem', right: '15%' }}
+              >
+                <KeyboardArrowUpIcon />
+              </Fab>
+            </ScrollTop>
           </Paper>
         </Grid>
         <Grid item md={1} justify={'flex-end'} container></Grid>
