@@ -33,7 +33,13 @@ function DeleteAccountModal(props) {
         variant='contained'
         startIcon={<DeleteIcon />}
         onClick={handleClickOpen}
-        style={{ marginLeft: '18px', backgroundColor: 'red', color: 'white' }}
+        style={{
+          marginLeft: '18px',
+          backgroundColor: 'red',
+          color: 'white',
+          fontFamily: 'Bahnschrift Condensed',
+          fontSize: '1.1rem'
+        }}
       >
         Delete account
       </Button>
@@ -46,20 +52,47 @@ function DeleteAccountModal(props) {
         aria-describedby='alert-dialog-slide-description'
       >
         <DialogTitle id='alert-dialog-slide-title'>
-          {'Delete account?'}
+          <div
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.5rem'
+            }}
+          >
+            Delete account?
+          </div>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            We're sorry to see you leave
+            <div
+              style={{
+                fontFamily: 'Bahnschrift Condensed',
+                fontSize: '1.2rem'
+              }}
+            >
+              We're sorry to see you leave
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary' variant='outlined'>
+          <Button
+            onClick={handleClose}
+            color='primary'
+            variant='outlined'
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.1rem'
+            }}
+          >
             Cancel
           </Button>
           <Button
             onClick={() => props.deleteProfile()}
-            color='secondary'
+            style={{
+              backgroundColor: 'red',
+              color: 'white',
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.1rem'
+            }}
             variant='contained'
             startIcon={<DeleteIcon />}
           >

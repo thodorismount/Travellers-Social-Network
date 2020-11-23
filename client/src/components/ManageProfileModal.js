@@ -84,11 +84,27 @@ const ManageProfileModal = props => {
         aria-labelledby='form-dialog-title'
       >
         <form className={classes.form} onSubmit={e => onSubmit(e)}>
-          <DialogTitle id='form-dialog-title'>Manage account</DialogTitle>
+          <DialogTitle id='form-dialog-title'>
+            <div
+              style={{
+                fontFamily: 'Bahnschrift Condensed',
+                fontSize: '1.5rem'
+              }}
+            >
+              Manage account
+            </div>
+          </DialogTitle>
           <DialogContent>
             <LoginAlert />
             <DialogContentText>
-              Fill in your password to edit your account details
+              <div
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.2rem'
+                }}
+              >
+                Fill in your password first to edit your account details
+              </div>
             </DialogContentText>
             <TextField
               id='confirmPassword'
@@ -170,6 +186,10 @@ const ManageProfileModal = props => {
               variant='outlined'
               size='medium'
               onClick={handleToggle}
+              style={{
+                fontFamily: 'Bahnschrift Condensed',
+                fontSize: '1.1rem'
+              }}
             >
               Cancel
             </Button>
@@ -180,6 +200,10 @@ const ManageProfileModal = props => {
               color='primary'
               className={classes.button}
               size='medium'
+              style={{
+                fontFamily: 'Bahnschrift Condensed',
+                fontSize: '1.1rem'
+              }}
             >
               Submit
             </Button>

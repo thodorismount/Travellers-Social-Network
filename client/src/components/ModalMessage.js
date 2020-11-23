@@ -12,13 +12,23 @@ const ModalMessage = ({ auth: { user }, profile: { profile } }) => {
   if (profile == null) {
     return (
       <DialogTitle style={{ width: '500px' }}>
-        Welcome {user && user.firstName} {user && user.lastName}! Please fill in
-        your profile
+        <div
+          style={{ fontFamily: 'Bahnschrift Condensed', fontSize: '1.5rem' }}
+        >
+          Welcome {user && user.firstName} {user && user.lastName}! Please fill
+          in your profile
+        </div>
       </DialogTitle>
     );
   } else {
     return (
-      <DialogTitle style={{ width: '500px' }}>Edit your profile </DialogTitle>
+      <DialogTitle style={{ width: '500px' }}>
+        <div
+          style={{ fontFamily: 'Bahnschrift Condensed', fontSize: '1.5rem' }}
+        >
+          Edit your profile
+        </div>
+      </DialogTitle>
     );
   }
 };

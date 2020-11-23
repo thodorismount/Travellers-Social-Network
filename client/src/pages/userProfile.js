@@ -253,11 +253,17 @@ const UserProfile = ({
                   {profile && profile.bio}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <RoomIcon color='primary' style={{ marginRight: '1rem' }} />
+                  <RoomIcon
+                    color='primary'
+                    style={{ marginRight: '1rem', marginBottom: '-2px' }}
+                  />
                   {profile && profile.location}
                 </div>
                 <div style={{ marginBottom: '0.4rem' }}>
-                  <CakeIcon color='primary' style={{ marginRight: '1rem' }} />
+                  <CakeIcon
+                    color='primary'
+                    style={{ marginRight: '1rem', marginBottom: '-2px' }}
+                  />
                   {moment(
                     profile && profile.user && profile.user.birthDate
                   ).format('DD-MM-YYYY')}

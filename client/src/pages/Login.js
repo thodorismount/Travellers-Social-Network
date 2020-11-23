@@ -35,7 +35,9 @@ const styles = {
     margin: '3% auto auto auto'
   },
   button: {
-    margin: '3% 1%'
+    margin: '3% 1%',
+    fontFamily: 'Bahnschrift Condensed',
+    fontSize: '1.1rem'
   },
   card: {
     padding: '1rem',

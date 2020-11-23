@@ -62,7 +62,11 @@ const ChangePasswordModal = props => {
         color='default'
         startIcon={<LockOutlinedIcon />}
         onClick={handleToggle}
-        style={{ marginTop: '12px' }}
+        style={{
+          fontFamily: 'Bahnschrift Condensed',
+          fontSize: '1.1rem',
+          marginTop: '12px'
+        }}
       >
         Change password
       </Button>
@@ -72,7 +76,16 @@ const ChangePasswordModal = props => {
         aria-labelledby='form-dialog-title'
         classes={{ paper: styleDialog.paper }}
       >
-        <DialogTitle id='form-dialog-title'>Change Password</DialogTitle>
+        <DialogTitle id='form-dialog-title'>
+          <div
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.5rem'
+            }}
+          >
+            Change Password
+          </div>
+        </DialogTitle>
         <DialogContent>
           <Alert />
           <form className={classes.form}>
@@ -124,6 +137,10 @@ const ChangePasswordModal = props => {
             variant='outlined'
             size='medium'
             onClick={handleToggle}
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.1rem'
+            }}
           >
             Cancel
           </Button>
@@ -134,6 +151,10 @@ const ChangePasswordModal = props => {
             className={classes.button}
             size='medium'
             onClick={submitForm}
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.1rem'
+            }}
           >
             Submit
           </Button>
