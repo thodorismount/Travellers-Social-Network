@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 6,
     fontFamily: 'Bahnschrift Condensed',
-    ['@media only screen and (max-width:550px)']: { paddingTop: '3rem' }
+    ['@media only screen and (max-width:1024px)']: { paddingTop: '3rem' }
   },
   paper: {
     padding: theme.spacing(2),

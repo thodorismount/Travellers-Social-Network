@@ -74,7 +74,7 @@ html body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(248, 177, 46);
+    background-color: #DBD0B3;
     width: 100%;
     padding-top: 0.5rem;
   }
@@ -85,7 +85,7 @@ html body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgb(248, 177, 46);
+    background-color: #DBD0B3;
     width: 100%;
     padding-top: 0.5rem;
   }
@@ -98,7 +98,7 @@ html body {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: rgb(248, 177, 46);
+    background-color: #DBD0B3;
     padding-top: 0.5rem;
   }
 }
@@ -109,7 +109,7 @@ html body {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: rgb(248, 177, 46);
+    background-color: #DBD0B3;
     padding-top: 0.5rem;
   }
 }
