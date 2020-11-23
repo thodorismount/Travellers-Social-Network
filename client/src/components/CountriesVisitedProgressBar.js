@@ -18,7 +18,8 @@ export default function CountriesVisitedProgressBar(props) {
         value={props.travelExperience * 10}
         style={{
           height: '0.5rem',
-          borderRadius: '10px'
+          borderRadius: '10px',
+          maxWidth: '400px'
         }}
       />
     </div>

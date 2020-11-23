@@ -79,12 +79,6 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: 'rotate(180deg)'
   },
-  profilePic: {
-    backgroundImage:
-      'url(' +
-      'https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' +
-      ')'
-  },
   postInProfile: {
     width: '100%',
     backgroundColor: '#F0F2F5',
@@ -199,6 +193,7 @@ const UserProfile = ({
             <Paper className={classes.paper} variant='elevation'>
               <div
                 className='raised'
+                align='center'
                 style={{
                   backgroundColor: '#F0F2F5',
                   borderRadius: '2%',
@@ -216,8 +211,6 @@ const UserProfile = ({
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '50%',
-                    marginLeft: '15%',
-                    marginRight: '15%',
                     marginBottom: '0.8rem'
                   }}
                 ></div>
