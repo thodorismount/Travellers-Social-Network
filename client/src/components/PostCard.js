@@ -254,7 +254,6 @@ function PostCard(props) {
               fullWidth
               className={classes.textfield}
               id='comments'
-              autoFocus
               value={formData.text}
               name='comments'
               multiline
