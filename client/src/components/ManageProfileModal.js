@@ -66,7 +66,6 @@ const ManageProfileModal = props => {
       <Tooltip title='Manage account'>
         <IconButton
           color='primary'
-          title='Manage account'
           component='span'
           onClick={handleToggle}
           style={{

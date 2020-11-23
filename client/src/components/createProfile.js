@@ -14,7 +14,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 // import Typography from '@material-ui/core/Typography';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { withRouter } from 'react-router-dom';
 // redux imports
@@ -78,7 +77,6 @@ const EditProfileModal = props => {
             top: '1%'
           }}
           color='primary'
-          title='Edit profile'
           component='span'
         >
           <EditRoundedIcon fontSize='large' />
@@ -134,7 +132,9 @@ const EditProfileModal = props => {
               className={classes.textField}
               fullWidth
             />
-            <Typography>Add profile picture</Typography>
+            <Typography style={{ marginTop: '0.5rem' }}>
+              Add profile picture
+            </Typography>
             <FileBase
               type='file'
               multiple={false}

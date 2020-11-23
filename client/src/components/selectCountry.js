@@ -29,7 +29,6 @@ function CountrySelect(props) {
   }
 
   flag = false;
-  console.log(val);
   return (
     <Autocomplete
       multiple
