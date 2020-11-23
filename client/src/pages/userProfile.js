@@ -142,6 +142,7 @@ const UserProfile = ({
           hasProfile={false}
           disableOutsideClick={true}
           disableCancelButton={true}
+          disableEscapeKeyDown={true}
           hideButton='none'
         />
         <div style={{ fontSize: 'large' }}>
@@ -404,6 +405,7 @@ const UserProfile = ({
                     hideButton=''
                     disableOutsideClick={false}
                     disableCancelButton={false}
+                    disableEscapeKeyDown={false}
                     bio={profile ? profile && profile.bio : ''}
                     interests={profile ? profile && profile.interests : ''}
                     location={profile ? profile && profile.location : ''}
@@ -428,8 +430,17 @@ const UserProfile = ({
               ) : (
                 <div className='posts'>
                   <div id='back-to-top-anchor'></div>
-                  {posts.length > 0 &&
-                    posts.map(post => <PostItem key={post._id} post={post} />)}
+                  {posts.length > 0 ? (
+                    posts.map(post => <PostItem key={post._id} post={post} />)
+                  ) : (
+                    <Typography
+                      variant='h5'
+                      style={{ fontFamily: 'Bahnschrift Condensed' }}
+                      align='center'
+                    >
+                      There are no posts yet...
+                    </Typography>
+                  )}
                 </div>
               )}
               <ScrollTop>

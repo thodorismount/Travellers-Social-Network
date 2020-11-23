@@ -12,9 +12,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ScrollTop(props) {
-  const { children, window } = props;
+  const { children } = props;
   const paper = document.getElementById('postsPaper');
-  console.log(paper);
   const classes = useStyles();
   const trigger = useScrollTrigger({
     target: paper ? paper : undefined,
