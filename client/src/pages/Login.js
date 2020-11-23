@@ -43,6 +43,18 @@ const styles = {
     padding: '1rem',
     marginTop: '10%',
     backgroundColor: '#F0F2F5'
+  },
+  image: {
+    marginTop: '-7%',
+    ['@media only screen and (min-width:560px)']: {
+      width: '600px',
+      height: '450px'
+    },
+    ['@media only screen and (max-width:560px)']: {
+      width: '375px',
+      height: '300px'
+    },
+    align: 'center'
   }
 };
 
@@ -83,9 +95,7 @@ const Login = props => {
           <img
             src='static/images/final_logo.png'
             alt='Logo'
-            width='600'
-            height='450'
-            style={{ marginTop: '-7%' }}
+            className={classes.image}
           />
           <br />
         </Grid>
