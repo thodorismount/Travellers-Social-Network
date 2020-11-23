@@ -60,7 +60,11 @@ const CreatePostDialog = ({ addPost }) => {
         aria-labelledby='form-dialog-title'
       >
         <DialogTitle id='form-dialog-title'>
-          Create your travel post
+          <div
+            style={{ fontFamily: 'Bahnschrift Condensed', fontSize: '1.5rem' }}
+          >
+            Create your travel post
+          </div>
         </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
@@ -95,10 +99,22 @@ const CreatePostDialog = ({ addPost }) => {
             />
 
             <DialogActions>
-              <Button color='primary' variant='outlined' onClick={handleToggle}>
+              <Button
+                color='primary'
+                variant='outlined'
+                onClick={handleToggle}
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
+              >
                 Cancel
               </Button>
               <Button
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.1rem'
+                }}
                 color='primary'
                 disabled={
                   formData.location === '' ||

@@ -20,7 +20,9 @@ import Alert from './Alerts/Alert';
 
 const styles = {
   button: {
-    margin: '10px 10px'
+    margin: '10px 10px',
+    fontFamily: 'Bahnschrift Condensed',
+    fontSize: '1.1rem'
   }
 };
 
@@ -87,11 +89,27 @@ const FormDialog = props => {
         aria-labelledby='form-dialog-title'
       >
         <DialogTitle id='form-dialog-title'>
-          Join Travellers community
+          <div
+            style={{
+              fontFamily: 'Bahnschrift Condensed',
+              fontSize: '1.5rem'
+            }}
+          >
+            Join Travellers community
+          </div>
         </DialogTitle>
         <form className={classes.form} onSubmit={e => handleSubmit(e)}>
           <DialogContent>
-            <DialogContentText>It’s quick and easy.</DialogContentText>
+            <DialogContentText>
+              <div
+                style={{
+                  fontFamily: 'Bahnschrift Condensed',
+                  fontSize: '1.2rem'
+                }}
+              >
+                It’s quick and easy.
+              </div>
+            </DialogContentText>
             <Alert />
 
             <TextField
@@ -177,7 +195,14 @@ const FormDialog = props => {
           </DialogContent>
 
           <DialogActions>
-            <Button color='primary' onClick={e => handleToggle(e)}>
+            <Button
+              color='primary'
+              onClick={e => handleToggle(e)}
+              style={{
+                fontFamily: 'Bahnschrift Condensed',
+                fontSize: '1.1rem'
+              }}
+            >
               Cancel
             </Button>
             <Button
