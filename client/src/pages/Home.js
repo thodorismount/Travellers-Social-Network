@@ -40,17 +40,17 @@ const useStyles = makeStyles(theme => ({
     overflowY: 'scroll',
     scrollbarWidth: '0'
   },
-  backtotop:{
-    ['@media only screen and (min-width:550px)']:{
-    position: 'fixed',
-    bottom: '3rem',
-    right: '15%' 
-  },
-  ['@media only screen and (max-width:550px)']:{
-    position: 'fixed',
-    bottom: '7rem',
-    right: '2.5rem',
-  }
+  backtotop: {
+    ['@media only screen and (min-width:550px)']: {
+      position: 'fixed',
+      bottom: '3rem',
+      right: '15%'
+    },
+    ['@media only screen and (max-width:550px)']: {
+      position: 'fixed',
+      bottom: '7rem',
+      right: '2.5rem'
+    }
   }
 }));
 
@@ -63,13 +63,18 @@ const Home = ({
   posts
 }) => {
   const [skip, setSkip] = useState(2);
+  const [fetch, setFetch] = useState(true);
 
   const handleScroll = e => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
 
-    if (offsetHeight + scrollTop >= scrollHeight) {
+    if (offsetHeight + scrollTop >= scrollHeight && fetch) {
+      setFetch(false);
       setSkip(skip + 2);
       fetchMore(skip);
+      setInterval(() => {
+        setFetch(true);
+      }, 1000);
     }
   };
 
@@ -111,7 +116,7 @@ const Home = ({
             )}
             <ScrollTop>
               <Fab
-              className={classes.backtotop}
+                className={classes.backtotop}
                 color='primary'
                 size='small'
                 aria-label='scroll back to top'
