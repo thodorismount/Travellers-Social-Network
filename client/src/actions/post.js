@@ -121,7 +121,7 @@ export const deletePost = id => async dispatch => {
       type: DELETE_POST,
       payload: id
     });
-
+    window.location.reload();
     dispatch(setAlert('Post was deleted', 'success'));
   } catch (err) {
     dispatch({
@@ -201,7 +201,7 @@ export const addComment = (id, text) => async dispatch => {
     const res = await axios.post(`/api/posts/comment/${id}`, text, config);
     dispatch({
       type: ADD_COMMENT,
-      payload: {id,comments:res.data}
+      payload: { id, comments: res.data }
     });
   } catch (err) {
     console.log(err);
@@ -212,22 +212,19 @@ export const addComment = (id, text) => async dispatch => {
   }
 };
 
-//DELETE Comments 
+//DELETE Comments
 export const removeComment = (id, commentId) => async dispatch => {
-  
   try {
     const res = await axios.delete(`/api/posts/comment/${id}/${commentId}`);
 
     dispatch({
       type: REMOVE_COMMENT,
-      payload: {id,comments:res.data}
+      payload: { id, comments: res.data }
     });
-
-
 
     dispatch(setAlert('Comment Removed', 'success'));
   } catch (err) {
-    console.log(err)
+    console.log(err);
 
     dispatch({
       type: POST_ERROR,
@@ -235,4 +232,3 @@ export const removeComment = (id, commentId) => async dispatch => {
     });
   }
 };
-
