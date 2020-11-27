@@ -5,6 +5,3 @@
 <p align="center">
   During our two months on Skg.code we developed a social network site related to traveling.
 </p>
-
-
-<a href="https://www.w3schools.com">Visit W3Schools</a>
