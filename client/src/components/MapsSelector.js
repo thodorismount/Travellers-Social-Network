@@ -40,7 +40,7 @@ export default function MapsSelector(props) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
         // in order for the api to work he need to delete SKG from the link bellow  at key= ->(!! SKG !!!)<- AIzaSyD...
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD_n1iuFbpTNBpKIE3aXHR45y8gF6ybI6A&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?key=skgAIzaSyD_n1iuFbpTNBpKIE3aXHR45y8gF6ybI6Acode&libraries=places',
         document.querySelector('head'),
         'google-maps'
       );
